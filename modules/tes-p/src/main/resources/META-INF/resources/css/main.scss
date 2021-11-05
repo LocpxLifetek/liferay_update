@@ -1,0 +1,23 @@
+.tes-p {
+}
+.title_box {
+  color: #990000;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: Arial;
+}
+
+a:link.tinmoi {
+  color: #02345e;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+  font-family: Arial;
+}
+.container-chinhphu {
+  display: grid;
+  grid-template-areas: "left right";
+}
+.item-left { grid-area: left; }
+.item-right { grid-area: right; }

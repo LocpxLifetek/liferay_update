@@ -1,0 +1,4 @@
+Bundle-Name: late_leader
+Bundle-SymbolicName: late_leader
+Bundle-Version: 1.0.0
+Export-Package: late_leader.constants

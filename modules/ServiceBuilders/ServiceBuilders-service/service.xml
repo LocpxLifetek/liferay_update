@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.3.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_3_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="serviceBuilder">
+	<namespace>LT</namespace>
+	<entity local-service="true" name="Menus" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="id" primary="true" type="String" />
+
+		<!-- Group instance -->
+
+		<column name="createdDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		<column name="createdUser" type="String" />
+		<column name="modifiedUser" type="String" />
+		<column name="code" type="String" />
+		<column name="displayName" type="String" />
+		<column name="description" type="String" />
+		<column name="url" type="String" />
+		<column name="func" type="String" />
+		<column name="type" type="int" />
+		<column name="isActive" type="boolean" />
+		<column name="parentId" type="String" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="createdDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Code" return-type="Collection">
+			<finder-column name="code" />
+		</finder>
+
+		<!-- References 
+		<reference entity="AssetEntry" package-path="com.liferay.portlet.asset" />
+		<reference entity="AssetTag" package-path="com.liferay.portlet.asset" />
+		-->
+		
+	</entity>
+    <entity local-service="true" name="assetlistentry" remote-service="true" uuid="true">
+		<column name="mvccversion" type="int"/>
+		<column name="ctcollectionid" type="int"/>
+		<column name="assetlistentryid"	primary="true" type="int"/>
+		<column name="groupid" type="int"/>
+		<column name="companyid" type="int"/>
+		<column name ="userid" type="int"/>
+		<column name="username" type="String"/>
+		<column name="createdate" type="Date"/>
+		<column name="modifieddate"	type="Date"/>
+		<column name="assetlistentrykey" type="String"/>
+		<column name="title" type="String"/>
+		<column name="type_" type="int"/>
+		<column name="assetentrysubtype" type="String"/>
+		<column name="assetentrytype" type="String"/>
+		<column name="lastpublishdate" type="Date"/>
+	</entity>
+</service-builder>

@@ -1,0 +1,4 @@
+Bundle-Name: ControllMenuLeft
+Bundle-SymbolicName: com.controlMenu
+Bundle-Version: 1.0.0
+Export-Package: com.controlMenu.constants

@@ -1,0 +1,44 @@
+.cp_new {
+color:black;
+border:1px solid #E8EDED;
+border-collapse: collapse;
+width:100%;
+table-layout:fixed;
+padding: 5px 5px 5px 5px;
+}
+
+.cp_new th{
+color:black;
+background-image: linear-gradient(#FFFFFF, #EEEEEE);
+border:1px solid #E8EDED;
+border-collapse: collapse;
+padding: 5px 5px 5px 5px;
+}
+
+.cp_new td{
+color:black;
+border:1px solid #E8EDED;
+border-collapse: collapse;
+padding: 5px 5px 5px 5px;
+color:black;
+font-size: 11px;
+}
+
+.cp_new a{
+color:black;
+}
+
+.cp_newCon {
+color:black;
+border:0px;
+border-collapse: collapse;
+margin-top: 0px;
+}
+
+.cp_newCon th{
+border:0px;
+}
+.cp_newCon td{
+font-size: 11px;
+border:0px;
+}

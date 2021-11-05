@@ -1,0 +1,4 @@
+Bundle-Name: TestThoi
+Bundle-SymbolicName: com.Test.Thoi
+Bundle-Version: 1.0.0
+Export-Package: com.Test.Thoi.constants

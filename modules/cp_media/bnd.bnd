@@ -1,0 +1,4 @@
+Bundle-Name: cp_media
+Bundle-SymbolicName: com.cpMedia
+Bundle-Version: 1.0.0
+Export-Package: com.cpMedia.constants

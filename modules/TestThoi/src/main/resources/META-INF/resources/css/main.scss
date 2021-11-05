@@ -1,0 +1,45 @@
+	.TestThoi {}
+
+	.TestThoi img {
+		width: 100%;
+		height: auto;
+	}
+
+	.TestThoi .blogs {
+		grid-column-start: 1;
+		padding: 10px;
+		height: 60px;
+		border: 1px solid rgb(219, 216, 216);
+
+	}
+
+	.TestThoi .nameCg {
+		padding: 10px;
+		height: 35px;
+		border: 1px solid rgb(219, 216, 216);
+	}
+
+	.TestThoi .chuyende {
+		overflow: auto;
+		height: 160px;
+	}
+
+	.TestThoi .nameOther {
+		height: 34px;
+		background-color: rgb(27, 60, 209);
+		color: white;
+		padding-left: 5px;
+		padding-top: 5px;
+	}
+
+	.TestThoi a {
+		color: black;
+	}
+
+	.TestThoi .Docnhieu {
+		overflow: auto;
+		height: 190px;
+		list-style-type: circle;
+		border: 1px solid rgb(221, 217, 217);
+		margin: 5px;
+	}

@@ -1,0 +1,4 @@
+Bundle-Name: lanh_dao
+Bundle-SymbolicName: lanh_dao
+Bundle-Version: 1.0.0
+Export-Package: lanh_dao.constants

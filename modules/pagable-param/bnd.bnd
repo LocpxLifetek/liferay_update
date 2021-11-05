@@ -1,0 +1,4 @@
+Bundle-Name: pagable-param
+Bundle-SymbolicName: pagable.param
+Bundle-Version: 1.0.0
+Export-Package: pagable.param.constants

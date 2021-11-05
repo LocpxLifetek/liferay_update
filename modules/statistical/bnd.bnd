@@ -1,0 +1,4 @@
+Bundle-Name: statistical
+Bundle-SymbolicName: statistical
+Bundle-Version: 1.0.0
+Export-Package: statistical.constants

@@ -1,0 +1,4 @@
+Bundle-Name: new_documents
+Bundle-SymbolicName: new_documents
+Bundle-Version: 1.0.0
+Export-Package: new_documents.constants

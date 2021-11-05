@@ -1,0 +1,4 @@
+Bundle-Name: tes-p
+Bundle-SymbolicName: tes.p
+Bundle-Version: 1.0.0
+Export-Package: tes.p.constants

@@ -1,0 +1,4 @@
+Bundle-Name: ajax-get
+Bundle-SymbolicName: ajax.get
+Bundle-Version: 1.0.0
+Export-Package: ajax.get.constants

@@ -1,0 +1,4 @@
+Bundle-Name: menu_baoCP
+Bundle-SymbolicName: menu_baoCP
+Bundle-Version: 1.0.0
+Export-Package: menu_baoCP.constants

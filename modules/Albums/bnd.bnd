@@ -1,0 +1,4 @@
+Bundle-Name: Albums
+Bundle-SymbolicName: Albums
+Bundle-Version: 1.0.0
+Export-Package: Albums.constants

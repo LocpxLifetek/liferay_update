@@ -1,0 +1,4 @@
+Bundle-Name: footer_portlet
+Bundle-SymbolicName: footer_portlet
+Bundle-Version: 1.0.0
+Export-Package: footer_portlet.constants

@@ -1,0 +1,4 @@
+Bundle-Name: hot_newEvent
+Bundle-SymbolicName: hot_newEvent
+Bundle-Version: 1.0.0
+Export-Package: hot_newEvent.constants

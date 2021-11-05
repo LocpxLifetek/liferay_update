@@ -1,0 +1,4 @@
+Bundle-Name: cp_new2
+Bundle-SymbolicName: com.cp_new2
+Bundle-Version: 1.0.0
+Export-Package: com.cp_new2.constants

@@ -1,0 +1,4 @@
+Bundle-Name: portlet_thutuong_right
+Bundle-SymbolicName: portlet_thutuong_right
+Bundle-Version: 1.0.0
+Export-Package: portlet_thutuong_right.constants

@@ -1,0 +1,4 @@
+Bundle-Name: cp_baochinhphuLeft
+Bundle-SymbolicName: com.bcpLeft
+Bundle-Version: 1.0.0
+Export-Package: com.bcpLeft.constants

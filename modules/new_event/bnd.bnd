@@ -1,0 +1,4 @@
+Bundle-Name: new_event
+Bundle-SymbolicName: new_event
+Bundle-Version: 1.0.0
+Export-Package: new_event.constants
