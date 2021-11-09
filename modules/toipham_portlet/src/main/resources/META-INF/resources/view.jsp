@@ -8,7 +8,7 @@
                     <c:forEach items="${listBlog}" var="u">
 				      <ul  style="width:100%">
 						<li>
-							${u.content}
+							${u.title}
 						</li>
 				      </ul>
 				    </c:forEach>

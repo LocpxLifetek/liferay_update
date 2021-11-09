@@ -1,4 +1,4 @@
-package portlet_thutuong_right.portlet;
+	package portlet_thutuong_right.portlet;
 
 import com.liferay.asset.entry.rel.model.AssetEntryAssetCategoryRel;
 import com.liferay.asset.entry.rel.service.AssetEntryAssetCategoryRelLocalServiceUtil;

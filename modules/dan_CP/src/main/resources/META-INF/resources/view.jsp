@@ -8,7 +8,7 @@
   	<c:forEach items="${listBlog}" var="u">
       <div  style="width:100%">
 		<div style="width:100%" align="justify">
-		<a padding-left="5px" class="pb"> ${u.content}</a></div>
+		<a padding-left="5px" class="pb"> ${u.title	}</a></div>
       </div>
     </c:forEach>
   </div> 

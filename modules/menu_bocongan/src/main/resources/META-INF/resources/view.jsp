@@ -96,6 +96,7 @@
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
+        margin-bottom: 0 !important;
       }
       #cssmenu:after,
       #cssmenu > ul:after {
@@ -189,7 +190,7 @@
         border-top: 1px solid #333;
       }
 
-      @media screen and (max-width: 1012px) {
+       	@media screen and (max-width: 1012px) {
         nav {
           width: 100%;
         }
