@@ -1,0 +1,4 @@
+Bundle-Name: policeActive
+Bundle-SymbolicName: policeActive
+Bundle-Version: 1.0.0
+Export-Package: policeActive.constants

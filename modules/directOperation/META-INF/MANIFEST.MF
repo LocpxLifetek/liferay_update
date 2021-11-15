@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: directOperation
+Bundle-SymbolicName: directOperation
+Bundle-Version: 1.0.0.qualifier
+Export-Package: content,
+ directOperation.constants,
+ directOperation.portlet

@@ -1,0 +1,4 @@
+Bundle-Name: tintuc
+Bundle-SymbolicName: tintuc
+Bundle-Version: 1.0.0
+Export-Package: tintuc.constants

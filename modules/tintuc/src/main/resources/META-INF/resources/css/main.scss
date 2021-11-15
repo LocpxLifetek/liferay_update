@@ -1,0 +1,60 @@
+.title_ttsk {
+    text-align: center;
+    text-transform: uppercase;
+    color: #404041 !important;
+    padding: 15px 0px !important;
+}
+
+.categoryContent {
+    display: flex;
+}
+ul.ttsk {
+    list-style: none;
+}
+
+ul.ttsk > li::before {
+    content: " \2022";
+    color: #be1e2d;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em !important;
+    height: 2em !important;
+    margin-left: -1em !important;
+}
+ul.parentCategory {
+    list-style: none;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+ul.parentCategory > li::before {
+    content: " \043E";
+    display: inline-block;
+    color: #be1e2d;
+    width: 1em !important;
+    height: 1em !important;
+    margin-left: -1em !important;
+}
+.tintuc_sukien_top {
+    font: 500 16px/18px Roboto, Arial, Tahoma !important;
+    padding: 10% !important;
+    border-bottom: 4px solid #d71920;
+}
+.tintuc_sukien_top a {
+    text-decoration: none;
+    color: black !important;
+}
+.tintuc_sukien_top a:hover {
+    color: red !important;
+    font-weight: bold;
+}
+.tintuc_sukien {
+    background: #fff url("http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-right.png") repeat-x center
+        top;
+    border: 1px solid #ddd;
+    overflow: auto;
+}
+.linered {
+    border-top: 2px solid #d71920;
+    width: 30%;
+    margin: 0 auto;
+}

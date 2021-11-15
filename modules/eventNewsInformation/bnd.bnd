@@ -1,0 +1,4 @@
+Bundle-Name: eventNewsInformation
+Bundle-SymbolicName: eventNewsInformation
+Bundle-Version: 1.0.0
+Export-Package: eventNewsInformation.constants

@@ -1,0 +1,63 @@
+.detailBlogs {
+  color: black !important;
+  text-align: left;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif; }
+
+.title h2 {
+  color: black !important;
+  font-weight: bold; }
+
+.description h4 {
+  color: black !important; }
+
+div.contentBlogs {
+  width: 100%;
+  text-align: center; }
+
+.contentBlogs p {
+  text-align: justify !important;
+  /* For Edge */
+  display: block; }
+
+.box-dieuhuong {
+  display: flex; }
+
+.trangchu a {
+  padding: 0px 5px;
+  color: black;
+  text-decoration: none; }
+
+.trangchu a:hover {
+  color: red; }
+
+.detailBoCongAn {
+  padding: 10px 0px; }
+
+.contentBlogs img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60% !important; }
+
+.contentBlogs p em {
+  display: flex;
+	align-items: center;
+    justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60% !important;
+  
+  }
+
+.contentBlogs i {
+ display: flex;
+align-items: center;
+    justify-content: center;
+  text-align: center;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60% !important; }

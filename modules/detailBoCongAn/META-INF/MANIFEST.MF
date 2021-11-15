@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: detailBoCongAn
+Bundle-SymbolicName: detailBoCongAn
+Bundle-Version: 1.0.0.qualifier
+Export-Package: content,
+ detailBoCongAn.constants,
+ detailBoCongAn.portlet

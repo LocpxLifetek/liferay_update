@@ -1,0 +1,4 @@
+Bundle-Name: featuredNews
+Bundle-SymbolicName: featuredNews
+Bundle-Version: 1.0.0
+Export-Package: featuredNews.constants

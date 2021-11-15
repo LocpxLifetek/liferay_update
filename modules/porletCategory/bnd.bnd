@@ -1,0 +1,4 @@
+Bundle-Name: porletCategory
+Bundle-SymbolicName: porletCategory
+Bundle-Version: 1.0.0
+Export-Package: porletCategory.constants

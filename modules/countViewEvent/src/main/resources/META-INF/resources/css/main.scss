@@ -1,0 +1,29 @@
+
+.countViewEvent {
+	display:grid;
+	grid-template-columns: 50% 40% !important;
+	grid-column-gap: 5%;
+}
+.countViewEvent a{
+	text-decoration: none;
+    color: black !important;
+	text-align: justify !important;
+	display:block;
+}
+.countViewEvent a:hover{
+	color:red !important;
+}
+.countViewE img{
+	width:100%;
+}
+.countViewE a{
+	font-size:20px;
+	font-weight: bold !important;
+}
+.title-infor{
+	padding:6px 0px;
+}	
+.title-new-hot {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #d71920;
+}
