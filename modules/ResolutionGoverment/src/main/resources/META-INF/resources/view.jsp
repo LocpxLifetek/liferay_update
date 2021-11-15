@@ -3,7 +3,7 @@
 
 
 
-<p style="font-weight:bold; font-size:14px; text-align: justify;">Nghị quyết số ${map.get("SốKýHiệu")} của ${map.get("CơQuanBanHành")}: ${map.get("TríchYếu") } </p> 
+<p style="font-weight:bold; font-size:14px; text-align: justify;">Nghị quyết số ${map.get("Số Ký Hiệu")} của ${map.get("Cơ Quan Ban Hành")}: ${map.get("Trích Yếu") } </p> 
 	
 <table class="doc_detail_attr_table">
 	<tbody>
