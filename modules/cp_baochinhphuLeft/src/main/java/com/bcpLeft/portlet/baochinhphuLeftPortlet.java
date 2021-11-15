@@ -50,7 +50,7 @@ public class baochinhphuLeftPortlet extends MVCPortlet {
 		try {
 // Hiển thị các mục bên phải
 			// get banner
-			DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(156419);
+			DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(184105);
 			renderRequest.setAttribute("srcBanner", "/documents/" + dlFileEntry.getGroupId() + "/"
 					+ dlFileEntry.getFolderId() + "/" + dlFileEntry.getTitle() + "/" + dlFileEntry.getUuid());
 			// get Name cua Category: Các bài phát biểu của Thủ tướng

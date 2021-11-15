@@ -41,19 +41,20 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.name=" + cp_mediaPortletKeys.CP_MEDIA, "javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class cp_mediaPortlet extends MVCPortlet {
+	private final String LINK_CP_MEDIA = "http://portal.lifetek.vn/web/lifetek/media.chinhphu?id=";
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			// http://localhost:8080/web/lifetek/media.chinhphu?id=******
+			// http://172.16.100.70:8080/web/lifetek/media.chinhphu?id=******
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			int id = Integer.parseInt(PortalUtil.getOriginalServletRequest(request).getParameter("id"));
 			FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(id);
 			String src = String.format("/documents/%s/%s/%s/%s", fileEntry.getGroupId(), fileEntry.getFolderId(),
 					fileEntry.getTitle(), fileEntry.getUuid());
 			renderRequest.setAttribute("src", src);
-			renderRequest.setAttribute("fileName", fileEntry.getFileName());
+			renderRequest.setAttribute("fileName", fileEntry.getFileName().replace(".mp4", ""));
 			// title: Video cung chu de
 			AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(147329);
 			renderRequest.setAttribute("NameCategory", assetCategory.getName());
@@ -76,7 +77,7 @@ public class cp_mediaPortlet extends MVCPortlet {
 					if (!assetLinks.isEmpty()) {
 						i++;
 						renderRequest.setAttribute("srcVideo" + i,
-								"http://localhost:8080/web/lifetek/media.chinhphu?id=" + dlFileEntry.getFileEntryId());
+								LINK_CP_MEDIA + dlFileEntry.getFileEntryId());
 						renderRequest.setAttribute("title" + i, dlFileEntry.getTitle().replace(".mp4", ""));
 
 						if (assetLinks.get(0).getEntryId1() == assetEntryId) {

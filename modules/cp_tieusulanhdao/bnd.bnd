@@ -1,0 +1,4 @@
+Bundle-Name: cp_tieusulanhdao
+Bundle-SymbolicName: com.cp_tieusulanhdao
+Bundle-Version: 1.0.0
+Export-Package: com.cp_tieusulanhdao.constants

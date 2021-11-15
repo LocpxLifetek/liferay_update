@@ -36,6 +36,8 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class cp_new2Portlet extends MVCPortlet {
+	
+	private final String LINK_TINTUC_SUKIEN = "http://portal.lifetek.vn/web/lifetek/tintuc_sukien?id=";
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
@@ -73,11 +75,13 @@ public class cp_new2Portlet extends MVCPortlet {
 			List<BlogsEntry> blogsEntriesnew1 = blogsEntries1.stream().sorted().limit(2).collect(Collectors.toList());
 			for (int i = 0; i < blogsEntriesnew1.size(); i++) {
 				renderRequest.setAttribute("tlcddn" + (1 + i), blogsEntriesnew1.get(i));
+				//get link của bản tin đó
+				renderRequest.setAttribute("linkTlcddn" + (1+i), LINK_TINTUC_SUKIEN + blogsEntriesnew1.get(i).getEntryId());
 			}
-
+			
 			// lay image của Blog Top1
 			long imgTop1tlcddn = blogsEntriesnew1.get(0).getSmallImageFileEntryId();
-
+			// get Image
 			DLFileEntry fileEntryTlcddn = DLFileEntryLocalServiceUtil.getDLFileEntry(imgTop1tlcddn);
 			renderRequest.setAttribute("imgSrcTlcddnTop1",
 					"/documents/" + fileEntryTlcddn.getGroupId() + "/" + fileEntryTlcddn.getFolderId() + "/"
@@ -106,10 +110,12 @@ public class cp_new2Portlet extends MVCPortlet {
 			List<BlogsEntry> blogsEntriesnew2 = blogsEntries2.stream().sorted().limit(2).collect(Collectors.toList());
 			for (int i = 0; i < blogsEntriesnew2.size(); i++) {
 				renderRequest.setAttribute("cddh" + (1 + i), blogsEntriesnew2.get(i));
+				//get link của bản tin đó
+				renderRequest.setAttribute("linkCddh" + (1+i), LINK_TINTUC_SUKIEN + blogsEntriesnew2.get(i).getEntryId());
 			}
 			// lay image của Blog Top1
 			long imgTop1cddh = blogsEntriesnew2.get(0).getSmallImageFileEntryId();
-
+			// get Image
 			DLFileEntry fileEntryCddh = DLFileEntryLocalServiceUtil.getDLFileEntry(imgTop1cddh);
 			renderRequest.setAttribute("imgSrcCddhTop1", "/documents/" + fileEntryCddh.getGroupId() + "/"
 					+ fileEntryCddh.getFolderId() + "/" + fileEntryCddh.getTitle() + "/" + fileEntryCddh.getUuid());
@@ -136,11 +142,13 @@ public class cp_new2Portlet extends MVCPortlet {
 			List<BlogsEntry> blogsEntriesnew3 = blogsEntries3.stream().sorted().limit(2).collect(Collectors.toList());
 			for (int i = 0; i < blogsEntriesnew3.size(); i++) {
 				renderRequest.setAttribute("sukien" + (1 + i), blogsEntriesnew3.get(i));
+				//get link của bản tin đó
+				renderRequest.setAttribute("linkSukien" + (1+i), LINK_TINTUC_SUKIEN + blogsEntriesnew3.get(i).getEntryId());
 			}
 
 			// lay image của Blog Top1
 			long imgTop1Sukien = blogsEntriesnew3.get(0).getSmallImageFileEntryId();
-
+			// get Image
 			DLFileEntry fileEntrySukien = DLFileEntryLocalServiceUtil.getDLFileEntry(imgTop1Sukien);
 			renderRequest.setAttribute("imgSrcSukienTop1",
 					"/documents/" + fileEntrySukien.getGroupId() + "/" + fileEntrySukien.getFolderId() + "/"
@@ -168,9 +176,12 @@ public class cp_new2Portlet extends MVCPortlet {
 			List<BlogsEntry> blogsEntriesnew4 = blogsEntries4.stream().sorted().limit(2).collect(Collectors.toList());
 			for (int i = 0; i < blogsEntriesnew4.size(); i++) {
 				renderRequest.setAttribute("doingoai" + (1 + i), blogsEntriesnew4.get(i));
+				//get link của bản tin đó
+				renderRequest.setAttribute("linkDoingoai" + (1+i), LINK_TINTUC_SUKIEN + blogsEntriesnew4.get(i).getEntryId());
 			}
 			// lay image của Blog Top1
 			long imgTop1Doingoai = blogsEntriesnew4.get(0).getSmallImageFileEntryId();
+			// get Image
 			DLFileEntry fileEntryDoingoai = DLFileEntryLocalServiceUtil.getDLFileEntry(imgTop1Doingoai);
 			renderRequest.setAttribute("imgSrcDoingoaiTop1",
 					"/documents/" + fileEntryDoingoai.getGroupId() + "/" + fileEntryDoingoai.getFolderId() + "/"
