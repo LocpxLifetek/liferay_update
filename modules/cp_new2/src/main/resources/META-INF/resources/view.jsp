@@ -24,7 +24,7 @@
 			<table class="cp_newCon">
 				<tr>
 					<td><img src="${imgSrcTlcddnTop1}" width="51px" height="51px"></td>
-					<td><a href="">${tlcddn1.title}</a></td>
+					<td><a href="${linkTlcddn1}">${tlcddn1.title}</a></td>
 				</tr>
 			</table>
 		</td>
@@ -32,7 +32,7 @@
 			<table class="cp_newCon">
 				<tr>
 					<td><img src="${imgSrcCddhTop1}" width="51px" height="51px"></td>
-					<td><a href="">${cddh1.title}</a></td>
+					<td><a href="${linkCddh1}">${cddh1.title}</a></td>
 				</tr>
 			</table>
 		</td>
@@ -40,7 +40,7 @@
 			<table class="cp_newCon">
 				<tr>
 					<td><img src="${imgSrcSukienTop1}" width="51px" height="51px"></td>
-					<td><a href="">${sukien1.title}</a></td>
+					<td><a href="${linkSukien1}">${sukien1.title}</a></td>
 				</tr>
 			</table>
 		</td>
@@ -49,16 +49,16 @@
 				<tr>
 					<td><img src="${imgSrcDoingoaiTop1}" width="51px"
 						height="51px"></td>
-					<td><a href="">${doingoai1.title}</a></td>
+					<td><a href="${linkDoingoai1}">${doingoai1.title}</a></td>
 				</tr>
 			</table>
 		</td>
 
 	</tr>
 	<tr style="text-align: left;">
-		<td><a href="">${tlcddn2.title}</a></td>
-		<td><a href="">${cddh2.title}</a></td>
-		<td><a href="">${sukien2.title}</a></td>
-		<td><a href="">${doingoai2.title}</a></td>
+		<td><a href="${linkTlcddn2}">${tlcddn2.title}</a></td>
+		<td><a href="${linkCddh2}">${cddh2.title}</a></td>
+		<td><a href="${linkSukien2}">${sukien2.title}</a></td>
+		<td><a href="${linkDoingoai2}">${doingoai2.title}</a></td>
 	</tr>
 </table>

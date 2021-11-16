@@ -1,0 +1,4 @@
+Bundle-Name: cp_contentChinhphu
+Bundle-SymbolicName: com.cp_contentChinhphu
+Bundle-Version: 1.0.0
+Export-Package: com.cp_contentChinhphu.constants

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: countViewBlogs
+Bundle-SymbolicName: countViewBlogs
+Bundle-Version: 1.0.0.qualifier
+Export-Package: content,
+ countViewBlogs.constants,
+ countViewBlogs.portlet

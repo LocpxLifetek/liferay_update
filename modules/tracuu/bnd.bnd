@@ -1,0 +1,4 @@
+Bundle-Name: tracuu
+Bundle-SymbolicName: tracuu
+Bundle-Version: 1.0.0
+Export-Package: tracuu.constants

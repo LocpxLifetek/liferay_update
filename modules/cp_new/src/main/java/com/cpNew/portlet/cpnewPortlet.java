@@ -40,6 +40,8 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class cpnewPortlet extends MVCPortlet {
+	
+	private final String LINK_CP_NEW = "http://portal.lifetek.vn/web/lifetek/media.chinhphu?id=";
 	@SuppressWarnings("deprecation")
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
@@ -91,8 +93,7 @@ public class cpnewPortlet extends MVCPortlet {
 				List<DLFileEntry> dlFileEntries = DLFileEntryLocalServiceUtil.dynamicQuery(query);
 				for (DLFileEntry d : dlFileEntries) {
 					renderRequest.setAttribute("hrefttdpt" + (i + 1),
-							"http://localhost:8080/media.chinhphu?id=" + d.getFileEntryId());
-					System.out.println("http://localhost:8080/media.chinhphu?id=" + d.getFileEntryId());
+							LINK_CP_NEW + d.getFileEntryId());
 				}
 			}
 
@@ -133,7 +134,7 @@ public class cpnewPortlet extends MVCPortlet {
 				List<DLFileEntry> dlFileEntries2 = DLFileEntryLocalServiceUtil.dynamicQuery(query2);
 				for (DLFileEntry d : dlFileEntries2) {
 					renderRequest.setAttribute("hrefbtcptq" + (i + 1),
-							"http://localhost:8080/media.chinhphu?id=" + d.getFileEntryId());
+							LINK_CP_NEW + d.getFileEntryId());
 				}
 			}
 			// image tin thứ nhất của Bản tin chính phủ tuần qua (btcptq)

@@ -1,0 +1,4 @@
+Bundle-Name: cp_Thongtindientu_Left
+Bundle-SymbolicName: com.cp_ThongtindientuLeft
+Bundle-Version: 1.0.0
+Export-Package: com.cp_ThongtindientuLeft.constants

@@ -1,0 +1,4 @@
+Bundle-Name: menu_quangninh
+Bundle-SymbolicName: menu_quangninh
+Bundle-Version: 1.0.0
+Export-Package: menu_quangninh.constants

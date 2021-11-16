@@ -1,0 +1,4 @@
+Bundle-Name: MyCustomLoginPorlet
+Bundle-SymbolicName: MyCustomLoginPorlet
+Bundle-Version: 1.0.0
+Export-Package: MyCustomLoginPorlet.constants

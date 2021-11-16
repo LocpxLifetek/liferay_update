@@ -1,0 +1,25 @@
+	.cp_Thongtindientu_Left {}
+
+    .cp_Thongtindientu_Left ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background-color: #e9d8f4;
+    }
+
+    .cp_Thongtindientu_Left li{
+        border: 1px solid red;
+        background-image: linear-gradient(#FFCC00, #EEE8AA);
+        display: block;
+    }
+
+    .cp_Thongtindientu_Left a{
+        text-decoration: none;
+        font-size: 14px;
+        color: black;
+    }
+    /* Thay đổi màu liên kết khi di chuột qua */
+    .cp_Thongtindientu_Left li a:hover {
+        color: red;
+    }

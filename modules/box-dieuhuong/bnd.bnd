@@ -1,0 +1,4 @@
+Bundle-Name: box-dieuhuong
+Bundle-SymbolicName: box.dieuhuong
+Bundle-Version: 1.0.0
+Export-Package: box.dieuhuong.constants

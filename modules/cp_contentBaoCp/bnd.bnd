@@ -1,0 +1,4 @@
+Bundle-Name: cp_contentBaoCp
+Bundle-SymbolicName: com.contentBcp
+Bundle-Version: 1.0.0
+Export-Package: com.contentBcp.constants

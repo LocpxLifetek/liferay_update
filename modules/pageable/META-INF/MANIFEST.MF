@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: pageable
+Bundle-SymbolicName: pageable
+Bundle-Version: 1.0.0.qualifier
+Export-Package: content,
+ pageable.constants,
+ pageable.portlet

@@ -1,0 +1,4 @@
+Bundle-Name: currentDate
+Bundle-SymbolicName: currentDate
+Bundle-Version: 1.0.0
+Export-Package: currentDate.constants
