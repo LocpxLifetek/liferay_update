@@ -51,7 +51,7 @@ public class cp_chinhsachthanhtuu_noidungPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			// http://localhost:8080/web/lifetek/chinhphu/noidungchinhsachthanhtuu?categoryId=******&priKey=******
+			// http://portal.lifetek.vn/web/lifetek/chinhphu/noidungchinhsachthanhtuu?categoryId=******&priKey=******
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			int categoryId = Integer.parseInt(PortalUtil.getOriginalServletRequest(request).getParameter("categoryId"));
 			int priKey = Integer.parseInt(PortalUtil.getOriginalServletRequest(request).getParameter("priKey"));

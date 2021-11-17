@@ -42,7 +42,7 @@ public class cp_thanhviencpquacacthoikyPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			// http://localhost:8080/web/lifetek/chinhphu/thanhvienchinhphuquacacthoiky?priKey=******
+			// http://portal.lifetek.vn/web/lifetek/chinhphu/thanhvienchinhphuquacacthoiky?priKey=******
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 
 			// check path "/lifetek/chinhphu/thanhvienchinhphuquacacthoiky"
@@ -50,9 +50,9 @@ public class cp_thanhviencpquacacthoikyPortlet extends MVCPortlet {
 			// check exists paramter
 			boolean checkparam = PortalUtil.getOriginalServletRequest(request).getParameter("priKey") != null;
 			//
-			// nếu không truyền parameter, mặc định hiển thị tin đầu của list Category
+			// náº¿u khÃ´ng truyá»�n parameter, máº·c Ä‘á»‹nh hiá»ƒn thá»‹ tin Ä‘áº§u cá»§a list Category
 			if (path.equals("/lifetek/chinhphu/thanhvienchinhphuquacacthoiky") && !checkparam) {
-				// category : CHÍNH PHỦ QUA CÁC THỜI KỲ có id 211761
+				// category : CHÃ�NH PHá»¦ QUA CÃ�C THá»œI Ká»² cÃ³ id 211761
 				AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(211761);
 				renderRequest.setAttribute("assetCategory", assetCategory);
 				List<AssetEntryAssetCategoryRel> assetEntryAssetCategoryReles = AssetEntryAssetCategoryRelLocalServiceUtil
@@ -72,11 +72,11 @@ public class cp_thanhviencpquacacthoikyPortlet extends MVCPortlet {
 				}
 				renderRequest.setAttribute("articleDisplays", articleDisplays);
 				renderRequest.setAttribute("articleDisplay", articleDisplays.get(0));
-			} // Nếu truyền parameter là priKey
+			} // Náº¿u truyá»�n parameter lÃ  priKey
 			else {
 				String priKeyParam = PortalUtil.getOriginalServletRequest(request).getParameter("priKey");
 				int priKey = Integer.parseInt(priKeyParam);
-				// category : CHÍNH PHỦ QUA CÁC THỜI KỲ có id 211761
+				// category : CHÃ�NH PHá»¦ QUA CÃ�C THá»œI Ká»² cÃ³ id 211761
 				AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(211761);
 				renderRequest.setAttribute("assetCategory", assetCategory);
 				List<AssetEntryAssetCategoryRel> assetEntryAssetCategoryReles = AssetEntryAssetCategoryRelLocalServiceUtil

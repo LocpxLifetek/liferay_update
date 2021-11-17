@@ -40,7 +40,7 @@ public class cp_chucnangnhiemvu_noidungPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			// http://localhost:8080/web/lifetek/chinhphu/noidungchucnangnhiemvu?id=******
+			// http://portal.lifetek.vn/web/lifetek/chinhphu/noidungchucnangnhiemvu?id=******
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			// id trong http dung de lay ra webcontent
 			int id = Integer.parseInt(PortalUtil.getOriginalServletRequest(request).getParameter("id"));

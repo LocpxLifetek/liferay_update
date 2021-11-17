@@ -16,10 +16,10 @@
 		<div class="cp_tstvcp">${tieusutvcp.getName()}</div>
 		<div style="border: rgb(207, 205, 205) solid 1px;">
 			<ul>
-				<li><a href="http://localhost:8080/web/lifetek/chinhphu/thutuongchinhphucacnhiemky" style="color: black;">${tieusu1.getTitle()}</a></li>
+				<li><a href="http://portal.lifetek.vn/web/lifetek/chinhphu/thutuongchinhphucacnhiemky" style="color: black;">${tieusu1.getTitle()}</a></li>
 				<c:forEach items="${displayTieusu}" var="d1">
 					<li><a style="color: black;"
-						href="http://localhost:8080/web/lifetek/chinhphu/thanhvienchinhphuquacacthoiky?priKey=${d1.getResourcePrimKey()}">
+						href="http://portal.lifetek.vn/web/lifetek/chinhphu/thanhvienchinhphuquacacthoiky?priKey=${d1.getResourcePrimKey()}">
 							${d1.getTitle()} </a></li>
 				</c:forEach>
 			</ul>

@@ -41,7 +41,7 @@ public class cp_tieusulanhdaoPortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		try {
 			String content = StringPool.BLANK; //
-			// "http://localhost:8080/web/lifetek/chinhphu/tieusulanhdao?categoryId=198798&id=199303";
+			// "http://portal.lifetek.vn/web/lifetek/chinhphu/tieusulanhdao?categoryId=198798&id=199303";
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			// id trong http dùng để check id đó có chủ để là categoryId=198798 (Tiểu sử)
 			int id = Integer.parseInt(PortalUtil.getOriginalServletRequest(request).getParameter("id"));

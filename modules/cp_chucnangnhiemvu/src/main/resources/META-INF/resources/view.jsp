@@ -9,7 +9,7 @@
 		<c:forEach items="${journalArticles}" var="article">
 			<li><a
 				style="color:black;"
-				href="http://localhost:8080/web/lifetek/chinhphu/noidungchucnangnhiemvu?id=${article.getResourcePrimKey()}">
+				href="http://portal.lifetek.vn/web/lifetek/chinhphu/noidungchucnangnhiemvu?id=${article.getResourcePrimKey()}">
 					${article.getTitle()} </a></li>
 
 		</c:forEach>
