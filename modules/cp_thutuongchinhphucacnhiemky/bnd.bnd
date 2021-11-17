@@ -1,0 +1,4 @@
+Bundle-Name: cp_thutuongchinhphucacnhiemky
+Bundle-SymbolicName: com.cp_thutuongchinhphucacnhiemky
+Bundle-Version: 1.0.0
+Export-Package: com.cp_thutuongchinhphucacnhiemky.constants

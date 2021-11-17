@@ -1,0 +1,4 @@
+Bundle-Name: cp_gioithieubanchidao
+Bundle-SymbolicName: com.cp_gioithieubanchidao
+Bundle-Version: 1.0.0
+Export-Package: com.cp_gioithieubanchidao.constants
