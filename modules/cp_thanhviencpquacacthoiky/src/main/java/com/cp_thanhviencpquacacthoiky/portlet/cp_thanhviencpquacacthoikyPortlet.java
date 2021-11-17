@@ -50,9 +50,9 @@ public class cp_thanhviencpquacacthoikyPortlet extends MVCPortlet {
 			// check exists paramter
 			boolean checkparam = PortalUtil.getOriginalServletRequest(request).getParameter("priKey") != null;
 			//
-			// náº¿u khÃ´ng truyá»�n parameter, máº·c Ä‘á»‹nh hiá»ƒn thá»‹ tin Ä‘áº§u cá»§a list Category
+			// nếu không truyền parameter, mặc định hiển thị tin đầu của list Category
 			if (path.equals("/lifetek/chinhphu/thanhvienchinhphuquacacthoiky") && !checkparam) {
-				// category : CHÃ�NH PHá»¦ QUA CÃ�C THá»œI Ká»² cÃ³ id 211761
+				// category : CHÍNH PHỦ QUA CÁC THỜI KỲ có id 211761
 				AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(211761);
 				renderRequest.setAttribute("assetCategory", assetCategory);
 				List<AssetEntryAssetCategoryRel> assetEntryAssetCategoryReles = AssetEntryAssetCategoryRelLocalServiceUtil
@@ -72,11 +72,11 @@ public class cp_thanhviencpquacacthoikyPortlet extends MVCPortlet {
 				}
 				renderRequest.setAttribute("articleDisplays", articleDisplays);
 				renderRequest.setAttribute("articleDisplay", articleDisplays.get(0));
-			} // Náº¿u truyá»�n parameter lÃ  priKey
+			} // Nếu truyền parameter là priKey
 			else {
 				String priKeyParam = PortalUtil.getOriginalServletRequest(request).getParameter("priKey");
 				int priKey = Integer.parseInt(priKeyParam);
-				// category : CHÃ�NH PHá»¦ QUA CÃ�C THá»œI Ká»² cÃ³ id 211761
+				// category : CHÍNH PHỦ QUA CÁC THỜI KỲ có id 211761
 				AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(211761);
 				renderRequest.setAttribute("assetCategory", assetCategory);
 				List<AssetEntryAssetCategoryRel> assetEntryAssetCategoryReles = AssetEntryAssetCategoryRelLocalServiceUtil

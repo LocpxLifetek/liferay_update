@@ -4,7 +4,7 @@
 <div class="cp_Thongtindientu_Left">
 	<ul>
 		<li><a href="">Nước CHXHCN Việt Nam</a></li>
-		<li><a href="">Chính phủ</a></li>
+		<li><a href="http://portal.lifetek.vn/web/lifetek/chinhphu/chinhphu">Chính phủ</a></li>
 		<li><a href="">Hệ thống văn bản</a></li>
 		<li><a href="">Số liệu ngân sách Nhà nước</a></li>
 		<li><a href="">Chính sách phát triển kinh tế - xã hội</a></li>
