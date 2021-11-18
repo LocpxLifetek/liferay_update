@@ -14,26 +14,17 @@
 <body>
 	<div class="grid">
 
-		<c:forEach items="${blogsList}" var="blog">
-			<c:choose>
-				<c:when test="${blog.smallImageFileEntryId > 0}">
-					<c:forEach items="${smallImage}" var="si">
-						<c:if test="${blog.smallImageFileEntryId == si.fileEntryId}">
-							<div class="hotNews">
-								<img
-									src="/documents/${si.groupId}/${si.folderId}/${si.title}/${si.uuid}"
-									class="soup-image1"> 
-									<a href="/web/lifetek/tintuc?id=${blog.uuid}">${blog.title}</a>
-							</div>
-						</c:if>
-					</c:forEach>
-				</c:when>
-				<c:otherwise>
-					<div>
-						<a href="/web/lifetek/tintuc?id=${blog.uuid}">${blog.title}</a>
-					</div>
-				</c:otherwise>
-			</c:choose>
+		<c:forEach items="${listBlogsEntryDtos}" var="blog">
+
+			<div class="hotNews">
+				<img
+					src="/documents/${blog.groupId}/${blog.folderId}/${blog.titleDlFileEntry}/${blog.uuidDlFileEntry}"
+					class="soup-image1"> <a
+					href="/web/lifetek/tintuc?id=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
+			</div>
+
+
+
 		</c:forEach>
 	</div>
 </body>

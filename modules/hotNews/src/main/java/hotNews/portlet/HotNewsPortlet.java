@@ -10,6 +10,7 @@ import com.liferay.blogs.model.BlogsEntry;
 import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
@@ -19,6 +20,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +36,7 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import hotNews.constants.HotNewsPortletKeys;
+import hotNews.dto.BlogsEntryDto;
 
 /**
  * @author java05
@@ -41,58 +48,58 @@ import hotNews.constants.HotNewsPortletKeys;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class HotNewsPortlet extends MVCPortlet {
-
+	private PreparedStatement statement;
+	Connection con = null;
+	private List<BlogsEntryDto> findAllBlogsByIdCategory() throws SQLException {
+		try {
+			
+			List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
+			con = DataAccess.getConnection();
+			statement = con.prepareStatement("SELECT be.uuid_  AS uuidblogsentry,be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,dl.fileentryid AS fileentryid,dl.groupid  AS groupid,dl.folderid AS folderid, dl.title AS titledlfileentry, dl.uuid_ AS uuiddlfileentry FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid INNER JOIN dlfileentry dl ON dl.fileentryid = be.smallimagefileentryid WHERE ac.categoryid = '52271'  AND ae.classnameid = '31201'  AND be.status = '0' ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY");
+			ResultSet rs=statement.executeQuery();
+			while(rs.next()) {
+				BlogsEntryDto blogsEntryDto=new BlogsEntryDto();
+				String uuidBlogsEntry=rs.getString("uuidblogsentry");
+				Integer entryId=rs.getInt("entryid");
+				String titleBlogsEntry=rs.getString("titleblogsentry");
+				String description=rs.getString("descriptiondlfileentry");
+				Integer fileEntryId=rs.getInt("fileentryid");
+				Integer groupId=rs.getInt("groupid");
+				Integer folderId=rs.getInt("folderid");
+				String titleDlFileEntry=rs.getString("titledlfileentry");
+				String uuidDlFileEntry=rs.getString("uuiddlfileentry");
+				blogsEntryDto.setDescription(description);
+				blogsEntryDto.setEntryId(entryId);
+				blogsEntryDto.setFileEntryId(fileEntryId);
+				blogsEntryDto.setFolderId(folderId);
+				blogsEntryDto.setGroupId(groupId);
+				blogsEntryDto.setTitleBlogsEntry(titleBlogsEntry);
+				blogsEntryDto.setTitleDlFileEntry(titleDlFileEntry);
+				blogsEntryDto.setUuidBlogsEntry(uuidBlogsEntry);
+				blogsEntryDto.setUuidDlFileEntry(uuidDlFileEntry);
+				listBlogsEntryDto.add(blogsEntryDto);
+			}
+			return listBlogsEntryDto;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}finally {
+			statement.close();
+			con.close();
+		}
+	}
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 
-		try {
-
-			AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(52271);
-
-			List<BlogsEntry> blogsList = new ArrayList<>();
-			List<DLFileEntry> dlFileEntryList = new ArrayList<>();
-			DynamicQuery queryAssetentryAssetCategory = DynamicQueryFactoryUtil
-					.forClass(AssetEntryAssetCategoryRel.class);
-			Long categoryId = assetCategory.getCategoryId();
-			Property categoryProperty = PropertyFactoryUtil.forName("assetCategoryId");
-			queryAssetentryAssetCategory.add(categoryProperty.eq(categoryId));
-			queryAssetentryAssetCategory.addOrder(OrderFactoryUtil.desc("assetEntryAssetCategoryRelId"));
-			queryAssetentryAssetCategory.setLimit(0, 10);
-			List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRel = AssetEntryAssetCategoryRelLocalServiceUtil
-					.dynamicQuery(queryAssetentryAssetCategory);
-			int i = 0;
-			for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel2 : listAssetEntryAssetCategoryRel) {
-				AssetEntry assetEntry = AssetEntryLocalServiceUtil
-						.getEntry(assetEntryAssetCategoryRel2.getAssetEntryId());
-				if (assetEntry.getClassNameId() == 31201) {
-					BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
-					if (blogsEntry.getStatus() == 0) {
-
-						i++;
-						if (i <= 4) {
-
-							if (blogsEntry.getSmallImageFileEntryId() > 0) {
-								DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil
-										.getFileEntry(blogsEntry.getSmallImageFileEntryId());
-								dlFileEntryList.add(dlFileEntry);
-							}
-							blogsList.add(blogsEntry);
-						} else {
-							break;
-						}
-					}
-				}
-			}
-
-			renderRequest.setAttribute("smallImage", dlFileEntryList);
-			renderRequest.setAttribute("blogsList", blogsList);
-
-		} catch (PortalException e) {
-			// TODO Auto-generated catch block
+		try {	
+			List<BlogsEntryDto> listBlogsEntryDtos=findAllBlogsByIdCategory();
+			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);	
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
-
 		super.doView(renderRequest, renderResponse);
 
 	}
