@@ -17,7 +17,7 @@
 					<img src="https://www.totolink.vn/public/uploads/img_post/truy-tim-nguyen-nhan-va-cach-sua-chua-loi-tra-cuu-404-not-found-1.jpg" style="width:100%">
 				</c:when>
 				<c:otherwise>
-					<c:forEach items="${listBlogsEntryDto}" var="blog">
+					<c:forEach items="${listBlogEntryDtos}" var="blog">
 
 						<div class="listDirectOperationGrid">
 							<div class="ldo">

@@ -1,25 +1,20 @@
 package eventNewsInformation.portlet;
 
-import com.liferay.asset.entry.rel.model.AssetEntryAssetCategoryRel;
-import com.liferay.asset.entry.rel.service.AssetEntryAssetCategoryRelLocalServiceUtil;
-import com.liferay.asset.kernel.model.AssetCategory;
-import com.liferay.asset.kernel.model.AssetEntry;
-import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
-import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
-import com.liferay.blogs.model.BlogsEntry;
-import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.document.library.kernel.model.DLFileEntry;
-import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -29,6 +24,9 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import eventNewsInformation.constants.EventNewsInformationPortletKeys;
+import eventNewsInformation.dto.AssetCategoryDto;
+import eventNewsInformation.dto.BlogsEntryDto;
+import eventNewsInformation.dto.CategoryDto;
 
 /**
  * @author java05
@@ -41,273 +39,101 @@ import eventNewsInformation.constants.EventNewsInformationPortletKeys;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class EventNewsInformationPortlet extends MVCPortlet {
-
+	private PreparedStatement statement;
+	private Connection con=null;
+	
+	private List<AssetCategoryDto> findAssetCategoryByParentCategory() throws SQLException{
+		try {
+			List<AssetCategoryDto> listAssetCategoryDto=new ArrayList<>();
+			con=DataAccess.getConnection();
+			statement=con.prepareStatement("select ac.categoryid as categoryId,ac.uuid_ as uuid, ac.name as name from assetCategory ac where ac.parentcategoryid='108693'");
+			ResultSet rs=statement.executeQuery();
+			while(rs.next()) {
+				AssetCategoryDto assetCategoryDto=new AssetCategoryDto();
+				Integer categoryId=rs.getInt("categoryId");
+				String nameCategory=rs.getString("name");
+				String uuid=rs.getString("uuid");
+				assetCategoryDto.setUuid(uuid);
+				assetCategoryDto.setId(categoryId);
+				assetCategoryDto.setName(nameCategory);
+				listAssetCategoryDto.add(assetCategoryDto);
+			}
+			return listAssetCategoryDto;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}finally {
+			statement.close();
+			con.close();
+		}
+	}
+	
+	private List<BlogsEntryDto> findAllBlogsEntryById(Integer id) throws SQLException{
+		try {
+			List<BlogsEntryDto> listBlogsEntryDtos=new ArrayList<>();
+			con=DataAccess.getConnection();
+			statement=con.prepareStatement("SELECT be.uuid_  AS uuidblogsentry,be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,be.modifieddate AS modifieddate,dl.fileentryid AS fileentryid,dl.groupid  AS groupid,dl.folderid AS folderid, dl.title AS titledlfileentry, dl.uuid_ AS uuiddlfileentry FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid INNER JOIN dlfileentry dl ON dl.fileentryid = be.smallimagefileentryid WHERE ac.categoryid =?  AND ae.classnameid = '31201'  AND be.status = '0' ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY");
+			statement.setInt(1, id);
+			ResultSet rs=statement.executeQuery();
+			while(rs.next()) {
+				BlogsEntryDto blogsEntryDto=new BlogsEntryDto();
+				String uuidBlogsEntry=rs.getString("uuidblogsentry");
+				Integer entryId=rs.getInt("entryid");
+				String titleBlogsEntry=rs.getString("titleblogsentry");
+				String description=rs.getString("descriptiondlfileentry");
+				Timestamp modifiedDate=rs.getTimestamp("modifieddate");
+				Integer fileEntryId=rs.getInt("fileentryid");
+				Integer groupId=rs.getInt("groupid");
+				Integer folderId=rs.getInt("folderid");
+				String titleDlFileEntry=rs.getString("titledlfileentry");
+				String uuidDlFileEntry=rs.getString("uuiddlfileentry");
+				blogsEntryDto.setDescription(description);
+				blogsEntryDto.setEntryId(entryId);
+				blogsEntryDto.setFileEntryId(fileEntryId);
+				blogsEntryDto.setFolderId(folderId);
+				blogsEntryDto.setGroupId(groupId);
+				blogsEntryDto.setTitleBlogsEntry(titleBlogsEntry);
+				blogsEntryDto.setTitleDlFileEntry(titleDlFileEntry);
+				blogsEntryDto.setUuidBlogsEntry(uuidBlogsEntry);
+				blogsEntryDto.setUuidDlFileEntry(uuidDlFileEntry);
+				blogsEntryDto.setModifiedDate(modifiedDate);
+				listBlogsEntryDtos.add(blogsEntryDto);
+			}
+			return listBlogsEntryDtos;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}finally {
+			statement.close();
+			con.close();
+		}
+	}
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(108693);
-			DynamicQuery dynamicQueryCategory = DynamicQueryFactoryUtil.forClass(AssetCategory.class);
-			long categoryId = assetCategory.getCategoryId();
-			Property parentCategoryProperty = PropertyFactoryUtil.forName("parentCategoryId");
-			dynamicQueryCategory.add(parentCategoryProperty.eq(categoryId));
-			List<AssetCategory> listAssetCategory = AssetCategoryLocalServiceUtil.dynamicQuery(dynamicQueryCategory);
-			List<BlogsEntry> listBlogsEntriesDirectOperator = new ArrayList<>();
-			List<DLFileEntry> listDlFileEntryDirectOperator = new ArrayList<>();
-			List<BlogsEntry> listBlogsEntriesForeignInformation = new ArrayList<>();
-			List<BlogsEntry> listBlogsEntriesSecurityNews = new ArrayList<>();
-			List<BlogsEntry> listBlogsEntriesGoodPeople = new ArrayList<>();
-			List<BlogsEntry> listBlogsEntriesPoliceActivities = new ArrayList<>();
-			List<DLFileEntry> listDlFileEntryPoliceActivities = new ArrayList<>();
-			List<BlogsEntry> listBlogsEntriesSocialActivities= new ArrayList<>();
-			List<DLFileEntry> listDLFileEntrySocialActivities=new ArrayList<>();
-			for (AssetCategory assetCategory2 : listAssetCategory) {
-				System.out.println("assetCategory: " + assetCategory2.getName());
-				if (assetCategory2.getCategoryId() == 108700) {
-					renderRequest.setAttribute("category", assetCategory2);
-					int i = 0;
-					DynamicQuery queryAssetentryAssetCategory = DynamicQueryFactoryUtil
-							.forClass(AssetEntryAssetCategoryRel.class);
-					long assetCategoryId = assetCategory2.getCategoryId();
-					Property assetCategoryAndEntryProperty = PropertyFactoryUtil.forName("assetCategoryId");
-					queryAssetentryAssetCategory.add(assetCategoryAndEntryProperty.eq(assetCategoryId));
-					queryAssetentryAssetCategory.addOrder(OrderFactoryUtil.desc("assetEntryAssetCategoryRelId"));
-					List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRel = AssetEntryAssetCategoryRelLocalServiceUtil
-							.dynamicQuery(queryAssetentryAssetCategory);
-					for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRel) {
-						AssetEntry assetEntry = AssetEntryLocalServiceUtil
-								.getEntry(assetEntryAssetCategoryRel.getAssetEntryId());
-						if (assetEntry.getClassNameId() == 31201) {
-							BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
-							if (blogsEntry.getStatus() == 0) {
-
-								i++;
-								if (i == 1) {
-									if (blogsEntry.getSmallImageFileEntryId() > 0) {
-										DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil
-												.getFileEntry(blogsEntry.getSmallImageFileEntryId());
-										renderRequest.setAttribute("smallImageDirectOperator", dlFileEntry);
-									}
-
-									renderRequest.setAttribute("directOperator", blogsEntry);
-								} else if (i > 1 && i <= 5) {
-
-									if (blogsEntry.getSmallImageFileEntryId() > 0) {
-										DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil
-												.getFileEntry(blogsEntry.getSmallImageFileEntryId());
-										listDlFileEntryDirectOperator.add(dlFileEntry);
-									}
-									listBlogsEntriesDirectOperator.add(blogsEntry);
-								} else {
-									break;
-								}
-							}
-						}
-					}
-				} else if (assetCategory2.getCategoryId() == 108703) {
-					renderRequest.setAttribute("category1", assetCategory2);
-					int j = 0;
-					DynamicQuery queryAssetentryAssetCategory = DynamicQueryFactoryUtil
-							.forClass(AssetEntryAssetCategoryRel.class);
-					long assetCategoryId = assetCategory2.getCategoryId();
-					Property assetCategoryAndEntryProperty = PropertyFactoryUtil.forName("assetCategoryId");
-					queryAssetentryAssetCategory.add(assetCategoryAndEntryProperty.eq(assetCategoryId));
-					queryAssetentryAssetCategory.addOrder(OrderFactoryUtil.desc("assetEntryAssetCategoryRelId"));
-					List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRel = AssetEntryAssetCategoryRelLocalServiceUtil
-							.dynamicQuery(queryAssetentryAssetCategory);
-					for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRel) {
-						AssetEntry assetEntry = AssetEntryLocalServiceUtil
-								.getEntry(assetEntryAssetCategoryRel.getAssetEntryId());
-						if (assetEntry.getClassNameId() == 31201) {
-							BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
-							if (blogsEntry.getStatus() == 0) {
-
-								j++;
-								if (j == 1) {
-									if (blogsEntry.getSmallImageFileEntryId() > 0) {
-										DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil
-												.getFileEntry(blogsEntry.getSmallImageFileEntryId());
-										renderRequest.setAttribute("smallImageForeignInformation", dlFileEntry);
-									}
-									renderRequest.setAttribute("foreignInformation", blogsEntry);
-								} else if (j > 1 && j <= 5) {
-
-									listBlogsEntriesForeignInformation.add(blogsEntry);
-								} else {
-									break;
-								}
-							}
-						}
-					}
-				} else if (assetCategory2.getCategoryId() == 113401) {
-					renderRequest.setAttribute("category2", assetCategory2);
-					int j = 0;
-					DynamicQuery queryAssetentryAssetCategory = DynamicQueryFactoryUtil
-							.forClass(AssetEntryAssetCategoryRel.class);
-					long assetCategoryId = assetCategory2.getCategoryId();
-					Property assetCategoryAndEntryProperty = PropertyFactoryUtil.forName("assetCategoryId");
-					queryAssetentryAssetCategory.add(assetCategoryAndEntryProperty.eq(assetCategoryId));
-					queryAssetentryAssetCategory.addOrder(OrderFactoryUtil.desc("assetEntryAssetCategoryRelId"));
-					List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRel = AssetEntryAssetCategoryRelLocalServiceUtil
-							.dynamicQuery(queryAssetentryAssetCategory);
-					for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRel) {
-						AssetEntry assetEntry = AssetEntryLocalServiceUtil
-								.getEntry(assetEntryAssetCategoryRel.getAssetEntryId());
-						if (assetEntry.getClassNameId() == 31201) {
-							BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
-							if (blogsEntry.getStatus() == 0) {
-
-								j++;
-								if (j == 1) {
-									if (blogsEntry.getSmallImageFileEntryId() > 0) {
-										DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil
-												.getFileEntry(blogsEntry.getSmallImageFileEntryId());
-										renderRequest.setAttribute("smallImageSecurityNews", dlFileEntry);
-									}
-									renderRequest.setAttribute("securityNews", blogsEntry);
-								} else if (j > 1 && j <= 5) {
-
-									listBlogsEntriesSecurityNews.add(blogsEntry);
-								} else {
-									break;
-								}
-							}
-						}
-					}
-				} else if (assetCategory2.getCategoryId() == 113404) {
-					renderRequest.setAttribute("category3", assetCategory2);
-					int j = 0;
-					DynamicQuery queryAssetentryAssetCategory = DynamicQueryFactoryUtil
-							.forClass(AssetEntryAssetCategoryRel.class);
-					long assetCategoryId = assetCategory2.getCategoryId();
-					Property assetCategoryAndEntryProperty = PropertyFactoryUtil.forName("assetCategoryId");
-					queryAssetentryAssetCategory.add(assetCategoryAndEntryProperty.eq(assetCategoryId));
-					queryAssetentryAssetCategory.addOrder(OrderFactoryUtil.desc("assetEntryAssetCategoryRelId"));
-					List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRel = AssetEntryAssetCategoryRelLocalServiceUtil
-							.dynamicQuery(queryAssetentryAssetCategory);
-					for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRel) {
-						AssetEntry assetEntry = AssetEntryLocalServiceUtil
-								.getEntry(assetEntryAssetCategoryRel.getAssetEntryId());
-						if (assetEntry.getClassNameId() == 31201) {
-							BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
-							if (blogsEntry.getStatus() == 0) {
-
-								j++;
-								if (j == 1) {
-									if (blogsEntry.getSmallImageFileEntryId() > 0) {
-										DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil
-												.getFileEntry(blogsEntry.getSmallImageFileEntryId());
-										renderRequest.setAttribute("smallImageGoodPeople", dlFileEntry);
-									}
-									renderRequest.setAttribute("goodPeople", blogsEntry);
-								} else if (j > 1 && j <= 5) {
-
-									listBlogsEntriesGoodPeople.add(blogsEntry);
-								} else {
-									break;
-								}
-							}
-						}
-					}
-				} else if (assetCategory2.getCategoryId() == 113410) {
-					renderRequest.setAttribute("category4", assetCategory2);
-					int j = 0;
-					DynamicQuery queryAssetentryAssetCategory = DynamicQueryFactoryUtil
-							.forClass(AssetEntryAssetCategoryRel.class);
-					long assetCategoryId = assetCategory2.getCategoryId();
-					Property assetCategoryAndEntryProperty = PropertyFactoryUtil.forName("assetCategoryId");
-					queryAssetentryAssetCategory.add(assetCategoryAndEntryProperty.eq(assetCategoryId));
-					queryAssetentryAssetCategory.addOrder(OrderFactoryUtil.desc("assetEntryAssetCategoryRelId"));
-					List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRel = AssetEntryAssetCategoryRelLocalServiceUtil
-							.dynamicQuery(queryAssetentryAssetCategory);
-					for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRel) {
-						AssetEntry assetEntry = AssetEntryLocalServiceUtil
-								.getEntry(assetEntryAssetCategoryRel.getAssetEntryId());
-						if (assetEntry.getClassNameId() == 31201) {
-							BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
-							if(blogsEntry.getStatus() ==0) {
-								j++;
-								if (j == 1) {
-									if (blogsEntry.getSmallImageFileEntryId() > 0) {
-										DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil
-												.getFileEntry(blogsEntry.getSmallImageFileEntryId());
-										renderRequest.setAttribute("smallImagePoliceActivities", dlFileEntry);
-									}
-									renderRequest.setAttribute("policeActivities", blogsEntry);
-								} else if (j > 1 && j <= 5) {
-									if (blogsEntry.getSmallImageFileEntryId() > 0) {
-										DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil
-												.getFileEntry(blogsEntry.getSmallImageFileEntryId());
-										listDlFileEntryPoliceActivities.add(dlFileEntry);
-									}
-									listBlogsEntriesPoliceActivities.add(blogsEntry);
-								} else {
-									break;
-								}
-							}
-						}
-					}
-				}
-				else if (assetCategory2.getCategoryId() == 113407) {
-					renderRequest.setAttribute("category5", assetCategory2);
-					int j = 0;
-					DynamicQuery queryAssetentryAssetCategory = DynamicQueryFactoryUtil
-							.forClass(AssetEntryAssetCategoryRel.class);
-					long assetCategoryId = assetCategory2.getCategoryId();
-					Property assetCategoryAndEntryProperty = PropertyFactoryUtil.forName("assetCategoryId");
-					queryAssetentryAssetCategory.add(assetCategoryAndEntryProperty.eq(assetCategoryId));
-					queryAssetentryAssetCategory.addOrder(OrderFactoryUtil.desc("assetEntryAssetCategoryRelId"));
-					List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRel = AssetEntryAssetCategoryRelLocalServiceUtil
-							.dynamicQuery(queryAssetentryAssetCategory);
-					for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRel) {
-						AssetEntry assetEntry = AssetEntryLocalServiceUtil
-								.getEntry(assetEntryAssetCategoryRel.getAssetEntryId());
-						if (assetEntry.getClassNameId() == 31201) {
-							BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
-							if(blogsEntry.getStatus() ==0) {
-								j++;
-								if (j == 1) {
-									if (blogsEntry.getSmallImageFileEntryId() > 0) {
-										DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil
-												.getFileEntry(blogsEntry.getSmallImageFileEntryId());
-										renderRequest.setAttribute("smallImageSocialActivities", dlFileEntry);
-									}
-									renderRequest.setAttribute("socialActivities", blogsEntry);
-								} else if (j > 1 && j <= 5) {
-									
-									listBlogsEntriesSocialActivities.add(blogsEntry);
-								} else {
-									break;
-								}
-							}
-						}
-					}
-				}
-			}
-			// chá»‰ Ä‘áº¡o Ä‘iá»�u hÃ nh
-			renderRequest.setAttribute("listBlogsEntriesDirectOperator", listBlogsEntriesDirectOperator);
-			renderRequest.setAttribute("listDlFileEntryDirectOperator", listDlFileEntryDirectOperator);
-
-			// thÃ´ng tin Ä‘á»‘i ngoáº¡i
-			renderRequest.setAttribute("listBlogsEntriesForeignInformation", listBlogsEntriesForeignInformation);
-
-			// tin an ninh tráº­t tá»±
-			renderRequest.setAttribute("listBlogsEntriesSecurityNews", listBlogsEntriesSecurityNews);
-
-			// ngÆ°á»�i tá»‘t
-			renderRequest.setAttribute("listBlogsEntriesGoodPeople", listBlogsEntriesGoodPeople);
-
-			// hoáº¡t Ä‘á»™ng chÃ­nh phá»§
-			renderRequest.setAttribute("listBlogsEntriesPoliceActivities", listBlogsEntriesPoliceActivities);
-			renderRequest.setAttribute("listDlFileEntryPoliceActivities", listDlFileEntryPoliceActivities);
 			
-			//hoat động xã hội
-			renderRequest.setAttribute("listBlogsEntriesSocialActivities", listBlogsEntriesSocialActivities);
-			super.doView(renderRequest, renderResponse);
-
+			List<AssetCategoryDto> listAssetCategoryDto=findAssetCategoryByParentCategory();
+			Map<List<AssetCategoryDto>,List<BlogsEntryDto>> maps=new LinkedHashMap<>();
+			for (AssetCategoryDto assetCategoryDto : listAssetCategoryDto) {
+				List<AssetCategoryDto> listAssetCategory=new ArrayList<>();
+				List<BlogsEntryDto> listBlogsEntryDtoMap=new ArrayList<>();
+				listAssetCategory.add(assetCategoryDto);
+				List<BlogsEntryDto> listBlogsEntryDtos=findAllBlogsEntryById(assetCategoryDto.getId());
+				for (BlogsEntryDto blogsEntryDto : listBlogsEntryDtos) {
+					listBlogsEntryDtoMap.add(blogsEntryDto);
+				}
+				maps.put(listAssetCategory, listBlogsEntryDtoMap); 		
+			}
+			renderRequest.setAttribute("maps", maps);
+			
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
+		super.doView(renderRequest, renderResponse);
 	}
 }

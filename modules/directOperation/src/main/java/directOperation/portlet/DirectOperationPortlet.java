@@ -9,6 +9,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.osgi.service.component.annotations.Component;
 
 import directOperation.constants.DirectOperationPortletKeys;
+import directOperation.dto.CategoryDto;
 
 /**
  * @author java05
@@ -37,22 +39,88 @@ public class DirectOperationPortlet extends MVCPortlet {
 	private PreparedStatement statement;
 	private java.sql.Connection con;
 
-	public Integer countBlogByCategory(String categoryId) {
+	public Integer countBlogByCategory(String categoryId) throws SQLException {
 		try {
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
-					"select count(*) as count from assetCAtegory ac inner join assetentryassetcategoryrel aeac on aeac.assetcategoryid=ac.categoryId inner join assetEntry ae on ae.entryId=aeac.assetentryid inner join BlogsEntry be on be.entryId=ae.classpk inner join DLFILEENTRY de on be.smallImageFileEntryId=de.fileEntryId  where ac.uuid_=? and be.status=0 and ae.classnameid='31201' order by be.modifieddate desc");
+					"select count(*) as count from assetCAtegory ac inner join assetentryassetcategoryrel aeac on aeac.assetcategoryid=ac.categoryId inner join assetEntry ae on ae.entryId=aeac.assetentryid inner join BlogsEntry be on be.entryId=ae.classpk inner join DLFILEENTRY de on be.smallImageFileEntryId=de.fileEntryId  where ac.uuid_=? and be.status='0' and ae.classnameid='31201' order by be.modifieddate desc");
 			statement.setString(1, categoryId);
 			ResultSet rs = statement.executeQuery();
+			int countBlog=0;
 			while (rs.next()) {
-				int countBlog = rs.getInt("count");
-				return countBlog;
+				countBlog = rs.getInt("count");
 			}
+			return countBlog;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			return null;
+		}finally {
+			statement.close();
+			con.close();
 		}
-		return null;
+	}
+
+	public List<BlogsEntryDto> pageableBlogsEntry(String uuid, Integer page, Integer size) throws SQLException {
+		try {
+			con = DataAccess.getConnection();
+			statement = con.prepareStatement(
+					"select be.DESCRIPTION,be.TITLE as titleBlog,be.MODIFIEDDATE,be.UUID_ as uuidBlogs,de.GROUPID,de.FOLDERID,de.title as titleDlfile,de.UUID_ as uuidImage from assetCAtegory ac inner join assetentryassetcategoryrel aeac on aeac.assetcategoryid=ac.categoryId inner join assetEntry ae on ae.entryId=aeac.assetentryid inner join BlogsEntry be on be.entryId=ae.classpk inner join DLFILEENTRY de on be.smallImageFileEntryId=de.fileEntryId  where ac.uuid_=? and be.status=0 and ae.classnameid='31201' order by be.modifieddate desc OFFSET (?-1)*? ROWS FETCH NEXT ? ROWS ONLY");
+			statement.setString(1, uuid);
+			statement.setInt(2, page);
+			statement.setInt(3, size);
+			statement.setInt(4, size);
+			ResultSet rs = statement.executeQuery();
+			List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
+			while (rs.next()) {
+				BlogsEntryDto blogsEntryDto = new BlogsEntryDto();
+				Date modifiedDate = rs.getDate("MODIFIEDDATE");
+				blogsEntryDto.setModifiedDate(modifiedDate);
+				String description = rs.getString("DESCRIPTION");
+				blogsEntryDto.setDescription(description);
+				String titleBlog = rs.getString("titleBlog");
+				blogsEntryDto.setTitleBlogs(titleBlog);
+				String uuidBlogs = rs.getString("uuidBlogs");
+				blogsEntryDto.setUuidBlogs(uuidBlogs);
+				String groupIdImage = rs.getString("GROUPID");
+				String folderImage = rs.getString("FOLDERID");
+				String uuidImage = rs.getString("uuidImage");
+				String titleImage = rs.getString("titleDlfile");
+				String srcImage = "/documents" + "/" + groupIdImage + "/" + folderImage + "/" + titleImage
+						+ "/" + uuidImage;
+				blogsEntryDto.setSrcImage(srcImage);
+				listBlogsEntryDto.add(blogsEntryDto);
+			}
+			return listBlogsEntryDto;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}finally {
+			statement.close();
+			con.close();
+		}
+	}
+	
+	public CategoryDto findCategoryByUuid(String uuid) {
+		try {
+			con = DataAccess.getConnection();
+			statement = con.prepareStatement("Select ac.uuid_ as uuid, ac.name as name from assetCategory ac where ac.uuid_=?");
+			statement.setString(1, uuid);
+			ResultSet rs =statement.executeQuery();
+			CategoryDto categoryDto=new CategoryDto();
+			while(rs.next()) {
+				String uuidCategory=rs.getString("uuid");
+				String name =rs.getString("name");
+				categoryDto.setName(name);
+				categoryDto.setUuid(uuidCategory);
+			}
+			return categoryDto;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	@Override
@@ -60,116 +128,25 @@ public class DirectOperationPortlet extends MVCPortlet {
 			throws IOException, PortletException {
 		try {
 			String error = null;
-
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid = PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
 			String pageDetail = PortalUtil.getOriginalServletRequest(request).getParameter("page");
-
-			if (uuid == null) {
-				uuid = "ff2977fb-16c1-17fa-b087-87636b71184b";
-				int count = countBlogByCategory(uuid);
-				int result = (int) Math.ceil((float) count / 10);
-				if (pageDetail == null) {
-					pageDetail = "1";
-
-					AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId(uuid,
-							37732);
-					renderRequest.setAttribute("assetCategory", assetCategory);
-					if (Integer.parseInt(pageDetail) < 1 || Integer.parseInt(pageDetail) > result) {
-						error = "404 Error !!!!";
-						renderRequest.setAttribute("error", error);
-					} else {
-
-						con = DataAccess.getConnection();
-						String categoryUUid = uuid;
-						int page = Integer.parseInt(pageDetail);
-						int size = 10;
-
-						statement = con.prepareStatement(
-								"select be.DESCRIPTION,be.TITLE as titleBlog,be.MODIFIEDDATE,be.UUID_ as uuidBlogs,de.GROUPID,de.FOLDERID,de.title as titleDlfile,de.UUID_ as uuidImage from assetCAtegory ac inner join assetentryassetcategoryrel aeac on aeac.assetcategoryid=ac.categoryId inner join assetEntry ae on ae.entryId=aeac.assetentryid inner join BlogsEntry be on be.entryId=ae.classpk inner join DLFILEENTRY de on be.smallImageFileEntryId=de.fileEntryId  where ac.uuid_=? and be.status=0 and ae.classnameid='31201' order by be.modifieddate desc OFFSET (?-1)*? ROWS FETCH NEXT ? ROWS ONLY");
-						statement.setString(1, categoryUUid);
-						statement.setInt(2, page);
-						statement.setInt(3, size);
-						statement.setInt(4, size);
-						ResultSet rs = statement.executeQuery();
-						List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
-						while (rs.next()) {
-							BlogsEntryDto blogsEntryDto = new BlogsEntryDto();
-							Date modifiedDate = rs.getDate("MODIFIEDDATE");
-							blogsEntryDto.setModifiedDate(modifiedDate);
-							String description = rs.getString("DESCRIPTION");
-							blogsEntryDto.setDescription(description);
-							String titleBlog = rs.getString("titleBlog");
-							blogsEntryDto.setTitleBlogs(titleBlog);
-							String uuidBlogs = rs.getString("uuidBlogs");
-							blogsEntryDto.setUuidBlogs(uuidBlogs);
-							String groupIdImage = rs.getString("GROUPID");
-							String folderImage = rs.getString("FOLDERID");
-							String uuidImage = rs.getString("uuidImage");
-							String titleImage = rs.getString("titleDlfile");
-							String srcImage = "/documents" + "/" + groupIdImage + "/" + folderImage + "/" + titleImage
-									+ "/" + uuidImage;
-							blogsEntryDto.setSrcImage(srcImage);
-							listBlogsEntryDto.add(blogsEntryDto);
-						}
-
-						renderRequest.setAttribute("uuid", uuid);
-						renderRequest.setAttribute("currentPage", page);
-						renderRequest.setAttribute("totalPage", result);
-						renderRequest.setAttribute("listBlogsEntryDto", listBlogsEntryDto);
-					}
-				}
-			} else {
-				int count = countBlogByCategory(uuid);
-				int result = (int) Math.ceil((float) count / 10);
-
-				AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId(uuid,
-						37732);
-				renderRequest.setAttribute("assetCategory", assetCategory);
-				if (Integer.parseInt(pageDetail) < 1 || Integer.parseInt(pageDetail) > result) {
-					error = "404 Error !!!!";
-					renderRequest.setAttribute("error", error);
-				} else {
-
-					con = DataAccess.getConnection();
-					String categoryUUid = uuid;
-					int page = Integer.parseInt(pageDetail);
-					int size = 10;
-
-					statement = con.prepareStatement(
-							"select be.DESCRIPTION,be.TITLE as titleBlog,be.MODIFIEDDATE,be.UUID_ as uuidBlogs,de.GROUPID,de.FOLDERID,de.title as titleDlfile,de.UUID_ as uuidImage from assetCAtegory ac inner join assetentryassetcategoryrel aeac on aeac.assetcategoryid=ac.categoryId inner join assetEntry ae on ae.entryId=aeac.assetentryid inner join BlogsEntry be on be.entryId=ae.classpk inner join DLFILEENTRY de on be.smallImageFileEntryId=de.fileEntryId  where ac.uuid_=? and be.status=0 and ae.classnameid='31201' order by be.modifieddate desc OFFSET (?-1)*? ROWS FETCH NEXT ? ROWS ONLY");
-					statement.setString(1, categoryUUid);
-					statement.setInt(2, page);
-					statement.setInt(3, size);
-					statement.setInt(4, size);
-					ResultSet rs = statement.executeQuery();
-					List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
-					while (rs.next()) {
-						BlogsEntryDto blogsEntryDto = new BlogsEntryDto();
-						Date modifiedDate = rs.getDate("MODIFIEDDATE");
-						blogsEntryDto.setModifiedDate(modifiedDate);
-						String description = rs.getString("DESCRIPTION");
-						blogsEntryDto.setDescription(description);
-						String titleBlog = rs.getString("titleBlog");
-						blogsEntryDto.setTitleBlogs(titleBlog);
-						String uuidBlogs = rs.getString("uuidBlogs");
-						blogsEntryDto.setUuidBlogs(uuidBlogs);
-						String groupIdImage = rs.getString("GROUPID");
-						String folderImage = rs.getString("FOLDERID");
-						String uuidImage = rs.getString("uuidImage");
-						String titleImage = rs.getString("titleDlfile");
-						String srcImage = "/documents" + "/" + groupIdImage + "/" + folderImage + "/" + titleImage + "/"
-								+ uuidImage;
-						blogsEntryDto.setSrcImage(srcImage);
-						listBlogsEntryDto.add(blogsEntryDto);
-					}
-
-					renderRequest.setAttribute("uuid", uuid);
-					renderRequest.setAttribute("currentPage", page);
-					renderRequest.setAttribute("totalPage", result);
-					renderRequest.setAttribute("listBlogsEntryDto", listBlogsEntryDto);
-				}
+			String uuidCategory=(uuid == null ? "ff2977fb-16c1-17fa-b087-87636b71184b" : uuid);
+			Integer page=Integer.parseInt(pageDetail == null ? "1" : pageDetail);
+			Integer size=10;
+			Integer count=countBlogByCategory(uuidCategory);
+			int result = (int) Math.ceil((float) count / size);
+			if(page<0 && page>result) {
+				error="Error !!!";
+				renderRequest.setAttribute("error", error);
 			}
+			List<BlogsEntryDto> listBlogEntryDtos=pageableBlogsEntry(uuidCategory,page,size);
+			CategoryDto categoryDto=findCategoryByUuid(uuidCategory);
+			renderRequest.setAttribute("assetCategory", categoryDto);
+			renderRequest.setAttribute("listBlogEntryDtos", listBlogEntryDtos);
+			renderRequest.setAttribute("currentPage", page);
+			renderRequest.setAttribute("totalPage", result);
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

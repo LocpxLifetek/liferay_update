@@ -27,8 +27,7 @@
       }
       .section-content .tin_th{
       	text-align: justify;
-      	margin-left: 20px;
-    	margin-right: 5px;   	
+      	padding-left:0 !important; 	
       }
       .section-content .tin_th a:hover{
           color: #09f;
