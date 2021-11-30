@@ -24,7 +24,6 @@
 					<p>${blogsEntryDto.description}</p>
 				</div>
 			</div>
-
 		</div>
 		<div style="margin-left: 5px;">
 			<c:forEach items="${listBlogsNoImage}" var="blog">

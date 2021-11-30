@@ -9,16 +9,15 @@ import com.liferay.asset.kernel.model.AssetLink;
 import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetLinkLocalServiceUtil;
+import com.liferay.blogs.model.BlogsEntry;
+import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.document.library.kernel.model.DLFileEntry;
-import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +45,7 @@ public class cpnewPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
+			renderRequest.setAttribute("LINK_CP_NEW", LINK_CP_NEW);
 			AssetCategory assetCategory1 = AssetCategoryLocalServiceUtil.getAssetCategory(72134);
 			renderRequest.setAttribute("assetCategory1", assetCategory1);
 			AssetCategory assetCategory2 = AssetCategoryLocalServiceUtil.getAssetCategory(71438);
@@ -61,59 +61,93 @@ public class cpnewPortlet extends MVCPortlet {
 //			BlogsEntry blogTest = BlogsEntryLocalServiceUtil.getBlogsEntry(140411);
 //			renderRequest.setAttribute("testImg", blogTest.getSmallImageFileEntryId());
 
-			// categoryId Thông tin đa phương tiện - Bản tin chính phủ tuần qua
-			List<Integer> cateIds = Arrays.asList(72134, 71438);
-			int i = 0;
-			for (Integer ca : cateIds) {
-				i++;
-				AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(ca);
-				renderRequest.setAttribute("category" + i, assetCategory);
-				List<AssetEntryAssetCategoryRel> assetCategoryRels = AssetEntryAssetCategoryRelLocalServiceUtil
-						.getAssetEntryAssetCategoryRelsByAssetCategoryId(ca);
-
-				List<DLFileEntry> fileEntries = new ArrayList<>();
-				for (AssetEntryAssetCategoryRel a : assetCategoryRels) {
-					long entryId = a.getAssetEntryId();
-					AssetEntry assetEntry = AssetEntryLocalServiceUtil.getAssetEntry(entryId);
-					// check file is video???
-					if (assetEntry.getMimeType().equals("video/mp4")) {
-						// lấy fileId để lấy thông tin DLFileEntry(FileEntry)
-						long fileId = assetEntry.getClassPK();
-						DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(fileId);
-						// add FileEntry vao List
-						fileEntries.add(fileEntry);
-					}
-				}
-				List<DLFileEntry> fileEntriesNew = fileEntries.stream()
-						.sorted((s1, s2) -> (int) s2.getFileEntryId() - (int) s1.getFileEntryId()).limit(5)
-						.collect(Collectors.toList());
-				// lấy link ảnh cho mục đầu tiên
-				DLFileEntry mucdau = fileEntriesNew.get(0);
-				renderRequest.setAttribute("mucdau" + i, mucdau);
-
-				for (AssetEntryAssetCategoryRel a2 : assetCategoryRels) {
-					long entryId2 = a2.getAssetEntryId();
-					AssetEntry assetEntry2 = AssetEntryLocalServiceUtil.getAssetEntry(entryId2);
-					if (assetEntry2.getClassPK() == mucdau.getFileEntryId()) {
-						AssetLink assetLink = AssetLinkLocalServiceUtil.getLinks(entryId2).get(0);
-						if (assetLink.getEntryId1() == entryId2) {
-							AssetEntry asAnh = AssetEntryLocalServiceUtil.getAssetEntry(assetLink.getEntryId2());
-							FileEntry dlAnh = DLAppLocalServiceUtil.getFileEntry(asAnh.getClassPK());
-							renderRequest.setAttribute("srcAnh" + i, "/documents/" + dlAnh.getGroupId() + "/"
-									+ dlAnh.getFolderId() + "/" + dlAnh.getTitle() + "/" + dlAnh.getUuid());
-						}
-						if (assetLink.getEntryId2() == entryId2) {
-							AssetEntry asAnh = AssetEntryLocalServiceUtil.getAssetEntry(assetLink.getEntryId1());
-							FileEntry dlAnh = DLAppLocalServiceUtil.getFileEntry(asAnh.getClassPK());
-							renderRequest.setAttribute("srcAnh" + i, "/documents/" + dlAnh.getGroupId() + "/"
-									+ dlAnh.getFolderId() + "/" + dlAnh.getTitle() + "/" + dlAnh.getUuid());
-						}
-					}
-				}
-				fileEntriesNew.remove(mucdau);
-				renderRequest.setAttribute("fileEntriesNew" + i, fileEntriesNew);
+			// danh sach top 5 muc Thông tin đa phương tiện
+			// lay danh sach blogs theo categoryId
+			List<AssetEntryAssetCategoryRel> assetCategoryRels = AssetEntryAssetCategoryRelLocalServiceUtil
+					.getAssetEntryAssetCategoryRelsByAssetCategoryId(72134);
+			List<DLFileEntry> dlFileEntriesLeft = new ArrayList<>();
+			for (AssetEntryAssetCategoryRel a : assetCategoryRels) {
+				// lay assetEntryId trong AssetEntryAssetCategoryRel
+				long entryId = a.getAssetEntryId();
+				// lay assetEntry theo id vua lay
+				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getAssetEntry(entryId);
+				// lay classPk cua DlFileEntry
+				long fileId = assetEntry.getClassPK();
+				DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileId);
+				dlFileEntriesLeft.add(dlFileEntry);
 			}
-			renderRequest.setAttribute("LINK_CP_NEW", LINK_CP_NEW);
+			
+			List<DLFileEntry> dlFileEntriesLeftNew = dlFileEntriesLeft.stream().sorted().limit(5).collect(Collectors.toList());
+			long entryIdTop1_1 = dlFileEntriesLeftNew.get(0).getFileEntryId();
+			
+			
+//			List<AssetLink> assetLink1 = AssetLinkLocalServiceUtil.getLinks(entryIdTop1_1);
+//			if (entryIdTop1_1 == assetLink1.get(0).getEntryId1()) {
+//				// id cua Anh
+//				long dlImage1 = assetLink1.get(0).getEntryId2();
+//				DLFileEntry imgTtdpt1 = DLFileEntryLocalServiceUtil.getDLFileEntry(dlImage1);
+//				renderRequest.setAttribute("imgTtdpt1", "/documents/" + imgTtdpt1.getGroupId() + imgTtdpt1.getFolderId()
+//							+ imgTtdpt1.getTitle() + imgTtdpt1.getUuid());
+//			}
+//			if (entryIdTop1_1 == assetLink1.get(0).getEntryId2()) {
+//				// id cua Anh
+//				long dlImage1 = assetLink1.get(0).getEntryId1();
+//				DLFileEntry imgTtdpt1 = DLFileEntryLocalServiceUtil.getDLFileEntry(dlImage1);
+//				renderRequest.setAttribute("imgTtdpt1", "/documents/" + imgTtdpt1.getGroupId() + imgTtdpt1.getFolderId()
+//				+ imgTtdpt1.getTitle() + imgTtdpt1.getUuid());
+//			}
+			
+			
+			
+			
+			
+			
+	
+		
+			// gan gia tri cho list cua 4 phan tu con lai
+//			blogsEntriesnew1.remove(0);
+//			renderRequest.setAttribute("blogsEntriesnew1", blogsEntriesnew1);
+//=====================================================================================
+			// danh sach top 5 muc Bản tin chính phủ tuần qua
+			// lay danh sach blogs theo categoryId
+			List<AssetEntryAssetCategoryRel> assetCategoryRels2 = AssetEntryAssetCategoryRelLocalServiceUtil
+					.getAssetEntryAssetCategoryRelsByAssetCategoryId(71438);
+			List<BlogsEntry> blogsEntries2 = new ArrayList<>();
+			for (AssetEntryAssetCategoryRel a : assetCategoryRels2) {
+				// lay assetEntryId trong AssetEntryAssetCategoryRel
+				long entryId = a.getAssetEntryId();
+				// lay assetEntry theo id vua lay
+				AssetEntry assetEntry = AssetEntryLocalServiceUtil.getAssetEntry(entryId);
+				// lay classPk cua AssetEntry
+				long blogsentryId = assetEntry.getClassPK();
+				// lay BlogsEntryId theo classPk
+				BlogsEntry blogsEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(blogsentryId);
+				blogsEntries2.add(blogsEntry);
+
+			}
+			// BlogsEntry1-5 theo blogsEntries giới hạn 5 phần tử và mới nhất
+			// Bản tin chính phủ tuần qua(btcptq)
+			List<BlogsEntry> blogsEntriesnew2 = blogsEntries2.stream().sorted().limit(5).collect(Collectors.toList());
+			long entryIdTop1_2 = blogsEntriesnew2.get(0).getEntryId();
+			List<AssetLink> assetLink2 = AssetLinkLocalServiceUtil.getLinks(entryIdTop1_2);
+			if (entryIdTop1_2 == assetLink2.get(0).getEntryId1()) {
+				// id cua Anh
+				long dlImage1 = assetLink2.get(0).getEntryId2();
+				DLFileEntry imgBtcptq1 = DLFileEntryLocalServiceUtil.getDLFileEntry(dlImage1);
+				renderRequest.setAttribute("imgBtcptq1", "/documents/" + imgBtcptq1.getGroupId() + imgBtcptq1.getFolderId()
+				+ imgBtcptq1.getTitle() + imgBtcptq1.getUuid());
+			}
+
+			if (entryIdTop1_2 == assetLink2.get(0).getEntryId2()) {
+				// id cua Anh
+				long dlImage1 = assetLink2.get(0).getEntryId1();
+				DLFileEntry imgBtcptq1 = DLFileEntryLocalServiceUtil.getDLFileEntry(dlImage1);
+				renderRequest.setAttribute("imgBtcptq1", "/documents/" + imgBtcptq1.getGroupId() + imgBtcptq1.getFolderId()
+				+ imgBtcptq1.getTitle() + imgBtcptq1.getUuid());
+			}
+			
+			blogsEntriesnew2.remove(0);
+			renderRequest.setAttribute("blogsEntriesnew2", blogsEntriesnew2);
 		} catch (PortalException e) {
 			e.printStackTrace();
 		}

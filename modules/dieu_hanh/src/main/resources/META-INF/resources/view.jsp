@@ -7,10 +7,10 @@
                 <div class="linered"></div>
             </div>
             <div class="lts-chidaodieuhanh">
-                <c:forEach items="${listBlog}" var="u">
+                <c:forEach items="${listBlogsNoImage}" var="blog">
 				      <ul>
 						<li>
-                        	<a href="/diem-tin-interpol/tin-tuc/tin-tuc-su-kien/chi-dao-dieu-hanh/bo-truong-to-lam-gui-thu-khen-toan-the-can-bo-chien-si-cong-an-xa-thi-tran-d24-t30338.html">${u.title}</a>
+                        	<a href="/diem-tin-interpol/tin-tuc/tin-tuc-su-kien/chi-dao-dieu-hanh/bo-truong-to-lam-gui-thu-khen-toan-the-can-bo-chien-si-cong-an-xa-thi-tran-d24-t30338.html">${blog.titleBlogsEntry}</a>
                     	</li>
 				      </ul>
 				 </c:forEach>

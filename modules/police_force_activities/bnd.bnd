@@ -1,4 +1,0 @@
-Bundle-Name: police_force_activities
-Bundle-SymbolicName: police_force_activities
-Bundle-Version: 1.0.0
-Export-Package: police_force_activities.constants
