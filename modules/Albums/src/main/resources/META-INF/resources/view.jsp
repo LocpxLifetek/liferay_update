@@ -13,15 +13,15 @@
                 
                 <div class="top1">
                     <a href="#">
-                        <img style="max-width:100%; min-width:20%;" src="/documents/${si.groupId}/${si.folderId}/${si.title}/${si.uuid}">
+                        <img style="max-width:100%; min-width:20%;" src="/documents/${blogsEntryDto.groupId}/${blogsEntryDto.folderId}/${blogsEntryDto.titleDlFileEntry}/${blogsEntryDto.uuidDlFileEntry}">
                     </a>
-                    <div><a href="/media/album-anh/bo-cong-an-to-chuc-hoi-nghi-so-ket-cong-tac-cong-an-6-thang-dau-nam-2021-179.html">${blogs.title}</a></div>
+                    <div><a href="/media/album-anh/bo-cong-an-to-chuc-hoi-nghi-so-ket-cong-tac-cong-an-6-thang-dau-nam-2021-179.html">${blogsEntryDto.titleBlogsEntry}</a></div>
                 </div>
                 
                 <ul>
                     
-                    <c:forEach items="${listBlogs}" var="blog">
-                        <li><a class="album_bottom">${blog.title}</a></li>
+                    <c:forEach items="${listBlogsNoImage}" var="blog">
+                        <li><a class="album_bottom">${blog.titleBlogsEntry}</a></li>
                     </c:forEach>
                 
                 </ul>   

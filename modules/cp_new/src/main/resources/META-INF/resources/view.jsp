@@ -36,50 +36,30 @@
 			href="${hrefbtcptq1}"> ${btcptq1.title} </a></strong>
 	</div>
 	<div class="item"></div>
+	
 	<div class="item5">
-		<p>
-			<img src="${srcImgdaudong}" width="4px" height="5px"> <strong>
-				<a href="${hrefttdpt2}"> ${ttdpt2.title} </a>
-			</strong>
-		</p>
-		<p>
-			<img src="${srcImgdaudong}" width="4px" height="5px"> <strong>
-				<a href="${hrefttdpt3}"> ${ttdpt3.title} </a>
-			</strong>
-		</p>
-		<p>
-			<img src="${srcImgdaudong}" width="4px" height="5px"> <strong>
-				<a href="${hrefttdpt4}"> ${ttdpt4.title} </a>
-			</strong>
-		</p>
-		<p>
-			<img src="${srcImgdaudong}" width="4px" height="5px"> <strong>
-				<a href="${hrefttdpt5}"> ${ttdpt5.title} </a>
-			</strong>
-		</p>
+		<c:forEach items="${blogsEntriesnew1}" var="new1">
+			<p>
+				<img src="${srcImgdaudong}" width="4px" height="5px"> <strong>
+					<a href="${LINK_CP_NEW}${new1.getFileEntryId()}">
+						${new1.getTitle()} </a>
+				</strong>
+			</p>
+
+		</c:forEach>
 	</div>
 
 	<div class="item6">
-		<p>
-			<img src="${srcImgdaudong}" width="4px" height="5px"> <strong>
-				<a href="${hrefbtcptq2}"> ${btcptq2.title} </a>
-			</strong>
-		</p>
-		<p>
-			<img src="${srcImgdaudong}" width="4px" height="5px"> <strong>
-				<a href="${hrefbtcptq3}"> ${btcptq3.title} </a>
-			</strong>
-		</p>
-		<p>
-			<img src="${srcImgdaudong}" width="4px" height="5px"> <strong>
-				<a href="${hrefbtcptq4}"> ${btcptq4.title} </a>
-			</strong>
-		</p>
-		<p>
-			<img src="${srcImgdaudong}" width="4px" height="5px"> <strong>
-				<a href="${hrefbtcptq5}"> ${btcptq5.title} </a>
-			</strong>
-		</p>
+	
+	<c:forEach items="${blogsEntriesnew2}" var="new2">
+			<p>
+				<img src="${srcImgdaudong}" width="4px" height="5px"> <strong>
+					<a href="${LINK_CP_NEW}${new2.getFileEntryId()}">
+						${new2.getTitle()} </a>
+				</strong>
+			</p>
+
+		</c:forEach>
 	</div>
 </div>
 

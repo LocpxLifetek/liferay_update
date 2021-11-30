@@ -9,46 +9,31 @@
              <div class="ltstop2">
                  
                 <div class="top2">
-                    <c:forEach items="${blogs}" var="blog">
-						<c:choose>
-							<c:when test="${blog.smallImageFileEntryId > 0}">
-								<c:forEach items="${smallImage}" var="si">
-									<c:if test="${blog.smallImageFileEntryId == si.fileEntryId}">
+                    <c:forEach items="${listBlogs2}" var="blog">
 						                    <div class="info">
 							                    <a>
-						                        <img src="/documents/${si.groupId}/${si.folderId}/${si.title}/${si.uuid}"></a>
+						                        <img src="/documents/${blog.groupId}/${blog.folderId}/${blog.titleDlFileEntry}/${blog.uuidDlFileEntry}"></a>
 
-						                        <h2><a>${blog.title}</a></h2>
+						                        <h2><a>${blog.titleBlogsEntry}</a></h2>
 						                        <p>${blog.description}</p>
 						                    </div>
-									</c:if>
-								</c:forEach>
-							</c:when>
-						</c:choose>
 					</c:forEach>
                 </div>
             </div>
             <div class="ltstop4">
-                    <c:forEach items="${listBlogs}" var="listBlog">
-						<c:choose>
-							<c:when test="${listBlog.smallImageFileEntryId > 0}">
-								<c:forEach items="${smallImage}" var="si">
+                    <c:forEach items="${listBlogs6}" var="listBlog">
 								<ul>
-									<c:if test="${listBlog.smallImageFileEntryId == si.fileEntryId}">
+								
 										<li style="min-height: 100px;">
                         
 					                        <a>
-					                            <img src="/documents/${si.groupId}/${si.folderId}/${si.title}/${si.uuid}">${listBlog.title}
+					                            <img src="/documents/${listBlog.groupId}/${listBlog.folderId}/${listBlog.titleDlFileEntry}/${listBlog.uuidDlFileEntry}">${listBlog.titleBlogsEntry}
 					                            
 					                        </a>
 					                       
 					                    </li>
-									</c:if>
 								</ul>
-								</c:forEach>
-							</c:when>
-						</c:choose>
-					</c:forEach>    
+					</c:forEach> 
             </div>
             
         </div>
