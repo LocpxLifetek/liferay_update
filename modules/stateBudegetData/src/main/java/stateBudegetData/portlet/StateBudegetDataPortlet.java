@@ -209,7 +209,7 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 	private JournalArticleLocalizationDto findAllJournalArticleLocalizationDtoByArticlePk(Integer id)
 			throws SQLException {
 		try {
-
+	
 			JournalArticleLocalizationDto journalArticleLocalizationDto = new JournalArticleLocalizationDto();
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
@@ -224,6 +224,7 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 				journalArticleLocalizationDto.setFolderId(folderId);
 				journalArticleLocalizationDto.setId(idJournalArticle);
 			}
+			
 			return journalArticleLocalizationDto;
 		} catch (Exception e) {
 			// TODO: handle exception
