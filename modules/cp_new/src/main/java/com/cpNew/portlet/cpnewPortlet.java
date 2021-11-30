@@ -51,15 +51,15 @@ public class cpnewPortlet extends MVCPortlet {
 			renderRequest.setAttribute("assetCategory1", assetCategory1);
 			AssetCategory assetCategory2 = AssetCategoryLocalServiceUtil.getAssetCategory(71438);
 			renderRequest.setAttribute("assetCategory2", assetCategory2);
-			// img Banr tin chinh phu
-			renderRequest.setAttribute("srcImgBtcptq",
-					"http://daphuongtien.chinhphu.vn/file?path=/content/data/random/102021/CPTQ%20ava_9c38564d_bae176d1.jpg");
-
-			BlogsEntry blogTest = BlogsEntryLocalServiceUtil.getBlogsEntry(140411);
-			renderRequest.setAttribute("testImg", blogTest.getSmallImageFileEntryId());
 			// img đầu dòng các mục
 			String srcImgdaudong = "http://chinhphu.vn/templates/govportal/chinhphu/images/icon3.jpg";
 			renderRequest.setAttribute("srcImgdaudong", srcImgdaudong);
+			// img Banr tin chinh phu
+//			renderRequest.setAttribute("srcImgBtcptq",
+//					"http://daphuongtien.chinhphu.vn/file?path=/content/data/random/102021/CPTQ%20ava_9c38564d_bae176d1.jpg");
+//
+//			BlogsEntry blogTest = BlogsEntryLocalServiceUtil.getBlogsEntry(140411);
+//			renderRequest.setAttribute("testImg", blogTest.getSmallImageFileEntryId());
 
 			// danh sach top 5 muc Thông tin đa phương tiện
 			// lay danh sach blogs theo categoryId
