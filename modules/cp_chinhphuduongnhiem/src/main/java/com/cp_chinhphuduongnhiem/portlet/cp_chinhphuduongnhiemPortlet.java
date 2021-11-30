@@ -1,8 +1,12 @@
 package com.cp_chinhphuduongnhiem.portlet;
 
 import com.cp_chinhphuduongnhiem.constants.cp_chinhphuduongnhiemPortletKeys;
-
+import com.liferay.journal.model.JournalArticle;
+import com.liferay.journal.model.JournalArticleDisplay;
+import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 
@@ -37,7 +41,16 @@ public class cp_chinhphuduongnhiemPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
+//			String content = "";
+			JournalArticle journalArticle = JournalArticleLocalServiceUtil.getLatestArticle(189280);
 			
+			ThemeDisplay themeDisplay1 = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			String articleId = journalArticle.getArticleId();
+			JournalArticleDisplay articleDisplay = JournalArticleLocalServiceUtil
+					.getArticleDisplay(themeDisplay1.getScopeGroupId(), articleId, "", "", themeDisplay1);
+			String content = articleDisplay.getContent();
+			
+			renderRequest.setAttribute("webContent", content);
 		} catch (Exception e) {
 			
 		}

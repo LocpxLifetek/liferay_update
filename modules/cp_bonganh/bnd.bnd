@@ -1,0 +1,4 @@
+Bundle-Name: cp_bonganh
+Bundle-SymbolicName: com.cp_bonganh
+Bundle-Version: 1.0.0
+Export-Package: com.cp_bonganh.constants

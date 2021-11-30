@@ -55,6 +55,7 @@ public class DetailBoCongAnPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
+	
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("id");
 			DynamicQuery queryBlogs=DynamicQueryFactoryUtil.forClass(BlogsEntry.class);
@@ -106,6 +107,7 @@ public class DetailBoCongAnPortlet extends MVCPortlet {
 				
 				renderRequest.setAttribute("blogsEntry", blogsEntry);
 			}
+			
 			
 		} catch (Exception e) {
 			// TODO: handle exception

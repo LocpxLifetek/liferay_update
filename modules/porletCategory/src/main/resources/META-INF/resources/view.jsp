@@ -50,7 +50,7 @@
 
 																			<tr>
 																				<td><a
-																					href="/portal/page/portal/chinhphu/congdan/DuThaoVanBan"><img
+																					href="#"><img
 																						height="77" width="100%"
 																						src="http://chinhphu.vn/templates/govportal/tinhthanh/images/bn_layykien.jpg"></a>
 																				</td>
@@ -84,7 +84,7 @@
 								<table cellspacing="0" cellpadding="0" border="0" width= "100%">
 									<tr>
 										<td><a
-											href="/portal/page/portal/chinhphu/congdan/gopy_hienke"><img
+											href="#"><img
 												height="40" width="100%"
 												src="http://chinhphu.vn/templates/govportal/chinhphu/images/gopy_hienke.JPG"></a>
 										</td>
