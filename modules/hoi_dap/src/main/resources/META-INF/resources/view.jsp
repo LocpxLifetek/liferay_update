@@ -3,10 +3,10 @@
         
 <div class="lts-bovoicongdan">
 	<ul>
-  		<c:forEach items="${listBlogs}" var="blog">   
+  		<c:forEach items="${listBlogsEntryDtos}" var="blog">   
             <li>
                 <h2>
-                    <a>${blog.title}</a></h2>
+                    <a>${blog.titleBlogsEntry}</a></h2>
                     <div style="text-align: justify;">
 	                    <p><span style="font-size:14px;">${blog.content}</span>
 	                    

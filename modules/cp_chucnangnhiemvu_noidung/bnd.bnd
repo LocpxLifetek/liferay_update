@@ -1,0 +1,4 @@
+Bundle-Name: cp_chucnangnhiemvu_noidung
+Bundle-SymbolicName: com.cp_chucnangnhiemvu_noidung
+Bundle-Version: 1.0.0
+Export-Package: com.cp_chucnangnhiemvu_noidung.constants

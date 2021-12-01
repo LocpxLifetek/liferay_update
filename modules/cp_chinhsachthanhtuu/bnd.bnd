@@ -1,0 +1,4 @@
+Bundle-Name: cp_chinhsachthanhtuu
+Bundle-SymbolicName: com.cp_chinhsachthanhtuu
+Bundle-Version: 1.0.0
+Export-Package: com.cp_chinhsachthanhtuu.constants

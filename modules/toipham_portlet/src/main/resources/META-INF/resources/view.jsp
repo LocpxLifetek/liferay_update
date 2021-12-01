@@ -5,10 +5,10 @@
                     <img width="100%" src="http://bocongan.gov.vn/Publishing_Resources/images/box-canhgiac.png">
                 </div>  
                 <div class="lts-cmanh">
-                    <c:forEach items="${listBlog}" var="u">
+                    <c:forEach items="${listBlogsEntryDtos}" var="u">
 				      <ul  style="width:100%">
 						<li>
-							${u.title}
+							${u.titleBlogsEntry}
 						</li>
 				      </ul>
 				    </c:forEach>

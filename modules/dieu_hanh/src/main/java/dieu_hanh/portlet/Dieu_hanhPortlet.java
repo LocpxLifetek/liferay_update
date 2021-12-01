@@ -1,24 +1,14 @@
 package dieu_hanh.portlet;
 
-import dieu_hanh.constants.Dieu_hanhPortletKeys;
-
-import com.liferay.asset.entry.rel.model.AssetEntryAssetCategoryRel;
-import com.liferay.asset.entry.rel.service.AssetEntryAssetCategoryRelLocalServiceUtil;
-import com.liferay.asset.kernel.model.AssetCategory;
-import com.liferay.asset.kernel.model.AssetEntry;
-import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
-import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
-import com.liferay.blogs.model.BlogsEntry;
-import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +18,9 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+
+import dieu_hanh.constants.Dieu_hanhPortletKeys;
+
 
 /**
  * @author java03
@@ -48,34 +41,77 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class Dieu_hanhPortlet extends MVCPortlet {
+	private List<BlogsEntryDto> findAllBlogsByIdCategory() throws SQLException {
+		PreparedStatement statement=null;
+		Connection con=null;
+		ResultSet rs=null;
+		try {
+			
+			List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
+			con = DataAccess.getConnection();
+			statement = con.prepareStatement("SELECT be.uuid_  AS uuidblogsentry,be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,be.modifieddate AS modifieddate,dl.fileentryid AS fileentryid,dl.groupid  AS groupid,dl.folderid AS folderid, dl.title AS titledlfileentry, dl.uuid_ AS uuiddlfileentry FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid INNER JOIN dlfileentry dl ON dl.fileentryid = be.smallimagefileentryid WHERE ac.categoryid = '108700'  AND ae.classnameid = '31201'  AND be.status = '0' ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 2 ROWS ONLY");
+			rs=statement.executeQuery();
+			while(rs.next()) {
+				BlogsEntryDto blogsEntryDto=new BlogsEntryDto();
+				String uuidBlogsEntry=rs.getString("uuidblogsentry");
+				Integer entryId=rs.getInt("entryid");
+				String titleBlogsEntry=rs.getString("titleblogsentry");
+				String description=rs.getString("descriptiondlfileentry");
+				Timestamp modifiedDate=rs.getTimestamp("modifieddate");
+				Integer fileEntryId=rs.getInt("fileentryid");
+				Integer groupId=rs.getInt("groupid");
+				Integer folderId=rs.getInt("folderid");
+				String titleDlFileEntry=rs.getString("titledlfileentry");
+				String uuidDlFileEntry=rs.getString("uuiddlfileentry");
+				blogsEntryDto.setDescription(description);
+				blogsEntryDto.setEntryId(entryId);
+				blogsEntryDto.setFileEntryId(fileEntryId);
+				blogsEntryDto.setFolderId(folderId);
+				blogsEntryDto.setGroupId(groupId);
+				blogsEntryDto.setTitleBlogsEntry(titleBlogsEntry);
+				blogsEntryDto.setTitleDlFileEntry(titleDlFileEntry);
+				blogsEntryDto.setUuidBlogsEntry(uuidBlogsEntry);
+				blogsEntryDto.setUuidDlFileEntry(uuidDlFileEntry);
+				blogsEntryDto.setModifiedDate(modifiedDate);
+				listBlogsEntryDto.add(blogsEntryDto);
+			}
+			return listBlogsEntryDto;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}finally {
+			if(statement != null) {
+				statement.close();
+			}
+			if(con != null) {
+				con.close();
+			}
+			if(rs != null) {
+				rs.close();
+			}
+		}
+	}
+
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-		try {
-			AssetCategory assetCategory= AssetCategoryLocalServiceUtil.getAssetCategory(99329);
-			List<BlogsEntry> listBlog= new ArrayList<BlogsEntry>();
-			long assetCategoryId=assetCategory.getCategoryId();
-			DynamicQuery queryAssetEntryAssetCategory=DynamicQueryFactoryUtil.forClass(AssetEntryAssetCategoryRel.class);
-			Property assetEntryProperty=PropertyFactoryUtil.forName("assetCategoryId");
-			queryAssetEntryAssetCategory.add(assetEntryProperty.eq(assetCategoryId));
-			queryAssetEntryAssetCategory.addOrder(OrderFactoryUtil.desc("assetEntryId"));
-			queryAssetEntryAssetCategory.setLimit(0, 2);
-			List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRels=AssetEntryAssetCategoryRelLocalServiceUtil.dynamicQuery(queryAssetEntryAssetCategory);
-			for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRels) {
-				AssetEntry assetEntry= AssetEntryLocalServiceUtil.getEntry(assetEntryAssetCategoryRel.getAssetEntryId());
-				BlogsEntry blogEntry= BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
-				listBlog.add(blogEntry);
+
+		try {	
+			List<BlogsEntryDto> listBlogsNoImage=new ArrayList<>();
+			List<BlogsEntryDto> listBlogsEntryDtos=findAllBlogsByIdCategory();
+			int i=0;
+			for (BlogsEntryDto blogsEntryDto : listBlogsEntryDtos) {
+				i++;
+				if(i<=2) {
+					listBlogsNoImage.add(blogsEntryDto);
+				}
 			}
-			
-//			for(AssetEntryAssetCategoryRel assetEn_assetCategory : assetEn_assetCa) {
-//				AssetEntry assetEntry= AssetEntryLocalServiceUtil.getEntry(assetEn_assetCategory.getAssetEntryId());
-//			}
-			renderRequest.setAttribute("listBlog", listBlog);
-		} catch (PortalException e) {
-			// TODO Auto-generated catch block
+			renderRequest.setAttribute("listBlogsNoImage", listBlogsNoImage);
+		} catch (Exception e) {
+			// TODO: handle exception
 			e.printStackTrace();
 		}
-
 		super.doView(renderRequest, renderResponse);
 	}
 }

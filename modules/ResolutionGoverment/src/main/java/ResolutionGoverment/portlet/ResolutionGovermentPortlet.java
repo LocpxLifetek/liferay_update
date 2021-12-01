@@ -251,6 +251,7 @@ public class ResolutionGovermentPortlet extends MVCPortlet {
 			}
 
 			renderRequest.setAttribute("map", map);
+			
 
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block

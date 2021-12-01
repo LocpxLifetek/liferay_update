@@ -1,0 +1,4 @@
+Bundle-Name: cp_cactinhvathanhpho
+Bundle-SymbolicName: com.cp_cactinhvathanhpho
+Bundle-Version: 1.0.0
+Export-Package: com.cp_cactinhvathanhpho.constants

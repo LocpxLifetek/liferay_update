@@ -5,10 +5,10 @@
 	<h6 front-size="4px">Người dân và Chính phủ</h6>
   </div>
   <div class="lanhdao_content">
-  	<c:forEach items="${listBlog}" var="u">
+  	<c:forEach items="${listBlogsEntryDtos}" var="u">
       <div  style="width:100%">
 		<div style="width:100%" align="justify">
-		<a padding-left="5px" class="pb"> ${u.title	}</a></div>
+		<a padding-left="5px" class="pb"> ${u.titleBlogsEntry}</a></div>
       </div>
     </c:forEach>
   </div> 
