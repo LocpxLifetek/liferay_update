@@ -1,4 +1,0 @@
-Bundle-Name: pho_thu_tuong_info
-Bundle-SymbolicName: pho_thu_tuong_info
-Bundle-Version: 1.0.0
-Export-Package: pho_thu_tuong_info.constants
