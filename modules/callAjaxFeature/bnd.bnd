@@ -1,0 +1,4 @@
+Bundle-Name: callAjaxFeature
+Bundle-SymbolicName: callAjaxFeature
+Bundle-Version: 1.0.0
+Export-Package: callAjaxFeature.constants

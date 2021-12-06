@@ -9,7 +9,9 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Node;
@@ -49,8 +51,6 @@ import dto.JournalArticleLocazationDto;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class ResolutionGovermentPortlet extends MVCPortlet {
-	private PreparedStatement statement;
-	Connection con = null;
 
 	private static NodeModel convertToNodeMap(Node node, String langId) {
 		Node nodeValue = node.selectSingleNode("dynamic-content[@language-id='" + langId + "']");
@@ -129,7 +129,10 @@ public class ResolutionGovermentPortlet extends MVCPortlet {
 		return jsonObject;
 	}
 
-	private List<JournalArticleDto> findAllJournalArticleAndDontId(Long idJournalArticle) throws SQLException {
+	private List<JournalArticleDto> findAllJournalArticleAndDontId(Long idJournalArticle,long groupId) throws SQLException {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
 		try {
 			List<JournalArticleDto> listJournalArticle = new ArrayList<>();
 
@@ -141,10 +144,11 @@ public class ResolutionGovermentPortlet extends MVCPortlet {
 					+ "            INNER JOIN assetentryassetcategoryrel  aeac ON aeac.assetentryid = ae.entryid\r\n"
 					+ "            INNER JOIN assetcategory               ac ON ac.categoryid = aeac.assetcategoryid\r\n"
 					+ "            INNER JOIN ddmstructure                ddm ON ddm.structurekey = ja.ddmstructurekey\r\n"
-					+ "            WHERE ja.folderid = '189126' AND ja.ddmstructurekey='189235' and ja.id_!=?\r\n"
+					+ "            WHERE ja.folderid = '189126' AND ja.ddmstructurekey='189235' and ja.id_!=? and ac.groupid=? and upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) = upper('Nghi quyt cua Chinh phu')\r\n"
 					+ "            GROUP BY ja.resourceprimkey order by max(ja.id_) desc offset 0 rows fetch next 8 rows only");
 			statement.setLong(1, idJournalArticle);
-			ResultSet rs = statement.executeQuery();
+			statement.setLong(2, groupId);
+			rs = statement.executeQuery();
 			while (rs.next()) {
 				JournalArticleDto journalArticleDto = new JournalArticleDto();
 				Integer resourceprimkey = rs.getInt("resourceprimkey");
@@ -161,19 +165,39 @@ public class ResolutionGovermentPortlet extends MVCPortlet {
 			// TODO: handle exception
 			return null;
 		} finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 
 	}
 
 	private JournalArticleLocazationDto findAllJornalArticleByArticlePK(long articlePk, long id) {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
 		try {
+
 			con = DataAccess.getConnection();
 			statement = con
 					.prepareStatement(" select ja.title from journalarticlelocalization ja where ja.articlePk=?");
 			statement.setLong(1, articlePk);
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			JournalArticleLocazationDto journalArticleLocazationDto = new JournalArticleLocazationDto();
 			while (rs.next()) {
 				String title = rs.getString("title");
@@ -185,6 +209,25 @@ public class ResolutionGovermentPortlet extends MVCPortlet {
 			// TODO: handle exception
 			e.printStackTrace();
 			return null;
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 
@@ -206,22 +249,23 @@ public class ResolutionGovermentPortlet extends MVCPortlet {
 				String removeKeyUtf8 = key.replaceAll("[^\\p{ASCII}]", "");
 				String valueGoverment = null;
 				String value = json.get(key).toString();
-				String keyValue=null;
-				int upper=0;
+				String keyValue = null;
+				int upper = 0;
 				if (value != null && value.isEmpty() == false) {
 					for (int i = 0; i < key.length(); i++) {
-						for (int j = i+1; j <= i+1; j++) {
-							if ((key.charAt(i) >= 'A' && key.charAt(i) <= 'Z') && (key.charAt(j) >= 'A' && key.charAt(j) <='Z')) {
+						for (int j = i + 1; j <= i + 1; j++) {
+							if ((key.charAt(i) >= 'A' && key.charAt(i) <= 'Z')
+									&& (key.charAt(j) >= 'A' && key.charAt(j) <= 'Z')) {
 								upper++;
-								
+
 							}
 						}
 					}
-					if(upper == 0) {
+					if (upper == 0) {
 						keyValue = Character.toUpperCase(key.charAt(0))
-								+ key.substring(1).replaceAll("(?<!_)(?=[A-Z])", " ");						
-					}else {
-						keyValue=key;
+								+ key.substring(1).replaceAll("(?<!_)(?=[A-Z])", " ");
+					} else {
+						keyValue = key;
 					}
 					if (removeKeyUtf8.equals("NgyBanHnh")) {
 						String[] parts = value.split("-");
@@ -234,7 +278,8 @@ public class ResolutionGovermentPortlet extends MVCPortlet {
 			}
 			// lấy thông tin trừ id ở trên
 			try {
-				List<JournalArticleDto> listJournalArticleDtos = findAllJournalArticleAndDontId(idJournalArticle);
+				ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+				List<JournalArticleDto> listJournalArticleDtos = findAllJournalArticleAndDontId(idJournalArticle,themeDisplay.getScopeGroupId());
 				List<JournalArticleLocazationDto> listJournalArticleLocazationDto = new ArrayList<>();
 				for (JournalArticleDto journalArticleDto : listJournalArticleDtos) {
 					JournalArticle journalArticle = JournalArticleLocalServiceUtil
@@ -251,7 +296,6 @@ public class ResolutionGovermentPortlet extends MVCPortlet {
 			}
 
 			renderRequest.setAttribute("map", map);
-			
 
 		} catch (PortalException e) {
 			// TODO Auto-generated catch block

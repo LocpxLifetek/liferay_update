@@ -13,8 +13,8 @@
 			nổi bật</p>
 		<div class="imageViewBlogs">
 			<img
-				src="/documents/${smallImage.groupId}/${smallImage.folderId}/${smallImage.title}/${smallImage.uuid}">
-			<a href="/web/lifetek/tintuc?id=${blogOne.uuid}">${blogOne.title}</a>
+				src="${blogs.srcImage}">
+			<a href="/web/lifetek/tintuc?id=${blogs.uuid}">${blogs.title}</a>
 			<hr>
 		</div>
 	</div>

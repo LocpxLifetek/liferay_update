@@ -11,7 +11,7 @@
 	<div class="title">
 		<h2>${blogsEntry.title}</h2>
 		<span style="color: #d71920; font-size: 12px;">(<fmt:formatDate
-						value="${blogsEntry.modifiedDate}" pattern="MM/dd/yyyy" />)
+						value="${blogsEntry.modifiedDate}" pattern="dd/MM/yyyy" />)
 				</span>
 		<hr>
 	</div>

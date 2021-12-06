@@ -28,7 +28,7 @@
 		</div>
 		<div style="margin-left: 5px;">
 			<c:forEach items="${listBlogsNoImage}" var="blog">
-				<div class="title">
+				<div class="title1" style="padding: 25px 0px 0px 10px;">
 					<img
 						src="http://chinhphu.vn/templates/govportal/tinhthanh/images/icon_1.jpg"><a
 						href="/web/lifetek/tintuc?id=${blog.uuidBlogsEntry}"> ${blog.titleBlogsEntry}</a>

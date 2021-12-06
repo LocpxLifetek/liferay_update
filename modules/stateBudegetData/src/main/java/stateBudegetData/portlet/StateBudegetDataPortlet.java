@@ -45,8 +45,7 @@ import stateBudegetData.dto.JournalArticleProjection;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class StateBudegetDataPortlet extends MVCPortlet {
-	private PreparedStatement statement;
-	Connection con = null;
+
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
@@ -97,11 +96,14 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 	}
 
 	private JouranlArticleFolderDto findFolderNewsByTreepath() throws SQLException {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
 		try {
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
 					"select max(jf.folderId) as folderId from journalFolder jf where jf.treepath like '/188890/189130/%' and jf.status='0'");
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			JouranlArticleFolderDto stateBudegetDataDto = new JouranlArticleFolderDto();
 			while (rs.next()) {
 				Integer id = rs.getInt("folderId");
@@ -112,13 +114,32 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 			// TODO: handle exception
 			e.printStackTrace();
 			return null;
-		} finally {
-			statement.close();
-			con.close();
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 
 	private JournalArticleProjection findAllJournalArticleByIdAndFolderId(Integer folderId,Integer id) throws SQLException {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
 		try {
 			JournalArticleProjection journalArticleProjection = new JournalArticleProjection();
 			con = DataAccess.getConnection();
@@ -126,7 +147,7 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 					"select jf.folderId as folderId,jf.id_ as id from journalArticle jf where jf.folderId=? and jf.id_=? and jf.status='0'");
 			statement.setInt(1, folderId);
 			statement.setInt(2, id);
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			while (rs.next()) {
 				Integer idFolder = rs.getInt("folderId");
 				Integer idJouranlArticle=rs.getInt("id");
@@ -139,12 +160,31 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 			// TODO: handle exception
 			return null;
 		}finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 	
 	private JournalArticleProjection findAllJournalArticleByFolderId(Integer folderId) throws SQLException {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
 		try {
 			JournalArticleProjection journalArticleProjection = new JournalArticleProjection();
 			con = DataAccess.getConnection();
@@ -152,7 +192,7 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 					"select jf.folderId as folderId,jf.id_ as id from journalArticle jf where jf.folderId=? and jf.status='0'");
 			statement.setInt(1, folderId);
 			
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			while (rs.next()) {
 				Integer idFolder = rs.getInt("folderId");
 				Integer idJouranlArticle=rs.getInt("id");
@@ -165,11 +205,30 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 			// TODO: handle exception
 			return null;
 		}finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 	private List<JournalArticleDto> findAllJournalArticleDtoByFolderId(Integer id) throws SQLException {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
 		try {
 			List<JournalArticleDto> listJournalArticleDtos = new ArrayList<>();
 			con = DataAccess.getConnection();
@@ -183,7 +242,7 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 					+ "            WHERE ac.categoryid='189211' and  ja.folderId=? and ja.status='0'\r\n "
 					+ "            GROUP BY ja.resourceprimkey order by max(ja.id_) desc");
 			statement.setInt(1, id);
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			while (rs.next()) {
 				JournalArticleDto journalArticleDto = new JournalArticleDto();
 				Integer version = rs.getInt("version");
@@ -208,6 +267,9 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 
 	private JournalArticleLocalizationDto findAllJournalArticleLocalizationDtoByArticlePk(Integer id)
 			throws SQLException {
+		PreparedStatement statement=null;
+		Connection con = null;
+		ResultSet rs=null;
 		try {
 	
 			JournalArticleLocalizationDto journalArticleLocalizationDto = new JournalArticleLocalizationDto();
@@ -215,7 +277,7 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 			statement = con.prepareStatement(
 					"select jal.title as name, ja.id_ as id,ja.folderid as folderId from journalarticle ja inner join journalarticlelocalization jal on ja.id_=jal.articlepk where jal.articlepk=? and ja.status='0' ");
 			statement.setInt(1, id);
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			while (rs.next()) {
 				String name = rs.getString("name");
 				Integer idJournalArticle=rs.getInt("id");
@@ -231,8 +293,24 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 			e.printStackTrace();
 			return null;
 		} finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 }

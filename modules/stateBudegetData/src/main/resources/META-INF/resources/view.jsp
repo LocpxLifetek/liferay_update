@@ -8,7 +8,7 @@
 				<tr>
 					<td>
 						<table cellspacing="0" cellpadding="4" width="100%"
-							style="border-collapse: collapse; border: 1px solid rgb(251, 223, 184); background-image: url(/templates/govportal/chinhphu/images/bgr2.jpg);">
+							style="border-collapse: collapse; border: 1px solid rgb(251, 223, 184);">
 							<tbody>
 								<tr>
 									<td>
@@ -60,7 +60,7 @@
 				<tr>
 					<td>
 						<table cellspacing="0" cellpadding="4" width="100%"
-							style="border-collapse: collapse; border: 1px solid rgb(251, 223, 184); background-image: url(/templates/govportal/chinhphu/images/bgr2.jpg);">
+							style="border-collapse: collapse; border: 1px solid rgb(251, 223, 184);">
 							<tbody>
 								<tr>
 									<td>
