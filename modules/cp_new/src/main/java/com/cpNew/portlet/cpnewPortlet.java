@@ -10,11 +10,8 @@ import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetLinkLocalServiceUtil;
 import com.liferay.document.library.kernel.model.DLFileEntry;
-import com.liferay.document.library.kernel.service.DLAppLocalServiceUtil;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,74 +37,85 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class cpnewPortlet extends MVCPortlet {
 
-	private final String LINK_CP_NEW = "http://portal.lifetek.vn/web/lifetek/media.chinhphu?id=";
+	private final String LINK_CP_NEW = "/web/lifetek/media.chinhphu?id=";
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			// img Banr tin chinh phu
-			renderRequest.setAttribute("srcImgBtcptq",
-					"http://daphuongtien.chinhphu.vn/file?path=/content/data/random/102021/CPTQ%20ava_9c38564d_bae176d1.jpg");
 			// img đầu dòng các mục
 			String srcImgdaudong = "http://chinhphu.vn/templates/govportal/chinhphu/images/icon3.jpg";
 			renderRequest.setAttribute("srcImgdaudong", srcImgdaudong);
-
-			// categoryId Thông tin đa phương tiện - Bản tin chính phủ tuần qua
-			List<Integer> cateIds = Arrays.asList(72134, 71438);
+			List<Integer> categoryIds = Arrays.asList(72134, 71438);
 			int i = 0;
-			for (Integer ca : cateIds) {
+			for (Integer id : categoryIds) {
 				i++;
-				AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(ca);
-				renderRequest.setAttribute("category" + i, assetCategory);
+				AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(id);
+				renderRequest.setAttribute("assetCategory" + i, assetCategory);
 				List<AssetEntryAssetCategoryRel> assetCategoryRels = AssetEntryAssetCategoryRelLocalServiceUtil
-						.getAssetEntryAssetCategoryRelsByAssetCategoryId(ca);
-
-				List<DLFileEntry> fileEntries = new ArrayList<>();
+						.getAssetEntryAssetCategoryRelsByAssetCategoryId(id);
+				// list output
+				List<DLFileEntry> dlFileEntries = new ArrayList<>();
 				for (AssetEntryAssetCategoryRel a : assetCategoryRels) {
-					long entryId = a.getAssetEntryId();
-					AssetEntry assetEntry = AssetEntryLocalServiceUtil.getAssetEntry(entryId);
-					// check file is video???
+					// lay assetEntryId trong AssetEntryAssetCategoryRel
+					long assetEntryId = a.getAssetEntryId();
+
+					AssetEntry assetEntry = AssetEntryLocalServiceUtil.getAssetEntry(assetEntryId);
+					// lấy DlFileEntryId theo ClassPk
 					if (assetEntry.getMimeType().equals("video/mp4")) {
-						// lấy fileId để lấy thông tin DLFileEntry(FileEntry)
-						long fileId = assetEntry.getClassPK();
-						DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(fileId);
-						// add FileEntry vao List
-						fileEntries.add(fileEntry);
+						long classPk = assetEntry.getClassPK();
+						DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(classPk);
+						dlFileEntries.add(dlFileEntry);
 					}
 				}
-				List<DLFileEntry> fileEntriesNew = fileEntries.stream()
+				List<DLFileEntry> listOutput = dlFileEntries.stream()
 						.sorted((s1, s2) -> (int) s2.getFileEntryId() - (int) s1.getFileEntryId()).limit(5)
 						.collect(Collectors.toList());
-				// lấy link ảnh cho mục đầu tiên
-				DLFileEntry mucdau = fileEntriesNew.get(0);
-				renderRequest.setAttribute("mucdau" + i, mucdau);
 
-				for (AssetEntryAssetCategoryRel a2 : assetCategoryRels) {
-					long entryId2 = a2.getAssetEntryId();
-					AssetEntry assetEntry2 = AssetEntryLocalServiceUtil.getAssetEntry(entryId2);
-					if (assetEntry2.getClassPK() == mucdau.getFileEntryId()) {
-						AssetLink assetLink = AssetLinkLocalServiceUtil.getLinks(entryId2).get(0);
-						if (assetLink.getEntryId1() == entryId2) {
-							AssetEntry asAnh = AssetEntryLocalServiceUtil.getAssetEntry(assetLink.getEntryId2());
-							FileEntry dlAnh = DLAppLocalServiceUtil.getFileEntry(asAnh.getClassPK());
-							renderRequest.setAttribute("srcAnh" + i, "/documents/" + dlAnh.getGroupId() + "/"
-									+ dlAnh.getFolderId() + "/" + dlAnh.getTitle() + "/" + dlAnh.getUuid());
+				// **
+				DLFileEntry dlFileEntry = listOutput.get(0);
+				renderRequest.setAttribute("top1_" + i, dlFileEntry);
+				for (AssetEntryAssetCategoryRel l : assetCategoryRels) {
+					long assetEntryId = l.getAssetEntryId();
+
+					AssetEntry assetEntry = AssetEntryLocalServiceUtil.getAssetEntry(assetEntryId);
+					if (dlFileEntry.getFileEntryId() == assetEntry.getClassPK()) {
+						long assEntryId = assetEntry.getEntryId();
+						List<AssetLink> assLinks = AssetLinkLocalServiceUtil.getLinks(assEntryId);
+						// lay link anh
+						if (assEntryId == assLinks.get(0).getEntryId1()) {
+							// id cua Anh
+							long dlImage = assLinks.get(0).getEntryId2();
+							AssetEntry asAnh = AssetEntryLocalServiceUtil.getAssetEntry(dlImage);
+							DLFileEntry imgTtdpt = DLFileEntryLocalServiceUtil.getDLFileEntry(asAnh.getClassPK());
+							renderRequest.setAttribute("imgTop" + i, "/documents/" 
+									+ imgTtdpt.getGroupId() + "/"
+									+ imgTtdpt.getFolderId() + "/" 
+									+ imgTtdpt.getTitle() + "/" 
+									+ imgTtdpt.getUuid());
 						}
-						if (assetLink.getEntryId2() == entryId2) {
-							AssetEntry asAnh = AssetEntryLocalServiceUtil.getAssetEntry(assetLink.getEntryId1());
-							FileEntry dlAnh = DLAppLocalServiceUtil.getFileEntry(asAnh.getClassPK());
-							renderRequest.setAttribute("srcAnh" + i, "/documents/" + dlAnh.getGroupId() + "/"
-									+ dlAnh.getFolderId() + "/" + dlAnh.getTitle() + "/" + dlAnh.getUuid());
+						if (assEntryId == assLinks.get(0).getEntryId2()) {
+							// id cua Anh
+							long dlImage = assLinks.get(0).getEntryId1();
+							AssetEntry asAnh = AssetEntryLocalServiceUtil.getAssetEntry(dlImage);
+							DLFileEntry imgTtdpt = DLFileEntryLocalServiceUtil.getDLFileEntry(asAnh.getClassPK());
+							renderRequest.setAttribute("imgTop" + i, "/documents/" 
+									+ imgTtdpt.getGroupId() + "/"
+									+ imgTtdpt.getFolderId() + "/" 
+									+ imgTtdpt.getTitle() + "/" 
+									+ imgTtdpt.getUuid());
 						}
 					}
 				}
-				fileEntriesNew.remove(mucdau);
-				renderRequest.setAttribute("fileEntriesNew" + i, fileEntriesNew);
+				listOutput.remove(dlFileEntry);
+				renderRequest.setAttribute("listOutput" + i, listOutput);
+				// **
+
 			}
+
 			renderRequest.setAttribute("LINK_CP_NEW", LINK_CP_NEW);
-		} catch (PortalException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
 		super.doView(renderRequest, renderResponse);
 	}

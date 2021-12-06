@@ -10,10 +10,11 @@
 	<div class="vd_item1">
 		<video class="cp_media" controls preload="auto" autoplay="autoplay"
 			width="100%" data-setup="{}">
-			<source src="<%=request.getAttribute("src")%>" type="video/mp4">
+			<source src="${srcVideo}" type="video/mp4">
 		</video>
 		<h3>${fileName}</h3>
 	</div>
+	
 	<div class="vd_item2 vdWrapper_Con">
 		<div class="vd_item">
 			<h2>${NameCategory}</h2>

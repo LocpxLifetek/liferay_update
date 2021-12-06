@@ -18,21 +18,15 @@
         <div class="right" style="width: 50%">
           <div class="ct">
             <ul id="cal-tabs" class="ui-tabs-nav rights">
-            <c:forEach items="${listBlogs}" var="listblog">
-						<c:choose>
-							<c:when test="${listblog.smallImageFileEntryId > 0}">
-								<c:forEach items="${smallImage}" var="si">
-									<c:if test="${listblog.smallImageFileEntryId == si.fileEntryId}">
+            <c:forEach items="${listBlogsEntryDtos}" var="listblog">
+						
 										<li class="ui-tabs-nav-item" id="nav-fragment-1">
 						                  <a><img
-						                    src="/documents/${si.groupId}/${si.folderId}/${si.title}/${si.uuid}"/>
-						                  ${listblog.title}
+						                    src="/documents/${listblog.groupId}/${listblog.folderId}/${listblog.titleDlFileEntry}/${listblog.uuidDlFileEntry}"/>
+						                  ${listblog.titleBlogsEntry}
 						                </a>
 						              </li>
-									</c:if>
-								</c:forEach>
-							</c:when>
-						</c:choose>
+									
 					</c:forEach>
             </ul>
           </div>

@@ -5,27 +5,24 @@
 <html>
 <body>
 	<div class="contentContainer">
-        <c:forEach items="${blogs}" var="blog">
-			<c:choose>
-				<c:when test="${blog.smallImageFileEntryId >0}">
-					<c:forEach items="${smallImage}" var="si">
-						<c:if test="${blog.smallImageFileEntryId == si.fileEntryId}">
+	 <div class="head-cm">
+      <ul style="padding-left: 0">
+        <li><a href="#"></a>${asc.name}</li>
+      </ul>
+    </div>
+        <c:forEach items="${listBlogsEntryDtos}" var="blog">
 							  <div class="newsItem">
 							        <div class="container">
 							        
 										<a href="#">
-										<img src="/documents/${si.groupId}/${si.folderId}/${si.title}/${si.uuid}" alt="" />
+										<img src="/documents/${blog.groupId}/${blog.folderId}/${blog.titleDlFileEntry}/${blog.uuidDlFileEntry}" alt="" />
 										</a>
 										<h2>
-										<a href="#">${blog.title}</a>
+										<a href="#">${blog.titleBlogsEntry}</a>
 										</h2>
 										<p class="des">${blog.description}</p>
 							        </div>
 							      </div>
-						</c:if>
-					</c:forEach>
-				</c:when>
-			</c:choose>
 		</c:forEach>
         </div>
 </body>
@@ -69,5 +66,26 @@
         background: rgba(0, 0, 0, 0) url("../images/icon-time.png") no-repeat
           scroll 0 4px;
         padding: 3px 5px 3px 20px;
+      }
+      .head-cm {
+        width: 100%;
+        border-bottom: 1px solid #d71921;
+        margin-bottom: 20px;
+      }
+      .head-cm ul li:first-child {
+        background: url("http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-chuyenmuc.png")
+          no-repeat right top;
+      }
+      .head-cm ul {
+        display: inline-flex;
+        list-style: none;
+      }
+      .head-cm ul li:first-child a {
+        color: #fff;
+        font: 700 16px/35px Roboto, Arial, Tahoma;
+        text-transform: uppercase;
+        border-right: none;
+        padding: 0 30px 0 20px;
+        text-decoration: none;
       }
     </style>

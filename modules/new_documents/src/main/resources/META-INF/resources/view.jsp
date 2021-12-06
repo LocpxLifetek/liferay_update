@@ -6,20 +6,16 @@
 <html>
 <body>
 	<div class="vanbanduthaoitem">
-		<c:forEach items="${listBlogs}" var="blog">
-			<c:choose>
-				<c:when test="${blog.smallImageFileEntryId > 0}">
-					<c:forEach items="${smallImage}" var="si">
-						<c:if test="${blog.smallImageFileEntryId == si.fileEntryId}">
+		<c:forEach items="${listBlogsEntryDtos}" var="blog">
 							<div class="vanban">
 								<div>
 									<a class="vbdt-image"><img
-										src="/documents/${si.groupId}/${si.folderId}/${si.title}/${si.uuid}"></a>
+										src="/documents/${blog.groupId}/${blog.folderId}/${blog.titleDlFileEntry}/${blog.uuidDlFileEntry}"></a>
 								</div>
 								<div>
 									<div class="sTitle">
 										<div class="title">
-											<a>${blog.title}</a>
+											<a>${blog.titleBlogsEntry}</a>
 										</div>
 										<div class="vbdt-info">
 											<div class="desc">${blog.description}</div>
@@ -27,10 +23,6 @@
 									</div>
 								</div>
 							</div>
-						</c:if>
-					</c:forEach>
-				</c:when>
-			</c:choose>
 		</c:forEach>
 	</div>
 </body>

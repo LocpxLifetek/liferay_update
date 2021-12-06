@@ -1,4 +1,0 @@
-Bundle-Name: navigation_document
-Bundle-SymbolicName: navigation_document
-Bundle-Version: 1.0.0
-Export-Package: navigation_document.constants

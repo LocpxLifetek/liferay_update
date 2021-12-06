@@ -9,23 +9,23 @@
 		<div style="width: 100%">
 			<div class="grid2">
 				<h2 >
-					<a href="/web/lifetek/detail_page?id=${blogs.uuid}">${blogs.title}</a>
+					<a href="/web/lifetek/detail_page?id=${blogsEntryDto.uuidBlogsEntry}">${blogsEntryDto.titleBlogsEntry}</a>
 				</h2>
 			</div>
 			<div class="grid1">
 				<div>
 					<img
-						src="/documents/${si.groupId}/${si.folderId}/${si.title}/${si.uuid}"
+						src="/documents/${blogsEntryDto.groupId}/${blogsEntryDto.folderId}/${blogsEntryDto.titleDlFileEntry}/${blogsEntryDto.uuidDlFileEntry}"
 						class="soup-image">
-					<p>${blogs.description}</p>
+					<p>${blogsEntryDto.description}</p>
 				</div>
 			</div>
 
 		</div>
 		<div style="margin-left:5px;">
-			<c:forEach items="${listBlogs}" var="blog">
+			<c:forEach items="${listBlogsNoImage}" var="blog">
 				<div class="title">
-					<a href="/web/lifetek/detail_page?id=${blog.uuid}"> ${blog.title}</a>
+					<a href="/web/lifetek/detail_page?id=${blog.uuidBlogsEntry}"> ${blog.titleBlogsEntry}</a>
 				</div>
 			</c:forEach>
 		</div>
