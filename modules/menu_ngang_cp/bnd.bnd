@@ -1,4 +1,0 @@
-Bundle-Name: menu_ngang_cp
-Bundle-SymbolicName: menu_ngang_cp
-Bundle-Version: 1.0.0
-Export-Package: menu_ngang_cp.constants
