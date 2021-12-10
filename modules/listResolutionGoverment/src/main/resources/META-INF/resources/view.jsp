@@ -17,7 +17,7 @@
 						<c:choose>
 							<c:when test="${valueGoverment.key == 'TríchYếu'}">
 								<td style="padding: 3px;"><a
-									href="/web/lifetek/chi-tiết-nghị-quyết-chính-phủ?class_id=${valueGoverment.id}">${valueGoverment.value}</a></td>
+									href="${url}/chi-tiết-nghị-quyết-chính-phủ?class_id=${valueGoverment.id}">${valueGoverment.value}</a></td>
 
 							</c:when>
 							<c:otherwise>
@@ -36,7 +36,7 @@
 	<ul id="pagination">
 		<c:if test="${currentPage != 1}">
 			<li><a
-				href="/web/lifetek/nghị-quyết-của-chính-phủ?page=${currentPage - 1}">«</a></li>
+				href="${url}/nghị-quyết-của-chính-phủ?page=${currentPage - 1}">«</a></li>
 		</c:if>
 		<c:if test="${currentPage gt 3}">
 			<li><span>...</span></li>
@@ -50,7 +50,7 @@
 				<c:otherwise>
 					<c:if test="${(currentPage-3) lt i and i lt (currentPage + 3)}">
 						<li><a
-							href="/web/lifetek/nghị-quyết-của-chính-phủ?page=${i}">${i}</a>
+							href="${url}/nghị-quyết-của-chính-phủ?page=${i}">${i}</a>
 						</li>
 					</c:if>
 				</c:otherwise>
@@ -61,7 +61,7 @@
 		</c:if>
 		<c:if test="${currentPage lt totalPage}">
 			<li><a
-				href="/web/lifetek/nghị-quyết-của-chính-phủ?page=${currentPage + 1}">»</a></li>
+				href="${url}/nghị-quyết-của-chính-phủ?page=${currentPage + 1}">»</a></li>
 		</c:if>
 
 	</ul>

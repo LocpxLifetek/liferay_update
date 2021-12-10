@@ -1,5 +1,6 @@
 package hotNews.portlet;
 
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -34,21 +35,33 @@ public class HotNewsPortlet extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-		long startTime = System.nanoTime();
+	
 		WebCacheItem wci = new TestCache();
-		try {	
-			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			String key = HotNewsPortletKeys.HOTNEWS + "," + String.valueOf(themeDisplay.getScopeGroupId());
 			List<BlogsEntryDto> listBlogsEntryDtos = (List<BlogsEntryDto>) WebCachePoolUtil.get(key, wci);
+			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
+
+			String urlCurrent = themeDisplay.getURLCurrent();
+			String layoutUrl = themeDisplay.getLayoutFriendlyURL(layout);
+			String[] url = urlCurrent.split(layoutUrl);
+			String urlSite = null;
+			int i = 0;
+			for (String string : url) {
+				i++;
+				if (i == 1) {
+					urlSite = string;
+				}
+			}
+			renderRequest.setAttribute("url", urlSite);
 //			List<BlogsEntryDto> listBlogsEntryDtos=findAllBlogsByIdCategory(themeDisplay.getScopeGroupId());
-			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);	
+			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		long endTime   = System.nanoTime();
-		long totalTime = endTime - startTime;
-		System.out.println(totalTime);
+		
 		super.doView(renderRequest, renderResponse);
 
 	}

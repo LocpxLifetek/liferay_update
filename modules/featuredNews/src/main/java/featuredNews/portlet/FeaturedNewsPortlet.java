@@ -3,6 +3,7 @@ package featuredNews.portlet;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.transaction.Isolation;
@@ -52,6 +53,20 @@ public class FeaturedNewsPortlet extends MVCPortlet {
 			String key = FeaturedNewsPortletKeys.FEATUREDNEWS + "," + String.valueOf(themeDisplay.getScopeGroupId());
 			List<BlogsEntryDto> listBlogsNoImage = new ArrayList<>();
 			List<BlogsEntryDto> listBlogsEntryDtos = (List<BlogsEntryDto>) WebCachePoolUtil.get(key, wci);
+			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
+			
+			String urlCurrent=themeDisplay.getURLCurrent();
+			String layoutUrl =themeDisplay.getLayoutFriendlyURL(layout);
+			String[] url=urlCurrent.split(layoutUrl);
+			String urlSite=null;
+			int j=0;
+			for (String string : url) {
+				j++;
+				if(j==1) {
+					urlSite=string;
+				}
+			}
+			renderRequest.setAttribute("url", urlSite);	
 			int i = 0;
 			for (BlogsEntryDto blogsEntryDto : listBlogsEntryDtos) {
 				i++;

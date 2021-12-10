@@ -3,6 +3,7 @@ package directOperation.portlet;
 import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -201,6 +202,20 @@ public class DirectOperationPortlet extends MVCPortlet {
 			Integer size=10;
 			Integer count=countBlogByCategory(uuidCategory);
 			int result = (int) Math.ceil((float) count / size);
+			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
+
+			String urlCurrent = themeDisplay.getURLCurrent();
+			String layoutUrl = themeDisplay.getLayoutFriendlyURL(layout);
+			String[] url = urlCurrent.split(layoutUrl);
+			String urlSite = null;
+			int i = 0;
+			for (String string : url) {
+				i++;
+				if (i == 1) {
+					urlSite = string;
+				}
+			}
+			renderRequest.setAttribute("url", urlSite);
 			if(page<0 && page>result) {
 				error="Error !!!";
 				renderRequest.setAttribute("error", error);

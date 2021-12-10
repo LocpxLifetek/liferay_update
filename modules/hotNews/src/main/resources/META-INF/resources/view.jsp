@@ -16,7 +16,7 @@
 				<img
 					src="/documents/${blog.groupId}/${blog.folderId}/${blog.titleDlFileEntry}/${blog.uuidDlFileEntry}"
 					class="soup-image1"> <a
-					href="/web/lifetek/tintuc?id=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
+					href="${url}/tintuc?id=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
 			</div>
 		</c:forEach>
 	</div>

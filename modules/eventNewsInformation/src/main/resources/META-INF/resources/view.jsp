@@ -13,7 +13,7 @@
 			<div class="head-cm">
 				<ul>
 					<li><a
-						href="/web/lifetek/theloaitintucsukien?uuid=${mapKey.uuid}">${mapKey.name}</a></li>
+						href="${url}/theloaitintucsukien?uuid=${mapKey.uuid}">${mapKey.name}</a></li>
 				</ul>
 				<a href="/tin-tuc-su-kien/thong-tin-doi-ngoai-20.html"
 					class="xemthem">Xem thêm</a>
@@ -22,7 +22,7 @@
 		<div class="directOperator">
 			<c:forEach items="${map.value}" var="mapValue">
 				<div class="directOperationLeft">
-					<a href="/web/lifetek/chitiettintuc?id=${mapValue.uuidBlogsEntry}"
+					<a href="${url}/chitiettintuc?id=${mapValue.uuidBlogsEntry}"
 						style="font-size: 16px">${mapValue.titleBlogsEntry}</a> <img
 						src="/documents/${mapValue.groupId}/${mapValue.folderId}/${mapValue.titleDlFileEntry}/${mapValue.uuidDlFileEntry}"
 						class="soup-image">

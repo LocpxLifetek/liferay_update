@@ -44,7 +44,7 @@
 																	src="http://chinhphu.vn/templates/govportal/chinhphu/images/icon.jpg" style="margin:10px">
 																</td>
 																<td><a class="tinmoi"
-																	href="/web/lifetek/số-liệu-ngân-sách-nhà-nước?idFolder=${budegetData.folderId}">
+																	href="${url}/số-liệu-ngân-sách-nhà-nước?idFolder=${budegetData.folderId}">
 																		${budegetData.name}</a></td>
 															</tr>
 														</tbody>
@@ -105,7 +105,7 @@
 																		src="http://chinhphu.vn/templates/govportal/chinhphu/images/icon.jpg" style="margin:10px">
 																	</td>
 																	<td><a class="tinmoi"
-																		href="/web/lifetek/số-liệu-ngân-sách-nhà-nước?idFolder=${journalArticle.folderId}&articleId=${journalArticle.id}">
+																		href="${url}/số-liệu-ngân-sách-nhà-nước?idFolder=${journalArticle.folderId}&articleId=${journalArticle.id}">
 																			${journalArticle.name}</a></td>
 																</tr>
 															</tbody>

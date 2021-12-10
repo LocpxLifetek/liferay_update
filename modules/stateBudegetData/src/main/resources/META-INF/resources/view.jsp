@@ -99,7 +99,7 @@
 																			src="http://chinhphu.vn/templates/govportal/chinhphu/images/icon.jpg" style="margin:10px">
 																		</td>
 																		<td><a class="tinmoi"
-																			href="/web/lifetek/số-liệu-ngân-sách-nhà-nước?idFolder=${journalArticleLocalizationDtos.folderId}&articleId=${journalArticleLocalizationDtos.id}">
+																			href="${url}/số-liệu-ngân-sách-nhà-nước?idFolder=${journalArticleLocalizationDtos.folderId}&articleId=${journalArticleLocalizationDtos.id}">
 																				${journalArticleLocalizationDtos.name} </a></td>
 																	</tr>
 																</tbody>

@@ -14,7 +14,7 @@
 		<div class="imageViewBlogs">
 			<img
 				src="${blogs.srcImage}">
-			<a href="/web/lifetek/tintuc?id=${blogs.uuid}">${blogs.title}</a>
+			<a href="${url}/tintuc?id=${blogs.uuid}">${blogs.title}</a>
 			<hr>
 		</div>
 	</div>
@@ -23,7 +23,7 @@
 
 		<c:forEach items="${listBlogsEntry}" var="blog">
 			<div>
-				<a href="/web/lifetek/tintuc/?id=${blog.uuid}">${blog.title}</a>
+				<a href="${url}/tintuc/?id=${blog.uuid}">${blog.title}</a>
 			</div>
 			<hr>
 		</c:forEach>

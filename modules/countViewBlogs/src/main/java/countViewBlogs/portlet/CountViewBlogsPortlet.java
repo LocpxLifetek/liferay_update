@@ -7,6 +7,7 @@ import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -49,25 +50,17 @@ public class CountViewBlogsPortlet extends MVCPortlet {
 		try {
 			List<BlogsEntryDtos> listBlogsEntryDtos = new ArrayList<>();
 			con = DataAccess.getConnection();
-			statement = con.prepareStatement("SELECT\r\n" + 
-					"    be.title          AS title,\r\n" + 
-					"    be.description    AS description,\r\n" + 
-					"    be.uuid_          AS uuid,\r\n" + 
-					"    de.groupid        AS groupid,\r\n" + 
-					"    de.folderid       AS folderid,\r\n" + 
-					"    de.title          AS titledlfile,\r\n" + 
-					"    de.uuid_          AS uuiddlfile\r\n" + 
-					"FROM\r\n" + 
-					"         blogsentry be\r\n" + 
-					"    INNER JOIN assetentry      ae ON be.entryid = ae.classpk\r\n" + 
-					"    INNER JOIN viewcountentry  vc ON vc.classpk = ae.entryid\r\n" + 
-					"     INNER JOIN dlfileentry                 de ON de.fileentryid = be.smallimagefileentryid\r\n" + 
-					"WHERE\r\n" + 
-					"        ae.classnameid = '31201'\r\n" + 
-					"    AND be.groupid = ?\r\n" + 
-					"    AND be.status = '0'\r\n" + 
-					"ORDER BY\r\n" + 
-					"    vc.viewcount DESC OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY");
+			statement = con.prepareStatement("SELECT\r\n" + "    be.title          AS title,\r\n"
+					+ "    be.description    AS description,\r\n" + "    be.uuid_          AS uuid,\r\n"
+					+ "    de.groupid        AS groupid,\r\n" + "    de.folderid       AS folderid,\r\n"
+					+ "    de.title          AS titledlfile,\r\n" + "    de.uuid_          AS uuiddlfile\r\n"
+					+ "FROM\r\n" + "         blogsentry be\r\n"
+					+ "    INNER JOIN assetentry      ae ON be.entryid = ae.classpk\r\n"
+					+ "    INNER JOIN viewcountentry  vc ON vc.classpk = ae.entryid\r\n"
+					+ "     INNER JOIN dlfileentry                 de ON de.fileentryid = be.smallimagefileentryid\r\n"
+					+ "WHERE\r\n" + "        ae.classnameid = '31201'\r\n" + "    AND be.groupid = ?\r\n"
+					+ "    AND be.status = '0'\r\n" + "ORDER BY\r\n"
+					+ "    vc.viewcount DESC OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY");
 			statement.setLong(1, groupIdCategory);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -117,10 +110,24 @@ public class CountViewBlogsPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			int i=0;
-			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			List<BlogsEntryDtos> listBlogsEntryDtos=findBlogsCountView(themeDisplay.getScopeGroupId());
-			List<BlogsEntryDtos> manyBlog=new ArrayList<>();
+			int i = 0;
+			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			List<BlogsEntryDtos> listBlogsEntryDtos = findBlogsCountView(themeDisplay.getScopeGroupId());
+			List<BlogsEntryDtos> manyBlog = new ArrayList<>();
+			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
+
+			String urlCurrent = themeDisplay.getURLCurrent();
+			String layoutUrl = themeDisplay.getLayoutFriendlyURL(layout);
+			String[] url = urlCurrent.split(layoutUrl);
+			String urlSite = null;
+			int j = 0;
+			for (String string : url) {
+				j++;
+				if (j == 1) {
+					urlSite = string;
+				}
+			}
+			renderRequest.setAttribute("url", urlSite);
 			for (BlogsEntryDtos blogs : listBlogsEntryDtos) {
 				i++;
 				if (i == 1) {

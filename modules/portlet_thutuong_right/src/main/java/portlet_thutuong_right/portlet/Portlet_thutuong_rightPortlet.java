@@ -71,15 +71,12 @@ public class Portlet_thutuong_rightPortlet extends MVCPortlet{
 			e.printStackTrace();
 			return null;
 		}finally {
-			if(statement != null) {
 				statement.close();
-			}
-			if(con != null) {
 				con.close();
-			}
-			if(rs != null) {
+			
+			
 				rs.close();
-			}
+			
 		}
 	}
 

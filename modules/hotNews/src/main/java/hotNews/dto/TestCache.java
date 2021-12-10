@@ -103,6 +103,6 @@ public class TestCache implements WebCacheItem {
 		return _REFRESH_TIME;
 	}
 
-	private static final long _REFRESH_TIME = Time.SECOND * 60;
+	private static final long _REFRESH_TIME = Time.SECOND * 10;
 
 }

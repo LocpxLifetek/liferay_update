@@ -23,7 +23,7 @@
 							<div class="ldo">
 								<img src="${blog.srcImage}" class="soup-image"
 									style="width: 30% !important"> <a
-									href="/web/lifetek/chitiettintuc?id=${blog.uuidBlogs}">${blog.titleBlogs}</a>
+									href="${url}/chitiettintuc?id=${blog.uuidBlogs}">${blog.titleBlogs}</a>
 								<span style="color: #d71920; font-size: 12px;">(<fmt:formatDate
 										value="${blog.modifiedDate}" pattern="MM/dd/yyyy" />)
 								</span> <br>
@@ -36,7 +36,7 @@
 						<ul id="pagination">
 							<c:if test="${currentPage != 1}">
 								<li><a
-									href="/web/lifetek/theloaitintucsukien?uuid=${uuid}&page=${currentPage - 1}">«</a></li>
+									href="${url}/theloaitintucsukien?uuid=${uuid}&page=${currentPage - 1}">«</a></li>
 							</c:if>
 							<c:if test="${currentPage gt 3}">
 								<li><span>...</span></li>
@@ -51,7 +51,7 @@
 										<c:if
 											test="${(currentPage-3) lt i and i lt (currentPage + 3)}">
 											<li><a
-												href="/web/lifetek/theloaitintucsukien?uuid=${uuid}&page=${i}">${i}</a>
+												href="${url}/theloaitintucsukien?uuid=${uuid}&page=${i}">${i}</a>
 											</li>
 										</c:if>
 									</c:otherwise>
@@ -62,7 +62,7 @@
 							</c:if>
 							<c:if test="${currentPage lt totalPage}">
 								<li><a
-									href="/web/lifetek/theloaitintucsukien?uuid=${uuid}&page=${currentPage + 1}">»</a>
+									href="${url}/theloaitintucsukien?uuid=${uuid}&page=${currentPage + 1}">»</a>
 								</li>
 							</c:if>
 

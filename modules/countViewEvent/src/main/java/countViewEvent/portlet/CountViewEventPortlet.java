@@ -1,6 +1,7 @@
 package countViewEvent.portlet;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -121,7 +122,20 @@ public class CountViewEventPortlet extends MVCPortlet {
 			String from = format.format(fromDate);
 			List<CountViewDto> listCountViewDtos=countViewEvent(current, from,themeDisplay.getScopeGroupId());
 			int i=0;
-			
+			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
+
+			String urlCurrent = themeDisplay.getURLCurrent();
+			String layoutUrl = themeDisplay.getLayoutFriendlyURL(layout);
+			String[] url = urlCurrent.split(layoutUrl);
+			String urlSite = null;
+			int j = 0;
+			for (String string : url) {
+				j++;
+				if (j == 1) {
+					urlSite = string;
+				}
+			}
+			renderRequest.setAttribute("url", urlSite);
 			List<CountViewDto> listManyCountViewDtos=new ArrayList<>();
 			for (CountViewDto countViewDto : listCountViewDtos) {
 				i++;

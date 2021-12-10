@@ -3,6 +3,7 @@ package listStateBudgetDataPorlet.portlet;
 import com.liferay.journal.model.JournalFolder;
 import com.liferay.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -50,6 +51,20 @@ public class ListStateBudgetDataPorletPortlet extends MVCPortlet {
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
+			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
+
+			String urlCurrent = themeDisplay.getURLCurrent();
+			String layoutUrl = themeDisplay.getLayoutFriendlyURL(layout);
+			String[] url = urlCurrent.split(layoutUrl);
+			String urlSite = null;
+			int i = 0;
+			for (String string : url) {
+				i++;
+				if (i == 1) {
+					urlSite = string;
+				}
+			}
+			renderRequest.setAttribute("url", urlSite);
 			String idFolder = PortalUtil.getOriginalServletRequest(request).getParameter("idFolder");
 			String articleId = PortalUtil.getOriginalServletRequest(request).getParameter("articleId");
 			renderRequest.setAttribute("articleId", articleId);

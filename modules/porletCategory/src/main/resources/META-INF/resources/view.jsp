@@ -53,13 +53,23 @@
 																					</table>
 																				</td>
 																			</tr>
-
-																			<tr>
-																				<td><a href="#"><img height="77"
-																						width="100%"
-																						src="http://chinhphu.vn/templates/govportal/tinhthanh/images/bn_layykien.jpg"></a>
-																				</td>
-																			</tr>
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
+																			
 																		</tbody>
 																	</table>
 																</div>
@@ -78,29 +88,7 @@
 			</div>
 		</td>
 	</tr>
-	<tr align="left">
-		<td valign="top" style="padding: 4px 0px 0px 0px; width: 100%;">
-			<div id="p135_270244_135_17802_17802">
-				<table border="0" width="100%" cellpadding="0" cellspacing="0"
-					class="RegionNoBorder">
-					<tr>
-						<td class="RegionHeaderColor" style="width: 100%">
-							<div id="pcnt135_270244_135_17802_17802">
-								<table cellspacing="0" cellpadding="0" border="0" width="100%">
-									<tr>
-										<td><a href="#"><img height="40" width="100%"
-												src="http://chinhphu.vn/templates/govportal/chinhphu/images/gopy_hienke.JPG"></a>
-										</td>
-									</tr>
-								</table>
-
-							</div>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</td>
-	</tr>
+	
 </table>
 
 

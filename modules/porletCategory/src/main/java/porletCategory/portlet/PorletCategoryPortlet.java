@@ -37,7 +37,7 @@ import porletCategory.constants.PorletCategoryPortletKeys;
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class PorletCategoryPortlet extends MVCPortlet {
 
-	private List<PorletCategoryDto> findAllCategoryMenu(long groupId)
+	private List<PorletCategoryDto> findAllCategoryMenu()
 			throws IOException, PortletException, SQLException {
 		PreparedStatement statement = null;
 		java.sql.Connection con = null;
@@ -46,8 +46,8 @@ public class PorletCategoryPortlet extends MVCPortlet {
 			List<PorletCategoryDto> listPorletCategoryDto = new ArrayList<>();
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
-					"select c.NAME as name from AssetCategory c inner join assetvocabulary av on c.vocabularyid=av.vocabularyid where c.groupId=? and upper(REGEXP_REPLACE(av.name,'[^a-z_A-Z ]')) = upper('menu')");
-			statement.setLong(1, groupId);
+					"select c.NAME as name from AssetCategory c inner join assetvocabulary av on c.vocabularyid=av.vocabularyid where  upper(REGEXP_REPLACE(av.name,'[^a-z_A-Z ]')) = upper('menu')");
+			
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				PorletCategoryDto porletCategoryDto = new PorletCategoryDto();
@@ -83,8 +83,8 @@ public class PorletCategoryPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			List<PorletCategoryDto> listPorletCategoryDtos = findAllCategoryMenu(themeDisplay.getScopeGroupId());
+			
+			List<PorletCategoryDto> listPorletCategoryDtos = findAllCategoryMenu();
 			renderRequest.setAttribute("listPorletCategoryDtos", listPorletCategoryDtos);
 
 		} catch (SQLException e) {

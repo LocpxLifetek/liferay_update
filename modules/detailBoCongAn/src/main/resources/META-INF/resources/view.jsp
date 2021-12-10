@@ -17,11 +17,11 @@
 						src="http://bocongan.gov.vn/Publishing_Resources/web/portal/images/i-right.png">
 				</div>
 				<div class="trangchu">
-					<a href="tintucsukien">Tin tức sự kiện</a> <img
+					<a href="${url}/tintucsukien">Tin tức sự kiện</a> <img
 						src="http://bocongan.gov.vn/Publishing_Resources/web/portal/images/i-right.png">
 				</div>
 				<div class="trangchu">
-					<a href="/web/lifetek/theloaitintucsukien?id=${listBlogsEntryDto.uuidCategory}"
+					<a href="${url}/theloaitintucsukien?id=${listBlogsEntryDto.uuidCategory}"
 						style="color: red !important;">${listBlogsEntryDto.nameCategory}</a>
 				</div>
 			</div>

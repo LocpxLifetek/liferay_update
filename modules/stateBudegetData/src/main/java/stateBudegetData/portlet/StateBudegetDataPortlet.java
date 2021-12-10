@@ -7,6 +7,7 @@ import com.liferay.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -55,6 +56,21 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String idFolder = PortalUtil.getOriginalServletRequest(request).getParameter("idFolder");
 			String articleId = PortalUtil.getOriginalServletRequest(request).getParameter("articleId");
+			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
+
+			String urlCurrent = themeDisplay.getURLCurrent();
+			String layoutUrl = themeDisplay.getLayoutFriendlyURL(layout);
+			String[] url = urlCurrent.split(layoutUrl);
+			String urlSite = null;
+			int i = 0;
+			for (String string : url) {
+				i++;
+				if (i == 1) {
+					urlSite = string;
+				}
+			}
+			renderRequest.setAttribute("url", urlSite);
 			renderRequest.setAttribute("articleId", articleId);
 			JouranlArticleFolderDto journalArticleFolderDto = findFolderNewsByTreepath();
 			Integer id = null;
@@ -68,7 +84,6 @@ public class StateBudegetDataPortlet extends MVCPortlet {
 				String content = StringPool.BLANK;
 				JournalArticleProjection journalAriArticleProjection = findAllJournalArticleByIdAndFolderId(Integer.parseInt(idFolder),Integer.parseInt(articleId));
 				id=journalAriArticleProjection.getFolderId();
-				ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 				JournalArticle journalArticle = JournalArticleLocalServiceUtil.getArticle(journalAriArticleProjection.getId());
 				JournalArticleDisplay journalArticleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(
 						themeDisplay.getScopeGroupId(), journalArticle.getArticleId(), "", "", themeDisplay);

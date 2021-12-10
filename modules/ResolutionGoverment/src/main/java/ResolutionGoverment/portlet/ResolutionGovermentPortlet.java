@@ -8,6 +8,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -279,6 +280,20 @@ public class ResolutionGovermentPortlet extends MVCPortlet {
 			// lấy thông tin trừ id ở trên
 			try {
 				ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+				Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
+
+				String urlCurrent = themeDisplay.getURLCurrent();
+				String layoutUrl = themeDisplay.getLayoutFriendlyURL(layout);
+				String[] url = urlCurrent.split(layoutUrl);
+				String urlSite = null;
+				int i = 0;
+				for (String string : url) {
+					i++;
+					if (i == 1) {
+						urlSite = string;
+					}
+				}
+				renderRequest.setAttribute("url", urlSite);
 				List<JournalArticleDto> listJournalArticleDtos = findAllJournalArticleAndDontId(idJournalArticle,themeDisplay.getScopeGroupId());
 				List<JournalArticleLocazationDto> listJournalArticleLocazationDto = new ArrayList<>();
 				for (JournalArticleDto journalArticleDto : listJournalArticleDtos) {

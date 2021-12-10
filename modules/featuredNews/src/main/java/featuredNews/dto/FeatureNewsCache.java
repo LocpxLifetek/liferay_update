@@ -99,5 +99,5 @@ public class FeatureNewsCache implements WebCacheItem{
 		// TODO Auto-generated method stub
 		return _REFRESH_TIME;
 	}
-	private static final long _REFRESH_TIME = Time.SECOND * 60;
+	private static final long _REFRESH_TIME = Time.SECOND * 10;
 }

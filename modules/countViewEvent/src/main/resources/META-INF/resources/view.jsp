@@ -7,7 +7,7 @@
 		<div class="countViewE">
 			<img
 				src="${countViewDto.srcImage}">
-			<a href="/web/lifetek/chitiettintuc?id=${countViewDto.uuid}">${countViewDto.title}</a>
+			<a href="${url}/chitiettintuc?id=${countViewDto.uuid}">${countViewDto.title}</a>
 			<p>${countViewDto.description}</p>
 		</div>
 	</div>
@@ -19,7 +19,7 @@
 		</div>
 		<c:forEach items="${listBlogsEntry}" var="blog">
 			<div class="title-infor">
-				<a href="/web/lifetek/chitiettintuc?id=${blog.uuid}"> <img
+				<a href="${url}/chitiettintuc?id=${blog.uuid}"> <img
 					src="http://chinhphu.vn/templates/govportal/tinhthanh/images/icon_1.jpg">
 					${blog.title}
 				</a>

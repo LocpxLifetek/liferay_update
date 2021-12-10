@@ -27,6 +27,6 @@
 	<div class="doc_detail_others_item"
 		style="display: block;text-align: justify; background: url(http://chinhphu.vn/templates/vanbanphapquy/images/icons/item.gif) no-repeat scroll 0px 2px; padding-left: 15px;">
 		<a
-			href="/web/lifetek/chi-tiết-nghị-quyết-chính-phủ?class_id=${journalArticleLocazation.id}">${journalArticleLocazation.title}</a>
+			href="${url}/chi-tiết-nghị-quyết-chính-phủ?class_id=${journalArticleLocazation.id}">${journalArticleLocazation.title}</a>
 	</div>
 </c:forEach>

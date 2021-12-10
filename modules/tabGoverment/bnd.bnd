@@ -1,0 +1,4 @@
+Bundle-Name: tabGoverment
+Bundle-SymbolicName: tabGoverment
+Bundle-Version: 1.0.0
+Export-Package: tabGoverment.constants
