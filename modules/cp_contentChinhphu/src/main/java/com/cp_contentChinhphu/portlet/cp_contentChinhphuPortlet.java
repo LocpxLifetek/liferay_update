@@ -35,23 +35,23 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class cp_contentChinhphuPortlet extends MVCPortlet {
-	private final String linkCpvndn = "http://portal.lifetek.vn/web/lifetek/chinhphu/chinhphu/chinhphuduongnhiem";
-	private final String linkCnnv = "http://portal.lifetek.vn/web/lifetek/chinhphu/chucnangnhiemvu";
-	private final String linkTcphln = "http://portal.lifetek.vn/web/lifetek/chinhphu/tochucphoihopliennganh";
-	private final String linkBn = "http://portal.lifetek.vn/web/lifetek/chinhphu/bonganh";
-	private final String linkTtp = "http://portal.lifetek.vn/web/lifetek/chinhphu/cactinhvathanhpho";
+	private final String LINK_HOME = "http://portal.lifetek.vn/web/lifetek/chinh-phu";
+	private final String linkCpvndn = LINK_HOME + "/chinhphu/chinhphuduongnhiem";
+	private final String linkCnnv = LINK_HOME + "/chucnangnhiemvu";
+	private final String linkTcphln = LINK_HOME + "/tochucphoihopliennganh";
+	private final String linkBn = LINK_HOME + "/bonganh";
+	private final String linkTtp = LINK_HOME + "/cactinhvathanhpho";
 	
-	private final String linkCstt = "http://portal.lifetek.vn/web/lifetek/chinhphu/chinhsachthanhtuu";
-	private final String linkTvcpqctk = "http://portal.lifetek.vn/web/lifetek/chinhphu/thanhvienchinhphuquacacthoiky";
-	private final String linkTsctvcp = "http://portal.lifetek.vn/web/lifetek/chinhphu/tieusucacthanhvienchinhphu";
-	private final String linkBhkn = "http://portal.lifetek.vn/web/lifetek/chinhphu/baihockinhnghiem";
+	private final String linkCstt = LINK_HOME + "/chinhsachthanhtuu";
+	private final String linkTvcpqctk = LINK_HOME + "/thanhvienchinhphuquacacthoiky";
+	private final String linkTsctvcp = LINK_HOME + "/tieusucacthanhvienchinhphu";
+	private final String linkBhkn = LINK_HOME + "/baihockinhnghiem";
 	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		
 		try {
-			// id lan luot CHÃ�NH PHá»¦ Ä�Æ¯Æ NG NHIá»†M, CHÃ�NH PHá»¦ VIá»†T NAM QUA CÃ�C THá»œI Ká»², NGHá»Š QUYáº¾T PHIÃŠN Há»ŒP CHÃ�NH PHá»¦, Sá»� LIá»†U NGÃ‚N SÃ�CH NHÃ€ NÆ¯á»šC
 			List<Integer> assIds = Arrays.asList(195814, 195817, 195820, 195823);
 			for (int i = 0; i < assIds.size(); i++) {
 				AssetCategory assetC = AssetCategoryLocalServiceUtil.getAssetCategory(assIds.get(i));

@@ -18,7 +18,7 @@
 			<ul>
 				<c:forEach items="${articleDisplays}" var="article">
 					<li><a style="color: black;"
-						href="http://portal.lifetek.vn/web/lifetek/chinhphu/noidungchinhsachthanhtuu?categoryId=${assetCategory.getCategoryId()}&priKey=${article.getResourcePrimKey()}">
+						href="${}${assetCategory.getCategoryId()}&priKey=${article.getResourcePrimKey()}">
 							${article.getTitle()} </a></li>
 				</c:forEach>
 			</ul>

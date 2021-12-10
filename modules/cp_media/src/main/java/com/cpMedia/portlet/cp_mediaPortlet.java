@@ -33,10 +33,10 @@ import org.osgi.service.component.annotations.Component;
  * @author java05
  */
 @Component(immediate = true, property = { "com.liferay.portlet.display-category=category.sample",
-		"com.liferay.portlet.header-portlet-css=/css/main.css",
-		"com.liferay.portlet.instanceable=true", "javax.portlet.display-name=cp_media",
-		"javax.portlet.init-param.template-path=/", "javax.portlet.init-param.view-template=/view.jsp",
-		"javax.portlet.name=" + cp_mediaPortletKeys.CP_MEDIA, "javax.portlet.resource-bundle=content.Language",
+		"com.liferay.portlet.header-portlet-css=/css/main.css", "com.liferay.portlet.instanceable=true",
+		"javax.portlet.display-name=cp_media", "javax.portlet.init-param.template-path=/",
+		"javax.portlet.init-param.view-template=/view.jsp", "javax.portlet.name=" + cp_mediaPortletKeys.CP_MEDIA,
+		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class cp_mediaPortlet extends MVCPortlet {
 	private final String LINK_CP_MEDIA = "/web/lifetek/media.chinhphu?id=";
@@ -49,11 +49,9 @@ public class cp_mediaPortlet extends MVCPortlet {
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			int id = Integer.parseInt(PortalUtil.getOriginalServletRequest(request).getParameter("id"));
 			FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(id);
-
-			String src = String.format("/documents/%s/%s/%s/%s", fileEntry.getGroupId(), 
-																 fileEntry.getFolderId(),
-																 fileEntry.getTitle(), 
-																 fileEntry.getUuid());
+			// Thông tin của video đc truyền vào
+			String src = String.format("/documents/%s/%s/%s/%s", fileEntry.getGroupId(), fileEntry.getFolderId(),
+					fileEntry.getTitle(), fileEntry.getUuid());
 			renderRequest.setAttribute("srcVideo", src);
 			renderRequest.setAttribute("fileName", fileEntry.getFileName().replace(".mp4", ""));
 			// title: Video cung chu de
@@ -63,7 +61,6 @@ public class cp_mediaPortlet extends MVCPortlet {
 			List<AssetEntryAssetCategoryRel> aeac = AssetEntryAssetCategoryRelLocalServiceUtil
 					.getAssetEntryAssetCategoryRelsByAssetCategoryId(147329).stream().limit(7)
 					.collect(Collectors.toList());
-//			List<AssetEntryAssetCategoryRel> listLeft = aeac.stream().sorted().limit(6).collect(Collectors.toList());
 			int i = 0;
 			for (AssetEntryAssetCategoryRel a : aeac) {
 				// get assetEntryId
@@ -76,30 +73,32 @@ public class cp_mediaPortlet extends MVCPortlet {
 					// get AssetLink
 					List<AssetLink> assetLinks = AssetLinkLocalServiceUtil.getLinks(assetEntryId);
 					DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil.getDLFileEntry(fileEntryId);
-					if (!assetLinks.isEmpty()) {
+					if (assetLinks.isEmpty() || assetLinks == null) {
 						i++;
 						renderRequest.setAttribute("srcVideo" + i, LINK_CP_MEDIA + dlFileEntry.getFileEntryId());
 						renderRequest.setAttribute("title" + i, dlFileEntry.getTitle().replace(".mp4", ""));
-
+						
+						// Ảnh báo lỗi có ảnh
+						DLFileEntry dlAnh = DLFileEntryLocalServiceUtil.getDLFileEntry(573793);
+						renderRequest.setAttribute("srcAnh" + i, "/documents/" + dlAnh.getGroupId() + "/"
+								+ dlAnh.getFolderId() + "/" + dlAnh.getTitle() + "/" + dlAnh.getUuid());
+					} else {
+						i++;
+						renderRequest.setAttribute("srcVideo" + i, LINK_CP_MEDIA + dlFileEntry.getFileEntryId());
+						renderRequest.setAttribute("title" + i, dlFileEntry.getTitle().replace(".mp4", ""));
 						if (assetLinks.get(0).getEntryId1() == assetEntryId) {
 							AssetEntry asAnh = AssetEntryLocalServiceUtil
 									.getAssetEntry(assetLinks.get(0).getEntryId2());
 							DLFileEntry dlAnh = DLFileEntryLocalServiceUtil.getDLFileEntry(asAnh.getClassPK());
-							renderRequest.setAttribute("srcAnh" + i, "/documents/" 
-										+ dlAnh.getGroupId() + "/"
-										+ dlAnh.getFolderId() + "/" 
-										+ dlAnh.getTitle() + "/" 
-										+ dlAnh.getUuid());
+							renderRequest.setAttribute("srcAnh" + i, "/documents/" + dlAnh.getGroupId() + "/"
+									+ dlAnh.getFolderId() + "/" + dlAnh.getTitle() + "/" + dlAnh.getUuid());
 						}
 						if (assetLinks.get(0).getEntryId2() == assetEntryId) {
 							AssetEntry asAnh = AssetEntryLocalServiceUtil
 									.getAssetEntry(assetLinks.get(0).getEntryId1());
 							DLFileEntry dlAnh = DLFileEntryLocalServiceUtil.getDLFileEntry(asAnh.getClassPK());
-							renderRequest.setAttribute("srcAnh" + i, "/documents/" 
-										+ dlAnh.getGroupId() + "/"
-										+ dlAnh.getFolderId() + "/" 
-										+ dlAnh.getTitle() + "/" 
-										+ dlAnh.getUuid());
+							renderRequest.setAttribute("srcAnh" + i, "/documents/" + dlAnh.getGroupId() + "/"
+									+ dlAnh.getFolderId() + "/" + dlAnh.getTitle() + "/" + dlAnh.getUuid());
 						}
 					}
 				}

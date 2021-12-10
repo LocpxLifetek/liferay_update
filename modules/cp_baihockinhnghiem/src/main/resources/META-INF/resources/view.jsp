@@ -10,7 +10,7 @@
 		<ul>
 			<c:forEach items="${journalArticleDisplays1}" var="article1">
 				<li><a style="color: black;"
-					href="http://portal.lifetek.vn/web/lifetek/chinhphu/tulieu?id=${article1.getResourcePrimKey()}&categoryId=${assetCategory1.getCategoryId()}">
+					href="${LINK_BHKN}${article1.getResourcePrimKey()}&categoryId=${assetCategory1.getCategoryId()}">
 						${article1.getTitle()} </a></li>
 
 			</c:forEach>
@@ -23,7 +23,7 @@
 		<ul>
 			<c:forEach items="${journalArticleDisplays2}" var="article2">
 				<li><a style="color: black;"
-					href="http://portal.lifetek.vn/web/lifetek/chinhphu/tulieu?id=${article2.getResourcePrimKey()}&categoryId=${assetCategory2.getCategoryId()}">
+					href="${LINK_BHKN}${article2.getResourcePrimKey()}&categoryId=${assetCategory2.getCategoryId()}">
 						${article2.getTitle()} </a></li>
 
 			</c:forEach>

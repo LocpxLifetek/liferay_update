@@ -38,14 +38,15 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class cp_thanhviencpquacacthoikyPortlet extends MVCPortlet {
+	private final String LINK_TVQCTK = "http://portal.lifetek.vn/web/lifetek/chinh-phu/thanhvienchinhphuquacacthoiky?priKey=";
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			// http://portal.lifetek.vn/web/lifetek/chinhphu/thanhvienchinhphuquacacthoiky?priKey=******
+			renderRequest.setAttribute("LINK_TVQCTK", LINK_TVQCTK);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 
-			// check path "/lifetek/chinhphu/thanhvienchinhphuquacacthoiky"
+			// check path
 			String path = PortalUtil.getOriginalServletRequest(request).getPathInfo();
 			// check exists paramter
 			boolean checkparam = PortalUtil.getOriginalServletRequest(request).getParameter("priKey") != null;

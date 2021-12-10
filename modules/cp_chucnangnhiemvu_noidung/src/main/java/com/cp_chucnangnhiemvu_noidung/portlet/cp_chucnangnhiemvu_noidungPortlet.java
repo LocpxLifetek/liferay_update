@@ -35,12 +35,11 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class cp_chucnangnhiemvu_noidungPortlet extends MVCPortlet {
-
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			// http://portal.lifetek.vn/web/lifetek/chinhphu/noidungchucnangnhiemvu?id=******
+			// http://portal.lifetek.vn/web/lifetek/chinh-phu/noidungchucnangnhiemvu?id=******
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			// id trong http dung de lay ra webcontent
 			int id = Integer.parseInt(PortalUtil.getOriginalServletRequest(request).getParameter("id"));
