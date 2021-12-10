@@ -44,10 +44,14 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class cp_thutuongchinhphucacnhiemkyPortlet extends MVCPortlet {
+	private final String LINK_TTCPCNK= "http://portal.lifetek.vn/web/lifetek/chinh-phu/thutuongchinhphucacnhiemky";
+	private final String LINK_TVCPQCK= "http://portal.lifetek.vn/web/lifetek/chinh-phu/thanhvienchinhphuquacacthoiky?priKey=";
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
+			renderRequest.setAttribute("LINK_TTCPCNK", LINK_TTCPCNK);
+			renderRequest.setAttribute("LINK_TVCPQCK", LINK_TVCPQCK);
 			AssetCategory tieusutvcp = AssetCategoryLocalServiceUtil.getAssetCategory(216220);
 			renderRequest.setAttribute("tieusutvcp", tieusutvcp);
 			List<AssetEntryAssetCategoryRel> assetTieusu = AssetEntryAssetCategoryRelLocalServiceUtil

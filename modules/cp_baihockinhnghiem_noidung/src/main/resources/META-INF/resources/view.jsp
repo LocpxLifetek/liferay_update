@@ -17,7 +17,7 @@
 			<ul>
 				<c:forEach items="${journalArticleDisplays}" var="article">
 					<li><a style="color: black;"
-						href="http://portal.lifetek.vn/web/lifetek/chinhphu/tulieu?id=${article.getResourcePrimKey()}&categoryId=${assetCategory.getCategoryId()}">
+						href="${LINK_BHKN_ND}${article.getResourcePrimKey()}&categoryId=${assetCategory.getCategoryId()}">
 							${article.getTitle()} </a></li>
 				</c:forEach>
 			</ul>

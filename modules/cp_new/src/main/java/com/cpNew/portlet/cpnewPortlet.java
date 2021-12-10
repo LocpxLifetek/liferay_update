@@ -82,28 +82,31 @@ public class cpnewPortlet extends MVCPortlet {
 					if (dlFileEntry.getFileEntryId() == assetEntry.getClassPK()) {
 						long assEntryId = assetEntry.getEntryId();
 						List<AssetLink> assLinks = AssetLinkLocalServiceUtil.getLinks(assEntryId);
-						// lay link anh
-						if (assEntryId == assLinks.get(0).getEntryId1()) {
-							// id cua Anh
-							long dlImage = assLinks.get(0).getEntryId2();
-							AssetEntry asAnh = AssetEntryLocalServiceUtil.getAssetEntry(dlImage);
-							DLFileEntry imgTtdpt = DLFileEntryLocalServiceUtil.getDLFileEntry(asAnh.getClassPK());
-							renderRequest.setAttribute("imgTop" + i, "/documents/" 
-									+ imgTtdpt.getGroupId() + "/"
-									+ imgTtdpt.getFolderId() + "/" 
-									+ imgTtdpt.getTitle() + "/" 
-									+ imgTtdpt.getUuid());
-						}
-						if (assEntryId == assLinks.get(0).getEntryId2()) {
-							// id cua Anh
-							long dlImage = assLinks.get(0).getEntryId1();
-							AssetEntry asAnh = AssetEntryLocalServiceUtil.getAssetEntry(dlImage);
-							DLFileEntry imgTtdpt = DLFileEntryLocalServiceUtil.getDLFileEntry(asAnh.getClassPK());
-							renderRequest.setAttribute("imgTop" + i, "/documents/" 
-									+ imgTtdpt.getGroupId() + "/"
-									+ imgTtdpt.getFolderId() + "/" 
-									+ imgTtdpt.getTitle() + "/" 
-									+ imgTtdpt.getUuid());
+						if (assLinks.isEmpty() || assLinks == null) {
+							// ảnh báo lỗi
+							DLFileEntry imgTtdpt = DLFileEntryLocalServiceUtil.getDLFileEntry(573793);
+							renderRequest.setAttribute("imgTop" + i, "/documents/" + imgTtdpt.getGroupId() + "/"
+									+ imgTtdpt.getFolderId() + "/" + imgTtdpt.getTitle() + "/" + imgTtdpt.getUuid());
+						} else {
+							// lay link anh
+							if (assEntryId == assLinks.get(0).getEntryId1()) {
+								// id cua Anh
+								long dlImage = assLinks.get(0).getEntryId2();
+								AssetEntry asAnh = AssetEntryLocalServiceUtil.getAssetEntry(dlImage);
+								DLFileEntry imgTtdpt = DLFileEntryLocalServiceUtil.getDLFileEntry(asAnh.getClassPK());
+								renderRequest.setAttribute("imgTop" + i,
+										"/documents/" + imgTtdpt.getGroupId() + "/" + imgTtdpt.getFolderId() + "/"
+												+ imgTtdpt.getTitle() + "/" + imgTtdpt.getUuid());
+							}
+							if (assEntryId == assLinks.get(0).getEntryId2()) {
+								// id cua Anh
+								long dlImage = assLinks.get(0).getEntryId1();
+								AssetEntry asAnh = AssetEntryLocalServiceUtil.getAssetEntry(dlImage);
+								DLFileEntry imgTtdpt = DLFileEntryLocalServiceUtil.getDLFileEntry(asAnh.getClassPK());
+								renderRequest.setAttribute("imgTop" + i,
+										"/documents/" + imgTtdpt.getGroupId() + "/" + imgTtdpt.getFolderId() + "/"
+												+ imgTtdpt.getTitle() + "/" + imgTtdpt.getUuid());
+							}
 						}
 					}
 				}

@@ -37,11 +37,13 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class cp_baihockinhnghiemPortlet extends MVCPortlet {
+	private final String LINK_BHKN ="http://portal.lifetek.vn/web/lifetek/chinh-phu/tulieu?id=" ;
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
+			renderRequest.setAttribute("LINK_BHKN", LINK_BHKN);
 			List<Integer> categoryIds = Arrays.asList(221207, 221210);
 			int i = 0;
 			for (Integer c : categoryIds) {

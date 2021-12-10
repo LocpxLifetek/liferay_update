@@ -36,11 +36,15 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class cp_tieusucacthanhviencpPortlet extends MVCPortlet {
+	private final String LINK_TTCPCNK = "http://portal.lifetek.vn/web/lifetek/chinh-phu/thutuongchinhphucacnhiemky";
+	private final String LINK_TVCPQCTK = "http://portal.lifetek.vn/web/lifetek/chinh-phu/thanhvienchinhphuquacacthoiky?priKey=";
+	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			// 216220 TIỂU SỬ CÁC THÀNH VIÊN CHÍNH PHỦ
+			renderRequest.setAttribute("LINK_TTCPCNK", LINK_TTCPCNK);
+			renderRequest.setAttribute("LINK_TVCPQCTK", LINK_TVCPQCTK);
 			AssetCategory tieusutvcp = AssetCategoryLocalServiceUtil.getAssetCategory(216220);
 			renderRequest.setAttribute("tieusutvcp", tieusutvcp);
 			List<AssetEntryAssetCategoryRel> assetTieusu = AssetEntryAssetCategoryRelLocalServiceUtil
@@ -66,7 +70,7 @@ public class cp_tieusucacthanhviencpPortlet extends MVCPortlet {
 			
 			
 			
-			// 211761 CHÍNH PHỦ QUA CÁC THỜI KỲ
+			// 211761 CHÃ�NH PHá»¦ QUA CÃ�C THá»œI Ká»²
 			AssetCategory chinhphuqctk = AssetCategoryLocalServiceUtil.getAssetCategory(211761);
 			renderRequest.setAttribute("chinhphuqctk", chinhphuqctk);
 			List<AssetEntryAssetCategoryRel> assetChinhphu = AssetEntryAssetCategoryRelLocalServiceUtil

@@ -46,11 +46,12 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class cp_baihockinhnghiem_noidungPortlet extends MVCPortlet {
-	
+	private final String LINK_BHKN_ND = "http://portal.lifetek.vn/web/lifetek/chinh-phu/tulieu?id=";
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
+			renderRequest.setAttribute("LINK_BHKN_ND", LINK_BHKN_ND);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			int id = Integer.parseInt(PortalUtil.getOriginalServletRequest(request).getParameter("id"));
 			int categoryId = Integer.parseInt(PortalUtil.getOriginalServletRequest(request).getParameter("categoryId"));

@@ -34,11 +34,12 @@ import org.osgi.service.component.annotations.Component;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class cp_chucnangnhiemvuPortlet extends MVCPortlet {
-
+	private final String LINK_CNNV = "http://portal.lifetek.vn/web/lifetek/chinh-phu/noidungchucnangnhiemvu?id=";
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {	
+			renderRequest.setAttribute("LINK_CNNV", LINK_CNNV);
 			List<JournalArticleDisplay> outs = new ArrayList<>();
 			// lấy danh sách chức năng nhiệm vụ theo category
 			List<AssetEntryAssetCategoryRel> entryCategory = AssetEntryAssetCategoryRelLocalServiceUtil

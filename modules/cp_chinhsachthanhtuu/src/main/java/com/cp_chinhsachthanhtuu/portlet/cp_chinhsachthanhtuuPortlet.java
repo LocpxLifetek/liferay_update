@@ -44,10 +44,12 @@ import org.osgi.service.component.annotations.Component;
 	service = Portlet.class
 )
 public class cp_chinhsachthanhtuuPortlet extends MVCPortlet {
+	private final String LINK_NDCSTT= "http://portal.lifetek.vn/web/lifetek/chinh-phu/noidungchinhsachthanhtuu?categoryId=";
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
+			renderRequest.setAttribute("LINK_NDCSTT", LINK_NDCSTT);
 			AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(210502);
 			renderRequest.setAttribute("assetCategory", assetCategory);
 			List<AssetEntryAssetCategoryRel> assetEntryAssetCategoryReles = AssetEntryAssetCategoryRelLocalServiceUtil.getAssetEntryAssetCategoryRelsByAssetCategoryId(210502);
