@@ -2,13 +2,18 @@ package porletCategory.portlet;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -31,19 +36,24 @@ import porletCategory.constants.PorletCategoryPortletKeys;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class PorletCategoryPortlet extends MVCPortlet {
-	private PreparedStatement statement;
-	java.sql.Connection con = null;
 
-	private List<PorletCategoryDto> findAllCategoryMenu() throws IOException, PortletException, SQLException {
+	private List<PorletCategoryDto> findAllCategoryMenu(long groupId)
+			throws IOException, PortletException, SQLException {
+		PreparedStatement statement = null;
+		java.sql.Connection con = null;
+		ResultSet rs = null;
 		try {
-			List<PorletCategoryDto> listPorletCategoryDto=new ArrayList<>();
+			List<PorletCategoryDto> listPorletCategoryDto = new ArrayList<>();
 			con = DataAccess.getConnection();
-			statement = con
-					.prepareStatement("select c.NAME as name from AssetCategory c where c.VOCABULARYID='189201'");
-			ResultSet rs = statement.executeQuery();
+			statement = con.prepareStatement(
+					"select c.NAME as name from AssetCategory c inner join assetvocabulary av on c.vocabularyid=av.vocabularyid where c.groupId=? and upper(REGEXP_REPLACE(av.name,'[^a-z_A-Z ]')) = upper('menu')");
+			statement.setLong(1, groupId);
+			rs = statement.executeQuery();
 			while (rs.next()) {
-				PorletCategoryDto porletCategoryDto=new PorletCategoryDto();
+				PorletCategoryDto porletCategoryDto = new PorletCategoryDto();
 				String name = rs.getString("name");
+				String slug = toSlug(name);
+				porletCategoryDto.setSlug(slug);
 				porletCategoryDto.setName(name);
 				listPorletCategoryDto.add(porletCategoryDto);
 			}
@@ -52,17 +62,31 @@ public class PorletCategoryPortlet extends MVCPortlet {
 			e.printStackTrace();
 			return null;
 		} finally {
+			rs.close();
 			statement.close();
 			con.close();
+
 		}
+	}
+
+	private static final Pattern NONLATIN = Pattern.compile("[^\\w-]");
+	private static final Pattern WHITESPACE = Pattern.compile("[\\s]");
+
+	public static String toSlug(String input) {
+		String nowhitespace = WHITESPACE.matcher(input).replaceAll("-");
+		String normalized = java.text.Normalizer.normalize(nowhitespace, Form.NFD);
+		String slug = NONLATIN.matcher(normalized).replaceAll("");
+		return slug.toLowerCase(Locale.ENGLISH);
 	}
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			List<PorletCategoryDto> listPorletCategoryDtos=findAllCategoryMenu();
+			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			List<PorletCategoryDto> listPorletCategoryDtos = findAllCategoryMenu(themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("listPorletCategoryDtos", listPorletCategoryDtos);
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

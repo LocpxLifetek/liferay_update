@@ -4,9 +4,12 @@ import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,16 +39,18 @@ import directOperation.dto.CategoryDto;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class DirectOperationPortlet extends MVCPortlet {
-	private PreparedStatement statement;
-	private java.sql.Connection con;
+	
 
 	public Integer countBlogByCategory(String categoryId) throws SQLException {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
 		try {
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
 					"select count(*) as count from assetCAtegory ac inner join assetentryassetcategoryrel aeac on aeac.assetcategoryid=ac.categoryId inner join assetEntry ae on ae.entryId=aeac.assetentryid inner join BlogsEntry be on be.entryId=ae.classpk inner join DLFILEENTRY de on be.smallImageFileEntryId=de.fileEntryId  where ac.uuid_=? and be.status='0' and ae.classnameid='31201' order by be.modifieddate desc");
 			statement.setString(1, categoryId);
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			int countBlog=0;
 			while (rs.next()) {
 				countBlog = rs.getInt("count");
@@ -56,21 +61,41 @@ public class DirectOperationPortlet extends MVCPortlet {
 			e.printStackTrace();
 			return null;
 		}finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 
-	public List<BlogsEntryDto> pageableBlogsEntry(String uuid, Integer page, Integer size) throws SQLException {
+	public List<BlogsEntryDto> pageableBlogsEntry(String uuid, Integer page, Integer size,long groupId) throws SQLException {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
 		try {
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
-					"select be.DESCRIPTION,be.TITLE as titleBlog,be.MODIFIEDDATE,be.UUID_ as uuidBlogs,de.GROUPID,de.FOLDERID,de.title as titleDlfile,de.UUID_ as uuidImage from assetCAtegory ac inner join assetentryassetcategoryrel aeac on aeac.assetcategoryid=ac.categoryId inner join assetEntry ae on ae.entryId=aeac.assetentryid inner join BlogsEntry be on be.entryId=ae.classpk inner join DLFILEENTRY de on be.smallImageFileEntryId=de.fileEntryId  where ac.uuid_=? and be.status=0 and ae.classnameid='31201' order by be.modifieddate desc OFFSET (?-1)*? ROWS FETCH NEXT ? ROWS ONLY");
+					"select be.DESCRIPTION,be.TITLE as titleBlog,be.MODIFIEDDATE,be.UUID_ as uuidBlogs,de.GROUPID,de.FOLDERID,de.title as titleDlfile,de.UUID_ as uuidImage from assetCAtegory ac inner join assetentryassetcategoryrel aeac on aeac.assetcategoryid=ac.categoryId inner join assetEntry ae on ae.entryId=aeac.assetentryid inner join BlogsEntry be on be.entryId=ae.classpk inner join DLFILEENTRY de on be.smallImageFileEntryId=de.fileEntryId  where ac.uuid_=? and be.status='0' and ae.classnameid='31201' and be.groupId=? order by be.modifieddate desc OFFSET (?-1)*? ROWS FETCH NEXT ? ROWS ONLY");
 			statement.setString(1, uuid);
-			statement.setInt(2, page);
-			statement.setInt(3, size);
+			statement.setLong(2, groupId);		
+			statement.setInt(3, page);
 			statement.setInt(4, size);
-			ResultSet rs = statement.executeQuery();
+			statement.setInt(5, size);
+			rs = statement.executeQuery();
 			List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
 			while (rs.next()) {
 				BlogsEntryDto blogsEntryDto = new BlogsEntryDto();
@@ -97,17 +122,37 @@ public class DirectOperationPortlet extends MVCPortlet {
 			e.printStackTrace();
 			return null;
 		}finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 	
-	public CategoryDto findCategoryByUuid(String uuid) {
+	public CategoryDto findCategoryByUuid(String uuid,long groupId) {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
 		try {
 			con = DataAccess.getConnection();
-			statement = con.prepareStatement("Select ac.uuid_ as uuid, ac.name as name from assetCategory ac where ac.uuid_=?");
+			statement = con.prepareStatement("Select ac.uuid_ as uuid, ac.name as name from assetCategory ac where ac.uuid_=? and ac.groupId=?");
 			statement.setString(1, uuid);
-			ResultSet rs =statement.executeQuery();
+			statement.setLong(2, groupId);
+			rs =statement.executeQuery();
 			CategoryDto categoryDto=new CategoryDto();
 			while(rs.next()) {
 				String uuidCategory=rs.getString("uuid");
@@ -120,6 +165,25 @@ public class DirectOperationPortlet extends MVCPortlet {
 			// TODO: handle exception
 			e.printStackTrace();
 			return null;
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 
@@ -127,6 +191,7 @@ public class DirectOperationPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			String error = null;
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid = PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
@@ -140,8 +205,8 @@ public class DirectOperationPortlet extends MVCPortlet {
 				error="Error !!!";
 				renderRequest.setAttribute("error", error);
 			}
-			List<BlogsEntryDto> listBlogEntryDtos=pageableBlogsEntry(uuidCategory,page,size);
-			CategoryDto categoryDto=findCategoryByUuid(uuidCategory);
+			List<BlogsEntryDto> listBlogEntryDtos=pageableBlogsEntry(uuidCategory,page,size,themeDisplay.getScopeGroupId());
+			CategoryDto categoryDto=findCategoryByUuid(uuidCategory,themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("assetCategory", categoryDto);
 			renderRequest.setAttribute("listBlogEntryDtos", listBlogEntryDtos);
 			renderRequest.setAttribute("currentPage", page);

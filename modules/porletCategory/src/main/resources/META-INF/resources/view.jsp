@@ -1,3 +1,4 @@
+<%@page import="javax.swing.plaf.SliderUI"%>
 <%@ include file="/init.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 
@@ -32,16 +33,21 @@
 																				<td>
 																					<table cellspacing="0" cellpadding="5"
 																						bordercolor="#f0ae5a" border="1"
-																						style="border-collapse: collapse;" class="tableMenu">
+																						style="border-collapse: collapse;"
+																						class="tableMenu">
 																						<tbody>
-																							<c:forEach items="${listPorletCategoryDtos}" var="blog">
-																								<tr style="height:30px;">
+																							<c:forEach items="${listPorletCategoryDtos}"
+																								var="blog">
+																								<tr style="height: 30px;">
+																								
 																									<td
 																										background="http://chinhphu.vn/templates/govportal/tinhthanh/images/bgr_left.jpg"
-																										align="left"><a class="menu_doc" href="#">${blog.name}</a></td>
+																										align="left"><a class="menu_doc"
+																										href="/web/lifetek/${blog.slug}">${blog.name}</a></td>
+																										
 																								</tr>
 																							</c:forEach>
-																							
+
 
 																						</tbody>
 																					</table>
@@ -49,9 +55,8 @@
 																			</tr>
 
 																			<tr>
-																				<td><a
-																					href="#"><img
-																						height="77" width="100%"
+																				<td><a href="#"><img height="77"
+																						width="100%"
 																						src="http://chinhphu.vn/templates/govportal/tinhthanh/images/bn_layykien.jpg"></a>
 																				</td>
 																			</tr>
@@ -81,11 +86,9 @@
 					<tr>
 						<td class="RegionHeaderColor" style="width: 100%">
 							<div id="pcnt135_270244_135_17802_17802">
-								<table cellspacing="0" cellpadding="0" border="0" width= "100%">
+								<table cellspacing="0" cellpadding="0" border="0" width="100%">
 									<tr>
-										<td><a
-											href="#"><img
-												height="40" width="100%"
+										<td><a href="#"><img height="40" width="100%"
 												src="http://chinhphu.vn/templates/govportal/chinhphu/images/gopy_hienke.JPG"></a>
 										</td>
 									</tr>
@@ -99,3 +102,5 @@
 		</td>
 	</tr>
 </table>
+
+

@@ -1,0 +1,4 @@
+Bundle-Name: callAjaxMenu
+Bundle-SymbolicName: callAjaxMenu
+Bundle-Version: 1.0.0
+Export-Package: callAjaxMenu.constants

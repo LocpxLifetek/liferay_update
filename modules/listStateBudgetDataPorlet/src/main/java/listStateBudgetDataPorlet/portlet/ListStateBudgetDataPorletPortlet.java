@@ -4,7 +4,9 @@ import com.liferay.journal.model.JournalFolder;
 import com.liferay.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -39,13 +41,14 @@ import listStateBudgetDataPorlet.dto.StateBudegetDataDto;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class ListStateBudgetDataPorletPortlet extends MVCPortlet {
-	private PreparedStatement statement;
-	Connection con = null;
+	
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
+		
 		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String idFolder = PortalUtil.getOriginalServletRequest(request).getParameter("idFolder");
 			String articleId = PortalUtil.getOriginalServletRequest(request).getParameter("articleId");
@@ -64,7 +67,7 @@ public class ListStateBudgetDataPorletPortlet extends MVCPortlet {
 				}
 			}
 			renderRequest.setAttribute("listJournalArticleLocalizationDtos", listJournalArticleLocalizationDtos);
-			List<StateBudegetDataDto> listBudegetDataDtos = findAllFolderIdByParentId();
+			List<StateBudegetDataDto> listBudegetDataDtos = findAllFolderIdByParentId(themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("listBudegetDataDtos", listBudegetDataDtos);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -73,13 +76,17 @@ public class ListStateBudgetDataPorletPortlet extends MVCPortlet {
 		super.doView(renderRequest, renderResponse);
 	}
 
-	private List<StateBudegetDataDto> findAllFolderIdByParentId() throws SQLException {
+	private List<StateBudegetDataDto> findAllFolderIdByParentId(long groupId) throws SQLException {
+		PreparedStatement statement=null;
+		Connection con = null;
+		ResultSet rs=null;
 		try {
 			List<StateBudegetDataDto> listBudegetDataDtos = new ArrayList<>();
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
-					"select jf.name as name,jf.folderId as folderId from journalFolder jf where jf.treepath like '/188890/189130/%' and status='0' and jf.parentfolderid='189130' order by jf.modifieddate desc");
-			ResultSet rs = statement.executeQuery();
+					"select jf.name as name,jf.folderId as folderId from journalFolder jf where jf.treepath like '/188890/189130/%' and status='0' and jf.groupId=? and jf.parentfolderid='189130' order by jf.modifieddate desc");
+			statement.setLong(1, groupId);
+			rs = statement.executeQuery();
 			while (rs.next()) {
 				StateBudegetDataDto stateBudegetDataDto = new StateBudegetDataDto();
 				String name = rs.getString("name");
@@ -93,12 +100,31 @@ public class ListStateBudgetDataPorletPortlet extends MVCPortlet {
 			e.printStackTrace();
 			return null;
 		} finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 
 	private List<JournalArticleDto> findAllJournalArticleDtoByFolderId(Integer id) throws SQLException {
+		PreparedStatement statement=null;
+		Connection con = null;
+		ResultSet rs=null;
 		try {
 			List<JournalArticleDto> listJournalArticleDtos = new ArrayList<>();
 			con = DataAccess.getConnection();
@@ -112,7 +138,7 @@ public class ListStateBudgetDataPorletPortlet extends MVCPortlet {
 					+ "            WHERE ac.categoryid='189211' and  ja.folderId=? and ja.status='0'\r\n "
 					+ "            GROUP BY ja.resourceprimkey order by max(ja.id_) desc");
 			statement.setInt(1, id);
-			ResultSet rs = statement.executeQuery();
+			 rs = statement.executeQuery();
 			while (rs.next()) {
 				JournalArticleDto journalArticleDto = new JournalArticleDto();
 				Integer version = rs.getInt("version");
@@ -130,21 +156,40 @@ public class ListStateBudgetDataPorletPortlet extends MVCPortlet {
 			e.printStackTrace();
 			return null;
 		} finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 
 	private JournalArticleLocalizationDto findAllJournalArticleLocalizationDtoByArticlePk(Integer id)
 			throws SQLException {
+		PreparedStatement statement=null;
+		Connection con = null;
+		ResultSet rs=null;
 		try {
-
+			
 			JournalArticleLocalizationDto journalArticleLocalizationDto = new JournalArticleLocalizationDto();
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
 					"select jal.title as name, ja.id_ as id,ja.folderid as folderId from journalarticle ja inner join journalarticlelocalization jal on ja.id_=jal.articlepk where jal.articlepk=? and ja.status='0' ");
 			statement.setInt(1, id);
-			ResultSet rs = statement.executeQuery();
+			 rs = statement.executeQuery();
 			while (rs.next()) {
 				String name = rs.getString("name");
 				Integer idJournalArticle=rs.getInt("id");
@@ -159,17 +204,37 @@ public class ListStateBudgetDataPorletPortlet extends MVCPortlet {
 			e.printStackTrace();
 			return null;
 		} finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 
 	private JouranlArticleFolderDto findFolderNewsByTreepath() throws SQLException {
+		PreparedStatement statement=null;
+		Connection con = null;
+		ResultSet rs=null;
 		try {
+			
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
 					"select max(jf.folderId) as folderId from journalFolder jf where jf.treepath like '/188890/189130/%' and jf.status='0'");
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			JouranlArticleFolderDto stateBudegetDataDto = new JouranlArticleFolderDto();
 			while (rs.next()) {
 				Integer id = rs.getInt("folderId");
@@ -181,8 +246,24 @@ public class ListStateBudgetDataPorletPortlet extends MVCPortlet {
 			e.printStackTrace();
 			return null;
 		} finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 

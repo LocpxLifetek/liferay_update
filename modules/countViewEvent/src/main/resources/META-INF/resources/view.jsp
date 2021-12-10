@@ -6,9 +6,9 @@
 	<div class=countViewEvent_Right">
 		<div class="countViewE">
 			<img
-				src="/documents/${smallImage.groupId}/${smallImage.folderId}/${smallImage.title}/${smallImage.uuid}">
-			<a href="/web/lifetek/chitiettintuc?id=${blogOne.uuid}">${blogOne.title}</a>
-			<p>${blogOne.description}</p>
+				src="${countViewDto.srcImage}">
+			<a href="/web/lifetek/chitiettintuc?id=${countViewDto.uuid}">${countViewDto.title}</a>
+			<p>${countViewDto.description}</p>
 		</div>
 	</div>
 	<div class="countViewEvent_Left">

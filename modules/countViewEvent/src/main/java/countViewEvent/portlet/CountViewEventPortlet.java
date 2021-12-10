@@ -1,20 +1,16 @@
 package countViewEvent.portlet;
 
-import com.liferay.asset.entry.rel.model.AssetEntryAssetCategoryRel;
-import com.liferay.asset.entry.rel.service.AssetEntryAssetCategoryRelLocalServiceUtil;
-import com.liferay.asset.kernel.model.AssetEntry;
-import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
-import com.liferay.blogs.model.BlogsEntry;
-import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.document.library.kernel.model.DLFileEntry;
-import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -28,85 +24,120 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import countViewEvent.constants.CountViewEventPortletKeys;
+import countViewEvent.dto.CountViewDto;
 
 /**
  * @author java05
  */
-@Component(
-	immediate = true,
-	property = {
-		"com.liferay.portlet.display-category=category.sample",
-		"com.liferay.portlet.header-portlet-css=/css/main.css",
-		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=CountViewEvent",
-		"javax.portlet.init-param.template-path=/",
+@Component(immediate = true, property = { "com.liferay.portlet.display-category=category.sample",
+		"com.liferay.portlet.header-portlet-css=/css/main.css", "com.liferay.portlet.instanceable=true",
+		"javax.portlet.display-name=CountViewEvent", "javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
 		"javax.portlet.name=" + CountViewEventPortletKeys.COUNTVIEWEVENT,
 		"javax.portlet.resource-bundle=content.Language",
-		"javax.portlet.security-role-ref=power-user,user"
-	},
-	service = Portlet.class
-)
+		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class CountViewEventPortlet extends MVCPortlet {
+	private List<CountViewDto> countViewEvent(String currentDate, String fromDate,long groupIdCategory) {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
+		try {
+			List<CountViewDto> listCountViewDtos = new ArrayList<>();
+
+			con = DataAccess.getConnection();
+			statement = con.prepareStatement("SELECT\r\n" + "    be.title          AS title,\r\n"
+					+ "    be.description    AS description,\r\n" + "    be.uuid_          AS uuid,\r\n"
+					+ "    de.groupid        AS groupid,\r\n" + "    de.folderid       AS folderid,\r\n"
+					+ "    de.title          AS titledlfile,\r\n" + "    de.uuid_          AS uuiddlfile\r\n"
+					+ "FROM\r\n" + "         assetcategory ac\r\n"
+					+ "    INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid\r\n"
+					+ "    INNER JOIN assetentry                  ae ON ae.entryid = aeac.assetentryid\r\n"
+					+ "    INNER JOIN viewcountentry              vc ON vc.classpk = ae.entryid\r\n"
+					+ "    INNER JOIN blogsentry                  be ON be.entryid = ae.classpk\r\n"
+					+ "    INNER JOIN dlfileentry                 de ON de.fileentryid = be.smallimagefileentryid\r\n"
+					+ "WHERE\r\n" + "        ae.classnameid = '31201'\r\n" + "    AND ac.groupid=? and upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) like upper('Tin tc s kin')\r\n"
+					+ "    AND be.status = '0'\r\n"
+					+ "    AND be.modifieddate BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD')\r\n"
+					+ "ORDER BY\r\n" + "    vc.viewcount DESC\r\n" + "OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY");
+			statement.setLong(1, groupIdCategory);
+			statement.setString(2, fromDate);
+			statement.setString(3, currentDate);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				CountViewDto countViewDto = new CountViewDto();
+				String title = rs.getString("title");
+				String description = rs.getString("description");
+				String uuid = rs.getString("uuid");
+				Integer groupId = rs.getInt("groupId");
+				Integer folderId = rs.getInt("folderId");
+				String titleDlfile = rs.getString("titledlfile");
+				String uuidDlfile = rs.getString("uuiddlfile");
+				countViewDto.setUuid(uuid);
+				countViewDto.setDescription(description);
+				countViewDto.setTitle(title);
+				String src = "/documents" + "/" + groupId + "/" + folderId + "/" + titleDlfile + "/" + uuidDlfile;
+				countViewDto.setSrcImage(src);
+				listCountViewDtos.add(countViewDto);
+			}
+			return listCountViewDtos;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+		}
+	}
 
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
-			List<BlogsEntry> manyBlog=new ArrayList<>();
+			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			
 			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			Date currentDate = calendar.getTime();
-			calendar.add(Calendar.DATE, -5);
+			String current = format.format(currentDate);
+			calendar.add(Calendar.DATE, -30);
 			Date fromDate = calendar.getTime();
-			List<BlogsEntry> listViewBlogsEntry=new ArrayList<>();
-			List<AssetEntry> listAssetEntry = AssetEntryLocalServiceUtil.getTopViewedEntries(BlogsEntry.class.getName(),
-					false, 0, 100);
+			String from = format.format(fromDate);
+			List<CountViewDto> listCountViewDtos=countViewEvent(current, from,themeDisplay.getScopeGroupId());
 			int i=0;
-			for (AssetEntry assetEntry : listAssetEntry) {
-				
-				List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRel=AssetEntryAssetCategoryRelLocalServiceUtil.getAssetEntryAssetCategoryRelsByAssetCategoryId(108693);
-				for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRel) {
-					if(assetEntry.getEntryId()==assetEntryAssetCategoryRel.getAssetEntryId()) {
-						Long entryId=assetEntry.getClassPK();
-						int status =0;
-						DynamicQuery dynamicQueryBlog = DynamicQueryFactoryUtil.forClass(BlogsEntry.class);
-						Property statusDateProperty = PropertyFactoryUtil.forName("modifiedDate");
-						Property statusEntryIdProperty = PropertyFactoryUtil.forName("entryId");
-						Property statusBlog=PropertyFactoryUtil.forName("status");
-						dynamicQueryBlog.add(statusEntryIdProperty.eq(entryId));
-						dynamicQueryBlog.add(statusBlog.eq(status));
-						dynamicQueryBlog.add(statusDateProperty.between(fromDate, currentDate));
-						dynamicQueryBlog.setLimit(0, 8);
-						List<BlogsEntry> listBlogEntry = BlogsEntryLocalServiceUtil.dynamicQuery(dynamicQueryBlog);
-						for (BlogsEntry blogsEntry : listBlogEntry) {
-							listViewBlogsEntry.add(blogsEntry);
-						}
-					}
-				}
-			}
-			for (BlogsEntry viewBlog : listViewBlogsEntry) {
-				
-				System.out.println("viewBlog: "+viewBlog.getEntryId());
+			
+			List<CountViewDto> listManyCountViewDtos=new ArrayList<>();
+			for (CountViewDto countViewDto : listCountViewDtos) {
 				i++;
 				if(i==1) {
-					if (viewBlog.getSmallImageFileEntryId() > 0) {
-						DLFileEntry dlFileEntry = DLFileEntryLocalServiceUtil
-								.getFileEntry(viewBlog.getSmallImageFileEntryId());
-						renderRequest.setAttribute("blogOne", viewBlog);
-						renderRequest.setAttribute("smallImage", dlFileEntry);
-					}
-				}else if(i>1 && i<8){
-					manyBlog.add(viewBlog);
+					renderRequest.setAttribute("countViewDto", countViewDto);
 				}else {
-					break;
+					listManyCountViewDtos.add(countViewDto);
 				}
 			}
-			renderRequest.setAttribute("listBlogsEntry", manyBlog);
+			renderRequest.setAttribute("listBlogsEntry", listManyCountViewDtos);
+		
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		super.doView(renderRequest, renderResponse);
 	}
-	
+
 }

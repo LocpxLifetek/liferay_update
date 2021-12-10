@@ -7,7 +7,9 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Node;
@@ -17,9 +19,11 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,10 +51,12 @@ import listResolutionGoverment.constants.ListResolutionGovermentPortletKeys;
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user" }, service = Portlet.class)
 public class ListResolutionGovermentPortlet extends MVCPortlet {
-	private PreparedStatement statement;
-	Connection con = null;
+	
 
-	private List<JournalArticleDto> findAllJournalArticleByMaxVersion(int page, int size) throws Exception {
+	private List<JournalArticleDto> findAllJournalArticleByMaxVersion(int page, int size,long groupId) throws Exception {
+		PreparedStatement statement=null;
+		Connection con = null;
+		ResultSet rs=null;
 		try {
 			List<JournalArticleDto> listJournalArticle = new ArrayList<>();
 			con = DataAccess.getConnection();
@@ -61,12 +67,13 @@ public class ListResolutionGovermentPortlet extends MVCPortlet {
 					"            INNER JOIN assetentryassetcategoryrel  aeac ON aeac.assetentryid = ae.entryid\r\n" + 
 					"            INNER JOIN assetcategory               ac ON ac.categoryid = aeac.assetcategoryid\r\n" + 
 					"            INNER JOIN ddmstructure                ddm ON ddm.structurekey = ja.ddmstructurekey\r\n" + 
-					"            WHERE ja.folderid = '189126' AND ja.ddmstructurekey='189235'\r\n" + 
+					"            WHERE ja.folderid = '189126' AND ja.ddmstructurekey='189235' and ac.groupid=? and upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) = upper('Nghi quyt cua Chinh phu')\r\n" + 
 					"            GROUP BY ja.resourceprimkey order by max(ja.id_) desc offset (?-1)*? rows fetch next ? rows only");
-			statement.setInt(1, page);
-			statement.setInt(2, size);
+			statement.setLong(1, groupId);
+			statement.setInt(2, page);
 			statement.setInt(3, size);
-			ResultSet rs = statement.executeQuery();
+			statement.setInt(4, size);
+			rs = statement.executeQuery();
 			while (rs.next()) {
 				JournalArticleDto journalArticleDto = new JournalArticleDto();
 				Integer resourceprimkey = rs.getInt("resourceprimkey");
@@ -81,13 +88,32 @@ public class ListResolutionGovermentPortlet extends MVCPortlet {
 			e.printStackTrace();
 			return null;
 		} finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 
 	private Integer countJournalArticleByFolderResolutionGoverment() throws Exception {
 		List<JournalArticleDto> listJournalArticle = new ArrayList<>();
+		PreparedStatement statement=null;
+		Connection con = null;
+		ResultSet rs=null;
 		try {
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement("SELECT\r\n" + "    ja.resourceprimkey    AS resourceprimkey,\r\n"
@@ -99,7 +125,7 @@ public class ListResolutionGovermentPortlet extends MVCPortlet {
 					+ "    INNER JOIN ddmstructure                ddm ON ddm.structurekey = ja.ddmstructurekey\r\n"
 					+ "WHERE\r\n" + "        ja.folderid = '189126'\r\n" + "    AND ja.ddmstructurekey='189235'\r\n"
 					+ "GROUP BY\r\n" + "    ja.resourceprimkey order by max(ja.id_) desc");
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			while (rs.next()) {
 				JournalArticleDto journalArticleDto = new JournalArticleDto();
 				Integer resourceprimkey = rs.getInt("resourceprimkey");
@@ -114,8 +140,24 @@ public class ListResolutionGovermentPortlet extends MVCPortlet {
 			e.printStackTrace();
 			return null;
 		} finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 
 	}
@@ -202,6 +244,7 @@ public class ListResolutionGovermentPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String pageDetail = PortalUtil.getOriginalServletRequest(request).getParameter("page");
 			int count = countJournalArticleByFolderResolutionGoverment();
@@ -210,9 +253,9 @@ public class ListResolutionGovermentPortlet extends MVCPortlet {
 			int result = (int) Math.ceil((float) count / size);
 
 			List<Map<String, List<JournalArticleIdAndValue>>> mapList = new ArrayList<>();
-			List<JournalArticleDto> listJournalArticleDtos = findAllJournalArticleByMaxVersion(page, size);
+			List<JournalArticleDto> listJournalArticleDtos = findAllJournalArticleByMaxVersion(page, size,themeDisplay.getScopeGroupId());
 			for (JournalArticleDto journalArticleDto : listJournalArticleDtos) {
-				Map<String, List<JournalArticleIdAndValue>> map = new HashMap<>();
+				Map<String, List<JournalArticleIdAndValue>> map = new LinkedHashMap<>();
 				List<JournalArticleIdAndValue> listJournalArticleIdAndValues = new ArrayList<>();
 
 				JournalArticle journalArticleObject = JournalArticleLocalServiceUtil

@@ -5,7 +5,9 @@ import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.blogs.model.BlogsEntry;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -44,16 +46,20 @@ import informationNews.dto.BlogsEntryDto;
 	service = Portlet.class
 )
 public class InformationNewsPortlet extends MVCPortlet {
-	private PreparedStatement statement;
-	Connection con = null;
 	
-	private BlogsEntryDto findAllBlogsEntryByUUID(String uuid) throws SQLException {
+	
+	private BlogsEntryDto findAllBlogsEntryByUUID(String uuid,long groupId) throws SQLException {
+		PreparedStatement statement=null;
+		Connection con = null;
+		ResultSet rs=null;
 		try {
+			
 			BlogsEntryDto blogsEntryDto=new BlogsEntryDto();
 			con=DataAccess.getConnection();
-			statement=con.prepareStatement("SELECT be.title as title,be.entryid as entryId, be.description as description,be.content as content,be.modifieddate as modifiedDate,be.companyid as companyId,be.userid as userId from BlogsEntry be where be.status='0' and be.uuid_=?");
+			statement=con.prepareStatement("SELECT be.title as title,be.entryid as entryId, be.description as description,be.content as content,be.modifieddate as modifiedDate,be.companyid as companyId,be.userid as userId from BlogsEntry be where be.status='0' and be.uuid_=? and be.groupId=?");
 			statement.setString(1, uuid);
-			ResultSet rs=statement.executeQuery();
+			statement.setLong(2, groupId);
+			 rs=statement.executeQuery();
 			while(rs.next()) {
 				String title=rs.getString("title");
 				String description=rs.getString("description");
@@ -70,24 +76,41 @@ public class InformationNewsPortlet extends MVCPortlet {
 				blogsEntryDto.setDescription(description);
 				blogsEntryDto.setTitle(title);
 			}
-			return blogsEntryDto;
 			
+			return blogsEntryDto;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			return null;
 		}finally {
-			statement.close();
-			con.close();
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
 		}
 	}
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("id");
-			BlogsEntryDto blogsEntryDto=findAllBlogsEntryByUUID(uuid);
+			BlogsEntryDto blogsEntryDto=findAllBlogsEntryByUUID(uuid,themeDisplay.getScopeGroupId());
 			AssetEntry assetEntry=AssetEntryLocalServiceUtil.incrementViewCounter(blogsEntryDto.getCompanyId(), blogsEntryDto.getUserId(), BlogsEntry.class.getName(), blogsEntryDto.getEntryId());
 			renderRequest.setAttribute("blogsEntry", blogsEntryDto);	
 			

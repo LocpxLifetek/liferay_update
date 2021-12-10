@@ -21,7 +21,7 @@
 
 								<c:forEach items="${listAssetCategory3}" var="assetCategory3">
 									<c:if
-										test="${assetCategory.categoryId == assetCategory3.parentCategoryId}">
+										test="${assetCategory.id == assetCategory3.parentCategoryId}">
 										<li><a href="#" title="${assetCategory3.name}">${assetCategory3.name}</a></li>
 									</c:if>
 								</c:forEach>
