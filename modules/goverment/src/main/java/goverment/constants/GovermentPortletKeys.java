@@ -12,5 +12,22 @@ public class GovermentPortletKeys {
 	public static final String HOTNEWS="hotNews_GovermentPortlet";
 	public static final String HOTNEWSEVENT="Hot_newEvent_GovermentPortlet";
 	public static final String COUNTVIEWBLOGS="countViewBlogs_GovermentPortlet";
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static final String ALBUMS ="Albums_AlbumsPortlet";
+	
 
 }
