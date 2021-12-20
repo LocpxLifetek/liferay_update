@@ -1,4 +1,0 @@
-Bundle-Name: countViewBlogs
-Bundle-SymbolicName: countViewBlogs
-Bundle-Version: 1.0.0
-Export-Package: countViewBlogs.constants
