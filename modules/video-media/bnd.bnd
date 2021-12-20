@@ -1,0 +1,4 @@
+Bundle-Name: video-media
+Bundle-SymbolicName: video.media
+Bundle-Version: 1.0.0
+Export-Package: video.media.constants

@@ -1,0 +1,72 @@
+#wrapper {
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+  }
+  
+  #pagination {
+    margin: 0;
+    padding: 0;
+    text-align: center
+  }
+  #pagination li {
+    display: inline
+  }
+  #pagination li a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #000
+  }
+  
+  /* Active and Hoverable Pagination */
+  #pagination li a {
+    border-radius: 5px;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s
+      
+  }
+  #pagination li a.active {
+    background-color: #4caf50;
+    color: #fff
+  }
+  #pagination li a:hover:not(.active) {
+    background-color: #ddd;
+  } 
+  .video-media{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-column-gap: 4%;
+}
+.video-media video{
+    width: 280px;
+    height: 160px;
+}
+.video-media a{
+    text-decoration: none;
+}
+.video-media p{
+    color:#58595b;
+    text-align: justify !important;
+}
+.video-media p:hover{
+    color:#038bd4;
+
+}
+.head-cm { width: 100%; border-bottom: 1px solid #D71921; margin-bottom: 20px; }
+.head-cm .xemthem { float: right; font: 400 13px Roboto,Arial,Tahoma; color: #be1e2d; display: block;}
+.head-cm ul { display: inline-flex;  }
+.head-cm ul li{list-style:none;}
+.head-cm ul li a { text-align: justify;
+    font: 700 14px/19px Roboto,Arial,Tahoma;
+    color: #58595B;
+    display: block;
+text-decoration: none;
+text-transform: uppercase;}
+.head-cm ul li:first-child { background: url('http://bocongan.gov.vn/Publishing_Resources/web/media/images/bg-chuyenmuc.png') no-repeat right top; position: relative;
+    top: 0%;
+    left: 0%;
+    transform: translate(0%,50%);
+    }
+.head-cm ul li:first-child a { color: #FFF; font: 700 16px/35px Roboto,Arial,Tahoma; text-transform: uppercase; border-right: none; padding: 0 30px 0 20px; }
+.head-cm ul li:last-child a { border-right: none; }

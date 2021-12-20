@@ -1,0 +1,4 @@
+Bundle-Name: MessageBorads
+Bundle-SymbolicName: MessageBorads
+Bundle-Version: 1.0.0
+Export-Package: MessageBorads.constants

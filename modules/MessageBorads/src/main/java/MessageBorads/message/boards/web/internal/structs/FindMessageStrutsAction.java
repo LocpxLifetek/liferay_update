@@ -1,0 +1,68 @@
+package MessageBorads.message.boards.web.internal.structs;
+
+import com.liferay.message.boards.constants.MBPortletKeys;
+import com.liferay.message.boards.model.MBMessage;
+import com.liferay.message.boards.service.MBMessageLocalService;
+import com.liferay.portal.kernel.portlet.PortletLayoutFinder;
+import com.liferay.portal.kernel.struts.StrutsAction;
+
+import javax.portlet.PortletURL;
+import javax.servlet.http.HttpServletRequest;
+
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+/**
+ * @author Brian Wing Shun Chan
+ */
+@Component(
+	property = {
+		"javax.portlet.name=" + MBPortletKeys.MESSAGE_BOARDS,
+		"javax.portlet.name=" + MBPortletKeys.MESSAGE_BOARDS_ADMIN,
+		"path=/message_boards/find_message"
+	},
+	service = StrutsAction.class
+)
+public class FindMessageStrutsAction extends FindStrutsAction {
+
+	@Override
+	public long getGroupId(long primaryKey) throws Exception {
+		MBMessage message = _mbMessageLocalService.getMessage(primaryKey);
+
+		return message.getGroupId();
+	}
+
+	@Override
+	public String getPrimaryKeyParameterName() {
+		return "messageId";
+	}
+
+	@Override
+	public void setPrimaryKeyParameter(PortletURL portletURL, long primaryKey) {
+		portletURL.setParameter(
+			getPrimaryKeyParameterName(), String.valueOf(primaryKey));
+	}
+
+	@Override
+	protected void addRequiredParameters(
+		HttpServletRequest httpServletRequest, String portletId,
+		PortletURL portletURL) {
+
+		portletURL.setParameter(
+			"mvcRenderCommandName", "/message_boards/view_message");
+	}
+
+	@Override
+	protected PortletLayoutFinder getPortletLayoutFinder() {
+		return _portletPageFinder;
+	}
+
+	@Reference
+	private MBMessageLocalService _mbMessageLocalService;
+
+	@Reference(
+		target = "(model.class.name=com.liferay.message.boards.model.MBMessage)"
+	)
+	private PortletLayoutFinder _portletPageFinder;
+
+}

@@ -1,0 +1,4 @@
+Bundle-Name: videoDetail
+Bundle-SymbolicName: videoDetail
+Bundle-Version: 1.0.0
+Export-Package: videoDetail.constants

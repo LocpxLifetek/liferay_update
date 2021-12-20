@@ -1,0 +1,4 @@
+Bundle-Name: countViewVideoMedia
+Bundle-SymbolicName: countViewVideoMedia
+Bundle-Version: 1.0.0
+Export-Package: countViewVideoMedia.constants

@@ -1,9 +1,4 @@
-<%@page import="com.liferay.blogs.model.BlogsEntry"%>
-<%@page import="com.liferay.asset.kernel.model.AssetCategory"%>
-<%@page import="com.liferay.asset.kernel.model.AssetEntry"%>
-<%@page
-	import="com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil"%>
-<%@page import="com.liferay.document.library.kernel.model.DLFileEntry"%>
+
 <%@ include file="/init.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 

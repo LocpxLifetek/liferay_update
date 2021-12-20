@@ -1,6 +1,4 @@
-<%@page
-	import="com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil"%>
-<%@page import="com.liferay.document.library.kernel.model.DLFileEntry"%>
+
 <%@ include file="/init.jsp"%>
 
 <%
