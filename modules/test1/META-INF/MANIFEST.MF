@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: test1
-Bundle-SymbolicName: test1
-Bundle-Version: 1.0.0.qualifier
-Export-Package: content,
- test1.constants,
- test1.portlet

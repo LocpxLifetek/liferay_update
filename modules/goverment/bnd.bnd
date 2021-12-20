@@ -1,0 +1,5 @@
+Bundle-Name: Cong Thong Tin Chinh phu
+Bundle-SymbolicName: goverment
+
+Bundle-Version: 1.0.0
+Export-Package: goverment.constants
