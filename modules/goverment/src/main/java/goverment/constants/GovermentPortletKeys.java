@@ -27,7 +27,12 @@ public class GovermentPortletKeys {
 	
 	
 	
+<<<<<<< HEAD
 	public static final String ALBUMS ="Albums_AlbumsPortlet";
+=======
+	
+	
+>>>>>>> bc652563f6ebfb51e9c191f576464a51099192e6
 	
 
 }

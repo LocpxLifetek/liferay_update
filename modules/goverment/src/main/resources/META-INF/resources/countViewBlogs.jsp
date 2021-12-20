@@ -1,7 +1,5 @@
-<%@ include file="/init.jsp"%>
+<%@ include file="/init.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 
 <div class="countViewBlogs">
 
@@ -13,8 +11,8 @@
 			nổi bật</p>
 		<div class="imageViewBlogs">
 			<img
-				src="${blogs.srcImage}">
-			<a href="${url}/tintuc?id=${blogs.uuid}">${blogs.title}</a>
+				src="${blogs.src}">
+			<a href="${url}/tintuc?id=${blogs.uuidBlogsEntry}">${blogs.titleBlogsEntry}</a>
 			<hr>
 		</div>
 	</div>
@@ -23,7 +21,7 @@
 
 		<c:forEach items="${listBlogsEntry}" var="blog">
 			<div>
-				<a href="${url}/tintuc/?id=${blog.uuid}">${blog.title}</a>
+				<a href="${url}/tintuc/?id=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
 			</div>
 			<hr>
 		</c:forEach>
