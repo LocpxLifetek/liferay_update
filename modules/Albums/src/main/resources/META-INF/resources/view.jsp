@@ -6,22 +6,22 @@
 <body>
 <div class="albums_anh">
             <div class="head-albums_anh">
-                <a style="color: #404041;" href="/media.html">Chuyên mục ảnh</a>
+                <a style="color: #404041;" href="${url}/album-anh">Chuyên mục ảnh</a>
                 <div class="linered"></div>
             </div>
             <div class="lts-cmanh">
                 
                 <div class="top1">
                     <a href="#">
-                        <img style="max-width:100%; min-width:20%;" src="/documents/${blogsEntryDto.groupId}/${blogsEntryDto.folderId}/${blogsEntryDto.titleDlFileEntry}/${blogsEntryDto.uuidDlFileEntry}">
+                        <img style="max-width:100%; min-width:20%;" src="${list.src}">
                     </a>
-                    <div><a href="/media/album-anh/bo-cong-an-to-chuc-hoi-nghi-so-ket-cong-tac-cong-an-6-thang-dau-nam-2021-179.html">${blogsEntryDto.titleBlogsEntry}</a></div>
+                    <div><a href="${url}/album_anh?id=${list.uuidCategory}">${list.title}</a></div>
                 </div>
                 
                 <ul>
                     
-                    <c:forEach items="${listBlogsNoImage}" var="blog">
-                        <li><a class="album_bottom">${blog.titleBlogsEntry}</a></li>
+                    <c:forEach items="${listDlfileNoImage}" var="listDlfileNoImage">
+                        <li><a class="album_bottom" href="${url}/album_anh?id=${listDlfileNoImage.uuidCategory}">${listDlfileNoImage.title}</a></li>
                     </c:forEach>
                 
                 </ul>   

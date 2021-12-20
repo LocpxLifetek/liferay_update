@@ -1,4 +1,4 @@
-package Albums.portlet;
+package table_category_photo.portlet;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.model.Layout;
@@ -22,10 +22,14 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
-import Albums.constants.AlbumsPortletKeys;
-import Albums.dto.CategoryDto;
-import Albums.dto.DlfileEntryDto;
-import Albums.dto.cpattachmentfileentryDto;
+import table_category_photo.constants.Table_category_photoPortletKeys;
+import table_category_photo.dto.CategoryDto;
+import table_category_photo.dto.DlfileEntryDto;
+import table_category_photo.dto.cpattachmentfileentryDto;
+
+
+
+
 
 /**
  * @author java03
@@ -36,17 +40,16 @@ import Albums.dto.cpattachmentfileentryDto;
 		"com.liferay.portlet.display-category=category.sample",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.instanceable=true",
-		"javax.portlet.display-name=Albums",
+		"javax.portlet.display-name=Table_category_photo",
 		"javax.portlet.init-param.template-path=/",
 		"javax.portlet.init-param.view-template=/view.jsp",
-		"javax.portlet.name=" + AlbumsPortletKeys.ALBUMS,
+		"javax.portlet.name=" + Table_category_photoPortletKeys.TABLE_CATEGORY_PHOTO,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.security-role-ref=power-user,user"
 	},
 	service = Portlet.class
 )
-public class AlbumsPortlet extends MVCPortlet {
-
+public class Table_category_photoPortlet extends MVCPortlet {
 	private CategoryDto categoryDto()
 	{
 		PreparedStatement  statement = null;
@@ -141,7 +144,7 @@ public class AlbumsPortlet extends MVCPortlet {
 		PreparedStatement  statement = null;
 		Connection con = null;
 		ResultSet rs = null;
-		cpattachmentfileentryDto cpa= new cpattachmentfileentryDto();
+		table_category_photo.dto.cpattachmentfileentryDto cpa= new cpattachmentfileentryDto();
 		try {
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement("SELECT\r\n" + 
@@ -196,11 +199,6 @@ public class AlbumsPortlet extends MVCPortlet {
 			statement = con.prepareStatement(
 					"SELECT\r\n" + 
 					"    ac.uuid_       AS uuidcategory,\r\n" + 
-					"    df.groupid     AS groupid,\r\n" + 
-					"    df.fileentryid     AS fileentryid,\r\n" + 
-					"    df.folderid    AS folderid,\r\n" + 
-					"    df.uuid_       AS uuid,\r\n" + 
-					"    df.filename    AS fileName,\r\n" + 
 					"    df.title       AS title,\r\n" + 
 					"    df.modifieddate AS modifiedDate\r\n" +
 					"FROM\r\n" + 
@@ -218,15 +216,9 @@ public class AlbumsPortlet extends MVCPortlet {
 				Timestamp modifiedDate=rs.getTimestamp("modifiedDate");
 				String uuidCategory = rs.getString("uuidcategory");
 				String title = rs.getString("title");
-				String groupId= rs.getString("groupid");
-				String folderId= rs.getString("folderid");
-				String fileName= rs.getString("fileName");
-				String uuid= rs.getString("uuid");
-				String src="/documents/" + groupId + "/" + folderId + "/" + fileName + "/" + uuid;
 				dlfileEntryDto.setUuidCategory(uuidCategory);
 				dlfileEntryDto.setTitle(title);
 				dlfileEntryDto.setModifiedDate(modifiedDate);
-				dlfileEntryDto.setSrc(src);
 			}
 			return  dlfileEntryDto;
 		} catch (Exception e) {
@@ -260,7 +252,7 @@ public class AlbumsPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 
-		try {	
+		try {
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			String urlCurrent=themDisplay.getURLCurrent();
@@ -278,30 +270,21 @@ public class AlbumsPortlet extends MVCPortlet {
 			CategoryDto categoryName= categoryDto();
 			List<CategoryDto> listCategory= findCategoryByParent(categoryName.getId());
 			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
-			List<DlfileEntryDto> listDlfileNoImage= new ArrayList<>();
-			List<DlfileEntryDto> listDlfImage= new ArrayList<>();
+			List<DlfileEntryDto> listDlefile= new ArrayList<>();
 			for (CategoryDto categoryDto : listCategory) {
 				cpattachmentfileentryDto cpaAttach= findCpattachByCategory(categoryDto.getId());
 				listCpa.add(cpaAttach);
 			}	
 			
 			for (cpattachmentfileentryDto cpas : listCpa) {
-				if(cpas.getId() !=null ) {			
+				if(cpas.getId() !=null ) {
+					
 					DlfileEntryDto dlfile= findDlFileEntryByCpa(cpas.getId());
-					listDlfImage.add(dlfile);
+					listDlefile.add(dlfile);
 				}
 			}
-			int j=0;
-			for(DlfileEntryDto list : listDlfImage) {
-				j++;
-				if(j==1) {
-					renderRequest.setAttribute("list", list);
-				}
-				else {
-					listDlfileNoImage.add(list);
-				}
-			}
-			renderRequest.setAttribute("listDlfileNoImage", listDlfileNoImage);
+			renderRequest.setAttribute("categoryName", categoryName);
+			renderRequest.setAttribute("listDlefile", listDlefile);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

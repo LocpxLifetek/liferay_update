@@ -1,0 +1,4 @@
+Bundle-Name: Message_boards
+Bundle-SymbolicName: Message_boards
+Bundle-Version: 1.0.0
+Export-Package: Message_boards.constants

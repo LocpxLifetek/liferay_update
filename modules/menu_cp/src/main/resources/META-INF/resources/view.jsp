@@ -77,7 +77,7 @@
   
   
     <div class="topnav" id="myTopnav">
-      <a href="#home" class="active">Trang chủ</a>
+      <a href="/web/lifetek/chinhphu" class="active">Trang chủ</a>
       <a href="#news">Giới thiệu Cổng TTĐT Chính phủ</a>
       <a href="#contact">Báo điện tử Chính phủ</a>
       <a href="#about">Thư điện tử công vụ Chính phủ</a>
