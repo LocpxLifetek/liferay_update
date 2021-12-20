@@ -1,5 +1,0 @@
-Bundle-Name: testPorlet
-Bundle-SymbolicName: testPorlet
-
-Bundle-Version: 1.0.0
-Export-Package: testPorlet.constants

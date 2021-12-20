@@ -1,4 +1,0 @@
-Bundle-Name: function
-Bundle-SymbolicName: function
-Bundle-Version: 1.0.0
-Export-Package: function.constants

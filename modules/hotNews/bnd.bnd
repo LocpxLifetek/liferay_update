@@ -1,4 +1,0 @@
-Bundle-Name: hotNews
-Bundle-SymbolicName: hotNews
-Bundle-Version: 1.0.0
-Export-Package: hotNews.constants

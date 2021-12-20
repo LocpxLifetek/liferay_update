@@ -1,4 +1,0 @@
-Bundle-Name: user_list.jsp
-Bundle-SymbolicName: user_list.jsp
-Bundle-Version: 1.0.0
-Export-Package: user_list.jsp.constants

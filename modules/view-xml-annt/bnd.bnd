@@ -1,4 +1,0 @@
-Bundle-Name: view-xml-annt
-Bundle-SymbolicName: view.xml.annt
-Bundle-Version: 1.0.0
-Export-Package: view.xml.annt.constants

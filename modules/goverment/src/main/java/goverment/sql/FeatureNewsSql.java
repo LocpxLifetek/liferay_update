@@ -22,7 +22,7 @@ public class FeatureNewsSql {
 			
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
-					"SELECT be.uuid_  AS uuidblogsentry,be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,be.modifieddate AS modifieddate,dl.fileentryid AS fileentryid,dl.groupid  AS groupid,dl.folderid AS folderid, dl.title AS titledlfileentry, dl.uuid_ AS uuiddlfileentry FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid INNER JOIN dlfileentry dl ON dl.fileentryid = be.smallimagefileentryid WHERE upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) = upper('TIN TC NI BT')  AND ae.classnameid = '31201'  AND be.status = '0' and ac.groupId=? ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 7 ROWS ONLY");
+					"SELECT be.uuid_  AS uuidblogsentry,be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,be.modifieddate AS modifieddate,dl.fileentryid AS fileentryid,dl.groupid  AS groupid,dl.folderid AS folderid, dl.filename AS filename, dl.uuid_ AS uuiddlfileentry FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid INNER JOIN dlfileentry dl ON dl.fileentryid = be.smallimagefileentryid WHERE upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) = upper('TIN TC NI BT')  AND ae.classnameid = '31201'  AND be.status = '0' and ac.groupId=? ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 7 ROWS ONLY");
 			statement.setLong(1, groupIdCategory);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -35,18 +35,17 @@ public class FeatureNewsSql {
 				Integer fileEntryId = rs.getInt("fileentryid");
 				Integer groupId = rs.getInt("groupid");
 				Integer folderId = rs.getInt("folderid");
-				String titleDlFileEntry = rs.getString("titledlfileentry");
+				String filename = rs.getString("filename");
 				String uuidDlFileEntry = rs.getString("uuiddlfileentry");
 				blogsEntryDto.setDescription(description);
 				blogsEntryDto.setEntryId(entryId);
 				blogsEntryDto.setFileEntryId(fileEntryId);
-				blogsEntryDto.setFolderId(folderId);
-				blogsEntryDto.setGroupId(groupId);
 				blogsEntryDto.setTitleBlogsEntry(titleBlogsEntry);
-				blogsEntryDto.setTitleDlFileEntry(titleDlFileEntry);
 				blogsEntryDto.setUuidBlogsEntry(uuidBlogsEntry);
-				blogsEntryDto.setUuidDlFileEntry(uuidDlFileEntry);
+				
 				blogsEntryDto.setModifiedDate(modifiedDate);
+				String src = "/documents" + "/" + groupId + "/" + folderId + "/" + filename + "/" + uuidDlFileEntry;
+				blogsEntryDto.setSrc(src);
 				listBlogsEntryDto.add(blogsEntryDto);
 			}
 			return listBlogsEntryDto;

@@ -1,4 +1,0 @@
-Bundle-Name: pageable
-Bundle-SymbolicName: pageable
-Bundle-Version: 1.0.0
-Export-Package: pageable.constants

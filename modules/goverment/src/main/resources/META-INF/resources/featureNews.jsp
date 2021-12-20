@@ -14,7 +14,7 @@
 			<div class="grid1">
 				<div>
 					<img
-						src="/documents/${blogsEntryDto.groupId}/${blogsEntryDto.folderId}/${blogsEntryDto.titleDlFileEntry}/${blogsEntryDto.uuidDlFileEntry}"
+						src="${blog.src}"
 						class="soup-image">
 					<p>${blogsEntryDto.description}</p>
 				</div>
