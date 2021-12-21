@@ -1,29 +1,24 @@
 package goverment.portlet;
 
-import com.liferay.asset.kernel.model.AssetEntry;
-import com.liferay.asset.kernel.model.AssetTag;
-import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
-import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
-import com.liferay.blogs.model.BlogsEntry;
-import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
+import goverment.dto.BlogsEntryDto;
+import goverment.sql.BlogEntrySql;
 import goverment.url.UrlCurrentPorlet;
 
 @Component(
@@ -32,34 +27,40 @@ import goverment.url.UrlCurrentPorlet;
 			"com.liferay.portlet.display-category=category.sample",
 			"com.liferay.portlet.header-portlet-css=/css/main.css",
 			"com.liferay.portlet.instanceable=true",
-			"javax.portlet.display-name=InformationNews",
+			"javax.portlet.display-name=New_documents",
 			"javax.portlet.init-param.template-path=/",
-			"javax.portlet.init-param.view-template=/information.jsp",
-			"javax.portlet.name=" + GovermentPortletKeys.INFORMATIONNEWS,
+			"javax.portlet.init-param.view-template=/new_document.jsp",
+			"javax.portlet.name=" + GovermentPortletKeys.NEWDOCUMENT,
 			"javax.portlet.resource-bundle=content.Language",
 			"javax.portlet.security-role-ref=power-user,user"
 		},
 		service = Portlet.class
-)
-public class InformationNewsPorlet extends MVCPortlet {
+	)
+public class New_document extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+		try {	
+			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
-			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("id");
+
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-			BlogsEntry blogsEntry=BlogsEntryLocalServiceUtil.getBlogsEntryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
-			renderRequest.setAttribute("blogsEntry", blogsEntry);
-			AssetEntry assetEntry=AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), blogsEntry.getEntryId());
-			List<AssetTag> listAssetTag=AssetTagLocalServiceUtil.getAssetEntryAssetTags(assetEntry.getEntryId());
-			
-				renderRequest.setAttribute("listAssetTag", listAssetTag);
-			
+			List<BlogsEntryDto> listBlogsEntryDtos=new BlogEntrySql().findAllBlogsByIdCategory(134236,3);
+			List<BlogsEntryDto> listBlog = new ArrayList<>();
+			int i=0;
+			for (BlogsEntryDto listblogsEntryDto : listBlogsEntryDtos) {
+				i++;
+				if(i<=3) {
+					listBlog.add(listblogsEntryDto);
+					renderRequest.setAttribute("listBlog", listBlog);
+				}
+				else {
+					break;
+				}
+			}
 			
 		} catch (Exception e) {
 			// TODO: handle exception

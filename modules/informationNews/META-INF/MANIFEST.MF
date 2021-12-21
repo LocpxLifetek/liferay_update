@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: informationNews
-Bundle-SymbolicName: informationNews
-Bundle-Version: 1.0.0.qualifier
-Export-Package: content,
- informationNews.constants,
- informationNews.portlet

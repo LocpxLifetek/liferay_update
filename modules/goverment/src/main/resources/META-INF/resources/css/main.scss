@@ -171,3 +171,271 @@ a {
             		display: none;
             	}
 			}
+.head-cm {
+        width: 100%;
+        border-bottom: 1px solid #d71921;
+        margin-bottom: 20px;
+      }
+      .head-cm ul {
+        display: inline-flex;
+        list-style: none;
+      }
+      .head-cm ul li:first-child {
+        background: url("	http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-chuyenmuc.png")
+          no-repeat right top;
+      }
+      .head-cm ul li:first-child a {
+        color: #fff;
+        font: 700 16px/35px Roboto, Arial, Tahoma;
+        text-transform: uppercase;
+        border-right: none;
+        padding: 0 30px 0 20px;
+      }
+      .head-cm ul li a {
+        color: #404041;
+        font: 400 13px/35px Roboto, Arial, Tahoma;
+        padding: 0 10px;
+        border-right: 1px solid #ddd;
+        text-decoration: none;
+      }
+      .info-album { overflow: auto; margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 20px; }
+		.box-top3 li a {
+        text-align: justify;
+        font: 700 14px/19px Roboto, Arial, Tahoma;
+        display: block;
+      }
+
+      .box-top3 li img {
+        width: 100%;
+        height: 200px;
+      }
+
+
+
+    
+      .box-top3 ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .box-top3 ul li {
+        width: 30%;
+        margin-right: 2.8%;
+        float: left;
+        position: relative;
+      }
+
+      .box-top3 ul li a {
+        text-align: justify;
+        font: 700 14px/19px Roboto, Arial, Tahoma;
+        color: #58595b;
+        display: block;
+      }
+
+      .box-top3 ul li img {
+        width: 100%;
+        height: 125px;
+      }
+      .main_photo {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+}
+.main_photo {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.4;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background: #fff;
+  color: #333;
+}
+.container_photo {
+  padding: 2rem 1rem;
+  margin: 0 auto;
+  max-width: 68rem;
+  width: 100%;
+}
+.main_photo .container_photo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.main_photo .card-image {
+  background: #fff;
+  display: block;
+  padding-top: 70%;
+  position: relative;
+  width: 100%;
+}
+.main_photo .card-image img {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 67%;
+  object-fit: cover;
+}
+@media only screen and (max-width: 600px) {
+  .main_photo .container_photo {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+  }
+}
+ .button a{
+        border-radius: 10px;
+        border: solid 1px;
+        width: 12%;
+      }
+      .chidao-dieuhanh {background: #FFF url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-right.png') repeat-x center top;border: 1px solid #ddd;overflow: auto;}
+           .head-chidaodieuhanh { font: 700 18px/35px Roboto,Arial,Tahoma; color: #404041; text-transform: uppercase; text-align: center; margin: 15px 0 5px 0; }
+           .linered { border-top: 2px solid #d71920; width: 30%; margin: 0 auto; }
+           .lts-cmanh ul li a.active {
+        font-weight: bold;
+        color: #be1e2d;
+      }
+      .lts-cmanh ul li ul li:first-child {
+        border-top: 1px dotted #ccc;
+        margin-top: 10px;
+      }
+      .lts-cmanh ul li {
+        background-position-y: 18px;
+        border-bottom: 1px dotted #ccc;
+        padding: 10px 0 10px 20px;
+      }
+      .i-ngang {
+        background: url(http://bocongan.gov.vn/Publishing_Resources/web/media/images/i-ngang.png)
+          no-repeat 7px 13px !important;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .lts-cmanh ul li:last-child {
+        border-bottom: none;
+      }
+      .lts-cmanh ul li a {
+        color: #333;
+        font: 400 15px/18px Roboto, Arial, Tahoma;
+        text-decoration: none;
+      }
+      .lts-cmanh ul li a.active {
+        font-weight: bold;
+        color: #be1e2d;
+      }
+      .lts-cmanh ul li a:hover {
+        font-weight: bold;
+        color: #be1e2d;
+      }
+      .lts-chidaodieuhanh { padding: 15px; border-bottom: 4px solid #d71920; }
+           .lts-chidaodieuhanh ul { list-style: none; }
+           .lts-chidaodieuhanh ul li { background: url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/i-v.png') no-repeat; padding-left: 25px; margin-bottom: 15px; }
+           .lts-chidaodieuhanh ul li a { color: #333; font: 700 15px/18px Roboto,Arial,Tahoma; display: block; text-align: justify; text-decoration: none; }
+           .lts-chidaodieuhanh ul li a:hover {color: red;}
+           .viewall { font: 400 13px Roboto,Arial,Tahoma; font-style: normal; color: #be1e2d; font-style: italic; text-align: right; display: block; }
+           @media screen and (max-width: 974px) {
+            	.chidao-dieuhanh{
+            		display: none;
+            	}
+			}
+//Hot event
+#featured { position: relative; min-height: 515px; overflow: hidden; background: #fff; }
+#featured ul.ui-tabs-nav { position: absolute; top: 0; left: 63.04131054131054%; list-style: none; padding: 0; margin: 0; width: 36.75213675213675%; overflow: auto; overflow-x: auto; overflow-x: hidden; }
+#featured ul.ui-tabs-nav li { color: #666; float: right; margin-bottom: 7px; padding-bottom: 7px; width:100%;}
+#featured ul.ui-tabs-nav li img { float: left; padding-right: 10px; width: 100px; }
+#featured ul.ui-tabs-nav li span { font: normal 13px/18px 'Roboto', Arial, Verdana; display: block; }
+#featured li.ui-tabs-nav-item a p { font-size: 15px; color: #1b75bb; }
+#featured li.ui-tabs-nav-item a { font-family: Roboto,Arial,Tahoma; text-align: justify; display: block; height: auto; text-decoration: none; color: #58585B; background: #fff; outline: none; font-size:14px; }
+#featured li.ui-tabs-nav-item a:hover { background: #FFF; font-weight: bold; color: #038bd4; }
+#featured li.ui-tabs-nav-item:last-child a { border-bottom: none; }
+#featured li.ui-tabs-selected span, #featured li.ui-tabs-active span { font: 700 13px Roboto,Arial,Tahoma !important; }
+#featured ul.ui-tabs-nav li.ui-tabs-selected a, #featured ul.ui-tabs-nav li.ui-tabs-active a { background: #FFF; font-weight: bold; }
+#featured .ui-tabs-panel { width: 60.54131054131054%; position: relative; text-align:justify; }
+#featured .ui-tabs-panel img { width: 100%; height: 278px;margin:0 auto; margin-bottom:5px; }
+#featured .ui-tabs-panel .info { bottom: 0; left: 0; height: 70px; /*background: url('images/transparent-bg.png');*/ }
+#featured .ui-tabs-panel .info a.hideshow { position: absolute; font-size: 15px; font-family: 'Roboto', Arial, Verdana; color: #f0f0f0; right: 10px; top: -20px; line-height: 20px; margin: 0; outline: none; }
+#featured .info h2 { font: 700 18px/24px 'Roboto', Arial,Verdana; padding: 5px 0; margin: 0; font-weight: normal; overflow: hidden; }
+#featured .info p { font-family: 'Roboto', Arial, Verdana; font-size: 13px; line-height: 18px; color: #58585b; text-align: justify; }
+#featured .info a { text-decoration: none; color: #404041; font-weight: bold;text-decoration: none; }
+#featured .info a:hover { text-decoration: none; }
+#featured .ui-tabs-hide { display: none; }
+#featured ul.ui-tabs-nav li:last-child { margin: 0; padding: 0; border-bottom: none; }
+.fix-slider{text-align:center;}
+
+.box-img .tit a {font: 700 18px/24px 'Roboto', Arial,Verdana;color:#404041;text-decoration: none;}
+.des .ct {text-align:justify;font: 400 13px/18px Roboto,Arial,Tahoma; margin-top:10px;}
+
+//New event
+.ltstop2 {overflow: auto;}
+            .ltstop2 .top2 { width: 100%; display: flex; }
+            .info{width: 50%; padding-right: 15px;}
+            a{text-decoration: none;}
+            .ltstop2 .top2 .info a { color: #404041; font: 700 18px/24px Roboto,Arial,Tahoma; display: block; padding: 10px 0 5px 0; text-align:justify; }
+            .ltstop2 .top2 .info p { font: 400 13px/18px Roboto,Arial,Tahoma; text-align: justify; }
+            .ltstop2 .top2:last-child { float: right !important; }
+            .ltstop2 .top2 a img { width: 100%; margin:0 auto;}
+            .ltstop4 { margin-top: 20px; border-bottom: 1px dotted #acacad; overflow: auto; }
+            .ltstop4 ul{list-style: none;}
+            .ltstop4 ul li { width: 50%; float: left; margin-bottom: 20px; min-height:80px; padding-right: 15px;}
+            .ltstop4 ul li a { font: 700 15px/18px Roboto,Arial,Tahoma; color: #333; display: block; text-align: justify; }
+            .ltstop4 ul li img { float: left; width: 20%; margin-right: 15px; }
+            @media screen and (max-width: 1024px) {
+            .info, .ltstop4 ul li
+			  {
+			    width: 100%; 
+			  }
+			  .ltstop2 .top2 { width: 100%; display: block !important; }
+			}
+
+// New document
+.vanbanduthaoitem a.vbdt-image {float: left;width: 100% !important; margin-right:20px; padding-right: 15px;}
+.vanbanduthaoitem a.vbdt-image img {width: 100%;}
+.vanbanduthaoitem div.title a {color: #333;font: 700 14px/18px Roboto,Arial,Tahoma; text-align:justify;display:block; text-decoration: none; padding-bottom: 10px;}
+.vanbanduthaoitem div.title a:hover{color: red;}
+.vanbanduthaoitem .desc {font-size: 13px;line-height: 18px;text-align: justify;margin-bottom: 5px; font-family:roboto,arial,tahoma;}
+ .vanban{
+ 	display:grid;
+ 	grid-template-columns:25% 75% !important;
+ 	padding-bottom: 20px;
+ }
+//information news
+.detailBlogs{
+	color:black !important;
+	text-align: left;
+	width:100%;
+	font-family:Arial, Helvetica, sans-serif;
+}
+.title h2{
+	color:black !important;
+	 font-weight: bold;
+}
+.description h4{
+	color:black !important;
+}
+div.contentBlogs{
+	width:100%;
+	text-align: left;
+	
+}
+div.contentBlogs img{
+	width:100% !important;
+	height:100%;
+}
+.contentBlogs p{
+	text-align: justify !important; /* For Edge */
+    display: block;
+}
+.tags-text a{
+  color: #036;
+  text-decoration: underline;
+}

@@ -22,66 +22,54 @@ import goverment.dto.cpattachmentfileentryDto;
 import goverment.sql.PhotoSql;
 import goverment.url.UrlCurrentPorlet;
 
-
 @Component(
 		immediate = true,
 		property = {
 			"com.liferay.portlet.display-category=category.sample",
 			"com.liferay.portlet.header-portlet-css=/css/main.css",
 			"com.liferay.portlet.instanceable=true",
-			"javax.portlet.display-name=Albums",
+			"javax.portlet.display-name=Photo",
 			"javax.portlet.init-param.template-path=/",
-			"javax.portlet.init-param.view-template=/Albums.jsp",
-			"javax.portlet.name=" + GovermentPortletKeys.ALBUMS,
+			"javax.portlet.init-param.view-template=/Photo.jsp",
+			"javax.portlet.name=" + GovermentPortletKeys.PHOTO,
 			"javax.portlet.resource-bundle=content.Language",
 			"javax.portlet.security-role-ref=power-user,user"
 		},
 		service = Portlet.class
 	)
-public class AlbumsPortlet extends MVCPortlet {
+public class Photo extends MVCPortlet {
+	
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-
-		try {	
+		try {
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
-
 			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
 					themDisplay.getLayoutFriendlyURL(layout));
-
 			renderRequest.setAttribute("url", url);
-			CategoryDto categoryName= new PhotoSql().categoryDto();
-			List<CategoryDto> listCategory= new PhotoSql().findCategoryByParent(categoryName.getId());
+			CategoryDto category= new PhotoSql().categoryDto();
+			List<CategoryDto> listCategoryDtos=new PhotoSql().findCategoryByParent(621347);
 			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
-			List<DlfileEntryDto> listDlfileNoImage= new ArrayList<>();
-			List<DlfileEntryDto> listDlfImage= new ArrayList<>();
-			for (CategoryDto categoryDto : listCategory) {
-				cpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());;
+			List<DlfileEntryDto> listDlefile= new ArrayList<>();
+			for (CategoryDto categoryDto : listCategoryDtos) {
+				cpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());
 				listCpa.add(cpaAttach);
 			}	
 			
 			for (cpattachmentfileentryDto cpas : listCpa) {
-				if(cpas.getId() !=null ) {			
+				if(cpas.getId() !=null && listDlefile.size()<3) {
+					
 					DlfileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
-					listDlfImage.add(dlfile);
+					listDlefile.add(dlfile);
 				}
 			}
-			int j=0;
-			for(DlfileEntryDto list : listDlfImage) {
-				j++;
-				if(j==1) {
-					renderRequest.setAttribute("list", list);
-				}
-				else {
-					listDlfileNoImage.add(list);
-				}
-			}
-			renderRequest.setAttribute("listDlfileNoImage", listDlfileNoImage);
+			renderRequest.setAttribute("category", category);
+			renderRequest.setAttribute("listDlefile", listDlefile);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		super.doView(renderRequest, renderResponse);
 	}
+
 }

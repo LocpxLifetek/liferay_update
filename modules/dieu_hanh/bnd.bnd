@@ -1,4 +1,0 @@
-Bundle-Name: dieu_hanh
-Bundle-SymbolicName: dieu_hanh
-Bundle-Version: 1.0.0
-Export-Package: dieu_hanh.constants
