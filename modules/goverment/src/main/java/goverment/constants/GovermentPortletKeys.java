@@ -5,34 +5,21 @@ package goverment.constants;
  */
 public class GovermentPortletKeys {
 
-	public static final String GOVERMENT =
-		"goverment_GovermentPortlet";
-	public static final String FEATURENEWS="featureNews_GovermentPortlet";
-	public static final String CURRENTDATE="currentDate_GovermentPortlet";
-	public static final String HOTNEWS="hotNews_GovermentPortlet";
-	public static final String HOTNEWSEVENT="Hot_newEvent_GovermentPortlet";
-	public static final String COUNTVIEWBLOGS="countViewBlogs_GovermentPortlet";
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-<<<<<<< HEAD
-	public static final String ALBUMS ="Albums_AlbumsPortlet";
-=======
-	
-	
->>>>>>> bc652563f6ebfb51e9c191f576464a51099192e6
-	
+	public static final String GOVERMENT = "goverment_GovermentPortlet";
+	public static final String FEATURENEWS = "featureNews_GovermentPortlet";
+	public static final String CURRENTDATE = "currentDate_GovermentPortlet";
+	public static final String HOTNEWS = "hotNews_GovermentPortlet";
+	public static final String HOTNEWSEVENT = "Hot_newEvent_GovermentPortlet";
+	public static final String COUNTVIEWBLOGS = "countViewBlogs_GovermentPortlet";
+	public static final String ALBUMS = "Albums_GovermentPortlet";
 
+	public static final String ALBUM_NEW ="Album_new_GovermentPortlet";
+	public static final String PHOTO ="Photo_GovermentPortlet";
+	public static final String DEATIL_PHOTO_CATEGORIES ="Deatil_Photo_Categories_GovermentPortlet";
+	public static final String TABLE_CATEGORY_PHOTO ="table_category_photo_GovermentPortlet";
+	public static final String HOTEVENT ="HotEvent_GovermentPortlet";
+	public static final String DIEUHANH ="Dieuhanh_GovermentPortlet";
+	public static final String NEWEVENT= "New_event_GovermentPortlet";
+	public static final String NEWDOCUMENT= "New_document_GovermentPortlet";
+	public static final String HOIDAP= "HoiDap_GovermentPortlet";
 }

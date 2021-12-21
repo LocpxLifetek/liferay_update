@@ -1,4 +1,0 @@
-Bundle-Name: table_category_photo
-Bundle-SymbolicName: table_category_photo
-Bundle-Version: 1.0.0
-Export-Package: table_category_photo.constants

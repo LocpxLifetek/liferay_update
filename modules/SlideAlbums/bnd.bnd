@@ -1,4 +1,0 @@
-Bundle-Name: SlideAlbums
-Bundle-SymbolicName: SlideAlbums
-Bundle-Version: 1.0.0
-Export-Package: SlideAlbums.constants
