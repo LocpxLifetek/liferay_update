@@ -1,7 +1,9 @@
 package informationNews.portlet;
 
 import com.liferay.asset.kernel.model.AssetEntry;
+import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
+import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
 import com.liferay.blogs.model.BlogsEntry;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -15,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -109,6 +112,11 @@ public class InformationNewsPortlet extends MVCPortlet {
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
+			
+			List<AssetTag> listAssetTag=AssetTagLocalServiceUtil.getAssetEntryAssetTags(843207);
+			for (AssetTag assetTag : listAssetTag) {
+				System.out.println(assetTag.getName());
+			}
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("id");
 			BlogsEntryDto blogsEntryDto=findAllBlogsEntryByUUID(uuid,themeDisplay.getScopeGroupId());
 			AssetEntry assetEntry=AssetEntryLocalServiceUtil.incrementViewCounter(blogsEntryDto.getCompanyId(), blogsEntryDto.getUserId(), BlogsEntry.class.getName(), blogsEntryDto.getEntryId());

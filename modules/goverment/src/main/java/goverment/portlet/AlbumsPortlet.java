@@ -20,6 +20,7 @@ import goverment.dto.CategoryDto;
 import goverment.dto.DlfileEntryDto;
 import goverment.dto.cpattachmentfileentryDto;
 import goverment.sql.PhotoSql;
+import goverment.url.UrlCurrentPorlet;
 
 
 @Component(
@@ -30,7 +31,7 @@ import goverment.sql.PhotoSql;
 			"com.liferay.portlet.instanceable=true",
 			"javax.portlet.display-name=Albums",
 			"javax.portlet.init-param.template-path=/",
-			"javax.portlet.init-param.view-template=/view.jsp",
+			"javax.portlet.init-param.view-template=/Albums.jsp",
 			"javax.portlet.name=" + GovermentPortletKeys.ALBUMS,
 			"javax.portlet.resource-bundle=content.Language",
 			"javax.portlet.security-role-ref=power-user,user"
@@ -44,19 +45,10 @@ public class AlbumsPortlet extends MVCPortlet {
 
 		try {	
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
-			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			String urlCurrent=themDisplay.getURLCurrent();
-			String layoutUrl =themDisplay.getLayoutFriendlyURL(layout);
-			String[] url=urlCurrent.split(layoutUrl);
-			String urlSite=null;
-			int i=0;
-			for (String string : url) {
-				i++;
-				if(i==1) {
-					urlSite=string;
-				}
-			}
-			renderRequest.setAttribute("url", urlSite);
+			ThemeDisplay themeDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
+					themeDisplay.getLayoutFriendlyURL(layout));
+			renderRequest.setAttribute("url", url);
 			CategoryDto categoryName= new PhotoSql().categoryDto();
 			List<CategoryDto> listCategory= new PhotoSql().findCategoryByParent(categoryName.getId());
 			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
