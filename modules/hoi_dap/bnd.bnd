@@ -1,4 +1,0 @@
-Bundle-Name: hoi_dap
-Bundle-SymbolicName: hoi_dap
-Bundle-Version: 1.0.0
-Export-Package: hoi_dap.constants

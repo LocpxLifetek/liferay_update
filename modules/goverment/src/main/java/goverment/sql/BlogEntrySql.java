@@ -27,6 +27,7 @@ public class BlogEntrySql {
 					"    be.entryid         AS entryid,\r\n" + 
 					"    dl.filename        AS filename,\r\n" + 
 					"    be.title           AS titleblogsentry,\r\n" + 
+					"    be.content           AS content,\r\n" +
 					"    be.description     AS descriptiondlfileentry,\r\n" + 
 					"    be.modifieddate    AS modifieddate,\r\n" + 
 					"    dl.fileentryid     AS fileentryid,\r\n" + 
@@ -61,6 +62,7 @@ public class BlogEntrySql {
 				Integer groupId= rs.getInt("groupid");
 				Integer folderId= rs.getInt("folderid");
 				String filename= rs.getString("filename");
+				String content= rs.getString("content");
 				String src = "/documents" + "/" + groupId + "/" + folderId + "/" + filename + "/" + uuid;
 				blogsEntryDto.setDescription(description);
 				blogsEntryDto.setEntryId(entryId);
@@ -69,6 +71,7 @@ public class BlogEntrySql {
 				blogsEntryDto.setUuidBlogsEntry(uuidBlogsEntry);
 				blogsEntryDto.setModifiedDate(modifiedDate);
 				blogsEntryDto.setSrc(src);
+				blogsEntryDto.setContent(content);
 				listBlogsEntryDto.add(blogsEntryDto);
 			}
 			return listBlogsEntryDto;
