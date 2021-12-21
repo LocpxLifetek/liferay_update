@@ -1,12 +1,8 @@
 package goverment.portlet;
 
-import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.Portlet;
@@ -19,7 +15,6 @@ import org.osgi.service.component.annotations.Component;
 import goverment.constants.GovermentPortletKeys;
 import goverment.dto.BlogsEntryDto;
 import goverment.sql.BlogEntrySql;
-import goverment.url.UrlCurrentPorlet;
 
 @Component(
 		immediate = true,
@@ -27,31 +22,23 @@ import goverment.url.UrlCurrentPorlet;
 			"com.liferay.portlet.display-category=category.sample",
 			"com.liferay.portlet.header-portlet-css=/css/main.css",
 			"com.liferay.portlet.instanceable=true",
-			"javax.portlet.display-name=New_documents",
+			"javax.portlet.display-name=Lanh_dao",
 			"javax.portlet.init-param.template-path=/",
-			"javax.portlet.init-param.view-template=/new_document.jsp",
-			"javax.portlet.name=" + GovermentPortletKeys.NEWDOCUMENT,
+			"javax.portlet.init-param.view-template=/lanhdao.jsp",
+			"javax.portlet.name=" + GovermentPortletKeys.LANHDAO,
 			"javax.portlet.resource-bundle=content.Language",
 			"javax.portlet.security-role-ref=power-user,user"
 		},
 		service = Portlet.class
 	)
-public class New_document extends MVCPortlet {
+public class LanhDao extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 
 		try {	
-			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
-
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
-					themeDisplay.getLayoutFriendlyURL(layout));
-			renderRequest.setAttribute("url", url);
-			List<BlogsEntryDto> listBlogsEntryDtos=new BlogEntrySql().findAllBlogsByIdCategory(134236,3);
-			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);
-		
-			
+			List<BlogsEntryDto> listBlogsEntryDtos= new BlogEntrySql().findAllBlogsByCategory(81506, 2);
+			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);	
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

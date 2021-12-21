@@ -4,7 +4,15 @@ public class CategoryDto {
 	private String name;
 	private Integer id;
 	private Integer groupId;
-
+	private String uuid;
+	
+	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 	public String getName() {
 		return name;
 	}

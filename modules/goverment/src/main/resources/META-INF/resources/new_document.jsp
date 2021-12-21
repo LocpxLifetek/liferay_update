@@ -6,7 +6,7 @@
 <html>
 <body>
 	<div class="vanbanduthaoitem">
-		<c:forEach items="${listBlog}" var="blog">
+		<c:forEach items="${listBlogsEntryDtos}" var="blog">
 			<div class="vanban">
 				<div>
 					<a class="vbdt-image"><img

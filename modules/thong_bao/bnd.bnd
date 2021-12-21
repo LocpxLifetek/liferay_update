@@ -1,4 +1,0 @@
-Bundle-Name: thong_bao
-Bundle-SymbolicName: thong_bao
-Bundle-Version: 1.0.0
-Export-Package: thong_bao.constants

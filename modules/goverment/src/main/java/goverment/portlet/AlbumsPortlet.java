@@ -45,9 +45,11 @@ public class AlbumsPortlet extends MVCPortlet {
 
 		try {	
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
+
 			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
 					themDisplay.getLayoutFriendlyURL(layout));
+
 			renderRequest.setAttribute("url", url);
 			CategoryDto categoryName= new PhotoSql().categoryDto();
 			List<CategoryDto> listCategory= new PhotoSql().findCategoryByParent(categoryName.getId());

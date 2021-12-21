@@ -13,7 +13,7 @@ import java.util.List;
 import goverment.dto.BlogsEntryDto;
 
 public class BlogEntrySql {
-	public List<BlogsEntryDto> findAllBlogsByIdCategory(Integer id) throws SQLException {
+	public List<BlogsEntryDto> findAllBlogsByIdCategory(Integer id,Integer number) throws SQLException {
 		PreparedStatement statement = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -47,8 +47,9 @@ public class BlogEntrySql {
 					"    AND be.status = '0'\r\n" + 
 					"ORDER BY\r\n" + 
 					"    be.modifieddate DESC\r\n" + 
-					"OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY");
+					"OFFSET 0 ROWS FETCH NEXT ? ROWS ONLY");
 			statement.setInt(1, id);
+			statement.setInt(2, number);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				BlogsEntryDto blogsEntryDto = new BlogsEntryDto();
@@ -87,6 +88,63 @@ public class BlogEntrySql {
 				con.close();
 			}
 			if (rs != null) {
+				rs.close();
+			}
+		}
+	}
+	public List<BlogsEntryDto> findAllBlogsByCategory(Integer id, Integer number) throws SQLException {
+		PreparedStatement statement=null;
+		Connection con=null;
+		ResultSet rs=null;
+		try {
+			
+			List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
+			con = DataAccess.getConnection();
+			statement = con.prepareStatement("SELECT\r\n" + 
+					"    be.entryid         AS entryid,\r\n" + 
+					"    be.title           AS titleblogsentry,\r\n" + 
+					"    be.description     AS descriptiondlfileentry,\r\n" + 
+					"    be.modifieddate    AS modifieddate\r\n" + 
+					"FROM\r\n" + 
+					"         assetcategory ac\r\n" + 
+					"    INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid\r\n" + 
+					"    INNER JOIN assetentry                  ae ON aeac.assetentryid = ae.entryid\r\n" + 
+					"    INNER JOIN blogsentry                  be ON ae.classpk = be.entryid\r\n" + 
+					"WHERE\r\n" + 
+					"        ac.categoryid = ?\r\n" + 
+					"    AND ae.classnameid = '31201'\r\n" + 
+					"    AND be.status = '0'\r\n" + 
+					"ORDER BY\r\n" + 
+					"    be.modifieddate DESC\r\n" + 
+					"OFFSET 0 ROWS FETCH NEXT ? ROWS ONLY");
+			statement.setInt(1, id);
+			statement.setInt(2, number);
+			rs=statement.executeQuery();
+			while(rs.next()) {
+				BlogsEntryDto blogsEntryDto=new BlogsEntryDto();
+				Integer entryId=rs.getInt("entryid");
+				String titleBlogsEntry=rs.getString("titleblogsentry");
+				String description=rs.getString("descriptiondlfileentry");
+				Timestamp modifiedDate=rs.getTimestamp("modifieddate");
+				blogsEntryDto.setDescription(description);
+				blogsEntryDto.setEntryId(entryId);
+				blogsEntryDto.setTitleBlogsEntry(titleBlogsEntry);
+				blogsEntryDto.setModifiedDate(modifiedDate);
+				listBlogsEntryDto.add(blogsEntryDto);
+			}
+			return listBlogsEntryDto;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}finally {
+			if(statement != null) {
+				statement.close();
+			}
+			if(con != null) {
+				con.close();
+			}
+			if(rs != null) {
 				rs.close();
 			}
 		}

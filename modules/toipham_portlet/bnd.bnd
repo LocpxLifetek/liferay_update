@@ -1,4 +1,0 @@
-Bundle-Name: toipham_portlet
-Bundle-SymbolicName: toipham_portlet
-Bundle-Version: 1.0.0
-Export-Package: toipham_portlet.constants
