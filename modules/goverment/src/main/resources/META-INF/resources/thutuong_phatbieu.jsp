@@ -15,15 +15,3 @@
 		</c:forEach>
 	</div>
 </div>
-<style>
-.bn_lanhdao {
-	width: 100%;
-	background-color: rgb(1, 21, 82);;
-}
-
-h6 {
-	text-align: center;
-	color: white;
-	padding: 10px 0 10px 0;
-}
-</style>

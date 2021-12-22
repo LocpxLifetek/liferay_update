@@ -23,6 +23,11 @@ public class GovermentPortletKeys {
 	public static final String NEWEVENT= "New_event_GovermentPortlet";
 	public static final String NEWDOCUMENT= "New_document_GovermentPortlet";
 	public static final String HOIDAP= "HoiDap_GovermentPortlet";
+	public static final String THONGBAO= "ThongBao_GovermentPortlet";
+	public static final String THUTUONG_PHATBIEU= "thuTuong_phatbieu_GovermentPortlet";
+	public static final String TOIPHAM= "ToiPham_GovermentPortlet";
+	public static final String LANHDAO= "LanhDao_GovermentPortlet";
+
 	public static final String INFORMATIONNEWS= "InformationNews_GovermentPortlet";
 	
 	

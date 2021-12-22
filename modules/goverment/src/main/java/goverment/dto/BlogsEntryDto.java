@@ -10,7 +10,18 @@ public class BlogsEntryDto {
 	private Timestamp modifiedDate;
 	private Integer fileEntryId;
 	private String src;
+	private String content;
 	
+	
+	
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
 	public String getUuidBlogsEntry() {
 		return uuidBlogsEntry;
 	}

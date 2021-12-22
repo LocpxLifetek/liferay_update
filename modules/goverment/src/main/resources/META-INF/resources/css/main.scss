@@ -396,6 +396,7 @@ a {
 			  }
 			  .ltstop2 .top2 { width: 100%; display: block !important; }
 			}
+			
 
 // New document
 .vanbanduthaoitem a.vbdt-image {float: left;width: 100% !important; margin-right:20px; padding-right: 15px;}
@@ -408,6 +409,18 @@ a {
  	grid-template-columns:25% 75% !important;
  	padding-bottom: 20px;
  }
+
+	
+// hoi dap
+.lts-bovoicongdan ul { overflow: auto; list-style-type: decimal; padding-left: 20px; font: 700 16px Roboto,Arial,Tahoma; color: #404041; }
+           ul { list-style: none; margin: 0; padding: 0; }
+           .lts-bovoicongdan ul li { padding-bottom: 20px; width: 46.89%; float: left; margin-right: 4%; border-right: 1px dotted #CCC; padding-right: 2%; }
+           .lts-bovoicongdan ul li h2 a { font: 700 16px Roboto,Arial,Tahoma; color: #404041;text-align:justify;display:block; }    
+           a{text-decoration: none;}
+           .lts-bovoicongdan ul li:nth-child(2n) {border-right: none;padding-right: 0;margin-right: 0;}
+           .viewall { font: 400 13px Roboto,Arial,Tahoma; font-style: normal; color: #be1e2d; font-style: italic; text-align: right; display: block; }
+           .lts-bovoicongdan ul li p, .lts-bovoicongdan ul li div {color: #404041;font: 400 13px/18px Roboto,Arial,Tahoma;/* text-align: justify; */}		
+
 //information news
 .detailBlogs{
 	color:black !important;
@@ -439,6 +452,7 @@ div.contentBlogs img{
   color: #036;
   text-decoration: underline;
 }
+<<<<<<< HEAD
 
 //eventNewsInformaion
 .directOperator{
@@ -572,3 +586,29 @@ border: 4px double rgb(212, 211, 211);
   width: 84%;
   margin-left: 20px;
 }
+=======
+// thu tuong phat bieu
+.bn_lanhdao {
+	width: 100%;
+	background-color: rgb(1, 21, 82);;
+}
+
+h6 {
+	text-align: center;
+	color: white;
+	padding: 10px 0 10px 0;
+}
+// toi pham
+.lts-cmanh ul li {text-align:justify; list-style: none;}
+            .box-canhgiac{border: 1px solid #ddd;}
+            .lts-cmanh {border-bottom: 4px solid #d71920; }
+            a{text-decoration: none;}
+            .lts-cmanh ul li a { color: #333; font: 400 15px/18px Roboto,Arial,Tahoma; display:block;text-align:justify; }
+            .viewall { font: 400 13px Roboto,Arial,Tahoma; font-style: normal; color: #be1e2d; font-style: italic; text-align: right; display: block; }
+            .lts-cmanh ul li { background: url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/i-bul.png') no-repeat left 18px; border-bottom: 1px dotted #ccc; padding: 10px 0 10px 15px; }
+            @media screen and (max-width: 974px) {
+            	.box-canhgiac{
+            		display: none;
+            	}
+			}
+>>>>>>> 01b561b1daa40978f26cbf548f0edfabb4067306
