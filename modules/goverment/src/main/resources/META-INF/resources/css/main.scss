@@ -439,3 +439,136 @@ div.contentBlogs img{
   color: #036;
   text-decoration: underline;
 }
+
+//eventNewsInformaion
+.directOperator{
+
+  display: grid;
+  grid-template-columns: 50% 50% !important;
+}
+.menu_1{
+  padding: 14px;
+  border-bottom: 1px dotted #ccc;
+  font-family: "Roboto",Arial,Helvetica,sans-serif;
+}
+a{
+  text-align: justify !important; /* For Edge */
+}
+.directOperator a{
+  text-decoration: none;
+  color: black !important;
+  display:block !important;
+}
+p{
+  text-align: justify !important; /* For Edge */
+  display: block;
+}
+.directOperator a:hover{
+  color:red !important;
+}
+.directOperationRight{
+  display: grid;
+}
+
+.directOperationGrid img{
+  margin-top: 3px;
+}
+.directOperationLeft{
+  margin-right: 13px;
+  border-right: 1px dotted #ccc;
+  padding-right: 13px;
+}
+.directOperationLeft a{
+  padding-left: 3px;
+  margin-top:5px;
+  font-size: 16px;
+  display:block;
+  font-weight: bold !important;
+}
+.policeActivitieLeft img{
+  border: 4px double rgb(212, 211, 211);
+  width: 100%;
+}
+.policeActivitieLeft a{
+  display:block;
+}
+.policeActivitie{
+  display: grid;
+  grid-template-columns: auto auto !important;
+  grid-column-gap: 5%;
+}
+.policeActivitie a{
+  text-decoration: none;
+  color: black !important;
+  font-weight: bold !important;
+}
+.policeActivitie a:hover{
+  color:red !important;
+}
+.head-cm {
+  width: 100%;
+  border-bottom: 1px solid #D71921;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.head-cm .xemthem {
+  float: right;
+  font: 400 13px Roboto, Arial, Tahoma;
+  color: #be1e2d;
+  display: block;
+  padding-top: 20px;
+}
+
+.head-cm ul {
+  display: inline-flex;
+  list-style: none;
+  position: relative;
+  top: 12px;
+  left: 0;
+  transform: translate(-12px, 0);
+}
+.soup-image {
+width:60% !important;
+float:left;
+margin-right:2%;
+border: 4px double rgb(212, 211, 211);
+}
+
+.head-cm ul li a {
+  color: #404041;
+  font: 400 13px/35px Roboto, Arial, Tahoma;
+  padding: 0 15px;
+  border-right: 1px solid #ddd;
+}
+
+.head-cm ul li:first-child {
+  background: url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-chuyenmuc.png') no-repeat right top;
+}
+
+.head-cm ul li:first-child a {
+  color: #FFF;
+  font: 700 16px/35px Roboto, Arial, Tahoma;
+  text-transform: uppercase;
+  border-right: none;
+  padding: 0 30px 0 20px;
+}
+
+.head-cm ul li:last-child a {
+  border-right: none;
+}
+.title{
+  padding: 3% 0%;
+}
+//link goverment
+.link-goverment {
+  text-transform: uppercase;
+  font: 700 16px/30px Roboto, Arial, Tahoma;
+  color: #d71920;
+  text-transform: uppercase;
+  border-bottom: 1px solid #ddd;
+}
+.link-portal-goverment img{
+  width: 84%;
+  margin-left: 20px;
+}

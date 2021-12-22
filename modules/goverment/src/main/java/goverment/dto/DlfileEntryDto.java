@@ -11,8 +11,36 @@ public class DlfileEntryDto {
 	private Timestamp modifiedDate;
 	private Integer id;
 	private String url;
-	
+	private Integer classPK;
+	private Integer groupId;
+	private String type;
+	private long folderId;
 
+	
+	public Integer getClassPK() {
+		return classPK;
+	}
+	public void setClassPK(Integer classPK) {
+		this.classPK = classPK;
+	}
+	public Integer getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public long getFolderId() {
+		return folderId;
+	}
+	public void setFolderId(long folderId) {
+		this.folderId = folderId;
+	}
 	public Integer getId() {
 		return id;
 	}

@@ -8,7 +8,10 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -18,8 +21,10 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
+import goverment.dto.BlogsEntryDto;
 import goverment.dto.CategoryDto;
 import goverment.sql.AssetCategorySql;
+import goverment.sql.BlogEntrySql;
 import goverment.url.UrlCurrentPorlet;
 
 @Component(
@@ -49,6 +54,15 @@ public class EventNewsInformationPorlet extends MVCPortlet{
 			renderRequest.setAttribute("url", url);
 			CategoryDto categoryDto=new AssetCategorySql().findCategoryByVocabulartDto(themeDisplay.getScopeGroupId());
 			List<AssetCategory> listAssetCategory=AssetCategoryLocalServiceUtil.getChildCategories(categoryDto.getId());
+			Map<List<AssetCategory>, List<BlogsEntryDto>> maps = new LinkedHashMap<>();
+			for (AssetCategory assetCategory : listAssetCategory) {
+				List<AssetCategory> listCategoryDto = new ArrayList<>();
+				listCategoryDto.add(assetCategory);
+				Integer categoryId=(int) assetCategory.getCategoryId();
+				List<BlogsEntryDto> listBlogsEntryDto=new BlogEntrySql().findAllBlogsByIdCategory(categoryId, 4);
+				maps.put(listCategoryDto, listBlogsEntryDto);
+			}
+			renderRequest.setAttribute("maps", maps);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception
