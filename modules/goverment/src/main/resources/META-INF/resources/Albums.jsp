@@ -13,15 +13,15 @@
                 
                 <div class="top1">
                     <a href="#">
-                        <img style="max-width:100%; min-width:20%;" src="${list.src}">
+                        <img style="max-width:100%; min-width:20%;" src="${cpa.src}">
                     </a>
-                    <div><a href="${url}/album_anh?id=${list.uuidCategory}">${list.title}</a></div>
+                    <div><a href="${url}/album_anh?id=${cpa.uuid}">${cpa.name}</a></div>
                 </div>
                 
                 <ul>
                     
-                    <c:forEach items="${listDlfileNoImage}" var="listDlfileNoImage">
-                        <li><a class="album_bottom" href="${url}/album_anh?id=${listDlfileNoImage.uuidCategory}">${listDlfileNoImage.title}</a></li>
+                    <c:forEach items="${listCpattachmentfileentryDtos}" var="listCpa">
+                        <li><a class="album_bottom" href="${url}/album_anh?id=${listCpa.uuid}">${listCpa.name}</a></li>
                     </c:forEach>
                 
                 </ul>   

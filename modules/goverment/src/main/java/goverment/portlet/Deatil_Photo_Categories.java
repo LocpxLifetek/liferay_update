@@ -32,7 +32,7 @@ import goverment.url.UrlCurrentPorlet;
 			"com.liferay.portlet.display-category=category.sample",
 			"com.liferay.portlet.header-portlet-css=/css/main.css",
 			"com.liferay.portlet.instanceable=true",
-			"javax.portlet.display-name=Deatil_Photo_Categories",
+			"javax.portlet.display-name=Detail_Photo_Categories",
 			"javax.portlet.init-param.template-path=/",
 			"javax.portlet.init-param.view-template=/DetailPhoto.jsp",
 			"javax.portlet.name=" + GovermentPortletKeys.DEATIL_PHOTO_CATEGORIES,
@@ -53,7 +53,11 @@ public class Deatil_Photo_Categories extends MVCPortlet {
 					themDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
+<<<<<<< HEAD
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("id");
+=======
+			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
+>>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 			DlFileEntryDto dlfileEntry= new PhotoSql().dlfile(uuid);
 			renderRequest.setAttribute("dlfileEntry", dlfileEntry);
 			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid);

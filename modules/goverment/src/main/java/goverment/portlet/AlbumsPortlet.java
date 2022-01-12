@@ -1,5 +1,7 @@
 package goverment.portlet;
 
+import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -17,9 +19,13 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
+<<<<<<< HEAD
 import goverment.dto.CategoryDto;
 import goverment.dto.DlFileEntryDto;
 import goverment.dto.cpattachmentfileentryDto;
+=======
+import goverment.dto.CpattachmentfileentryDto;
+>>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 import goverment.sql.PhotoSql;
 import goverment.url.UrlCurrentPorlet;
 
@@ -52,6 +58,7 @@ public class AlbumsPortlet extends MVCPortlet {
 					themDisplay.getLayoutFriendlyURL(layout));
 
 			renderRequest.setAttribute("url", url);
+<<<<<<< HEAD
 			CategoryDto categoryName= new PhotoSql().categoryDto();
 			List<CategoryDto> listCategory= new PhotoSql().findCategoryByParent(categoryName.getId());
 			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
@@ -76,9 +83,22 @@ public class AlbumsPortlet extends MVCPortlet {
 				}
 				else {
 					listDlfileNoImage.add(list);
+=======
+			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId("9d9a6b62-d2ed-9324-7b70-a524a67c5c64", themDisplay.getScopeGroupId());
+			List<AssetCategory> listAssetCategory=AssetCategoryLocalServiceUtil.getChildCategories(assetCategory.getCategoryId());
+			int i=0;
+			List<CpattachmentfileentryDto> listCpattachmentfileentryDtos=new ArrayList<>();
+			for (AssetCategory assetCategory2 : listAssetCategory) {
+				i++;
+				CpattachmentfileentryDto cpa=new PhotoSql().findCpattachByCategory(assetCategory2.getCategoryId());
+				if(i==1) {
+					renderRequest.setAttribute("cpa", cpa);
+				}else {
+					listCpattachmentfileentryDtos.add(cpa);
+>>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 				}
 			}
-			renderRequest.setAttribute("listDlfileNoImage", listDlfileNoImage);
+			renderRequest.setAttribute("listCpattachmentfileentryDtos", listCpattachmentfileentryDtos);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

@@ -55,7 +55,7 @@ public class CallAjaxPorlet_thutuong_rightPortlet extends MVCPortlet {
 
 			List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
 			con = DataAccess.getConnection();
-			statement = con.prepareStatement("SELECT be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid WHERE ac.categoryid = '72065'  AND ae.classnameid = '31201'  AND be.status = '0' and be.groupId=? ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 2 ROWS ONLY");
+			statement = con.prepareStatement("SELECT be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid WHERE ac.categoryid = '72065'  AND be.status = '0' and be.groupId=? ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 2 ROWS ONLY");
 			statement.setLong(1, groupId);
 			rs = statement.executeQuery();
 			while (rs.next()) {

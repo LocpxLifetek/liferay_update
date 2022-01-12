@@ -1,0 +1,4 @@
+Bundle-Name: LoginPorlet
+Bundle-SymbolicName: LoginPorlet
+Bundle-Version: 1.0.0
+Export-Package: LoginPorlet.constants

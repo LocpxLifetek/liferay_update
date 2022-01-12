@@ -1,11 +1,15 @@
 <%@ include file="/init.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<!DOCTYPE html>
-<html lang="en" >
+
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href="https://cdn.rawgit.com/Pagawa/PgwSlideshow/master/pgwslideshow_light.min.css">
-<link rel="stylesheet" href="https://cdn.rawgit.com/Pagawa/PgwSlideshow/master/pgwslideshow.min.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/pgwslideshow.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/pgwslideshow_light.min.css">
 </head>
 <body>
  <div class="head-cm">
@@ -26,8 +30,9 @@
             </ul>
 </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<script src="https://cdn.rawgit.com/Pagawa/PgwSlideshow/master/pgwslideshow.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/pgwslideshow.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/pgwslideshow.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
     $(".pgwSlideshow").pgwSlideshow({
@@ -38,3 +43,4 @@ $(document).ready(function() {
 
 </body>
 </html>
+

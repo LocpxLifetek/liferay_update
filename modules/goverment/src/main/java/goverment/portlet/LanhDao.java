@@ -1,6 +1,8 @@
 package goverment.portlet;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,7 +39,12 @@ public class LanhDao extends MVCPortlet {
 			throws IOException, PortletException {
 
 		try {	
+<<<<<<< HEAD
 			List<BlogsEntryDto> listBlogsEntryDtos= new BlogEntrySql().findAllBlogsByCategory("5ff435b2-dd2c-b4a8-324f-23dc2d1475a9", 2);
+=======
+			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			List<BlogsEntryDto> listBlogsEntryDtos= new BlogEntrySql().findAllBlogsByCategory("5ff435b2-dd2c-b4a8-324f-23dc2d1475a9", 2,themeDisplay.getScopeGroupId());
+>>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);	
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -47,7 +47,7 @@ public class TabGovermentPortlet extends MVCPortlet {
 			List<CategoryBusinessDto> listCategoryBusinessDto = new ArrayList<>();
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
-					"SELECT be.uuid_  AS uuidblogsentry,be.modifiedDate as modifiedDate,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,dl.groupid  AS groupid,dl.folderid AS folderid, dl.title AS titledlfileentry, dl.uuid_ AS uuiddlfileentry FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid INNER JOIN dlfileentry dl ON dl.fileentryid = be.smallimagefileentryid WHERE upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) = upper(?)  AND ae.classnameid = '31201'  AND be.status = '0' and ac.groupId=? ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY");
+					"SELECT be.uuid_  AS uuidblogsentry,be.modifiedDate as modifiedDate,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,dl.groupid  AS groupid,dl.folderid AS folderid, dl.title AS titledlfileentry, dl.uuid_ AS uuiddlfileentry FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid INNER JOIN dlfileentry dl ON dl.fileentryid = be.smallimagefileentryid WHERE upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) = upper(?)   AND be.status = '0' and ac.groupId=? ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY");
 			statement.setString(1, name);
 			statement.setLong(2, groupIdCategory);
 			rs = statement.executeQuery();

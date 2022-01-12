@@ -6,8 +6,6 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -17,10 +15,13 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
+<<<<<<< HEAD
 import goverment.dto.CategoryDto;
 import goverment.dto.DlFileEntryDto;
 import goverment.dto.cpattachmentfileentryDto;
 import goverment.sql.PhotoSql;
+=======
+>>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 import goverment.url.UrlCurrentPorlet;
 
 @Component(
@@ -49,6 +50,7 @@ public class Table_category_photo extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
+<<<<<<< HEAD
 			CategoryDto categoryName=new PhotoSql().categoryDto();
 			List<CategoryDto> listCategory=new PhotoSql().findCategoryByParent(categoryName.getId());
 			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
@@ -67,6 +69,26 @@ public class Table_category_photo extends MVCPortlet {
 			}
 			renderRequest.setAttribute("categoryName", categoryName);
 			renderRequest.setAttribute("listDlefile", listDlefile);
+=======
+////			CategoryDto categoryName=new PhotoSql().categoryDto();
+////			List<CategoryDto> listCategory=new PhotoSql().findCategoryByParent(categoryName.getId());
+////			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
+////			List<DlFileEntryDto> listDlefile= new ArrayList<>();
+////			for (CategoryDto categoryDto : listCategory) {
+////				cpattachmentfileentryDto cpaAttach=new PhotoSql().findCpattachByCategory(categoryDto.getId());
+////				listCpa.add(cpaAttach);
+////			}	
+////			
+////			for (cpattachmentfileentryDto cpas : listCpa) {
+////				if(cpas.getId() !=null ) {
+////					
+////					DlFileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
+////					listDlefile.add(dlfile);
+////				}
+////			}
+//			renderRequest.setAttribute("categoryName", categoryName);
+//			renderRequest.setAttribute("listDlefile", listDlefile);
+>>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

@@ -2,6 +2,8 @@ package goverment.portlet;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -40,7 +42,7 @@ import goverment.sql.BlogEntrySql;
 		service = Portlet.class
 	)
 public class HoiDap extends MVCPortlet {
-	private List<BlogsEntryDto> findAllBlogsByIdCategory() throws SQLException {
+	private List<BlogsEntryDto> findAllBlogsByIdCategory(long groupId) throws SQLException {
 		PreparedStatement statement=null;
 		Connection con=null;
 		ResultSet rs=null;
@@ -48,7 +50,8 @@ public class HoiDap extends MVCPortlet {
 			
 			List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
 			con = DataAccess.getConnection();
-			statement = con.prepareStatement("SELECT be.entryid AS entryid,be.content as content, be.title AS titleblogsentry, be.description AS descriptiondlfileentry,be.modifieddate AS modifieddate FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid WHERE ac.categoryid = '103573'  AND ae.classnameid = '31201'  AND be.status = '0' ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY");
+			statement = con.prepareStatement("SELECT be.entryid AS entryid,be.content as content, be.title AS titleblogsentry, be.description AS descriptiondlfileentry,be.modifieddate AS modifieddate FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid WHERE ac.uuid_='9d8e10bc-8135-139c-99a5-396a13ff8530' AND be.status = '0' and be.groupId=? ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY");
+			statement.setLong(0, groupId);
 			rs=statement.executeQuery();
 			while(rs.next()) {
 				BlogsEntryDto blogsEntryDto=new BlogsEntryDto();
@@ -88,7 +91,8 @@ public class HoiDap extends MVCPortlet {
 			throws IOException, PortletException {
 
 		try {	
-			List<BlogsEntryDto> listBlogsEntryDtos=findAllBlogsByIdCategory();
+			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			List<BlogsEntryDto> listBlogsEntryDtos=findAllBlogsByIdCategory(themeDisplay.getScopeGroupId());
 			
 			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);	
 			

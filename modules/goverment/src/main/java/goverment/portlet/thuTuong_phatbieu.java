@@ -2,6 +2,8 @@ package goverment.portlet;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -38,7 +40,7 @@ import goverment.dto.BlogsEntryDto;
 		service = Portlet.class
 	)
 public class thuTuong_phatbieu extends MVCPortlet {
-	private List<BlogsEntryDto> findAllBlogsByIdCategory() throws SQLException {
+	private List<BlogsEntryDto> findAllBlogsByIdCategory(long groupId) throws SQLException {
 		PreparedStatement statement=null;
 		Connection con=null;
 		ResultSet rs=null;
@@ -46,7 +48,8 @@ public class thuTuong_phatbieu extends MVCPortlet {
 			
 			List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
 			con = DataAccess.getConnection();
-			statement = con.prepareStatement("SELECT be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,be.modifieddate AS modifieddate FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid WHERE ac.categoryid = '72065'  AND ae.classnameid = '31201'  AND be.status = '0' ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 2 ROWS ONLY");
+			statement = con.prepareStatement("SELECT be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,be.modifieddate AS modifieddate FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN blogsentry be ON ae.classpk = be.entryid WHERE ac.uuid_ = '0b7b0c80-4d1f-8ba6-5a48-8b8dd0b576b0'  AND be.status = '0' and be.groupId=? ORDER BY be.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 2 ROWS ONLY");
+			statement.setLong(1, groupId);
 			rs=statement.executeQuery();
 			while(rs.next()) {
 				BlogsEntryDto blogsEntryDto=new BlogsEntryDto();
@@ -80,7 +83,8 @@ public class thuTuong_phatbieu extends MVCPortlet {
 			throws IOException, PortletException {
 
 		try {	
-			List<BlogsEntryDto> listBlogsEntryDtos=findAllBlogsByIdCategory();
+			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			List<BlogsEntryDto> listBlogsEntryDtos=findAllBlogsByIdCategory(themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);	
 		} catch (Exception e) {
 			// TODO: handle exception

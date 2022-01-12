@@ -7,11 +7,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link
-	rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css"
-    />
 
+	 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery.fancybox.min.css">
     <script>
  // Fancybox Config
     $('[data-fancybox="gallery"]').fancybox({
@@ -46,8 +43,9 @@
 		  </c:forEach>
 		</div>
 	  </main>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.fancybox.min.js"></script>
+	  <script type="text/javascript" src="<%=request.getContextPath()%>/js/TweenMax.min.js"></script>
+
   </body>
 </html>

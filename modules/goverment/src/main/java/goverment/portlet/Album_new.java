@@ -1,7 +1,11 @@
 package goverment.portlet;
 
+import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,11 +26,11 @@ import goverment.sql.PhotoSql;
 		immediate = true,
 		property = {
 			"com.liferay.portlet.display-category=category.sample",
-			"com.liferay.portlet.header-portlet-css=/css/main.css",
 			"com.liferay.portlet.instanceable=true",
 			"javax.portlet.display-name=Album_new",
+			"com.liferay.portlet.header-portlet-css=/META-INF/resources/css/main.css",
 			"javax.portlet.init-param.template-path=/",
-			"javax.portlet.init-param.view-template=/Album_new.jsp",
+			"javax.portlet.init-param.view-template=/META-INF/resources/Album_new.jsp",
 			"javax.portlet.name=" + GovermentPortletKeys.ALBUM_NEW,
 			"javax.portlet.resource-bundle=content.Language",
 			"javax.portlet.security-role-ref=power-user,user"
@@ -39,10 +43,18 @@ public class Album_new extends MVCPortlet {
 			throws IOException, PortletException {
 		try {
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
+<<<<<<< HEAD
 			String uuid1 =  PortalUtil.getOriginalServletRequest(request).getParameter("id");
 			
 			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(Integer.parseInt(uuid1));
 			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(categoryDto.getId());
+=======
+			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
+			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
+			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(assetCategory.getCategoryId());
+			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid);
+>>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 			renderRequest.setAttribute("categoryDto", categoryDto);
 			renderRequest.setAttribute("dLfileEntryDtos", dLfileEntryDtos);
 		} catch (Exception e) {
