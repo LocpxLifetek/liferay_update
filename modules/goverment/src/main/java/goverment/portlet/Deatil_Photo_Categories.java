@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
-import goverment.dto.DlfileEntryDto;
+import goverment.dto.DlFileEntryDto;
 import goverment.sql.PhotoSql;
 import goverment.url.UrlCurrentPorlet;
 
@@ -54,14 +54,14 @@ public class Deatil_Photo_Categories extends MVCPortlet {
 			renderRequest.setAttribute("url", url);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("id");
-			DlfileEntryDto dlfileEntry= new PhotoSql().dlfile(uuid);
+			DlFileEntryDto dlfileEntry= new PhotoSql().dlfile(uuid);
 			renderRequest.setAttribute("dlfileEntry", dlfileEntry);
-			List<DlfileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid);
-			List<DlfileEntryDto> listDlfile= new ArrayList<>();
+			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid);
+			List<DlFileEntryDto> listDlfile= new ArrayList<>();
 			AssetEntry assetEntry=AssetEntryLocalServiceUtil.getEntry("com.liferay.document.library.kernel.model.DLFileEntry", dlfileEntry.getId());
 			AssetRenderer<?> assetRender=assetEntry.getAssetRenderer();
 			String docUrl=assetRender.getURLDownload(themDisplay);
-			for (DlfileEntryDto listDlf : dLfileEntryDtos) {
+			for (DlFileEntryDto listDlf : dLfileEntryDtos) {
 				listDlf.setUrl(docUrl);
 				listDlfile.add(listDlf);
 			}

@@ -22,7 +22,7 @@ import org.osgi.service.component.annotations.Component;
 
 import goverment.config.ConvertXmlToJson;
 import goverment.constants.GovermentPortletKeys;
-import goverment.dto.DlfileEntryDto;
+import goverment.dto.DlFileEntryDto;
 import goverment.dto.JournalAricleDto;
 import goverment.sql.LinkSql;
 
@@ -47,7 +47,7 @@ public class LinkGoverment extends MVCPortlet{
 			throws IOException, PortletException {
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			List<DlfileEntryDto> listDlFileEntryDtos=new ArrayList<>();
+			List<DlFileEntryDto> listDlFileEntryDtos=new ArrayList<>();
 			List<JournalAricleDto> listJournalAricleDtos = new LinkSql().findJournalArticle(themeDisplay.getScopeGroupId());
 			for (JournalAricleDto journalAricleDto : listJournalAricleDtos) {
 
@@ -59,7 +59,7 @@ public class LinkGoverment extends MVCPortlet{
 					String key = keys.next();
 					String value = json.get(key).toString();
 					JSONObject object = JSONFactoryUtil.createJSONObject(value);
-					DlfileEntryDto dlFileEntryDto = new DlfileEntryDto();
+					DlFileEntryDto dlFileEntryDto = new DlFileEntryDto();
 					dlFileEntryDto.setClassPK(object.getInt("classPK"));
 					dlFileEntryDto.setGroupId(object.getInt("groupId"));
 					dlFileEntryDto.setType(object.getString("type"));

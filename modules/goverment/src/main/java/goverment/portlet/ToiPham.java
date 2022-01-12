@@ -39,7 +39,7 @@ public class ToiPham extends MVCPortlet {
 			throws IOException, PortletException {
 
 		try {	
-			List<BlogsEntryDto> listBlogsEntryDtos=new BlogEntrySql().findAllBlogsByCategory(99326, 1);
+			List<BlogsEntryDto> listBlogsEntryDtos=new BlogEntrySql().findAllBlogsByCategory("c3691d6d-f6d9-1990-75fc-449c5520f7b8", 1);
 			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);	
 		} catch (Exception e) {
 			// TODO: handle exception

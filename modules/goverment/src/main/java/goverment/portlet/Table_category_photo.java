@@ -16,9 +16,9 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
-import goverment.constants.*;
+import goverment.constants.GovermentPortletKeys;
 import goverment.dto.CategoryDto;
-import goverment.dto.DlfileEntryDto;
+import goverment.dto.DlFileEntryDto;
 import goverment.dto.cpattachmentfileentryDto;
 import goverment.sql.PhotoSql;
 import goverment.url.UrlCurrentPorlet;
@@ -52,7 +52,7 @@ public class Table_category_photo extends MVCPortlet {
 			CategoryDto categoryName=new PhotoSql().categoryDto();
 			List<CategoryDto> listCategory=new PhotoSql().findCategoryByParent(categoryName.getId());
 			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
-			List<DlfileEntryDto> listDlefile= new ArrayList<>();
+			List<DlFileEntryDto> listDlefile= new ArrayList<>();
 			for (CategoryDto categoryDto : listCategory) {
 				cpattachmentfileentryDto cpaAttach=new PhotoSql().findCpattachByCategory(categoryDto.getId());
 				listCpa.add(cpaAttach);
@@ -61,7 +61,7 @@ public class Table_category_photo extends MVCPortlet {
 			for (cpattachmentfileentryDto cpas : listCpa) {
 				if(cpas.getId() !=null ) {
 					
-					DlfileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
+					DlFileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
 					listDlefile.add(dlfile);
 				}
 			}

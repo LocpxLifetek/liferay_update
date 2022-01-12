@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.osgi.service.component.annotations.Component;
 
-import goverment.dto.CategoryDto;
-import goverment.dto.DlfileEntryDto;
-import goverment.sql.PhotoSql;
 import goverment.constants.GovermentPortletKeys;
+import goverment.dto.CategoryDto;
+import goverment.dto.DlFileEntryDto;
+import goverment.sql.PhotoSql;
 @Component(
 		immediate = true,
 		property = {
@@ -42,7 +42,7 @@ public class Album_new extends MVCPortlet {
 			String uuid1 =  PortalUtil.getOriginalServletRequest(request).getParameter("id");
 			
 			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(Integer.parseInt(uuid1));
-			List<DlfileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(categoryDto.getId());
+			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(categoryDto.getId());
 			renderRequest.setAttribute("categoryDto", categoryDto);
 			renderRequest.setAttribute("dLfileEntryDtos", dLfileEntryDtos);
 		} catch (Exception e) {

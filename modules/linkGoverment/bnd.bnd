@@ -1,4 +1,0 @@
-Bundle-Name: linkGoverment
-Bundle-SymbolicName: linkGoverment
-Bundle-Version: 1.0.0
-Export-Package: linkGoverment.constants

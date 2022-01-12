@@ -15,9 +15,10 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+
 import goverment.constants.GovermentPortletKeys;
 import goverment.dto.CategoryDto;
-import goverment.dto.DlfileEntryDto;
+import goverment.dto.DlFileEntryDto;
 import goverment.dto.cpattachmentfileentryDto;
 import goverment.sql.PhotoSql;
 import goverment.url.UrlCurrentPorlet;
@@ -54,8 +55,8 @@ public class AlbumsPortlet extends MVCPortlet {
 			CategoryDto categoryName= new PhotoSql().categoryDto();
 			List<CategoryDto> listCategory= new PhotoSql().findCategoryByParent(categoryName.getId());
 			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
-			List<DlfileEntryDto> listDlfileNoImage= new ArrayList<>();
-			List<DlfileEntryDto> listDlfImage= new ArrayList<>();
+			List<DlFileEntryDto> listDlfileNoImage= new ArrayList<>();
+			List<DlFileEntryDto> listDlfImage= new ArrayList<>();
 			for (CategoryDto categoryDto : listCategory) {
 				cpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());;
 				listCpa.add(cpaAttach);
@@ -63,12 +64,12 @@ public class AlbumsPortlet extends MVCPortlet {
 			
 			for (cpattachmentfileentryDto cpas : listCpa) {
 				if(cpas.getId() !=null ) {			
-					DlfileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
+					DlFileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
 					listDlfImage.add(dlfile);
 				}
 			}
 			int j=0;
-			for(DlfileEntryDto list : listDlfImage) {
+			for(DlFileEntryDto list : listDlfImage) {
 				j++;
 				if(j==1) {
 					renderRequest.setAttribute("list", list);

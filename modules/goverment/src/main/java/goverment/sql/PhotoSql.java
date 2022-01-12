@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import goverment.dto.CategoryDto;
-import goverment.dto.DlfileEntryDto;
+import goverment.dto.DlFileEntryDto;
 import goverment.dto.cpattachmentfileentryDto;
 
 
@@ -202,11 +202,11 @@ public class PhotoSql {
 			}
 		}
 	}
-	public DlfileEntryDto findDlFileEntryByCpa(Integer fileEntryId) {
+	public DlFileEntryDto findDlFileEntryByCpa(Integer fileEntryId) {
 		PreparedStatement  statement = null;
 		Connection con = null;
 		ResultSet rs = null;
-		DlfileEntryDto dlfileEntryDto = new DlfileEntryDto();
+		DlFileEntryDto dlfileEntryDto = new DlFileEntryDto();
 		try {
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
@@ -273,13 +273,13 @@ public class PhotoSql {
 		
 		
 	}
-	public List<DlfileEntryDto> findAllDLfileEntryDtos(Integer id) throws SQLException {
+	public List<DlFileEntryDto> findAllDLfileEntryDtos(Integer id) throws SQLException {
 		PreparedStatement statement=null;
 		Connection con=null;
 		ResultSet rs=null;
 		try {
 			
-			List<DlfileEntryDto> listDlFileEntry = new ArrayList<>();
+			List<DlFileEntryDto> listDlFileEntry = new ArrayList<>();
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement("\r\n" + 
 					"SELECT \r\n" + 
@@ -301,7 +301,7 @@ public class PhotoSql {
 			rs=statement.executeQuery();
 			
 			while(rs.next()) {
-				DlfileEntryDto dlFileEntryDto=new DlfileEntryDto();
+				DlFileEntryDto dlFileEntryDto=new DlFileEntryDto();
 				String uuid= rs.getString("uuid");
 				Integer groupId = rs.getInt("groupid");
 				Integer folderId = rs.getInt("folderid");
@@ -332,11 +332,11 @@ public class PhotoSql {
 			}
 		}
 	}
-	public DlfileEntryDto dlfile(String uuid) throws SQLException {
+	public DlFileEntryDto dlfile(String uuid) throws SQLException {
 		PreparedStatement statement=null;
 		Connection con=null;
 		ResultSet rs=null;
-		DlfileEntryDto dlfileDto= new DlfileEntryDto();
+		DlFileEntryDto dlfileDto= new DlFileEntryDto();
 		try {
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement("SELECT\r\n" + 
@@ -373,13 +373,13 @@ public class PhotoSql {
 			}
 		}
 	}
-	public List<DlfileEntryDto> findAllDLfileEntryDtos(String uuid) throws SQLException {
+	public List<DlFileEntryDto> findAllDLfileEntryDtos(String uuid) throws SQLException {
 		PreparedStatement statement=null;
 		Connection con=null;
 		ResultSet rs=null;
 		try {
 			
-			List<DlfileEntryDto> listDlFileEntry = new ArrayList<>();
+			List<DlFileEntryDto> listDlFileEntry = new ArrayList<>();
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement("\r\n" + 
 					"SELECT\r\n" + 
@@ -402,7 +402,7 @@ public class PhotoSql {
 			rs=statement.executeQuery();
 			
 			while(rs.next()) {
-				DlfileEntryDto dlFileEntryDto=new DlfileEntryDto();
+				DlFileEntryDto dlFileEntryDto=new DlFileEntryDto();
 				String uuid1= rs.getString("uuid");
 				Integer groupId = rs.getInt("groupid");
 				Integer folderId = rs.getInt("folderid");
