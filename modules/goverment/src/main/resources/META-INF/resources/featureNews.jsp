@@ -14,7 +14,7 @@
 			<div class="grid1">
 				<div>
 					<img
-						src="${blog.src}"
+						src="${blogsEntryDto.src}"
 						class="soup-image">
 					<p>${blogsEntryDto.description}</p>
 				</div>

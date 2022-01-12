@@ -2,7 +2,7 @@ package goverment.dto;
 
 import java.sql.Timestamp;
 
-public class DlfileEntryDto {
+public class DlFileEntryDto {
 	private String name;
 	private String uuidCategory;
 	private String src;
@@ -90,8 +90,8 @@ public class DlfileEntryDto {
 	public void setSrc(String src) {
 		this.src = src;
 	}
-	public DlfileEntryDto() {
+	public DlFileEntryDto() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+	
 }

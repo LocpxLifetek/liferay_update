@@ -6,6 +6,7 @@ import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
 import com.liferay.blogs.model.BlogsEntry;
 import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -55,10 +56,11 @@ public class InformationNewsPorlet extends MVCPortlet {
 			renderRequest.setAttribute("url", url);
 			BlogsEntry blogsEntry=BlogsEntryLocalServiceUtil.getBlogsEntryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("blogsEntry", blogsEntry);
+			AssetEntry incrementView=AssetEntryLocalServiceUtil.incrementViewCounter(themeDisplay.getCompanyId(), themeDisplay.getUserId(), BlogsEntry.class.getName(), blogsEntry.getEntryId());
 			AssetEntry assetEntry=AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), blogsEntry.getEntryId());
 			List<AssetTag> listAssetTag=AssetTagLocalServiceUtil.getAssetEntryAssetTags(assetEntry.getEntryId());
 			
-				renderRequest.setAttribute("listAssetTag", listAssetTag);
+			renderRequest.setAttribute("listAssetTag", listAssetTag);
 			
 			
 		} catch (Exception e) {

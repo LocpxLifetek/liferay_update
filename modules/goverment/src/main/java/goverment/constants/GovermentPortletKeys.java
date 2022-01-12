@@ -27,19 +27,15 @@ public class GovermentPortletKeys {
 	public static final String THUTUONG_PHATBIEU= "thuTuong_phatbieu_GovermentPortlet";
 	public static final String TOIPHAM= "ToiPham_GovermentPortlet";
 	public static final String LANHDAO= "LanhDao_GovermentPortlet";
-
+	
 	public static final String INFORMATIONNEWS= "InformationNews_GovermentPortlet";
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public static final String VIDEOMEDIA="VideoMedia_GovermentPortlet";
+	public static final String LISTVIDEOMEDIA="ListVideoMedia_GovermentPortlet";
+	public static final String LISTVIDEOCATEGORY="ListVideoCategory_GovermentPortlet";
+	public static final String VIDEODETAIL="VideoDetail_GovermentPortlet";
+	public static final String DETAILBOCONGAN="DetailBoCongAn_GovermentPortlet";
+	public static final String COUNTVIEWEVENT="CountViewEvent_GovermentPortlet";
+	public static final String COUNTVIEWVIDEOMEDIA="CountViewVideoMedia_GovermentPortlet";
 	
 	public static final String EVENTNEWSINFORMATION="EventNewsInformation_GovermentPortlet";
 	public static final String LINKGOVERMENT="LinkGoverment_GovermentPortlet";

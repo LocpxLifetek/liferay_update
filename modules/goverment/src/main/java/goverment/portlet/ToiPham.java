@@ -1,6 +1,8 @@
 package goverment.portlet;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
 import java.util.List;
@@ -39,7 +41,8 @@ public class ToiPham extends MVCPortlet {
 			throws IOException, PortletException {
 
 		try {	
-			List<BlogsEntryDto> listBlogsEntryDtos=new BlogEntrySql().findAllBlogsByCategory(99326, 1);
+			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			List<BlogsEntryDto> listBlogsEntryDtos=new BlogEntrySql().findAllBlogsByCategory("c3691d6d-f6d9-1990-75fc-449c5520f7b8", 1,themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);	
 		} catch (Exception e) {
 			// TODO: handle exception

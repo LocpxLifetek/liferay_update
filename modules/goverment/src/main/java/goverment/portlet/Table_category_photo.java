@@ -6,8 +6,6 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -16,11 +14,7 @@ import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
 
-import goverment.constants.*;
-import goverment.dto.CategoryDto;
-import goverment.dto.DlfileEntryDto;
-import goverment.dto.cpattachmentfileentryDto;
-import goverment.sql.PhotoSql;
+import goverment.constants.GovermentPortletKeys;
 import goverment.url.UrlCurrentPorlet;
 
 @Component(
@@ -49,24 +43,24 @@ public class Table_category_photo extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-			CategoryDto categoryName=new PhotoSql().categoryDto();
-			List<CategoryDto> listCategory=new PhotoSql().findCategoryByParent(categoryName.getId());
-			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
-			List<DlfileEntryDto> listDlefile= new ArrayList<>();
-			for (CategoryDto categoryDto : listCategory) {
-				cpattachmentfileentryDto cpaAttach=new PhotoSql().findCpattachByCategory(categoryDto.getId());
-				listCpa.add(cpaAttach);
-			}	
-			
-			for (cpattachmentfileentryDto cpas : listCpa) {
-				if(cpas.getId() !=null ) {
-					
-					DlfileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
-					listDlefile.add(dlfile);
-				}
-			}
-			renderRequest.setAttribute("categoryName", categoryName);
-			renderRequest.setAttribute("listDlefile", listDlefile);
+////			CategoryDto categoryName=new PhotoSql().categoryDto();
+////			List<CategoryDto> listCategory=new PhotoSql().findCategoryByParent(categoryName.getId());
+////			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
+////			List<DlFileEntryDto> listDlefile= new ArrayList<>();
+////			for (CategoryDto categoryDto : listCategory) {
+////				cpattachmentfileentryDto cpaAttach=new PhotoSql().findCpattachByCategory(categoryDto.getId());
+////				listCpa.add(cpaAttach);
+////			}	
+////			
+////			for (cpattachmentfileentryDto cpas : listCpa) {
+////				if(cpas.getId() !=null ) {
+////					
+////					DlFileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
+////					listDlefile.add(dlfile);
+////				}
+////			}
+//			renderRequest.setAttribute("categoryName", categoryName);
+//			renderRequest.setAttribute("listDlefile", listDlefile);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

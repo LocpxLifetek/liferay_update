@@ -1,5 +1,7 @@
 package goverment.portlet;
 
+import com.liferay.asset.kernel.model.AssetCategory;
+import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -15,10 +17,9 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
+
 import goverment.constants.GovermentPortletKeys;
-import goverment.dto.CategoryDto;
-import goverment.dto.DlfileEntryDto;
-import goverment.dto.cpattachmentfileentryDto;
+import goverment.dto.CpattachmentfileentryDto;
 import goverment.sql.PhotoSql;
 import goverment.url.UrlCurrentPorlet;
 
@@ -51,33 +52,20 @@ public class AlbumsPortlet extends MVCPortlet {
 					themDisplay.getLayoutFriendlyURL(layout));
 
 			renderRequest.setAttribute("url", url);
-			CategoryDto categoryName= new PhotoSql().categoryDto();
-			List<CategoryDto> listCategory= new PhotoSql().findCategoryByParent(categoryName.getId());
-			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
-			List<DlfileEntryDto> listDlfileNoImage= new ArrayList<>();
-			List<DlfileEntryDto> listDlfImage= new ArrayList<>();
-			for (CategoryDto categoryDto : listCategory) {
-				cpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());;
-				listCpa.add(cpaAttach);
-			}	
-			
-			for (cpattachmentfileentryDto cpas : listCpa) {
-				if(cpas.getId() !=null ) {			
-					DlfileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
-					listDlfImage.add(dlfile);
+			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId("9d9a6b62-d2ed-9324-7b70-a524a67c5c64", themDisplay.getScopeGroupId());
+			List<AssetCategory> listAssetCategory=AssetCategoryLocalServiceUtil.getChildCategories(assetCategory.getCategoryId());
+			int i=0;
+			List<CpattachmentfileentryDto> listCpattachmentfileentryDtos=new ArrayList<>();
+			for (AssetCategory assetCategory2 : listAssetCategory) {
+				i++;
+				CpattachmentfileentryDto cpa=new PhotoSql().findCpattachByCategory(assetCategory2.getCategoryId());
+				if(i==1) {
+					renderRequest.setAttribute("cpa", cpa);
+				}else {
+					listCpattachmentfileentryDtos.add(cpa);
 				}
 			}
-			int j=0;
-			for(DlfileEntryDto list : listDlfImage) {
-				j++;
-				if(j==1) {
-					renderRequest.setAttribute("list", list);
-				}
-				else {
-					listDlfileNoImage.add(list);
-				}
-			}
-			renderRequest.setAttribute("listDlfileNoImage", listDlfileNoImage);
+			renderRequest.setAttribute("listCpattachmentfileentryDtos", listCpattachmentfileentryDtos);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

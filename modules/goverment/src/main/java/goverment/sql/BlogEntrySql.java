@@ -13,7 +13,7 @@ import java.util.List;
 import goverment.dto.BlogsEntryDto;
 
 public class BlogEntrySql {
-	public List<BlogsEntryDto> findAllBlogsByIdCategory(Integer id,Integer number) throws SQLException {
+	public List<BlogsEntryDto> findAllBlogsByIdCategory(String uuid,Integer number,long groupIdBlog) throws SQLException {
 		PreparedStatement statement = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -42,14 +42,15 @@ public class BlogEntrySql {
 					"    INNER JOIN blogsentry                  be ON ae.classpk = be.entryid\r\n" + 
 					"    INNER JOIN dlfileentry                 dl ON dl.fileentryid = be.smallimagefileentryid\r\n" + 
 					"WHERE\r\n" + 
-					"        ac.categoryid =?\r\n" + 
-					"    AND ae.classnameid = '31201'\r\n" + 
-					"    AND be.status = '0'\r\n" + 
+					"        ac.uuid_ =?\r\n" + 
+					"   \r\n" + 
+					"    AND be.status = '0' and be.groupId=?\r\n" + 
 					"ORDER BY\r\n" + 
 					"    be.modifieddate DESC\r\n" + 
 					"OFFSET 0 ROWS FETCH NEXT ? ROWS ONLY");
-			statement.setInt(1, id);
-			statement.setInt(2, number);
+			statement.setString(1, uuid);
+			statement.setLong(2, groupIdBlog);
+			statement.setInt(3, number);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				BlogsEntryDto blogsEntryDto = new BlogsEntryDto();
@@ -59,12 +60,12 @@ public class BlogEntrySql {
 				String description = rs.getString("descriptiondlfileentry");
 				Timestamp modifiedDate = rs.getTimestamp("modifieddate");
 				Integer fileEntryId = rs.getInt("fileentryid");
-				String uuid= rs.getString("uuiddlfileentry");
+				String uuidDlFile= rs.getString("uuiddlfileentry");
 				Integer groupId= rs.getInt("groupid");
 				Integer folderId= rs.getInt("folderid");
 				String filename= rs.getString("filename");
 				String content= rs.getString("content");
-				String src = "/documents" + "/" + groupId + "/" + folderId + "/" + filename + "/" + uuid;
+				String src = "/documents" + "/" + groupId + "/" + folderId + "/" + filename + "/" + uuidDlFile;
 				blogsEntryDto.setDescription(description);
 				blogsEntryDto.setEntryId(entryId);
 				blogsEntryDto.setFileEntryId(fileEntryId);
@@ -92,7 +93,7 @@ public class BlogEntrySql {
 			}
 		}
 	}
-	public List<BlogsEntryDto> findAllBlogsByCategory(Integer id, Integer number) throws SQLException {
+	public List<BlogsEntryDto> findAllBlogsByCategory(String uuid, Integer number,long groupId) throws SQLException {
 		PreparedStatement statement=null;
 		Connection con=null;
 		ResultSet rs=null;
@@ -111,14 +112,15 @@ public class BlogEntrySql {
 					"    INNER JOIN assetentry                  ae ON aeac.assetentryid = ae.entryid\r\n" + 
 					"    INNER JOIN blogsentry                  be ON ae.classpk = be.entryid\r\n" + 
 					"WHERE\r\n" + 
-					"        ac.categoryid = ?\r\n" + 
-					"    AND ae.classnameid = '31201'\r\n" + 
-					"    AND be.status = '0'\r\n" + 
+					"        ac.uuid_ = ?\r\n" + 
+					"  \r\n" + 
+					"    AND be.status = '0' and be.groupId=?\r\n" + 
 					"ORDER BY\r\n" + 
 					"    be.modifieddate DESC\r\n" + 
 					"OFFSET 0 ROWS FETCH NEXT ? ROWS ONLY");
-			statement.setInt(1, id);
-			statement.setInt(2, number);
+			statement.setString(1, uuid);
+			statement.setLong(2, groupId);
+			statement.setInt(3, number);
 			rs=statement.executeQuery();
 			while(rs.next()) {
 				BlogsEntryDto blogsEntryDto=new BlogsEntryDto();

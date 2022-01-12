@@ -4,11 +4,9 @@
 <html>
 
 <head>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/slick.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/slick-theme.min.css">
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css">
 </head>
 <style>
 .link-goverment {
@@ -33,17 +31,11 @@
 
 					</a>
 				</div>
-
 			</c:forEach>
 		</div>
 	</div>
-
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.js"></script>
-
-
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/slick.min.js"></script>
 	<script type="text/javascript">
 		$('.link-portal').slick({
 			slidesToShow : 4,

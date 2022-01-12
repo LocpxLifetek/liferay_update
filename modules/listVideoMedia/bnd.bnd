@@ -1,4 +1,0 @@
-Bundle-Name: listVideoMedia
-Bundle-SymbolicName: listVideoMedia
-Bundle-Version: 1.0.0
-Export-Package: listVideoMedia.constants

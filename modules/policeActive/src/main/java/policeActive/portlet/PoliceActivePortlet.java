@@ -78,7 +78,7 @@ public class PoliceActivePortlet extends MVCPortlet {
 					List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRel=AssetEntryAssetCategoryRelLocalServiceUtil.dynamicQuery(assetEntryAssetCategoryRelDynamic);
 					for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRel) {
 						AssetEntry assetEntry=AssetEntryLocalServiceUtil.getEntry(assetEntryAssetCategoryRel.getAssetEntryId());
-						if(assetEntry.getClassNameId()==31201) {
+						
 							BlogsEntry blogsEntry=BlogsEntryLocalServiceUtil.getEntry(assetEntry.getClassPK());
 							if(blogsEntry.getStatus()==0) {
 								String timestamp=new SimpleDateFormat("MM/dd/yyyy").format(blogsEntry.getModifiedDate());
@@ -92,7 +92,7 @@ public class PoliceActivePortlet extends MVCPortlet {
 							}
 						}
 						
-					}
+					
 				}
 			}
 			renderRequest.setAttribute("listBlogsEntries", listBlogsEntries);
