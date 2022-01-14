@@ -1,0 +1,4 @@
+Bundle-Name: executive_documents
+Bundle-SymbolicName: executive_documents
+Bundle-Version: 1.0.0
+Export-Package: executive_documents.constants

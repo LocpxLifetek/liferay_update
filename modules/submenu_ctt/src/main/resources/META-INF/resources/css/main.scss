@@ -1,0 +1,227 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.navbar_menu {
+  width: 100%;
+  background-color: #b80003;
+  height: 40px;
+}
+.navbar_menu .logo {
+  padding: 11px;
+  font-size: 0.9375em;
+  font-weight: 800;
+  float: left;
+}
+#hamburger {
+  width: 30px;
+  position: relative;
+  margin: auto;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+#hamburger span {
+  display: block;
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  background: white;
+  border-radius: 9px;
+  opacity: 1;
+  left: 7px;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.25s ease-in-out;
+  -moz-transition: 0.25s ease-in-out;
+  -o-transition: 0.25s ease-in-out;
+  transition: 0.25s ease-in-out;
+}
+
+#hamburger span:nth-child(1) {
+  top: 0px;
+}
+
+#hamburger span:nth-child(2) {
+  top: 11px;
+}
+
+#hamburger span:nth-child(3) {
+  top: 22px;
+}
+
+#hamburger.open span:nth-child(1) {
+  top: 11px;
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+
+#hamburger.open span:nth-child(2) {
+  opacity: 0;
+  left: -30px;
+}
+
+#hamburger.open span:nth-child(3) {
+  top: 11px;
+  -webkit-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  transform: rotate(-135deg);
+}
+
+.sitenavigation ul {
+  margin: 0;
+  padding: 0;
+  float: left;
+}
+.sitenavigation li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  margin-left: -4px;
+  line-height: 20px;
+}
+.sitenavigation li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 11px 14px;
+  font-size: 1em;
+  -webkit-tap-highlight-color: transparent;
+}
+.sitenavigation li a:hover {
+  color: yellow;
+}
+.sitenavigation li.clicked > ul {
+  display: block;
+}
+.sitenavigation li ul {
+  display: none;
+  position: absolute;
+  min-width: 200px;
+  max-width: 300px;
+  padding: 0;
+  margin: 0;
+}
+
+.sitenavigation li ul li {
+  float: none;
+  display: block;
+  margin: 0;
+}
+.sitenavigation li ul ul {
+  left: 100%;
+  margin-top: -40px;
+}
+
+.no-js .sitenavigation li:hover > ul {
+  display: block !important;
+}
+
+.menu-icon {
+  display: none;
+}
+
+.btn_dn {
+  font-size: 1em;
+  float: right;
+}
+@media (max-width: 1000px) {
+  .navbar_menu {
+    width: 100%;
+    background-color: #b80003;
+    height: 44px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    z-index: 1;
+  }
+  .navbar_menu .logo {
+    float: right;
+    font-weight: 800;
+    margin: 10px;
+  }
+  .navbar_menu .menu-icon {
+    width: 30px;
+    height: 25px;
+    padding-top: 0;
+    margin-top: 7px;
+    display: block;
+    -webkit-tap-highlight-color: transparent;
+    padding: 5px;
+    padding-top: 1px;
+    padding-bottom: 12px;
+    cursor: pointer;
+  }
+  .navbar_menu .sitenavigation ul {
+    display: none;
+    max-width: none !important;
+  }
+  .navbar_menu .sitenavigation li {
+    float: none;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid white;
+  }
+  .navbar_menu .sitenavigation.is-tapped > ul {
+    display: block;
+    position: absolute;
+    margin: 0;
+    background-color: #fff;
+    right: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0;
+  }
+  .btn_dn {
+    display: block;
+  }
+  .navbar_menu .sitenavigation.is-tapped > ul a {
+    width: 100%;
+    margin: 0;
+    background-color: #b80003;
+    display: block;
+    font-size: 1em;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: auto;
+    color: white;
+    float: none;
+    border: none !important;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .navbar_menu .sitenavigation.is-tapped > ul a:hover {
+    background-color: #b80003;
+    color: yellow;
+  }
+
+  .navbar_menu .sitenavigation.is-tapped > ul li li {
+    background-color: #fff;
+  }
+  .navbar_menu .sitenavigation.is-tapped > ul ul {
+    display: none;
+    width: 100%;
+    z-index: 200;
+    border: none;
+    margin-left: 0;
+    padding: 0;
+    position: relative !important;
+  }
+}

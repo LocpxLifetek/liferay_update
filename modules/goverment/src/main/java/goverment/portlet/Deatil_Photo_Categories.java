@@ -53,11 +53,7 @@ public class Deatil_Photo_Categories extends MVCPortlet {
 					themDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
-<<<<<<< HEAD
-			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("id");
-=======
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 			DlFileEntryDto dlfileEntry= new PhotoSql().dlfile(uuid);
 			renderRequest.setAttribute("dlfileEntry", dlfileEntry);
 			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid);

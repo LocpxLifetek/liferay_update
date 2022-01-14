@@ -15,13 +15,6 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
-<<<<<<< HEAD
-import goverment.dto.CategoryDto;
-import goverment.dto.DlFileEntryDto;
-import goverment.dto.cpattachmentfileentryDto;
-import goverment.sql.PhotoSql;
-=======
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 import goverment.url.UrlCurrentPorlet;
 
 @Component(
@@ -50,45 +43,17 @@ public class Photo extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
 					themDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-<<<<<<< HEAD
-			CategoryDto category= new PhotoSql().categoryDto();
-			List<CategoryDto> listCategoryDtos=new PhotoSql().findCategoryByParent(621347);
-			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
-			List<DlFileEntryDto> listDlefile= new ArrayList<>();
-			for (CategoryDto categoryDto : listCategoryDtos) {
-				cpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());
-				listCpa.add(cpaAttach);
-			}	
-			
-			for (cpattachmentfileentryDto cpas : listCpa) {
-				if(cpas.getId() !=null && listDlefile.size()<3) {
-					
-					DlFileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
-					listDlefile.add(dlfile);
-				}
-			}
-			renderRequest.setAttribute("category", category);
-			renderRequest.setAttribute("listDlefile", listDlefile);
-=======
 //			CategoryDto category= new PhotoSql().categoryDto();
 //			List<CategoryDto> listCategoryDtos=new PhotoSql().findCategoryByParent(621347);
-//			List<cpattachmentfileentryDto> listCpa= new ArrayList<>();
+//			List<CpattachmentfileentryDto> listCpa= new ArrayList<>();
 //			List<DlFileEntryDto> listDlefile= new ArrayList<>();
 //			for (CategoryDto categoryDto : listCategoryDtos) {
-//				cpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());
+//				CpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());
 //				listCpa.add(cpaAttach);
 //			}	
 //			
-//			for (cpattachmentfileentryDto cpas : listCpa) {
-//				if(cpas.getId() !=null && listDlefile.size()<3) {
-//					
-//					DlFileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getId());
-//					listDlefile.add(dlfile);
-//				}
-////			}
 //			renderRequest.setAttribute("category", category);
 //			renderRequest.setAttribute("listDlefile", listDlefile);
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

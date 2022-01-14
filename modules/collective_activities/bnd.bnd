@@ -1,0 +1,4 @@
+Bundle-Name: collective_activities
+Bundle-SymbolicName: collective_activities
+Bundle-Version: 1.0.0
+Export-Package: collective_activities.constants

@@ -25,13 +25,13 @@
         <div class="footer-bottom">
           <div class="container">
             <h3>CỤC CÔNG NGHỆ THÔNG TIN</h3>
-            <p>
+            <span>
               Chịu trách nhiệm xuất bản: Cục Công nghệ thông tin<br />Địa chỉ:
               80 Trần Quốc Hoàn - Quận Cầu Giấy - Hà Nội<br />Điện thoại:
               069-47811 - Fax : 069-46980<br />Ghi rõ nguồn Cổng Thông tin điện
               tử Cục Công nghệ thông tin (https://h05.bca) khi trích dẫn lại tin
               từ địa chỉ này.
-            </p>
+            </span>
           </div>
         </div>
       </footer>

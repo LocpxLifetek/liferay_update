@@ -11,13 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import goverment.dto.CategoryDto;
-<<<<<<< HEAD
-import goverment.dto.DlFileEntryDto;
-import goverment.dto.cpattachmentfileentryDto;
-=======
 import goverment.dto.CpattachmentfileentryDto;
 import goverment.dto.DlFileEntryDto;
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
+
 
 
 
@@ -199,7 +195,7 @@ public class PhotoSql {
 		
 		
 	}
-<<<<<<< HEAD
+
 	public List<DlFileEntryDto> findAllDLfileEntryDtos(Integer id) throws SQLException {
 		PreparedStatement statement=null;
 		Connection con=null;
@@ -259,16 +255,11 @@ public class PhotoSql {
 			}
 		}
 	}
+
 	public DlFileEntryDto dlfile(String uuid) throws SQLException {
 		PreparedStatement statement=null;
 		Connection con=null;
 		ResultSet rs=null;
-=======
-	public DlFileEntryDto dlfile(String uuid) throws SQLException {
-		PreparedStatement statement=null;
-		Connection con=null;
-		ResultSet rs=null;
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 		DlFileEntryDto dlfileDto= new DlFileEntryDto();
 		try {
 			con = DataAccess.getConnection();

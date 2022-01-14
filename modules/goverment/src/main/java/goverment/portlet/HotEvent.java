@@ -47,11 +47,8 @@ public class HotEvent extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-<<<<<<< HEAD
-			List<BlogsEntryDto> listBlogsEntryDtos = new BlogEntrySql().findAllBlogsByIdCategory("4fb47075-a67c-9f2d-f175-d41304e90ad3",5);
-=======
+
 			List<BlogsEntryDto> listBlogsEntryDtos = new BlogEntrySql().findAllBlogsByIdCategory("4fb47075-a67c-9f2d-f175-d41304e90ad3",5,themeDisplay.getScopeGroupId());
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 			List<BlogsEntryDto> listBlogs = new ArrayList<>();
 			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);
 			int i = 0;

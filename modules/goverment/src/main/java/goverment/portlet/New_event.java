@@ -50,11 +50,8 @@ public class New_event extends MVCPortlet {
 			renderRequest.setAttribute("url", url);
 			List<BlogsEntryDto> listBlogs2=new ArrayList<>();
 			List<BlogsEntryDto> listBlogs6=new ArrayList<>();
-<<<<<<< HEAD
-			List<BlogsEntryDto> listBlogsEntryDtos= new BlogEntrySql().findAllBlogsByIdCategory("4fb47075-a67c-9f2d-f175-d41304e90ad3",8);
-=======
+
 			List<BlogsEntryDto> listBlogsEntryDtos= new BlogEntrySql().findAllBlogsByIdCategory("4fb47075-a67c-9f2d-f175-d41304e90ad3",8,themeDisplay.getScopeGroupId());
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 			int i=0;
 			for (BlogsEntryDto blogsEntryDto : listBlogsEntryDtos) {
 				i++;

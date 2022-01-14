@@ -96,11 +96,7 @@ public class CommonSqlBlogEntry {
 					+ "    INNER JOIN viewcountentry              vc ON vc.classpk = ae.entryid\r\n"
 					+ "    INNER JOIN blogsentry                  be ON be.entryid = ae.classpk\r\n"
 					+ "    INNER JOIN dlfileentry                 de ON de.fileentryid = be.smallimagefileentryid\r\n"
-<<<<<<< HEAD
-					+ "WHERE\r\n" + "        ae.classnameid = '31201'\r\n" + "    AND ac.groupid=? and upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) like upper('Tin tc s kin')\r\n"
-=======
 					+ "WHERE\r\n" + "  ac.groupid=? and upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) like upper('Tin tc s kin')\r\n"
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 					+ "    AND be.status = '0'\r\n"
 					+ "    AND be.modifieddate BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD')\r\n"
 					+ "ORDER BY\r\n" + "    vc.viewcount DESC\r\n" + "OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY");
@@ -158,11 +154,7 @@ public class CommonSqlBlogEntry {
 		try {
 			List<CountViewVideoDto> listCountViewVideoDto=new ArrayList<>();
 			con=DataAccess.getConnection();
-<<<<<<< HEAD
-			statement=con.prepareStatement("select df.groupid as groupId,df.folderid as folderId,df.filename as fileName,df.extension as extension,df.uuid_ as uuid,df.title as title,df.mimetype as mimeType from viewcountentry vc inner join assetEntry ae on vc.classpk=ae.classpk inner join dlfileentry df on df.fileentryid=ae.classpk where ae.mimetype like concat('video','%') and vc.classnameid='20011' and df.groupId=? order  by vc.viewcount desc OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY");
-=======
 			statement=con.prepareStatement("select df.groupid as groupId,df.folderid as folderId,df.filename as fileName,df.extension as extension,df.uuid_ as uuid,df.title as title,df.mimetype as mimeType from viewcountentry vc inner join assetEntry ae on vc.classpk=ae.classpk inner join dlfileentry df on df.fileentryid=ae.classpk where ae.mimetype like concat('video','%') and df.groupId=? order  by vc.viewcount desc OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY");
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 			statement.setLong(1, groupIdDlfileEntry);
 			rs=statement.executeQuery();
 			while(rs.next()) {

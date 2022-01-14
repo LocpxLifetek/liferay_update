@@ -1,0 +1,4 @@
+Bundle-Name: submenu_ctt
+Bundle-SymbolicName: submenu_ctt
+Bundle-Version: 1.0.0
+Export-Package: submenu_ctt.constants

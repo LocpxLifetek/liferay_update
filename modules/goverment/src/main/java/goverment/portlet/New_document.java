@@ -48,11 +48,8 @@ public class New_document extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-<<<<<<< HEAD
-			List<BlogsEntryDto> listBlogsEntryDtos=new BlogEntrySql().findAllBlogsByIdCategory("7cf5f47e-4c2a-17c6-8b20-8f709a9e07c1",3);
-=======
+
 			List<BlogsEntryDto> listBlogsEntryDtos=new BlogEntrySql().findAllBlogsByIdCategory("7cf5f47e-4c2a-17c6-8b20-8f709a9e07c1",3,themeDisplay.getScopeGroupId());
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);
 		
 			

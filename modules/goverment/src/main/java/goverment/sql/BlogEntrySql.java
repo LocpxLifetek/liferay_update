@@ -13,11 +13,7 @@ import java.util.List;
 import goverment.dto.BlogsEntryDto;
 
 public class BlogEntrySql {
-<<<<<<< HEAD
-	public List<BlogsEntryDto> findAllBlogsByIdCategory(String uuid,Integer number) throws SQLException {
-=======
 	public List<BlogsEntryDto> findAllBlogsByIdCategory(String uuid,Integer number,long groupIdBlog) throws SQLException {
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 		PreparedStatement statement = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -47,23 +43,17 @@ public class BlogEntrySql {
 					"    INNER JOIN dlfileentry                 dl ON dl.fileentryid = be.smallimagefileentryid\r\n" + 
 					"WHERE\r\n" + 
 					"        ac.uuid_ =?\r\n" + 
-<<<<<<< HEAD
 					"    AND ae.classnameid = '31201'\r\n" + 
 					"    AND be.status = '0'\r\n" + 
-=======
 					"   \r\n" + 
 					"    AND be.status = '0' and be.groupId=?\r\n" + 
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 					"ORDER BY\r\n" + 
 					"    be.modifieddate DESC\r\n" + 
 					"OFFSET 0 ROWS FETCH NEXT ? ROWS ONLY");
 			statement.setString(1, uuid);
-<<<<<<< HEAD
 			statement.setInt(2, number);
-=======
 			statement.setLong(2, groupIdBlog);
 			statement.setInt(3, number);
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				BlogsEntryDto blogsEntryDto = new BlogsEntryDto();
@@ -106,11 +96,7 @@ public class BlogEntrySql {
 			}
 		}
 	}
-<<<<<<< HEAD
-	public List<BlogsEntryDto> findAllBlogsByCategory(String uuid, Integer number) throws SQLException {
-=======
 	public List<BlogsEntryDto> findAllBlogsByCategory(String uuid, Integer number,long groupId) throws SQLException {
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 		PreparedStatement statement=null;
 		Connection con=null;
 		ResultSet rs=null;
@@ -130,23 +116,18 @@ public class BlogEntrySql {
 					"    INNER JOIN blogsentry                  be ON ae.classpk = be.entryid\r\n" + 
 					"WHERE\r\n" + 
 					"        ac.uuid_ = ?\r\n" + 
-<<<<<<< HEAD
 					"    AND ae.classnameid = '31201'\r\n" + 
 					"    AND be.status = '0'\r\n" + 
-=======
 					"  \r\n" + 
 					"    AND be.status = '0' and be.groupId=?\r\n" + 
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
 					"ORDER BY\r\n" + 
 					"    be.modifieddate DESC\r\n" + 
 					"OFFSET 0 ROWS FETCH NEXT ? ROWS ONLY");
 			statement.setString(1, uuid);
-<<<<<<< HEAD
 			statement.setInt(2, number);
-=======
 			statement.setLong(2, groupId);
 			statement.setInt(3, number);
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
+
 			rs=statement.executeQuery();
 			while(rs.next()) {
 				BlogsEntryDto blogsEntryDto=new BlogsEntryDto();

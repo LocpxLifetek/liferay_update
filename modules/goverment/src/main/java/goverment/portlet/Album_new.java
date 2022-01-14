@@ -43,18 +43,13 @@ public class Album_new extends MVCPortlet {
 			throws IOException, PortletException {
 		try {
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
-<<<<<<< HEAD
-			String uuid1 =  PortalUtil.getOriginalServletRequest(request).getParameter("id");
-			
-			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(Integer.parseInt(uuid1));
-			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(categoryDto.getId());
-=======
+
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
 			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(assetCategory.getCategoryId());
 			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid);
->>>>>>> 9d9f12a3e40a55ad899df6b15c3fdd8d602dea18
+
 			renderRequest.setAttribute("categoryDto", categoryDto);
 			renderRequest.setAttribute("dLfileEntryDtos", dLfileEntryDtos);
 		} catch (Exception e) {
