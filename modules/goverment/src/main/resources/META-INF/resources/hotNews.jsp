@@ -7,7 +7,7 @@
 			<img
 				src="${blog.src}"
 				class="soup-image1"> <a
-				href="${url}/tintuc?id=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
+				href="${url}/new_detail?id=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
 		</div>
 	</c:forEach>
 </div>

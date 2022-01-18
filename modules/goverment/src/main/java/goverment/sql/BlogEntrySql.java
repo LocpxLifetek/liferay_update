@@ -43,7 +43,6 @@ public class BlogEntrySql {
 					"    INNER JOIN dlfileentry                 dl ON dl.fileentryid = be.smallimagefileentryid\r\n" + 
 					"WHERE\r\n" + 
 					"        ac.uuid_ =?\r\n" + 
-					"    AND ae.classnameid = '31201'\r\n" + 
 					"    AND be.status = '0'\r\n" + 
 					"   \r\n" + 
 					"    AND be.status = '0' and be.groupId=?\r\n" + 
@@ -116,7 +115,6 @@ public class BlogEntrySql {
 					"    INNER JOIN blogsentry                  be ON ae.classpk = be.entryid\r\n" + 
 					"WHERE\r\n" + 
 					"        ac.uuid_ = ?\r\n" + 
-					"    AND ae.classnameid = '31201'\r\n" + 
 					"    AND be.status = '0'\r\n" + 
 					"  \r\n" + 
 					"    AND be.status = '0' and be.groupId=?\r\n" + 
