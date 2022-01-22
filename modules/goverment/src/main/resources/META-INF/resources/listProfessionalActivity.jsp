@@ -4,8 +4,7 @@
 
 	<div class="TD-box-news ">
         <div class="TD-box-news-title" style="background-image: url(<%=request.getContextPath()%>/images/portal/_res/img/bg-head.svg);"><a
-                href='portal/Pages/Hoat-dong-lanh-dao-UBND-tinh.aspx'>Tin
-                tức sự kiện</a></div>
+                href='portal/Pages/Hoat-dong-lanh-dao-UBND-tinh.aspx'>Hoạt dộng chuyên môn</a></div>
         <div class="TD-box-news-main">
             <table cellspacing="0"
                 id="ctl00_ctl34_g_1ef02479_6652_4c18_9f77_78ab31852301_ctl00_dform"
