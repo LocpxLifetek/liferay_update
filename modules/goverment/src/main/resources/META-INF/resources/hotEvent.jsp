@@ -14,7 +14,7 @@
 				</div>
 				<div class="tit" id="title2">
 					<a
-						href="${url}/chitiettintuc?id=${blog.uuidBlogsEntry}">
+						href="${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}">
 						${blogsEntryDto.titleBlogsEntry}
 					 </a>
 				</div>
@@ -31,7 +31,7 @@
 					<li class="ui-tabs-nav-item" id="nav-fragment-1"><a
 						aria-valuetext="${blog.description}"
 						aria-label="/knd/tt/PublishingImages/Tran Thanh Xuan/8.2021/bca_9220.jpg"
-						href="${url}/chitiettintuc?id=${blog.uuidBlogsEntry}"> <img
+						href="${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}"> <img
 							src="${blog.src}"
 							alt=""> ${blog.titleBlogsEntry}
 					</a></li>
