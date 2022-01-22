@@ -1,4 +1,0 @@
-Bundle-Name: cp_chucnangnhiemvu
-Bundle-SymbolicName: com.cp_chucnangnhiemvu
-Bundle-Version: 1.0.0
-Export-Package: com.cp_chucnangnhiemvu.constants

@@ -1,4 +1,0 @@
-Bundle-Name: cp_baihockinhnghiem
-Bundle-SymbolicName: com.cp_baihockinhnghiem
-Bundle-Version: 1.0.0
-Export-Package: com.cp_baihockinhnghiem.constants

@@ -1,6 +1,11 @@
+<%@page import="com.liferay.portal.kernel.util.PortalUtil"%>
+<%@page import="com.liferay.blogs.model.BlogsEntry"%>
 <%@ include file="/init.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="liferay-ui" uri="http://liferay.com/tld/ui" %>
+<%@ taglib prefix="liferay-comment" uri="http://liferay.com/tld/comment" %>
+<%@ taglib prefix="portlet" uri="http://java.sun.com/portlet_2_0" %>
 
 <div class="detailBlogs">
 	<div class="title">

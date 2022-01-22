@@ -1,4 +1,0 @@
-Bundle-Name: footer_qn
-Bundle-SymbolicName: footer_qn
-Bundle-Version: 1.0.0
-Export-Package: footer_qn.constants

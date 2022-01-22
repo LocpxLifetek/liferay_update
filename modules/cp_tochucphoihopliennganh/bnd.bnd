@@ -1,4 +1,0 @@
-Bundle-Name: cp_tochucphoihopliennganh
-Bundle-SymbolicName: com.cp_tochucphoihopliennganh
-Bundle-Version: 1.0.0
-Export-Package: com.cp_tochucphoihopliennganh.constants

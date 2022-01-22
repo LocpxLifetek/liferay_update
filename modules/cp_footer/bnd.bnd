@@ -1,4 +1,0 @@
-Bundle-Name: cp_footer
-Bundle-SymbolicName: com.cp_footer
-Bundle-Version: 1.0.0
-Export-Package: com.cp_footer.constants

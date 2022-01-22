@@ -96,7 +96,7 @@ public class CommonSqlBlogEntry {
 					+ "    INNER JOIN viewcountentry              vc ON vc.classpk = ae.entryid\r\n"
 					+ "    INNER JOIN blogsentry                  be ON be.entryid = ae.classpk\r\n"
 					+ "    INNER JOIN dlfileentry                 de ON de.fileentryid = be.smallimagefileentryid\r\n"
-					+ "WHERE\r\n" + "  ac.groupid=? and upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) like upper('Tin tc s kin')\r\n"
+					+ "WHERE\r\n" + "  ac.groupid=? and upper(REGEXP_REPLACE(ac.name,'[^a-z_A-Z ]')) = upper('Tin tc s kin')\r\n"
 					+ "    AND be.status = '0'\r\n"
 					+ "    AND be.modifieddate BETWEEN TO_DATE(?, 'YYYY-MM-DD') AND TO_DATE(?, 'YYYY-MM-DD')\r\n"
 					+ "ORDER BY\r\n" + "    vc.viewcount DESC\r\n" + "OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY");

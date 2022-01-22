@@ -1,4 +1,0 @@
-Bundle-Name: cp_tieusucacthanhviencp
-Bundle-SymbolicName: com.cp_tieusucacthanhviencp
-Bundle-Version: 1.0.0
-Export-Package: com.cp_tieusucacthanhviencp.constants

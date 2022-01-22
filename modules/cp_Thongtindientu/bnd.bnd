@@ -1,4 +1,0 @@
-Bundle-Name: cp_Thongtindientu
-Bundle-SymbolicName: com.thongtindientu
-Bundle-Version: 1.0.0
-Export-Package: com.thongtindientu.constants

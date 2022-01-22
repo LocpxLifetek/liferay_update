@@ -1,4 +1,0 @@
-Bundle-Name: portlet_map
-Bundle-SymbolicName: portlet_map
-Bundle-Version: 1.0.0
-Export-Package: portlet_map.constants

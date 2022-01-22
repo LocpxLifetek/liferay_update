@@ -1,4 +1,0 @@
-Bundle-Name: cp_thanhviencpquacacthoiky
-Bundle-SymbolicName: com.cp_thanhviencpquacacthoiky
-Bundle-Version: 1.0.0
-Export-Package: com.cp_thanhviencpquacacthoiky.constants

@@ -1,4 +1,0 @@
-Bundle-Name: portlet_lienket
-Bundle-SymbolicName: portlet_lienket
-Bundle-Version: 1.0.0
-Export-Package: portlet_lienket.constants

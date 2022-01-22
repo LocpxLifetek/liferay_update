@@ -1,4 +1,0 @@
-Bundle-Name: cp_Thongtindientu_Right
-Bundle-SymbolicName: com.cp_ThongtindientuRight
-Bundle-Version: 1.0.0
-Export-Package: com.cp_ThongtindientuRight.constants

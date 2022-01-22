@@ -1,20 +1,13 @@
 package goverment.portlet;
 
-import com.liferay.asset.kernel.model.AssetEntry;
-import com.liferay.asset.kernel.model.AssetTag;
-import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
-import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
 import com.liferay.blogs.model.BlogsEntry;
 import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.document.library.kernel.model.DLFileEntry;
-import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -25,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
-import goverment.url.UrlCurrentPorlet;
 
 @Component(
 		immediate = true,
@@ -33,36 +25,25 @@ import goverment.url.UrlCurrentPorlet;
 			"com.liferay.portlet.display-category=category.sample",
 			"com.liferay.portlet.header-portlet-css=/css/main.css",
 			"com.liferay.portlet.instanceable=true",
-			"javax.portlet.display-name=InformationNews",
+			"javax.portlet.display-name=Comments",
 			"javax.portlet.init-param.template-path=/",
-			"javax.portlet.init-param.view-template=/information.jsp",
-			"javax.portlet.name=" + GovermentPortletKeys.INFORMATIONNEWS,
+			"javax.portlet.init-param.view-template=/comment.jsp",
+			"javax.portlet.name=" + GovermentPortletKeys.COMMENTGOVERMENT,
 			"javax.portlet.resource-bundle=content.Language",
 			"javax.portlet.security-role-ref=power-user,user"
 		},
 		service = Portlet.class
-)
-public class InformationNewsPorlet extends MVCPortlet {
+	)
+public class Comment extends MVCPortlet  {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
-					themeDisplay.getLayoutFriendlyURL(layout));
-			renderRequest.setAttribute("url", url);
 			BlogsEntry blogsEntry=BlogsEntryLocalServiceUtil.getBlogsEntryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("blogsEntry", blogsEntry);
-			AssetEntry incrementView=AssetEntryLocalServiceUtil.incrementViewCounter(themeDisplay.getCompanyId(), themeDisplay.getUserId(), BlogsEntry.class.getName(), blogsEntry.getEntryId());
-			AssetEntry assetEntry=AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), blogsEntry.getEntryId());
-			List<AssetTag> listAssetTag=AssetTagLocalServiceUtil.getAssetEntryAssetTags(assetEntry.getEntryId());
-			
-			renderRequest.setAttribute("listAssetTag", listAssetTag);
-			
-			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
