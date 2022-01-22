@@ -41,5 +41,9 @@ public class GovermentPortletKeys {
 	public static final String LINKGOVERMENT="LinkGoverment_GovermentPortlet";
 	public static final String COMMENTGOVERMENT="Comment_GovermetPortlet";
 	public static final String SEARCHBLOGSGOVERMENT="Searchs_GovermentPortlet";
+	
+	
+	//H05
+	public static final String HEADERGOVERMENT="Headers_GovermentPorlet";
 
 }
