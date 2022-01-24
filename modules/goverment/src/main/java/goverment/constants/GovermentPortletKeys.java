@@ -41,8 +41,12 @@ public class GovermentPortletKeys {
 	public static final String LINKGOVERMENT="LinkGoverment_GovermentPortlet";
 	public static final String COMMENTGOVERMENT="Comment_GovermetPortlet";
 	public static final String SEARCHBLOGSGOVERMENT="Searchs_GovermentPortlet";
-	
-	
+	public static final String PROFESSIONAL_ACTIVITIES="professional_activitiesPortlet";
+	public static final String SUBCATEGORY="SubcategoryPortlet";
+	public static final String CATEGORY="CategoryPortlet";
+	public static final String COLLECTION_ACTIVITIES="collective_activitiesPortlet";
+	public static final String LISTEXECUTIVE_DOCUMENT_CATEGORY="Executive_documentsCategoryPortlet";
+
 	//H05
 	public static final String HEADERGOVERMENT="Headers_GovermentPorlet";
 	public static final String PROFESSIONALACTIVITIES="ProfessionalActivities_GovermentPorlet";

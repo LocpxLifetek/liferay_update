@@ -1,4 +1,0 @@
-Bundle-Name: banner_ctt
-Bundle-SymbolicName: banner_ctt
-Bundle-Version: 1.0.0
-Export-Package: banner_ctt.constants

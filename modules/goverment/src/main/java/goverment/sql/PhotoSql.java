@@ -18,16 +18,61 @@ import goverment.dto.DlFileEntryDto;
 
 
 public class PhotoSql {
-	
-	public CategoryDto findCategoryByParentId(long id){
+	public CategoryDto categoryDto(String uuid)
+	{
 		PreparedStatement  statement = null;
 		Connection con = null;
 		ResultSet rs = null;
 		CategoryDto category= new CategoryDto();
 		try {
 			con = DataAccess.getConnection();
-			statement= con.prepareStatement("select ac.categoryid as CategoryId, ac.groupid as groupId, ac.name as name from assetcategory ac where ac.parentcategoryid=? order by ac.modifieddate desc OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY");
-			statement.setLong(1, id);
+			statement= con.prepareStatement("SELECT ac.name as name , ac.categoryid as categoryId FROM assetcategory ac WHERE ac.uuid_=?");
+			statement.setString(1,uuid);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				String name= rs.getString("name");
+				Integer categoryId= rs.getInt("categoryId");
+				category.setName(name);
+				category.setId(categoryId);
+			}
+			return category;
+		}
+			catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+				return null;
+			} finally {
+				if (rs != null) {
+					try {
+						rs.close();
+					} catch (SQLException e) {
+						/* Ignored */}
+				}
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException e) {
+						/* Ignored */}
+				}
+				if (con != null) {
+					try {
+						con.close();
+					} catch (SQLException e) {
+						/* Ignored */}
+				}
+			}
+	}
+	
+	public List<CategoryDto> findCategoryByParentId(Integer id){
+		PreparedStatement  statement = null;
+		Connection con = null;
+		ResultSet rs = null;
+		List<CategoryDto> listCategory= new ArrayList<>();
+		CategoryDto category= new CategoryDto();
+		try {
+			con = DataAccess.getConnection();
+			statement= con.prepareStatement("select ac.categoryid as CategoryId, ac.groupid as groupId, ac.name as name from assetcategory ac where ac.parentcategoryid=? order by ac.modifieddate desc OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY");
+			statement.setInt(1, id);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				Integer categoryId = rs.getInt("CategoryId");
@@ -37,9 +82,10 @@ public class PhotoSql {
 				category.setId(categoryId);
 				category.setGroupId(groupId);
 				category.setName(name);
+				listCategory.add(category);
 				
 			}
-			return category;
+			return listCategory;
 		}  catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -65,7 +111,7 @@ public class PhotoSql {
 			}
 		}
 	}
-	public CpattachmentfileentryDto findCpattachByCategory(long categoryid) {
+	public CpattachmentfileentryDto findCpattachByCategory(Integer categoryid) {
 		PreparedStatement  statement = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -73,7 +119,7 @@ public class PhotoSql {
 		try {
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement("SELECT\r\n" + 
-					"    ac.uuid_ as uuid,ac.name as name,dl.fileentryid AS fileentryid,dl.groupid  AS groupid,dl.folderid AS folderid, dl.filename AS filename, dl.uuid_ AS uuiddlfileentry\r\n" + 
+					"    ac.uuid_ as uuid,ac.name as name,dl.fileentryid AS fileentryid,cp.fileentryid AS cpfileentryid,dl.groupid  AS groupid,dl.folderid AS folderid, dl.filename AS filename, dl.uuid_ AS uuiddlfileentry\r\n" + 
 					"FROM\r\n" + 
 					"         cpattachmentfileentry cp\r\n" + 
 					"    INNER JOIN assetcategory ac ON ac.categoryid = cp.classpk\r\n" + 
@@ -83,17 +129,20 @@ public class PhotoSql {
 					"ORDER BY\r\n" + 
 					"    cp.modifieddate DESC\r\n" + 
 					"OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY");
-			statement.setLong(1, categoryid);
+			statement.setInt(1, categoryid);
 			rs= statement.executeQuery();
 			while (rs.next()) {
 				String uuid=rs.getString("uuid");
 				String name =rs.getString("name");
-				
+				Integer fileEntryId= rs.getInt("fileentryid");
+				Integer flIdCpa= rs.getInt("cpfileentryid");
 				Integer groupId = rs.getInt("groupid");
 				Integer folderId = rs.getInt("folderid");
 				String filename = rs.getString("filename");
 				String uuidDlFileEntry = rs.getString("uuiddlfileentry");
 				String src = "/documents" + "/" + groupId + "/" + folderId + "/" + filename + "/" + uuidDlFileEntry;
+				cpa.setFlIdCpa(flIdCpa);
+				cpa.setFileEntryId(fileEntryId);
 				cpa.setName(name);
 				cpa.setSrc(src);
 				cpa.setUuid(uuid);

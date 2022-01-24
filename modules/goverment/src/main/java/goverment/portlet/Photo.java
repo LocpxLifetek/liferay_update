@@ -33,25 +33,33 @@ public class Photo extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-//		try {
-//			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
-//			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-//			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
-//					themDisplay.getLayoutFriendlyURL(layout));
-//			renderRequest.setAttribute("url", url);
-//			CategoryDto listCategoryDtos=new PhotoSql().findCategoryByParentId(39067);
-//			List<CpattachmentfileentryDto> listCpa= new ArrayList<>();
-//			List<DlFileEntryDto> listDlefile= new ArrayList<>();
-//			for (CategoryDto categoryDto : listCategoryDtos) {
-//				CpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());
-//				listCpa.add(cpaAttach);
-//			}	
-//			
-//			renderRequest.setAttribute("category", category);
-//			renderRequest.setAttribute("listDlefile", listDlefile);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
+		try {
+			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
+			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
+					themDisplay.getLayoutFriendlyURL(layout));
+			renderRequest.setAttribute("url", url);
+			CategoryDto category= new PhotoSql().categoryDto("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780");
+			List<CategoryDto> listCategoryDtos=new PhotoSql().findCategoryByParentId(category.getId());
+			List<CpattachmentfileentryDto> listCpa= new ArrayList<>();
+			List<DlFileEntryDto> listDlefile= new ArrayList<>();
+			for (CategoryDto categoryDto : listCategoryDtos) {
+				CpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());
+				listCpa.add(cpaAttach);
+			}	
+			
+			for (CpattachmentfileentryDto cpas : listCpa) {
+				if(cpas.getFlIdCpa()!= null && listDlefile.size()<3) {
+					
+					DlFileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getFlIdCpa());
+					listDlefile.add(dlfile);
+				}
+			}
+			renderRequest.setAttribute("category", category);
+			renderRequest.setAttribute("listDlefile", listDlefile);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		super.doView(renderRequest, renderResponse);
 	}
 

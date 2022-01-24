@@ -1,4 +1,0 @@
-Bundle-Name: tintonghop
-Bundle-SymbolicName: tintonghop
-Bundle-Version: 1.0.0
-Export-Package: tintonghop.constants

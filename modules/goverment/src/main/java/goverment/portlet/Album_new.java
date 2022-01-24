@@ -41,21 +41,21 @@ public class Album_new extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-		try {
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
-
-			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
-			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
-			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(assetCategory.getCategoryId());
-			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid);
-
-			renderRequest.setAttribute("categoryDto", categoryDto);
-			renderRequest.setAttribute("dLfileEntryDtos", dLfileEntryDtos);
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
+//		try {
+//			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
+//
+//			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
+//			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+//			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
+//			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(assetCategory.getCategoryId());
+//			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid);
+//
+//			renderRequest.setAttribute("categoryDto", categoryDto);
+//			renderRequest.setAttribute("dLfileEntryDtos", dLfileEntryDtos);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
 		super.doView(renderRequest, renderResponse);
 	}
 }

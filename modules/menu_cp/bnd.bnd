@@ -1,4 +1,0 @@
-Bundle-Name: menu_cp
-Bundle-SymbolicName: menu_cp
-Bundle-Version: 1.0.0
-Export-Package: menu_cp.constants

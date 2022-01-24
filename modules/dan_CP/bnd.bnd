@@ -1,4 +1,0 @@
-Bundle-Name: dan_CP
-Bundle-SymbolicName: dan_CP
-Bundle-Version: 1.0.0
-Export-Package: dan_CP.constants
