@@ -1,4 +1,0 @@
-Bundle-Name: CustomLogin
-Bundle-SymbolicName: CustomLogin
-Bundle-Version: 1.0.0
-Export-Package: CustomLogin.constants
