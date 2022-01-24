@@ -86,7 +86,7 @@
 	    img.src = image;
 	    document.getElementById('img').append(img);
 	    document.getElementById('title2').append(titleFeature);
-	    setTimeout(showSlides,2000);
+	    setTimeout(showSlides,4000);
 	};
 	showSlides();
 </script>

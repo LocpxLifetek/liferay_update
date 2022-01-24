@@ -1,13 +1,8 @@
 package goverment.portlet;
 
-import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
-import com.liferay.portal.kernel.theme.ThemeDisplay;
-import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -17,11 +12,6 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
-import goverment.dto.CategoryDto;
-import goverment.dto.CpattachmentfileentryDto;
-import goverment.dto.DlFileEntryDto;
-import goverment.sql.PhotoSql;
-import goverment.url.UrlCurrentPorlet;
 
 @Component(
 		immediate = true,

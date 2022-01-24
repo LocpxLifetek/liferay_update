@@ -6,7 +6,6 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.Portlet;

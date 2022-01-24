@@ -49,6 +49,7 @@ public class HotEvent extends MVCPortlet {
 			renderRequest.setAttribute("url", url);
 
 			List<BlogsEntryDto> listBlogsEntryDtos = new BlogEntrySql().findAllBlogsByIdCategory("f722b646-52c5-a5d2-8fd4-7d7698a81cd7",5,themeDisplay.getScopeGroupId());
+			
 			List<BlogsEntryDto> listBlogs = new ArrayList<>();
 			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);
 			int i = 0;

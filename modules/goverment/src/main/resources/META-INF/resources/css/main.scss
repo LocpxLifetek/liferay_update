@@ -4,18 +4,21 @@
 	
 }
 .countViewBlogs a:hover{
-	color:red !important;
+	color:#0a4298 !important;
 	text-decoration:none;
 }
 .imageViewBlogs img{
 	width:100%;
-
 }
 .countViewBlogs{
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Roboto,Arial,Tahoma;
 	font-size:14px;
 	text-align:left;
 	padding:5px;
+  border: 1px solid #ddd;
+  overflow: auto;
+  border-bottom: 4px solid #0a4298;
+  background: rgba(226, 229, 245, 0.4);
 }
 
 .currentDate {
@@ -33,21 +36,7 @@
 	margin-right:2%;
 	border: 4px double rgb(212, 211, 211);
 }
-.featured-news{
-	  display: grid;
-  grid-template-columns: 50% 50% !important;
-}
-.featured-news a{
-	color: black !important;
-	text-decoration:none;
-	
-}
-.featured-news a:hover{
-	color:red !important;
-}
-.fearured-news span{
-	padding:5px;
-}
+
 .title1{
 	padding: 25px 0px 0px 10px;
 	display: block !important;
@@ -157,7 +146,7 @@ a {
   }
   .head-albums_anh { font: 700 18px/35px Roboto,Arial,Tahoma; color: #404041; text-transform: uppercase; text-align: center; margin: 15px 0 5px 0; }
            .albums_anh { background: #FFF url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-right.png') repeat-x center top; border: 1px solid #ddd; overflow: auto; }
-           .linered { border-top: 2px solid #d71920; width: 30%; margin: 0 auto; }
+           .linered { border-top: 2px solid #0a4298; width: 30%; margin: 0 auto; }
            .lts-cmanh { padding: 10px; border-bottom: 4px solid #d71920; }
            .lts-cmanh .top1 { background: #FFF; border: 1px solid #ccc; }
            .lts-cmanh .top1 div { padding: 8px 10px; }
@@ -172,19 +161,16 @@ a {
             		display: none;
             	}
 			}
-.head-cm {
+      .head-cm {
         width: 100%;
-        border-bottom: 1px solid #d71921;
-        margin-bottom: 20px;
+        border-bottom: 1px solid #0a4298;
+        margin-top: 10px;
       }
       .head-cm ul {
         display: inline-flex;
         list-style: none;
       }
-      .head-cm ul li:first-child {
-        background: url("	http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-chuyenmuc.png")
-          no-repeat right top;
-      }
+      
       .head-cm ul li:first-child a {
         color: #fff;
         font: 700 16px/35px Roboto, Arial, Tahoma;
@@ -210,10 +196,6 @@ a {
         width: 100%;
         height: 200px;
       }
-
-
-
-    
       .box-top3 ul {
         list-style: none;
         margin: 0;
@@ -299,7 +281,7 @@ a {
       }
       .chidao-dieuhanh {background: #FFF url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-right.png') repeat-x center top;border: 1px solid #ddd;overflow: auto;}
            .head-chidaodieuhanh { font: 700 18px/35px Roboto,Arial,Tahoma; color: #404041; text-transform: uppercase; text-align: center; margin: 15px 0 5px 0; }
-           .linered { border-top: 2px solid #d71920; width: 30%; margin: 0 auto; }
+           .linered { border-top: 2px solid #0a4298; width: 30%; margin: 0 auto; }
            .lts-cmanh ul li a.active {
         font-weight: bold;
         color: #be1e2d;
@@ -362,7 +344,7 @@ a {
 #featured li.ui-tabs-selected span, #featured li.ui-tabs-active span { font: 700 13px Roboto,Arial,Tahoma !important; }
 #featured ul.ui-tabs-nav li.ui-tabs-selected a, #featured ul.ui-tabs-nav li.ui-tabs-active a { background: #FFF; font-weight: bold; }
 #featured .ui-tabs-panel { width: 60.54131054131054%; position: relative; text-align:justify; }
-#featured .ui-tabs-panel img { width: 100%; height: 278px;margin:0 auto; margin-bottom:5px; }
+#featured .ui-tabs-panel img { width: 100%; height: 100%;margin:0 auto; margin-bottom:5px; }
 #featured .ui-tabs-panel .info { bottom: 0; left: 0; height: 70px; /*background: url('images/transparent-bg.png');*/ }
 #featured .ui-tabs-panel .info a.hideshow { position: absolute; font-size: 15px; font-family: 'Roboto', Arial, Verdana; color: #f0f0f0; right: 10px; top: -20px; line-height: 20px; margin: 0; outline: none; }
 #featured .info h2 { font: 700 18px/24px 'Roboto', Arial,Verdana; padding: 5px 0; margin: 0; font-weight: normal; overflow: hidden; }
@@ -375,7 +357,70 @@ a {
 
 .box-img .tit a {font: 700 18px/24px 'Roboto', Arial,Verdana;color:#404041;text-decoration: none;}
 .des .ct {text-align:justify;font: 400 13px/18px Roboto,Arial,Tahoma; margin-top:10px;}
+//search
+.menu_1{
+  width: 97%;
+}
+.listDirectOperationRight {
+  display: grid;
+}
 
+.ldo a{
+  color: black !important;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: justify;
+  display: block;
+}
+.listDirectOperationGrid{
+  border-bottom: 1px dotted #ccc;
+  padding: 15px 0px;
+}
+.ldo a:hover{
+  color:red !important;
+}
+
+.soup-image {
+float:left;
+margin-right:2%;
+border: 4px double rgb(212, 211, 211);
+}
+#wrapper {
+  margin: 0 auto;
+  display: block;
+  width: 100%;
+}
+
+#pagination {
+  margin: 0;
+  padding: 0;
+  text-align: center
+}
+#pagination li {
+  display: inline
+}
+#pagination li a {
+  display: inline-block;
+  text-decoration: none;
+  padding: 5px 10px;
+  color: #000
+}
+
+/* Active and Hoverable Pagination */
+#pagination li a {
+  border-radius: 5px;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s
+    
+}
+#pagination li a.active {
+  background-color: #4caf50;
+  color: #fff
+}
+#pagination li a:hover:not(.active) {
+  background-color: #ddd;
+} 
 //New event
 .ltstop2 {overflow: auto;}
             .ltstop2 .top2 { width: 100%; display: flex; }
@@ -427,7 +472,7 @@ a {
 	color:black !important;
 	text-align: left;
 	width:100%;
-	font-family:Arial, Helvetica, sans-serif;
+	
 }
 .tags-text a{
   color: #036;
@@ -500,12 +545,6 @@ p{
 .policeActivitie a:hover{
   color:red !important;
 }
-.head-cm {
-  width: 100%;
-  border-bottom: 1px solid #D71921;
-  position: relative;
-  margin-bottom: 20px;
-}
 
 .head-cm .xemthem {
   float: right;
@@ -515,14 +554,6 @@ p{
   padding-top: 20px;
 }
 
-.head-cm ul {
-  display: inline-flex;
-  list-style: none;
-  position: relative;
-  top: 12px;
-  left: 0;
-  transform: translate(-12px, 0);
-}
 .soup-image {
 width:60% !important;
 float:left;
@@ -530,30 +561,8 @@ margin-right:2%;
 border: 4px double rgb(212, 211, 211);
 }
 
-.head-cm ul li a {
-  color: #404041;
-  font: 400 13px/35px Roboto, Arial, Tahoma;
-  padding: 0 15px;
-  border-right: 1px solid #ddd;
-}
-
-.head-cm ul li:first-child {
-  background: url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-chuyenmuc.png') no-repeat right top;
-}
-
-.head-cm ul li:first-child a {
-  color: #FFF;
-  font: 700 16px/35px Roboto, Arial, Tahoma;
-  text-transform: uppercase;
-  border-right: none;
-  padding: 0 30px 0 20px;
-}
-
-.head-cm ul li:last-child a {
-  border-right: none;
-}
 .title{
-  padding: 3% 0%;
+  padding: 2% 0%;
 }
 //link goverment
 .link-goverment {
@@ -664,28 +673,32 @@ h6 {
   width: 100%;
   font-family: Arial, Helvetica, sans-serif; }
 
-.title h2 {
-  color: black !important;
-  font-weight: bold; }
+.title h1 {
+  font: 700 25px/35px Roboto,Arial,Tahoma;
+  color: #004175;
+  margin-bottom: 20px;
+  text-align: justify; }
 
 .description h4 {
   color: black !important; }
 
 div.contentBlogs {
+  
   width: 100%;
   text-align: center; }
 
 .contentBlogs p {
   text-align: justify !important;
   /* For Edge */
-  display: block; }
+  display: block;
+  padding-bottom: 8px;
+  padding-top: 5px; }
 
 .box-dieuhuong {
   display: flex; }
 
 .trangchu a {
-  padding: 0px 5px;
-  color: black;
+  
   text-decoration: none; }
 
 .trangchu a:hover {
@@ -711,7 +724,12 @@ div.contentBlogs {
   width: 60% !important;
   
   }
+.blogView{
+  color: #333;
+  display: block;
+  text-align: justify;
 
+}
 .contentBlogs i {
  display: flex;
 align-items: center;
@@ -816,12 +834,6 @@ align-items: center;
 .lts-cmanh ul li a:hover {
   font-weight: bold;
   color: #be1e2d;
-}
-
-.linered {
-  border-top: 2px solid #d71920;
-  width: 30%;
-  margin: 0 auto;
 }
 
 //H05
@@ -1207,7 +1219,7 @@ table.table .header-bottom th{border-top:2px #ddd solid;}
 .tandan-div-search .btn-search{position:absolute;right:0;width:24px;}
 .tandan-div-search .adv-search{display:none}
 .tandan-div-search .div-input{position:absolute;left:1px;right:26px;}
-.tandan-div-search .div-input input{background:#fff;height:22px;width:100%;border:0px;outline:none;}
+.tandan-div-search .div-input input{background:#fff;height:22px;width:100%;outline:none; border: 2px solid #316db5;}
 .tandan-search-icon{height:22px;width:24px;}
 .td-thongke{margin:5px 0;margin-left:10px;width:100%;height:auto;float:left;}
 .td-thongke p{width:100%;float:left;line-height:25px;}
@@ -1518,7 +1530,7 @@ td.ms-vb-title{display:none;}
     display: inline-block
 }
 .header-above-latest-news {font-size:10pt;padding:5px 0;margin:0;font-weight:normal;overflow:hidden;font-weight:bold;margin-top:5px;margin-bottom:5px};
-.th-lich-tiep-cong-dan a,p{font-size: 11pt;font-weight: bold;}
+
 .danh-sach-title {margin: 0;margin-bottom: 20px;padding: 6px 10px !important;margin-bottom: 0;border: 1px solid #dfdfdf;color: #fff;}
 .div-title img {width: 100%;margin-bottom:10px;float: left;}
 .div-danh-sach {border-top: 0px !important;}
@@ -1544,7 +1556,7 @@ a.lnk-btn:active {position:relative;top:1px;}
 .ExternalClass224FFBFB477F483A8C44785504ACB74A table td {border:1px black solid	}
 .Td-footer {
 	position: relative;
-    background: url('../img/bg-footer.png'),linear-gradient(#3677c4, #185090, #204f86);
+  
     color: #fff;
     text-align: left;
     border-top: 2px solid #1f4f86;
@@ -2465,7 +2477,7 @@ a.top-t-1 ,a.top-t-2 ,a.top-t-1:visited,a.top-t-2:visited{color:#d65a01!importan
 .TD-ul-module-menu-left li:hover {background: #f5f5f5;}
 .subsites_pb a ,.subsites_pb a:visited{color:#333!important;background:url('img/hv-tab-sbn.png') left 6px no-repeat;}
 .subsites_pb a:hover{color:#c10600;background:url('img/hv-tab-sbn-hv.png') left 6px no-repeat;color: #D15604 !important;text-decoration: none;}
-.tandan-search-icon{background-image:url('img/ic-search.jpg');background-position:center center;background-repeat:no-repeat;}
+.tandan-search-icon{background-position:center center;background-repeat:no-repeat;}
 .TD-body-bt-bt-right-chanel .pager .PageNumbers .next{background-image:url(img/arrow-next-icon.png)}
 .TD-body-bt-bt-right-chanel .pager .PageNumbers .prev{background-image:url(img/arrow-previous-icon.png)}
 .tandan-div-article-border-top-center{background:url('img/modul-center-tvt.png') top left repeat-x;}
@@ -2555,7 +2567,6 @@ td.css-group {background: #E8EEF7;}
 .GopYVanBan tbody tr:hover td {background: rgb(253, 244, 221);}
 .head-news-cover-wrapper h2 a{color:#e66b01}
 .header-above-latest-news {color:#e66b01 !important;};
-.th-lich-tiep-cong-dan a,p{color: #e66b01}
 .danh-sach-title {background: #d65a01 !important;color: #fff;}
 .div-btn-sent-info input[type='submit']{background-color:#d65a01;color:white;}
 .div-img-captcha{border: 1px solid #ccc;}

@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: box-dieuhuong
-Bundle-SymbolicName: box-dieuhuong
-Bundle-Version: 1.0.0.qualifier
-Export-Package: box.dieuhuong.constants,
- box.dieuhuong.portlet,
- content

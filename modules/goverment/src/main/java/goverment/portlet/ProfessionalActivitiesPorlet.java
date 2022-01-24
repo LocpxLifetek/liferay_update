@@ -45,7 +45,6 @@ public class ProfessionalActivitiesPorlet extends MVCPortlet{
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
-			String key = GovermentPortletKeys.PROFESSIONALACTIVITIES + "," + String.valueOf(themeDisplay.getScopeGroupId());
 			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout));
 			
 			renderRequest.setAttribute("url", url);

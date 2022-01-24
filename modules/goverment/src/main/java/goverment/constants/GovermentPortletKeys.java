@@ -48,5 +48,7 @@ public class GovermentPortletKeys {
 	public static final String PROFESSIONALACTIVITIES="ProfessionalActivities_GovermentPorlet";
 	public static final String LISTPROPAGATE="ListPropagate_GovermentPorlet";
 	public static final String EXECUTIVEDOCUMENT="ExecutiveDocuments_GovermentPorlet";
+	public static final String FOOTERH05="FooterH05_GovermentPorlet";
+	public static final String SEARCHALLBLOGS="SearchAllBlogs_GovermentPorlet";
 
 }

@@ -1,11 +1,27 @@
 package goverment.dto;
 
+import java.util.Date;
+
 public class SearchBlogsDto {
 	private String uuid;
 	private String title;
 	private String src;
 	private String main;
+	private Date modifiedDate;
+	private String description;
 	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
 	public String getMain() {
 		return main;
 	}

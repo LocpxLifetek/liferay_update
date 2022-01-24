@@ -46,7 +46,7 @@ public class Comment extends MVCPortlet  {
 			renderRequest.setAttribute("blogsEntry", blogsEntry);
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			
 		}
 		super.doView(renderRequest, renderResponse);
 	}

@@ -20,9 +20,9 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import org.osgi.service.component.annotations.Component;
-import goverment.constants.*;
+
+import goverment.constants.GovermentPortletKeys;
 import goverment.dto.BlogsEntryDto;
-import goverment.sql.BlogEntrySql;
 
 
 

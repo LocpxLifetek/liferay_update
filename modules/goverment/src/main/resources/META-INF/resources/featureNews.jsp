@@ -17,7 +17,7 @@
                             <div
                                 class="tandan-div-module-default-left">
                                 <a
-                                    href='${url}/tintuc?uuid=${blogsEntryDto.uuidBlogsEntry}'><img
+                                    href='${url}/chitiettintuc?uuid=${blogsEntryDto.uuidBlogsEntry}'><img
                                         src='${blogsEntryDto.src}'></a>
                             </div>
                             <div
@@ -25,7 +25,7 @@
                                 <p
                                     class="tandan-p-module-news-title">
                                     <a
-                                        href='${url}/tintuc?uuid=${blogsEntryDto.uuidBlogsEntry}'>${blogsEntryDto.titleBlogsEntry}</a><span
+                                        href='${url}/chitiettintuc?uuid=${blogsEntryDto.uuidBlogsEntry}'>${blogsEntryDto.titleBlogsEntry}</a><span
                                         class="ngay">
                                         (<fmt:formatDate
 											value="${blogsEntryDto.modifiedDate}" pattern="dd/MM/yyyy" />)</span>
@@ -43,7 +43,7 @@
 				
 	                <p class="tandan-p-module-news-second">
 	                    <a
-	                        href='${url}/tintuc?uuid=${blog.uuidBlogsEntry}' style="background:url('<%=request.getContextPath()%>/images/portal/_themes/ThanhHoa_orange/img/hv-more-news.jpg') no-repeat top left; background-position-y: 5px;">${blog.titleBlogsEntry}</a><span
+	                        href='${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}' style="background:url('<%=request.getContextPath()%>/images/portal/_themes/ThanhHoa_orange/img/hv-more-news.jpg') no-repeat top left; background-position-y: 5px;">${blog.titleBlogsEntry}</a><span
 	                        class="ngay">
 	                        (<fmt:formatDate
 								value="${blog.modifiedDate}" pattern="dd/MM/yyyy" />)</span>

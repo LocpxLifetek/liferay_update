@@ -17,7 +17,6 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
-import goverment.dto.CountViewDto;
 import goverment.dto.CountViewVideoDto;
 import goverment.sql.CommonSqlBlogEntry;
 import goverment.url.UrlCurrentPorlet;

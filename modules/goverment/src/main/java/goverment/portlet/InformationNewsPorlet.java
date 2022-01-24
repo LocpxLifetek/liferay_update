@@ -1,12 +1,15 @@
 package goverment.portlet;
 
+import com.liferay.asset.entry.rel.model.AssetEntryAssetCategoryRel;
+import com.liferay.asset.entry.rel.service.AssetEntryAssetCategoryRelLocalServiceUtil;
+import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetTag;
+import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
 import com.liferay.blogs.model.BlogsEntry;
 import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.document.library.kernel.model.DLFileEntry;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -14,6 +17,7 @@ import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.Portlet;
@@ -58,6 +62,21 @@ public class InformationNewsPorlet extends MVCPortlet {
 			renderRequest.setAttribute("blogsEntry", blogsEntry);
 			AssetEntry incrementView=AssetEntryLocalServiceUtil.incrementViewCounter(themeDisplay.getCompanyId(), themeDisplay.getUserId(), BlogsEntry.class.getName(), blogsEntry.getEntryId());
 			AssetEntry assetEntry=AssetEntryLocalServiceUtil.getEntry(BlogsEntry.class.getName(), blogsEntry.getEntryId());
+			List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategory=AssetEntryAssetCategoryRelLocalServiceUtil.getAssetEntryAssetCategoryRelsByAssetEntryId(assetEntry.getEntryId());
+			List<AssetCategory> listAssetCategory=new ArrayList<>();
+			for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategory) {
+				AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategory(assetEntryAssetCategoryRel.getAssetCategoryId());
+				listAssetCategory.add(assetCategory);
+				
+			}
+			for (AssetCategory assetCategory : listAssetCategory) {
+				if(assetCategory.getParentCategoryId()>0) {
+					AssetCategory assetCategory2=AssetCategoryLocalServiceUtil.getAssetCategory(assetCategory.getCategoryId());
+					renderRequest.setAttribute("assetCategory2", assetCategory2);
+				}else {					
+					renderRequest.setAttribute("assetCategory", assetCategory);
+				}
+			}
 			List<AssetTag> listAssetTag=AssetTagLocalServiceUtil.getAssetEntryAssetTags(assetEntry.getEntryId());
 			
 			renderRequest.setAttribute("listAssetTag", listAssetTag);
@@ -65,7 +84,7 @@ public class InformationNewsPorlet extends MVCPortlet {
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			
 		}
 		super.doView(renderRequest, renderResponse);
 	}

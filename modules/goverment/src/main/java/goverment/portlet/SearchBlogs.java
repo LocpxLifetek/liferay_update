@@ -56,7 +56,7 @@ public class SearchBlogs extends MVCPortlet {
 			
 			JSONObject blogJSON = null;
 			List<SearchBlogsDto> listSearchBlogsDto = new SearchBlogsSql().searchBlogsSql(titleBlogs,
-					themeDisplay.getScopeGroupId());
+					themeDisplay.getScopeGroupId(),1,1);
 			
 			for (SearchBlogsDto searchBlogsDto : listSearchBlogsDto) {
 				blogJSON = JSONFactoryUtil.createJSONObject();
