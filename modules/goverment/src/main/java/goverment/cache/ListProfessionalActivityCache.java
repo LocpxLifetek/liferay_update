@@ -4,12 +4,9 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 
-import org.osgi.service.component.annotations.Reference;
-
 import goverment.sql.FeatureNewsSql;
 
-public class FeatureCache implements WebCacheItem {
-	
+public class ListProfessionalActivityCache implements WebCacheItem {
 	/**
 	 * 
 	 */
@@ -17,7 +14,6 @@ public class FeatureCache implements WebCacheItem {
 	
 	@Override
 	public Object convert(String key) throws WebCacheException {
-		// TODO Auto-generated method stub
 		String[] keyValue=key.split("\\,");
 		int i=0;
 		String groupId=null;
@@ -28,7 +24,7 @@ public class FeatureCache implements WebCacheItem {
 			}
 		}
 		long groupIdCategory = Long.parseLong(groupId);
-		return new FeatureNewsSql().findAllBlogsByIdCategory(groupIdCategory,"92cc5508-67db-bd35-eee5-c7dde6237582");
+		return new FeatureNewsSql().findAllBlogsByIdCategory(groupIdCategory,"521e8b35-2c5a-db70-f646-81c0c3912ee5");
 	}
 
 	@Override

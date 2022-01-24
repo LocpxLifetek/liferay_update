@@ -1,8 +1,19 @@
 <%@ include file="/init.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 
+<style>
+.header {
+    background: #2b85d9;
+    background-image: url('../img/bg-header-min.jpg');
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: top left;
+    position: relative;
+    min-height: 150px;
+}
+</style>
 <div class="header-fixed">
-        <div class="header">
+        <div class="header" style="background-image: url('<%=request.getContextPath()%>/images/portal/_res/img/bg-header-min.jpg');">
             <div class="container banner-band">
                 <img src="<%=request.getContextPath()%>/images/portal/_res/img/quochuy.png" />
                 <div class="brand-text">

@@ -48,5 +48,8 @@ public class GovermentPortletKeys {
 
 	//H05
 	public static final String HEADERGOVERMENT="Headers_GovermentPorlet";
+	public static final String PROFESSIONALACTIVITIES="ProfessionalActivities_GovermentPorlet";
+	public static final String LISTPROPAGATE="ListPropagate_GovermentPorlet";
+	public static final String EXECUTIVEDOCUMENT="ExecutiveDocuments_GovermentPorlet";
 
 }
