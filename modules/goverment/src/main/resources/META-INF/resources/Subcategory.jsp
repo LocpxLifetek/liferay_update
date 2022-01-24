@@ -38,7 +38,7 @@ p{
 }
 
 .head-cm ul li:first-child {
-    background: url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-chuyenmuc.png') no-repeat right top;
+    background: url('<%= request.getContextPath()%>/images/portal/images/bg-chuyenmuc.png') no-repeat right top;
 }
 
 .head-cm ul li:first-child a {
@@ -62,7 +62,7 @@ p{
 }
 .head-cm {
     width: 100%;
-    border-bottom: 1px solid #D71921;
+    border-bottom: 1px solid #0a4298;
     position: relative;
     margin-bottom: 20px;
 }

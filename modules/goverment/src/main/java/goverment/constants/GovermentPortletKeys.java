@@ -45,6 +45,7 @@ public class GovermentPortletKeys {
 	public static final String SUBCATEGORY="SubcategoryPortlet";
 	public static final String CATEGORY="CategoryPortlet";
 	public static final String COLLECTION_ACTIVITIES="collective_activitiesPortlet";
+	public static final String LISTEXECUTIVE_DOCUMENT_CATEGORY="Executive_documentsCategoryPortlet";
 
 	//H05
 	public static final String HEADERGOVERMENT="Headers_GovermentPorlet";
