@@ -1,4 +1,0 @@
-Bundle-Name: banner_cp
-Bundle-SymbolicName: banner_cp
-Bundle-Version: 1.0.0
-Export-Package: banner_cp.constants

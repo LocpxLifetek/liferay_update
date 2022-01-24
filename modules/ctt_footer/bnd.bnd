@@ -1,4 +1,0 @@
-Bundle-Name: ctt_footer
-Bundle-SymbolicName: ctt_footer
-Bundle-Version: 1.0.0
-Export-Package: ctt_footer.constants

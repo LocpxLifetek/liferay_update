@@ -4,11 +4,20 @@ public class CpattachmentfileentryDto {
 	private String uuid;
 	private String name;
 	private String src;
-	public CpattachmentfileentryDto(String uuid, String name, String src) {
-		super();
-		this.uuid = uuid;
-		this.name = name;
-		this.src = src;
+	private Integer fileEntryId;
+	private Integer flIdCpa;
+	
+	public Integer getFlIdCpa() {
+		return flIdCpa;
+	}
+	public void setFlIdCpa(Integer flIdCpa) {
+		this.flIdCpa = flIdCpa;
+	}
+	public Integer getFileEntryId() {
+		return fileEntryId;
+	}
+	public void setFileEntryId(Integer fileEntryId) {
+		this.fileEntryId = fileEntryId;
 	}
 	public CpattachmentfileentryDto() {
 		super();

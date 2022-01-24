@@ -1,4 +1,0 @@
-Bundle-Name: tin_baochi
-Bundle-SymbolicName: tin_baochi
-Bundle-Version: 1.0.0
-Export-Package: tin_baochi.constants

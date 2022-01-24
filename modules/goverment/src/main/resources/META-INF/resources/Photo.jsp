@@ -11,7 +11,7 @@
       <c:forEach items="${listDlefile}" var="listDlefile">
         <li>
           <a
-            href="${url}/album_anh?id=${listDlefile.uuidCategory}"
+            href="${url}/detail?uuid=${listDlefile.uuidCategory}"
           >
             <img
               class="img-album-new"
@@ -20,7 +20,7 @@
           </a>
           <h3>
             <a
-              href="${url}/album_anh?id=${listDlefile.uuidCategory}">${listDlefile.title}</a
+              href="${url}/detail?id=${listDlefile.uuidCategory}">${listDlefile.title}</a
             >
           </h3>
         </li>

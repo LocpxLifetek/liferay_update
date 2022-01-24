@@ -5,8 +5,15 @@ public class CategoryDto {
 	private Integer id;
 	private Integer groupId;
 	private String uuid;
+	private Integer parentCategoryId;
 	
 	
+	public Integer getParentCategoryId() {
+		return parentCategoryId;
+	}
+	public void setParentCategoryId(Integer parentCategoryId) {
+		this.parentCategoryId = parentCategoryId;
+	}
 	public String getUuid() {
 		return uuid;
 	}

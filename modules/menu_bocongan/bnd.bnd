@@ -1,4 +1,0 @@
-Bundle-Name: menu_bocongan
-Bundle-SymbolicName: menu_bocongan
-Bundle-Version: 1.0.0
-Export-Package: menu_bocongan.constants
