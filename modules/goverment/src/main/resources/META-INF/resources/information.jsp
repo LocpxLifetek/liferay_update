@@ -51,7 +51,7 @@
 
 		</div>
 	</div>
-	<div class="head-cm">
+	<div class="head-cm" style="margin-top:10px">
 		<c:choose>
 			<c:when test="${not empty assetCategory2}">
 				<ul>

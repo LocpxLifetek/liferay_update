@@ -5,19 +5,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <div class="menu_1">
-	<div class="box-dieuhuong">
-		<div class="trangchu">
-			<a href="/"
-				style="color: #333;
+	<div>
+		<div class="box-dieuhuong">
+			<div class="trangchu">
+				<a href="/"
+					style="color: #333;
 						    font-size: 13px;
 						    padding: 0 12px 0 0px;
 						    background: url('<%=request.getContextPath()%>/images/portal/_res/img/i-right.png') no-repeat right center;">Trang
-				chủ</a>
+					chủ</a>
+			</div>
+			<div class="trangchu">
+				<a href="#"
+					style="font-size: 13px; color: #0a4298 !important; padding: 0px 0px 0px 10px;">Tìm
+					kiếm</a>
+			</div>
 		</div>
-		<div class="trangchu">
-			<a href="#"
-				style="font-size: 13px; color: #0a4298 !important; padding: 0px 0px 0px 10px;">Tìm
-				kiếm</a>
+		<div style="padding-top:12px;">
+			<p>Tìm thấy <span style="font-weight:bold;color: #0a4298 !important;">${count}</span> kết quả với từ khóa <span style="font-weight:bold;color: #0a4298 !important;">${keyword}</span></p>
 		</div>
 	</div>
 	<div class="listDirectOperation">

@@ -164,7 +164,6 @@ a {
       .head-cm {
         width: 100%;
         border-bottom: 1px solid #0a4298;
-        margin-top: 10px;
       }
       .head-cm ul {
         display: inline-flex;
@@ -190,8 +189,9 @@ a {
         text-align: justify;
         font: 700 14px/19px Roboto, Arial, Tahoma;
         display: block;
+        
       }
-
+      .video-other li {min-height:240px !important;}
       .box-top3 li img {
         width: 100%;
         height: 200px;
@@ -549,7 +549,7 @@ p{
 .head-cm .xemthem {
   float: right;
   font: 400 13px Roboto, Arial, Tahoma;
-  color: #be1e2d;
+  color: #0a4298;
   display: block;
   padding-top: 20px;
 }
@@ -602,17 +602,8 @@ h6 {
             	}
 			}
 
-//video media
-.box-left-home { overflow: auto; margin-bottom: 20px; padding-bottom: 20px; }
-            .box-top3 { overflow: hidden; }
-            .box-top3 ul { }
-                .box-top3 ul li { width: 30.71428571428571%; margin-right: 3.8%; float: left; position: relative; list-style: none;}
-                .box-top3 ul li img {width:100%; height:125px;}
-                    .box-top3 ul li .bg-video { background: url("http://bocongan.gov.vn/Publishing_Resources/web/media/images/i-play-video.png") no-repeat bottom left; }
-                    .box-top3 ul li:nth-child(3n + 3) { margin-right: 0; }
-                    .box-top3 ul li a { text-align:justify; font: 700 14px/19px Roboto,Arial,Tahoma; color: #58595B; display: block; text-decoration: none;}
-                    .box-top3 ul li h3 a {padding: 10px 0;}
-                        .box-top3 ul li a.iconplay { width: 45px; height: 45px; position: absolute; left: 0; bottom: 0px; background: url("http://bocongan.gov.vn/Publishing_Resources/web/media/images/i-play-video.png") no-repeat; float: left; }
+
+
 // viddeo media category
 #wrapper {
   margin: 0 auto;
