@@ -17,79 +17,151 @@ public class DlFileEntryDto {
 	private long folderId;
 
 	
-	public Integer getClassPK() {
-		return classPK;
+	
+	public String getName() {
+		return name;
 	}
-	public void setClassPK(Integer classPK) {
-		this.classPK = classPK;
+
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public Integer getGroupId() {
-		return groupId;
+
+
+
+	public String getUuidCategory() {
+		return uuidCategory;
 	}
-	public void setGroupId(Integer groupId) {
-		this.groupId = groupId;
+
+
+
+	public void setUuidCategory(String uuidCategory) {
+		this.uuidCategory = uuidCategory;
 	}
-	public String getType() {
-		return type;
+
+
+
+	public String getSrc() {
+		return src;
 	}
-	public void setType(String type) {
-		this.type = type;
+
+
+
+	public void setSrc(String src) {
+		this.src = src;
 	}
-	public long getFolderId() {
-		return folderId;
-	}
-	public void setFolderId(long folderId) {
-		this.folderId = folderId;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public Timestamp getModifiedDate() {
-		return modifiedDate;
-	}
-	public void setModifiedDate(Timestamp modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
+
+
+
 	public String getTitle() {
 		return title;
 	}
+
+
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	public String getName() {
-		return name;
+
+
+	public String getFileName() {
+		return fileName;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
-	public String getUuidCategory() {
-		return uuidCategory;
+
+
+
+	public Timestamp getModifiedDate() {
+		return modifiedDate;
 	}
-	public void setUuidCategory(String uuidCategory) {
-		this.uuidCategory = uuidCategory;
+
+
+
+	public void setModifiedDate(Timestamp modifiedDate) {
+		this.modifiedDate = modifiedDate;
 	}
-	public String getSrc() {
-		return src;
+
+
+
+	public Integer getId() {
+		return id;
 	}
-	public void setSrc(String src) {
-		this.src = src;
+
+
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
+
+
+
+	public String getUrl() {
+		return url;
+	}
+
+
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+
+
+	public Integer getClassPK() {
+		return classPK;
+	}
+
+
+
+	public void setClassPK(Integer classPK) {
+		this.classPK = classPK;
+	}
+
+
+
+	public Integer getGroupId() {
+		return groupId;
+	}
+
+
+
+	public void setGroupId(Integer groupId) {
+		this.groupId = groupId;
+	}
+
+
+
+	public String getType() {
+		return type;
+	}
+
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+
+	public long getFolderId() {
+		return folderId;
+	}
+
+
+
+	public void setFolderId(long folderId) {
+		this.folderId = folderId;
+	}
+
+
+
 	public DlFileEntryDto() {
 		super();
 	}

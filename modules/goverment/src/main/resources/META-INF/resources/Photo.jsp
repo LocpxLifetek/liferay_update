@@ -3,15 +3,16 @@
 
    <div class="head-cm">
       <ul style="margin: 0; padding: 0">
-        <li><a href="${url}/thuvienanh?id=${category.id}">${category.name}</a></li>
+        <li><a href="${url}/thuvienanh?uuid=${category.uuid}">${category.name}</a></li>
       </ul>
+      <a href="/media/thu-vien-anh.html" class="xemthem">Xem thêm</a>
     </div>
 <div class="box-top3">
       <ul>
       <c:forEach items="${listDlefile}" var="listDlefile">
         <li>
           <a
-            href="${url}/detail?uuid=${listDlefile.uuidCategory}"
+            href="${url}/album-anh?uuid=${listDlefile.uuidCategory}"
           >
             <img
               class="img-album-new"
@@ -20,7 +21,7 @@
           </a>
           <h3>
             <a
-              href="${url}/detail?id=${listDlefile.uuidCategory}">${listDlefile.title}</a
+              href="${url}/album_anh?uuid=${listDlefile.uuidCategory}">${listDlefile.title}</a
             >
           </h3>
         </li>
@@ -31,7 +32,7 @@
 <style>
  .head-cm {
         width: 100%;
-        border-bottom: 1px solid #d71921;
+        border-bottom: 1px solid #0a4298;
         margin-bottom: 20px;
       }
       .head-cm ul {
@@ -39,7 +40,7 @@
         list-style: none;
       }
       .head-cm ul li:first-child {
-        background: url("	http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-chuyenmuc.png")
+        background: url('<%= request.getContextPath()%>/images/portal/images/bg-chuyenmuc.png')
           no-repeat right top;
       }
       .head-cm ul li:first-child a {

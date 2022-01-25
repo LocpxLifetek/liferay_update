@@ -18,99 +18,6 @@ import goverment.dto.DlFileEntryDto;
 
 
 public class PhotoSql {
-	public CategoryDto categoryDto(String uuid)
-	{
-		PreparedStatement  statement = null;
-		Connection con = null;
-		ResultSet rs = null;
-		CategoryDto category= new CategoryDto();
-		try {
-			con = DataAccess.getConnection();
-			statement= con.prepareStatement("SELECT ac.name as name , ac.categoryid as categoryId FROM assetcategory ac WHERE ac.uuid_=?");
-			statement.setString(1,uuid);
-			rs = statement.executeQuery();
-			while (rs.next()) {
-				String name= rs.getString("name");
-				Integer categoryId= rs.getInt("categoryId");
-				category.setName(name);
-				category.setId(categoryId);
-			}
-			return category;
-		}
-			catch (Exception e) {
-				// TODO: handle exception
-				e.printStackTrace();
-				return null;
-			} finally {
-				if (rs != null) {
-					try {
-						rs.close();
-					} catch (SQLException e) {
-						/* Ignored */}
-				}
-				if (statement != null) {
-					try {
-						statement.close();
-					} catch (SQLException e) {
-						/* Ignored */}
-				}
-				if (con != null) {
-					try {
-						con.close();
-					} catch (SQLException e) {
-						/* Ignored */}
-				}
-			}
-	}
-	
-	public List<CategoryDto> findCategoryByParentId(Integer id){
-		PreparedStatement  statement = null;
-		Connection con = null;
-		ResultSet rs = null;
-		List<CategoryDto> listCategory= new ArrayList<>();
-		CategoryDto category= new CategoryDto();
-		try {
-			con = DataAccess.getConnection();
-			statement= con.prepareStatement("select ac.categoryid as CategoryId, ac.groupid as groupId, ac.name as name from assetcategory ac where ac.parentcategoryid=? order by ac.modifieddate desc OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY");
-			statement.setInt(1, id);
-			rs = statement.executeQuery();
-			while (rs.next()) {
-				Integer categoryId = rs.getInt("CategoryId");
-				Integer groupId= rs.getInt("groupId");
-				String name= rs.getString("name");
-				
-				category.setId(categoryId);
-				category.setGroupId(groupId);
-				category.setName(name);
-				listCategory.add(category);
-				
-			}
-			return listCategory;
-		}  catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return null;
-		} finally {
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					/* Ignored */}
-			}
-			if (statement != null) {
-				try {
-					statement.close();
-				} catch (SQLException e) {
-					/* Ignored */}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (SQLException e) {
-					/* Ignored */}
-			}
-		}
-	}
 	public CpattachmentfileentryDto findCpattachByCategory(Integer categoryid) {
 		PreparedStatement  statement = null;
 		Connection con = null;
@@ -137,7 +44,7 @@ public class PhotoSql {
 				Integer fileEntryId= rs.getInt("fileentryid");
 				Integer flIdCpa= rs.getInt("cpfileentryid");
 				Integer groupId = rs.getInt("groupid");
-				Integer folderId = rs.getInt("folderid");
+				long folderId = rs.getLong("folderid");
 				String filename = rs.getString("filename");
 				String uuidDlFileEntry = rs.getString("uuiddlfileentry");
 				String src = "/documents" + "/" + groupId + "/" + folderId + "/" + filename + "/" + uuidDlFileEntry;
@@ -203,17 +110,17 @@ public class PhotoSql {
 			statement.setInt(1, fileEntryId);
 			rs = statement.executeQuery();
 			while (rs.next()) {
-				Timestamp modifiedDate=rs.getTimestamp("modifiedDate");
+				Timestamp modifiedDates=rs.getTimestamp("modifiedDate");
 				String uuidCategory = rs.getString("uuidcategory");
 				String title = rs.getString("title");
-				String groupId= rs.getString("groupid");
-				String folderId= rs.getString("folderid");
+				Integer groupId= rs.getInt("groupid");
+				long folderId= rs.getLong("folderid");
 				String fileName= rs.getString("fileName");
 				String uuid= rs.getString("uuid");
 				String src="/documents/" + groupId + "/" + folderId + "/" + fileName + "/" + uuid;
 				dlfileEntryDto.setUuidCategory(uuidCategory);
 				dlfileEntryDto.setTitle(title);
-				dlfileEntryDto.setModifiedDate(modifiedDate);
+				dlfileEntryDto.setModifiedDate(modifiedDates);
 				dlfileEntryDto.setSrc(src);
 			}
 			return  dlfileEntryDto;
@@ -243,66 +150,6 @@ public class PhotoSql {
 		}
 		
 		
-	}
-
-	public List<DlFileEntryDto> findAllDLfileEntryDtos(Integer id) throws SQLException {
-		PreparedStatement statement=null;
-		Connection con=null;
-		ResultSet rs=null;
-		try {
-			
-			List<DlFileEntryDto> listDlFileEntry = new ArrayList<>();
-			con = DataAccess.getConnection();
-			statement = con.prepareStatement("\r\n" + 
-					"SELECT \r\n" + 
-					"					    dl.groupid     AS groupid, \r\n" + 
-					"                       dl.folderid    AS folderid,\r\n" + 
-					"					    dl.uuid_       AS uuid,\r\n" + 
-					"					    dl.filename    AS filename,\r\n" + 
-					"					    dl.title       AS title\r\n" + 
-					"					FROM\r\n" + 
-					"					         assetcategory ac\r\n" + 
-					"					    INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid\r\n" + 
-					"					    INNER JOIN assetentry                  ae ON aeac.assetentryid = ae.entryid \r\n" + 
-					"					    INNER JOIN dlfileentry                 dl ON dl.fileentryid = ae.classpk\r\n" + 
-					"					WHERE\r\n" + 
-					"					      ac.categoryid=?\r\n" + 
-					"					ORDER BY\r\n" + 
-					"					    dl.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 9 ROWS only");
-			statement.setInt(1, id);
-			rs=statement.executeQuery();
-			
-			while(rs.next()) {
-				DlFileEntryDto dlFileEntryDto=new DlFileEntryDto();
-				String uuid= rs.getString("uuid");
-				Integer groupId = rs.getInt("groupid");
-				Integer folderId = rs.getInt("folderid");
-				String fileName = rs.getString("fileName");
-				String title = rs.getString("title");
-				String src="/documents/" + groupId + "/" + folderId + "/" + fileName + "/" + uuid;
-				
-				dlFileEntryDto.setSrc(src);
-				dlFileEntryDto.setTitle(title);
-				
-				listDlFileEntry.add(dlFileEntryDto);
-				
-			}
-			return listDlFileEntry;
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-			return null;
-		}finally {
-			if(statement != null) {
-				statement.close();
-			}
-			if(con != null) {
-				con.close();
-			}
-			if(rs != null) {
-				rs.close();
-			}
-		}
 	}
 
 	public DlFileEntryDto dlfile(String uuid) throws SQLException {
@@ -360,7 +207,8 @@ public class PhotoSql {
 					"    dl.uuid_          AS uuid,\r\n" + 
 					"    dl.fileentryid    AS fileentryid,\r\n" + 
 					"    dl.filename       AS filename,\r\n" + 
-					"    dl.title          AS title\r\n" + 
+					"    dl.title          AS title,\r\n" + 
+					"    ac.uuid_          AS uuidCa\r\n" +
 					"FROM\r\n" + 
 					"         assetcategory ac\r\n" + 
 					"    INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid\r\n" + 
@@ -377,6 +225,7 @@ public class PhotoSql {
 			while(rs.next()) {
 				DlFileEntryDto dlFileEntryDto=new DlFileEntryDto();
 				String uuid1= rs.getString("uuid");
+				String uuidCa= rs.getString("uuidCa");
 				Integer groupId = rs.getInt("groupid");
 				Integer folderId = rs.getInt("folderid");
 				String fileName = rs.getString("fileName");
@@ -386,6 +235,7 @@ public class PhotoSql {
 				
 				
 				dlFileEntryDto.setSrc(src);
+				dlFileEntryDto.setUuidCategory(uuidCa);
 				dlFileEntryDto.setTitle(title);
 				dlFileEntryDto.setId(id);
 				
@@ -408,6 +258,56 @@ public class PhotoSql {
 				rs.close();
 			}
 		}
+	}
+	public CategoryDto findCategoryByParentId(Integer parentId) {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
+		try {
+			con = DataAccess.getConnection();
+			statement = con.prepareStatement(
+					"SELECT ac.name AS name, ac.groupid AS groupid, ac.categoryid AS id, ac.uuid_ as uuid FROM assetcategory ac WHERE ac.parentcategoryid=? ORDER BY ac.modifieddate DESC OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY");
+			statement.setLong(1, parentId);
+			rs = statement.executeQuery();
+			CategoryDto categoryDto = new CategoryDto();
+			while (rs.next()) {
+				
+				String name = rs.getString("name");
+				Integer group = rs.getInt("groupId");
+				Integer id = rs.getInt("id");
+				String uuid= rs.getString("uuid");
+				categoryDto.setId(id);
+				categoryDto.setGroupId(group);
+				categoryDto.setName(name);
+				categoryDto.setUuid(uuid);
+				
+			}
+			return categoryDto;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+		}
+		
 	}
 
 }

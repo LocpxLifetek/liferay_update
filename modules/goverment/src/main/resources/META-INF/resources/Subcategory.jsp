@@ -30,42 +30,33 @@ p{
     text-align: justify;
     display: block;
 }
-.head-cm ul li a {
-    color: #404041;
-    font: 400 13px/35px Roboto, Arial, Tahoma;
-    padding: 0 15px;
-    border-right: 1px solid #ddd;
-}
-
-.head-cm ul li:first-child {
-    background: url('<%= request.getContextPath()%>/images/portal/images/bg-chuyenmuc.png') no-repeat right top;
-}
-
-.head-cm ul li:first-child a {
-    color: #FFF;
-    font: 700 16px/35px Roboto, Arial, Tahoma;
-    text-transform: uppercase;
-    border-right: none;
-    padding: 0 30px 0 20px;
-}
-
-.head-cm ul li:last-child a {
-    border-right: none;
-}
-.head-cm ul {
-    display: inline-flex;
-    list-style: none;
-    position: relative;
-    top: 12px;
-    left: 0;
-    transform: translate(-12px, 0);
-}
 .head-cm {
-    width: 100%;
-    border-bottom: 1px solid #0a4298;
-    position: relative;
-    margin-bottom: 20px;
-}
+        width: 100%;
+        border-bottom: 1px solid #0a4298;
+        margin-bottom: 20px;
+      }
+      .head-cm ul {
+        display: inline-flex;
+        list-style: none;
+      }
+      .head-cm ul li:first-child {
+        background: url('<%= request.getContextPath()%>/images/portal/images/bg-chuyenmuc.png')
+          no-repeat right top;
+      }
+      .head-cm ul li:first-child a {
+        color: #fff;
+        font: 700 16px/35px Roboto, Arial, Tahoma;
+        text-transform: uppercase;
+        border-right: none;
+        padding: 0 30px 0 20px;
+      }
+      .head-cm ul li a {
+        color: #404041;
+        font: 400 13px/35px Roboto, Arial, Tahoma;
+        padding: 0 10px;
+        border-right: 1px solid #ddd;
+        text-decoration: none;
+      }
 .soup-image {
 	float:left;
 	margin-right:2%;

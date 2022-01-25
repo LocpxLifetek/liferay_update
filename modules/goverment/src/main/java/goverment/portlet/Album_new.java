@@ -21,6 +21,7 @@ import org.osgi.service.component.annotations.Component;
 import goverment.constants.GovermentPortletKeys;
 import goverment.dto.CategoryDto;
 import goverment.dto.DlFileEntryDto;
+import goverment.sql.AssetCategorySql;
 import goverment.sql.PhotoSql;
 @Component(
 		immediate = true,
@@ -41,21 +42,22 @@ public class Album_new extends MVCPortlet {
 	@Override
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
-//		try {
-//			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
-//
-//			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
-//			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-//			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
-//			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(assetCategory.getCategoryId());
-//			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid);
-//
-//			renderRequest.setAttribute("categoryDto", categoryDto);
-//			renderRequest.setAttribute("dLfileEntryDtos", dLfileEntryDtos);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
+		try {
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
+
+			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
+			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid);
+			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(category.getId());
+			
+			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(categoryDto.getUuid());
+
+			renderRequest.setAttribute("categoryDto", categoryDto);
+			renderRequest.setAttribute("dLfileEntryDtos", dLfileEntryDtos);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		super.doView(renderRequest, renderResponse);
 	}
 }

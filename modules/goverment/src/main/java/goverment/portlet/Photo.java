@@ -20,6 +20,7 @@ import goverment.constants.GovermentPortletKeys;
 import goverment.dto.CategoryDto;
 import goverment.dto.CpattachmentfileentryDto;
 import goverment.dto.DlFileEntryDto;
+import goverment.sql.AssetCategorySql;
 import goverment.sql.PhotoSql;
 import goverment.url.UrlCurrentPorlet;
 
@@ -49,8 +50,8 @@ public class Photo extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
 					themDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-			CategoryDto category= new PhotoSql().categoryDto("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780");
-			List<CategoryDto> listCategoryDtos=new PhotoSql().findCategoryByParentId(category.getId());
+			CategoryDto category= new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780");
+			List<CategoryDto> listCategoryDtos=new AssetCategorySql().findCategoryByParentCategory(category.getId());
 			List<CpattachmentfileentryDto> listCpa= new ArrayList<>();
 			List<DlFileEntryDto> listDlefile= new ArrayList<>();
 			for (CategoryDto categoryDto : listCategoryDtos) {

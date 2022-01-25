@@ -1,4 +1,0 @@
-Bundle-Name: detail_info_qn
-Bundle-SymbolicName: detail_info_qn
-Bundle-Version: 1.0.0
-Export-Package: detail_info_qn.constants

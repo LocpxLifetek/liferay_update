@@ -6,6 +6,8 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.portlet.Portlet;
 import javax.portlet.PortletException;
@@ -15,6 +17,11 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
+import goverment.dto.CategoryDto;
+import goverment.dto.CpattachmentfileentryDto;
+import goverment.dto.DlFileEntryDto;
+import goverment.sql.AssetCategorySql;
+import goverment.sql.PhotoSql;
 import goverment.url.UrlCurrentPorlet;
 
 @Component(
@@ -43,17 +50,10 @@ public class Table_category_photo extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-//			CategoryDto categoryName=new PhotoSql().categoryDto();
-//			List<CategoryDto> listCategory=new PhotoSql().findCategoryByParent(categoryName.getId());
-//			List<CpattachmentfileentryDto> listCpa= new ArrayList<>();
-//			List<DlFileEntryDto> listDlefile= new ArrayList<>();
-//			for (CategoryDto categoryDto : listCategory) {
-//				CpattachmentfileentryDto cpaAttach=new PhotoSql().findCpattachByCategory(categoryDto.getId());
-//				listCpa.add(cpaAttach);
-//			}	
-			
-//			renderRequest.setAttribute("categoryName", categoryName);
-//			renderRequest.setAttribute("listDlefile", listDlefile);
+			CategoryDto categoryName=new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780");
+			List<CategoryDto> listCategory=new AssetCategorySql().findCategoryByParentCategory(categoryName.getId());
+			renderRequest.setAttribute("categoryName", categoryName);
+			renderRequest.setAttribute("listCategory", listCategory);
 
 		} catch (Exception e) {
 			// TODO: handle exception

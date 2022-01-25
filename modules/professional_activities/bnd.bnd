@@ -1,4 +1,0 @@
-Bundle-Name: professional_activities
-Bundle-SymbolicName: professional_activities
-Bundle-Version: 1.0.0
-Export-Package: professional_activities.constants

@@ -97,11 +97,11 @@
           };
         </script>
 				      <ul>
-				      <c:forEach items="${listDlefile}" var="listDlefile">
+				      <c:forEach items="${listCategory}" var="listCategory">
 						<li class="i-ngang">
-                        	<a href="${url}/album_anh?id=${listDlefile.uuidCategory}"
-						       title="${listDlefile.title}"
-						       class="">${listDlefile.title}</a>
+                        	<a href="${url}/album_anh?uuid=${listCategory.uuid}"
+						       title="${listCategory.name}"
+						       class="">${listCategory.name}</a>
                     	</li>
                     	</c:forEach>
 				      </ul>

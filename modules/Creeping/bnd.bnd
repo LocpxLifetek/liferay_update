@@ -1,4 +1,0 @@
-Bundle-Name: Creeping
-Bundle-SymbolicName: Creeping
-Bundle-Version: 1.0.0
-Export-Package: Creeping.constants

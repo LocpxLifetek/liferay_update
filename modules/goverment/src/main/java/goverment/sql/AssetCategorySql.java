@@ -67,7 +67,7 @@ public class AssetCategorySql {
 			CategoryDto CategoryDto = new CategoryDto();
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
-					"SELECT ac.name AS name, ac.groupid AS groupid, ac.categoryid AS id, ac.parentcategoryid as parentId FROM assetcategory ac WHERE ac.uuid_=?");
+					"SELECT ac.name AS name, ac.groupid AS groupid, ac.categoryid AS id,ac.uuid_ as uuidCa, ac.parentcategoryid as parentId FROM assetcategory ac WHERE ac.uuid_=?");
 			statement.setString(1, uuid);
 			rs = statement.executeQuery();
 			while (rs.next()) {
@@ -75,6 +75,8 @@ public class AssetCategorySql {
 				Integer group = rs.getInt("groupId");
 				Integer id = rs.getInt("id");
 				Integer parentId= rs.getInt("parentId");
+				String uuidCa= rs.getString("uuidCa");
+				CategoryDto.setUuid(uuidCa);
 				CategoryDto.setId(id);
 				CategoryDto.setGroupId(group);
 				CategoryDto.setName(name);

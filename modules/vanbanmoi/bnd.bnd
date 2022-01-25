@@ -1,4 +1,0 @@
-Bundle-Name: vanbanmoi
-Bundle-SymbolicName: vanbanmoi
-Bundle-Version: 1.0.0
-Export-Package: vanbanmoi.constants
