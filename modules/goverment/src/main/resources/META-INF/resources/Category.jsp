@@ -38,12 +38,6 @@
       .box-body {
         padding: 12px;
       }
-      @media only screen and (min-width: 992px) {
-        .box-body {
-          padding-right: 17px;
-          padding-left: 17px;
-        }
-      }
       .row {
         margin-right: -5px;
         margin-left: -5px;
@@ -53,12 +47,6 @@
         margin-left: -15px;
         display: flex;
         flex-wrap: wrap;
-      }
-      @media (min-width: 992px) {
-        .col-lg-12 {
-          flex: 0 0 100%;
-          max-width: 100%;
-        }
       }
       .col-lg-12 {
         width: 100%;
@@ -154,20 +142,19 @@
             <div class="post-thumb hover">
               <a
                 class="figure"
-                href="https://h05.bca/web/cuch05/tin-chi-tiet/-/chi-tiet/bai-hoc-kinh-nghiem-ve-an-toan-thong-tin-tu-ai-dich-covid-19-699-39.html"
+                href="${url}/chitiettintuc?uuid=${blogsEntryDto.uuidBlogsEntry}"
                 ><img
-                  alt=""
                   src="${blogsEntryDto.src}"
               /></a>
             </div>
             <div class="post-text">
               <h3 class="post-title h3">
                 <a
-                  href="https://h05.bca/web/cuch05/tin-chi-tiet/-/chi-tiet/bai-hoc-kinh-nghiem-ve-an-toan-thong-tin-tu-ai-dich-covid-19-699-39.html"
+                  href="${url}/chitiettintuc?uuid=${blogsEntryDto.uuidBlogsEntry}"
                   >${blogsEntryDto.titleBlogsEntry}</a
                 >
               </h3>
-              <span class="post-ago">(15:10 17/01/2022) </span>
+              <span class="post-ago">(<fmt:formatDate value="${blogsEntryDto.modifiedDate}" pattern="MM/dd/yyyy" />)</span>
               <div class="post-desc">
                 ${blogsEntryDto.description}
               </div>
@@ -182,9 +169,9 @@
                 <div class="post-thumb hover">
                   <a
                     class="figure"
-                    href="https://h05.bca/web/cuch05/tin-chi-tiet/-/chi-tiet/youtube-bi-cao-buoc-truyen-tai-thong-tin-sai-lech-698-39.html"
+                    href="${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}"
                     ><img
-                      alt=""
+                      
                       src="${blog.src}"
                   /></a>
                 </div>
@@ -192,7 +179,7 @@
                   <h3 class="post-title">
                     <a
                       title=""
-                      href="https://h05.bca/web/cuch05/tin-chi-tiet/-/chi-tiet/youtube-bi-cao-buoc-truyen-tai-thong-tin-sai-lech-698-39.html"
+                      href="${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}"
                       >${blog.titleBlogsEntry}</a
                     >
                   </h3>

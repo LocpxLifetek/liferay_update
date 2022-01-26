@@ -110,9 +110,10 @@ p{
 
 						<div class="listDirectOperationGrid">
 							<div class="ldo">
+							<a href="${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}">
 								<img src="${blog.src}" class="soup-image"
-									style="width: 30% !important"> <a
-									href="${url}/detail?id=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
+									style="width: 30% !important"> </a>
+									<a href="${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
 								<span style="color: #d71920; font-size: 12px;">(<fmt:formatDate
 										value="${blog.modifiedDate}" pattern="MM/dd/yyyy" />)
 								</span> <br>

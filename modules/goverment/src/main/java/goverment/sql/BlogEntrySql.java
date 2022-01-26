@@ -104,6 +104,7 @@ public class BlogEntrySql {
 			List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement("SELECT\r\n" + 
+					"    be.uuid_         AS uuid,\r\n" + 
 					"    be.entryid         AS entryid,\r\n" + 
 					"    be.title           AS titleblogsentry,\r\n" + 
 					"    be.description     AS descriptiondlfileentry,\r\n" + 
@@ -133,10 +134,12 @@ public class BlogEntrySql {
 				String titleBlogsEntry=rs.getString("titleblogsentry");
 				String description=rs.getString("descriptiondlfileentry");
 				Timestamp modifiedDate=rs.getTimestamp("modifieddate");
+				String uuidDl= rs.getString("uuid");
 				blogsEntryDto.setDescription(description);
 				blogsEntryDto.setEntryId(entryId);
 				blogsEntryDto.setTitleBlogsEntry(titleBlogsEntry);
 				blogsEntryDto.setModifiedDate(modifiedDate);
+				blogsEntryDto.setUuidBlogsEntry(uuidDl);
 				listBlogsEntryDto.add(blogsEntryDto);
 			}
 			return listBlogsEntryDto;
