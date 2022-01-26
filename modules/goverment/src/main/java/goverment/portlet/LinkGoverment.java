@@ -47,6 +47,7 @@ public class LinkGoverment extends MVCPortlet{
 			throws IOException, PortletException {
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			
 			List<DlFileEntryDto> listDlFileEntryDtos=new ArrayList<>();
 			List<JournalAricleDto> listJournalAricleDtos = new LinkSql().findJournalArticle(themeDisplay.getScopeGroupId());
 			for (JournalAricleDto journalAricleDto : listJournalAricleDtos) {

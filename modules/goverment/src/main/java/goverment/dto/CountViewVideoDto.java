@@ -5,6 +5,21 @@ public class CountViewVideoDto {
 	private String title;
 	private String src;
 	private String mimeType;
+	private long userId;
+	private long fileEntryId;
+
+	public long getUserId() {
+		return userId;
+	}
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+	public long getFileEntryId() {
+		return fileEntryId;
+	}
+	public void setFileEntryId(long fileEntryId) {
+		this.fileEntryId = fileEntryId;
+	}
 	public String getMimeType() {
 		return mimeType;
 	}

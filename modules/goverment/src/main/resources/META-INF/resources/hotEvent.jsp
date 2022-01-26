@@ -45,7 +45,6 @@
 	var posItem = document.querySelectorAll(".ui-tabs-nav-item");
 	var title=document.querySelector('.tit').querySelectorAll('a');
 	var descriptionContent=document.getElementsByClassName('ct');
-	// console.log(title);
 	var img=document.createElement('img');
 	var titleFeature=document.createElement('a');
 	var slideIndex=0;
@@ -58,14 +57,12 @@
 	        var content=item.textContent;
 	        var description=item.querySelector('a').ariaValueText;
 	        var href= item.querySelector('a').href;
-	        console.log(image);
 	        descriptionContent[0].innerText = description; 
 	        img.src= image;
 	        document.getElementById('img').append(img);
 	        titleFeature.href=href;
 	        titleFeature.textContent=content;
 	        document.getElementById('title2').append(titleFeature);
-	        // console.log(title[0].textContent);
 	    })
 	});
 	function showSlides() {
@@ -75,7 +72,6 @@
 	    if(slideIndex > posItem.length){
 	        slideIndex=1;
 	    }
-	    console.log(slideIndex)
 	    var image = posItem[slideIndex-1].querySelector('img').src;
 	    var title= posItem[slideIndex-1].textContent;
 	    var href=posItem[slideIndex-1].querySelector('a').href;

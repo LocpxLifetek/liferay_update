@@ -147,19 +147,11 @@ a {
   .head-albums_anh { font: 700 18px/35px Roboto,Arial,Tahoma; color: #404041; text-transform: uppercase; text-align: center; margin: 15px 0 5px 0; }
            .albums_anh { background: #FFF url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-right.png') repeat-x center top; border: 1px solid #ddd; overflow: auto; }
            .linered { border-top: 2px solid #0a4298; width: 30%; margin: 0 auto; }
-           .lts-cmanh { padding: 10px; border-bottom: 4px solid #d71920; }
-           .lts-cmanh .top1 { background: #FFF; border: 1px solid #ccc; }
-           .lts-cmanh .top1 div { padding: 8px 10px; }
-           .lts-cmanh .top1 a:hover.album_bottom{color: red;}
-           .lts-cmanh .top1 div a { color: #404041; font: 700 15px/18px Roboto,Arial,Tahoma; text-align: justify; display:block;}
-           .lts-cmanh ul { list-style: none; }
-           .lts-cmanh ul li { background: url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/i-bul.png') no-repeat left 18px; border-bottom: 1px dotted #ccc; padding: 10px 0 10px 15px; text-align: justify;}
-           .lts-cmanh ul li a { color: #333; font: 400 15px/18px Roboto,Arial,Tahoma; display:block;text-align:justify; }
-           a,.ms-link:visited{text-decoration:none;}
-           @media screen and (max-width: 974px) {
-            	.albums_anh{
-            		display: none;
-            	}
+     a,.ms-link:visited{text-decoration:none;}
+     @media screen and (max-width: 974px) {
+      .albums_anh{
+        	display: none;
+      }
 			}
       .head-cm {
         width: 100%;
@@ -279,13 +271,10 @@ a {
         border: solid 1px;
         width: 12%;
       }
-      .chidao-dieuhanh {background: #FFF url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/bg-right.png') repeat-x center top;border: 1px solid #ddd;overflow: auto;}
+      .chidao-dieuhanh {border: 1px solid #ddd;overflow: auto;}
            .head-chidaodieuhanh { font: 700 18px/35px Roboto,Arial,Tahoma; color: #404041; text-transform: uppercase; text-align: center; margin: 15px 0 5px 0; }
            .linered { border-top: 2px solid #0a4298; width: 30%; margin: 0 auto; }
-           .lts-cmanh ul li a.active {
-        font-weight: bold;
-        color: #be1e2d;
-      }
+      
       .lts-cmanh ul li ul li:first-child {
         border-top: 1px dotted #ccc;
         margin-top: 10px;
@@ -294,6 +283,7 @@ a {
         background-position-y: 18px;
         border-bottom: 1px dotted #ccc;
         padding: 10px 0 10px 20px;
+        text-align: justify;
       }
       .i-ngang {
         background: url(http://bocongan.gov.vn/Publishing_Resources/web/media/images/i-ngang.png)
@@ -304,33 +294,7 @@ a {
         margin: 0;
         padding: 0;
       }
-      .lts-cmanh ul li:last-child {
-        border-bottom: none;
-      }
-      .lts-cmanh ul li a {
-        color: #333;
-        font: 400 15px/18px Roboto, Arial, Tahoma;
-        text-decoration: none;
-      }
-      .lts-cmanh ul li a.active {
-        font-weight: bold;
-        color: #be1e2d;
-      }
-      .lts-cmanh ul li a:hover {
-        font-weight: bold;
-        color: #be1e2d;
-      }
-      .lts-chidaodieuhanh { padding: 15px; border-bottom: 4px solid #d71920; }
-           .lts-chidaodieuhanh ul { list-style: none; }
-           .lts-chidaodieuhanh ul li { background: url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/i-v.png') no-repeat; padding-left: 25px; margin-bottom: 15px; }
-           .lts-chidaodieuhanh ul li a { color: #333; font: 700 15px/18px Roboto,Arial,Tahoma; display: block; text-align: justify; text-decoration: none; }
-           .lts-chidaodieuhanh ul li a:hover {color: red;}
-           .viewall { font: 400 13px Roboto,Arial,Tahoma; font-style: normal; color: #be1e2d; font-style: italic; text-align: right; display: block; }
-           @media screen and (max-width: 974px) {
-            	.chidao-dieuhanh{
-            		display: none;
-            	}
-			}
+
 //Hot event
 #featured { position: relative; min-height: 515px; overflow: hidden; background: #fff; }
 #featured ul.ui-tabs-nav { position: absolute; top: 0; left: 63.04131054131054%; list-style: none; padding: 0; margin: 0; width: 36.75213675213675%; overflow: auto; overflow-x: auto; overflow-x: hidden; }
@@ -588,22 +552,6 @@ h6 {
 	color: white;
 	padding: 10px 0 10px 0;
 }
-// toi pham
-.lts-cmanh ul li {text-align:justify; list-style: none;}
-            .box-canhgiac{border: 1px solid #ddd;}
-            .lts-cmanh {border-bottom: 4px solid #d71920; }
-            a{text-decoration: none;}
-            .lts-cmanh ul li a { color: #333; font: 400 15px/18px Roboto,Arial,Tahoma; display:block;text-align:justify; }
-            .viewall { font: 400 13px Roboto,Arial,Tahoma; font-style: normal; color: #be1e2d; font-style: italic; text-align: right; display: block; }
-            .lts-cmanh ul li { background: url('http://bocongan.gov.vn/Publishing_Resources/web/portal/images/i-bul.png') no-repeat left 18px; border-bottom: 1px dotted #ccc; padding: 10px 0 10px 15px; }
-            @media screen and (max-width: 974px) {
-            	.box-canhgiac{
-            		display: none;
-            	}
-			}
-
-
-
 // viddeo media category
 #wrapper {
   margin: 0 auto;
@@ -693,7 +641,7 @@ div.contentBlogs {
   text-decoration: none; }
 
 .trangchu a:hover {
-  color: red; }
+  color: #004175; }
 
 .detailBoCongAn {
   padding: 10px 0px; }
@@ -761,11 +709,6 @@ align-items: center;
     border-bottom: 1px solid #d71920;
 }
 // đếm bài viết video mới nhất
-.chidao-dieuhanh {
-  background: #FFF url('http://bocongan.gov.vn/Publishing_Resources/web/media/images/bg-right.png') repeat-x center top;
-  border: 1px solid #ddd;
-  overflow: auto;
-}
 
 .head-chidaodieuhanh {
   font: 700 18px/35px Roboto, Arial, Tahoma;
@@ -775,22 +718,64 @@ align-items: center;
   margin: 15px 0 5px 0;
 }
 
+.lts-chidaodieuhanh {
+  padding: 15px;
+  border-bottom: 4px solid #004175;
+}
+
+.lts-chidaodieuhanh ul {}
+
+
+
+.lts-chidaodieuhanh ul li a {
+  color: #333;
+  font: 700 15px/18px Roboto, Arial, Tahoma;
+  display: block;
+  text-align: justify;
+}
+
+.lts-chidaodieuhanh ul li a:hover {
+  color: #004175;
+}
+
+.linered {
+  border-top: 2px solid #004175;
+  width: 30%;
+  margin: 0 auto;
+}
+
+.viewall {
+  font: 400 13px Roboto, Arial, Tahoma;
+  font-style: normal;
+  color: #004175;
+  font-style: italic;
+  text-align: right;
+  display: block;
+}
+
 .lts-cmanh {
   padding: 10px;
-  border-bottom: 4px solid #d71920;
+  border-bottom: 4px solid #004175;
 }
 
 .lts-cmanh .top1 {
   /*background: #FFF;*/
+  border: 1px solid #fff;
+  padding: 3px;
   border-bottom: 1px dotted #ccc;
+  text-align: justify;
 }
-.lts-cmanh .top1 div video{
+
+.top1 img{
   width: 100%;
 }
 .lts-cmanh .top1 div {
   padding: 8px 0px;
 }
-
+.lts-cmanh ul li a {
+  color: #333;
+  font: 400 15px/18px Roboto,Arial,Tahoma;
+}
 .lts-cmanh .top1 div a {
   color: #404041;
   font: 700 15px/18px Roboto, Arial, Tahoma;
@@ -798,33 +783,21 @@ align-items: center;
   text-decoration: none;
 }
 
-.lts-cmanh ul {}
-
-.lts-cmanh ul li {
-  background: url('http://bocongan.gov.vn/Publishing_Resources/web/media/images/i-bul.png') no-repeat left center;
-  border-bottom: 1px dotted #ccc;
-  padding: 10px 0 10px 15px;
-  list-style: none;
-}
-
 .lts-cmanh ul li:last-child {
   border-bottom: none;
 }
 
-.lts-cmanh ul li a {
-  color: #333;
-  font: 400 15px/18px Roboto, Arial, Tahoma;
-  text-decoration:none;
-}
+
 
 .lts-cmanh ul li a.active {
   font-weight: bold;
-  color: #be1e2d;
+  color: #004175;
 }
 
 .lts-cmanh ul li a:hover {
   font-weight: bold;
-  color: #be1e2d;
+  color: #004175;
+  text-decoration: none;
 }
 
 //H05

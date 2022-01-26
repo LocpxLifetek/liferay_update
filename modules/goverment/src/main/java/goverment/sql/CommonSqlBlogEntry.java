@@ -154,11 +154,13 @@ public class CommonSqlBlogEntry {
 		try {
 			List<CountViewVideoDto> listCountViewVideoDto=new ArrayList<>();
 			con=DataAccess.getConnection();
-			statement=con.prepareStatement("select df.groupid as groupId,df.folderid as folderId,df.filename as fileName,df.extension as extension,df.uuid_ as uuid,df.title as title,df.mimetype as mimeType from viewcountentry vc inner join assetEntry ae on vc.classpk=ae.classpk inner join dlfileentry df on df.fileentryid=ae.classpk where ae.mimetype like concat('video','%') and df.groupId=? order  by vc.viewcount desc OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY");
+			statement=con.prepareStatement("select df.fileEntryId as fileEntryId, df.userId as userId, df.groupid as groupId,df.folderid as folderId,df.filename as fileName,df.extension as extension,df.uuid_ as uuid,df.title as title,df.mimetype as mimeType from viewcountentry vc inner join assetEntry ae on vc.classpk=ae.classpk inner join dlfileentry df on df.fileentryid=ae.classpk where ae.mimetype like concat('video','%') and df.groupId=? order  by vc.viewcount desc OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY");
 			statement.setLong(1, groupIdDlfileEntry);
 			rs=statement.executeQuery();
 			while(rs.next()) {
 				CountViewVideoDto countViewVideoDto=new CountViewVideoDto();
+				Long fileEntryId=rs.getLong("fileEntryId");
+				Long userId=rs.getLong("userId");
 				Integer groupId = rs.getInt("groupId");
 				Integer folderId = rs.getInt("folderId");
 				String fileName = rs.getString("fileName");
@@ -177,6 +179,8 @@ public class CommonSqlBlogEntry {
 				countViewVideoDto.setTitle(titleDlFileEntry);
 				countViewVideoDto.setUuid(uuid);
 				countViewVideoDto.setMimeType(mimeType);
+				countViewVideoDto.setFileEntryId(fileEntryId);
+				countViewVideoDto.setUserId(userId);
 				listCountViewVideoDto.add(countViewVideoDto);
 			}
 			return listCountViewVideoDto;
