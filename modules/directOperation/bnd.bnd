@@ -1,4 +1,0 @@
-Bundle-Name: directOperation
-Bundle-SymbolicName: directOperation
-Bundle-Version: 1.0.0
-Export-Package: directOperation.constants

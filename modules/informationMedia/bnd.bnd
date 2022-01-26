@@ -1,4 +1,0 @@
-Bundle-Name: informationMedia
-Bundle-SymbolicName: informationMedia
-Bundle-Version: 1.0.0
-Export-Package: informationMedia.constants

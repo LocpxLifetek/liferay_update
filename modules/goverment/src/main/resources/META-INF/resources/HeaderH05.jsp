@@ -298,7 +298,7 @@ px
 
 .header-bottom span.lbl {
 	text-align: right;
-	color: rgb(212, 48, 40);
+	color: #0a4298;
 	line-height: 32px;
 	font-weight: 700;
 	display: block;

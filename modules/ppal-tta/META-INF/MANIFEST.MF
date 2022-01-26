@@ -1,8 +1,0 @@
-Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: ppal-tta
-Bundle-SymbolicName: ppal-tta
-Bundle-Version: 1.0.0.qualifier
-Export-Package: content,
- ppal.tta.constants,
- ppal.tta.portlet

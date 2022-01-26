@@ -19,7 +19,10 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
+import goverment.dto.CategoryDto;
 import goverment.dto.CpattachmentfileentryDto;
+import goverment.dto.DlFileEntryDto;
+import goverment.sql.AssetCategorySql;
 import goverment.sql.PhotoSql;
 import goverment.url.UrlCurrentPorlet;
 
@@ -44,33 +47,45 @@ public class AlbumsPortlet extends MVCPortlet {
 	public void doView(RenderRequest renderRequest, RenderResponse renderResponse)
 			throws IOException, PortletException {
 
-//		try {	
-//			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
-//
-//			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-//			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
-//					themDisplay.getLayoutFriendlyURL(layout));
-//
-//			renderRequest.setAttribute("url", url);
-//
-//			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId("9d9a6b62-d2ed-9324-7b70-a524a67c5c64", themDisplay.getScopeGroupId());
-//			List<AssetCategory> listAssetCategory=AssetCategoryLocalServiceUtil.getChildCategories(assetCategory.getCategoryId());
-//			int i=0;
-//			List<CpattachmentfileentryDto> listCpattachmentfileentryDtos=new ArrayList<>();
-//			for (AssetCategory assetCategory2 : listAssetCategory) {
-//				i++;
-//				CpattachmentfileentryDto cpa=new PhotoSql().findCpattachByCategory(assetCategory2.getCategoryId());
-//				if(i==1) {
-//					renderRequest.setAttribute("cpa", cpa);
-//				}else {
-//					listCpattachmentfileentryDtos.add(cpa);
-//				}
-//			}
-//			renderRequest.setAttribute("listCpattachmentfileentryDtos", listCpattachmentfileentryDtos);
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			e.printStackTrace();
-//		}
+		try {	
+			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
+
+			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
+					themDisplay.getLayoutFriendlyURL(layout));
+
+			renderRequest.setAttribute("url", url);
+			CategoryDto categoryName= new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780");
+			List<CategoryDto> listCategory= new AssetCategorySql().findCategoryByParentCategory(categoryName.getId());
+			List<CpattachmentfileentryDto> listCpa= new ArrayList<>();
+			List<DlFileEntryDto> listDlfileNoImage= new ArrayList<>();
+			List<DlFileEntryDto> listDlfImage= new ArrayList<>();
+			for (CategoryDto categoryDto : listCategory) {
+				CpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());;
+				listCpa.add(cpaAttach);
+			}	
+			
+			for (CpattachmentfileentryDto cpas : listCpa) {
+				if(cpas.getFlIdCpa() !=null ) {			
+					DlFileEntryDto dlfile= new PhotoSql().findDlFileEntryByCpa(cpas.getFlIdCpa());
+					listDlfImage.add(dlfile);
+				}
+			}
+			int j=0;
+			for(DlFileEntryDto list : listDlfImage) {
+				j++;
+				if(j==1) {
+					renderRequest.setAttribute("list", list);
+				}
+				else {
+					listDlfileNoImage.add(list);
+				}
+			}
+			renderRequest.setAttribute("listDlfileNoImage", listDlfileNoImage);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 		super.doView(renderRequest, renderResponse);
 	}
 }
