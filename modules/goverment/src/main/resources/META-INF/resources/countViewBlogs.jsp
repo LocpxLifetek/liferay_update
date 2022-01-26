@@ -1,28 +1,59 @@
 <%@ include file="/init.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<style>
+.chidao-dieuhanh {
+	border: 1px solid #ddd;
+	overflow: auto;
+}
 
-<div class="countViewBlogs">
 
-	<div class="fixed">
-		<div
-			style="font: 700 18px/35px Roboto, Arial, Tahoma; color: #404041; text-transform: uppercase; text-align: center; margin: 15px 0 5px 0;">Xem
-			nhiều</div>
+.lts-chidaodieuhanh ul li {
+	background:
+		url(<%=request.getContextPath()%>/images/portal/_themes/ThanhHoa_orange/img/hv-module-tvt.PNG)
+		no-repeat;
+	padding-left: 25px;
+	margin-bottom: 15px;
+}
+
+.lts-cmanh ul li {
+	background:
+		url(<%=request.getContextPath()%>/images/portal/_themes/ThanhHoa_orange/img/hv-module-tvt.PNG)
+		no-repeat left center;
+	border-bottom: 1px dotted #ccc;
+	padding: 10px 0 10px 15px;
+}
+</style>
+<div class="chidao-dieuhanh" style="background: rgba(226, 229, 245, 0.4);">
+	<div class="head-chidaodieuhanh">
+		Xem nhiều
 		<div class="linered"></div>
-		<br>
-		<div class="imageViewBlogs">
-			<img src="${blogs.src}"> <a
-				href="${url}/chitiettintuc?uuid=${blogs.uuidBlogsEntry}" style="padding:5px 0px 0px 0px;">${blogs.titleBlogsEntry}</a>
-			<hr>
-		</div>
 	</div>
+	<div class="lts-cmanh">
 
-	<div class="blogView">
-
-		<c:forEach items="${listBlogsEntry}" var="blog">
-			<div style="border-bottom: 1px dotted #ccc;padding: 10px 0 10px 0px;">
-				<a href="${url}/chitiettintuc/?uuid=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
+		<div class="top1">
+			<div style="position: relative">
+				<a
+					href="${url}/chitiettintuc?uuid=${blogs.uuidBlogsEntry}">
+					<img
+					src="${blogs.src}"
+					alt="">
+				</a>
 			</div>
-			
-		</c:forEach>
+			<div>
+				<a
+					href="${url}/chitiettintuc?uuid=${blogs.uuidBlogsEntry}">${blogs.titleBlogsEntry}</a>
+			</div>
+		</div>
+
+		<ul>
+			<c:forEach items="${listBlogsEntry}" var="blog">
+			<li><a
+				href="${url}/chitiettintuc/?uuid=${blog.uuidBlogsEntry}"
+				title="">${blog.titleBlogsEntry}</a></li>
+			</c:forEach>
+
+
+		</ul>
+
 	</div>
 </div>

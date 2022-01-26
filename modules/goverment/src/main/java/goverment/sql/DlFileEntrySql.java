@@ -12,6 +12,7 @@ import java.util.List;
 import goverment.dto.DlFileEntryMetaDataDto;
 import goverment.dto.FileEntryDlFileDto;
 import goverment.dto.VideoDto;
+import goverment.dto.VideoLatestDto;
 
 public class DlFileEntrySql {
 	
@@ -192,6 +193,61 @@ public class DlFileEntrySql {
 			return null;
 			
 			// TODO: handle exception
+		}finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+		}
+	}
+	
+	public List<VideoLatestDto> fileVideoLatestDto(String uuid,long groupIdDlFile){
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
+		try {
+			List<VideoLatestDto> listVideoLatestDtos=new ArrayList<>();
+			con = DataAccess.getConnection();
+			statement=con.prepareStatement("select dl.userId as userId, dl.title as title, dl.fileentryid AS fileentryid,dl.groupid  AS groupid,dl.folderid AS folderid, dl.filename AS filename, dl.uuid_ AS uuiddlfileentry from DlFileEntry dl where dl.extension='mp4' and dl.uuid_ !=? and dl.groupId=? order by dl.modifiedDate desc OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY");
+			statement.setString(1, uuid);
+			statement.setLong(2, groupIdDlFile);
+			rs=statement.executeQuery();
+			while(rs.next()) {
+				VideoLatestDto videoLatestDto=new VideoLatestDto();
+				long fileEntryId=rs.getLong("fileentryid");
+				long groupId =rs.getLong("groupid");
+				long folderId=rs.getLong("folderid");
+				long userId=rs.getLong("userId");
+				String filename= rs.getString("filename");
+				String uuiddlfileentry=rs.getString("uuiddlfileentry");
+				String title =rs.getString("title");
+				String src = "/documents" + "/" + groupId + "/" + folderId + "/" + filename + "/" + uuiddlfileentry;
+				videoLatestDto.setUserId(userId);
+				videoLatestDto.setFileEntryId(fileEntryId);
+				videoLatestDto.setSrc(src);
+				videoLatestDto.setTitle(title);
+				videoLatestDto.setUuid(uuiddlfileentry);
+				listVideoLatestDtos.add(videoLatestDto);
+			}
+			return listVideoLatestDtos;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
 		}finally {
 			if (rs != null) {
 				try {

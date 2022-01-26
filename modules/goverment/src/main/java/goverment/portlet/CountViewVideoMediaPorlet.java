@@ -1,5 +1,19 @@
 package goverment.portlet;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.liferay.document.library.kernel.model.DLFileEntry;
+import com.liferay.document.library.kernel.model.DLFileEntryMetadata;
+import com.liferay.document.library.kernel.model.DLFileVersion;
+import com.liferay.document.library.kernel.service.DLFileEntryLocalServiceUtil;
+import com.liferay.document.library.kernel.service.DLFileEntryMetadataLocalServiceUtil;
+import com.liferay.document.library.kernel.service.DLFileVersionLocalServiceUtil;
+import com.liferay.dynamic.data.mapping.model.DDMContent;
+import com.liferay.dynamic.data.mapping.model.DDMStructure;
+import com.liferay.dynamic.data.mapping.service.DDMContentLocalServiceUtil;
+import com.liferay.dynamic.data.mapping.service.DDMStructureLocalServiceUtil;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -18,6 +32,10 @@ import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
 import goverment.dto.CountViewVideoDto;
+import goverment.dto.DlFileEntryVideoDto;
+import goverment.dto.DlFileVideoDto;
+import goverment.dto.FieldValuesInDdmContentDto;
+import goverment.dto.ValueDlFileDto;
 import goverment.sql.CommonSqlBlogEntry;
 import goverment.url.UrlCurrentPorlet;
 
@@ -40,17 +58,46 @@ public class CountViewVideoMediaPorlet extends MVCPortlet {
 			renderRequest.setAttribute("url", url);
 			List<CountViewVideoDto> listCountViewVideoDto = new CommonSqlBlogEntry()
 					.getViewCountVideo(themeDisplay.getScopeGroupId());
-			CountViewVideoDto countViewVideoDto = listCountViewVideoDto.get(0);
-			renderRequest.setAttribute("countViewVideoDto", countViewVideoDto);
-			List<CountViewVideoDto> listCountViewVideoDtos = new ArrayList<>();
-			if (listCountViewVideoDto.size() > 0) {
-
-				for (int i = 1; i < listCountViewVideoDto.size(); i++) {
-					CountViewVideoDto countView = listCountViewVideoDto.get(i);
-					listCountViewVideoDtos.add(countView);
+			List<DlFileVideoDto> listDlFileVideoDtos=new ArrayList<>();
+			List<DlFileVideoDto> listDlFileVideoTitleDtos=new ArrayList<>();
+			DDMStructure ddmStructure= DDMStructureLocalServiceUtil.getDDMStructureByUuidAndGroupId("4098419d-5793-b989-21c2-c267a13ea5e4", themeDisplay.getScopeGroupId());
+			for (CountViewVideoDto countViewVideoDto : listCountViewVideoDto) {
+				DLFileVersion dlFileVersion=DLFileVersionLocalServiceUtil.getLatestFileVersion(countViewVideoDto.getUserId(), countViewVideoDto.getFileEntryId());
+				DLFileEntryMetadata dlFileEntryMetaData=DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadata(ddmStructure.getStructureId(), dlFileVersion.getFileVersionId());
+				DDMContent ddmContent=DDMContentLocalServiceUtil.getContent(dlFileEntryMetaData.getDDMStorageId());
+				ObjectMapper objectMapper = new ObjectMapper();
+				DlFileEntryVideoDto dlFileEntryVideoDtos=objectMapper.readValue(ddmContent.getData(), new TypeReference<DlFileEntryVideoDto>() {});
+				List<FieldValuesInDdmContentDto> listFieldValuesInDdmContentDtos = dlFileEntryVideoDtos.getFieldValues();
+				for (FieldValuesInDdmContentDto fieldValuesInDdmContentDtos : listFieldValuesInDdmContentDtos) {
+					ValueDlFileDto value = fieldValuesInDdmContentDtos.getValue();
+					JSONObject jsonObject = JSONFactoryUtil.createJSONObject(value.getVi_VN());
+					DlFileVideoDto dlFileVideoDto = new DlFileVideoDto();
+					DLFileEntry dlFileEntryImage = DLFileEntryLocalServiceUtil
+							.getDLFileEntry(jsonObject.getLong("classPK"));
+					dlFileVideoDto.setSrc("/documents" + "/" + dlFileEntryImage.getGroupId() + "/"
+							+ dlFileEntryImage.getFolderId() + "/" + dlFileEntryImage.getFileName() + "/"
+							+ dlFileEntryImage.getUuid());
+					String titleDlFile = null;
+					if (countViewVideoDto.getTitle().contains(".mp4")) {
+						titleDlFile = countViewVideoDto.getTitle().replace(".mp4", "");
+					} else {
+						titleDlFile = countViewVideoDto.getTitle();
+					}
+					dlFileVideoDto.setTitle(titleDlFile);
+					dlFileVideoDto.setUuid(countViewVideoDto.getUuid());
+					listDlFileVideoDtos.add(dlFileVideoDto);
 				}
 			}
-			renderRequest.setAttribute("listCountViewDtos", listCountViewVideoDtos);
+			int i=0;
+			for (DlFileVideoDto dlFileVideoDto : listDlFileVideoDtos) {
+				i++;
+				if(i==1) {
+					renderRequest.setAttribute("dlFileVideoDto", dlFileVideoDto);
+				}else {
+					listDlFileVideoTitleDtos.add(dlFileVideoDto);
+				}
+			}
+			renderRequest.setAttribute("listDlFileVideoTitleDtos", listDlFileVideoTitleDtos);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// TODO: handle exception

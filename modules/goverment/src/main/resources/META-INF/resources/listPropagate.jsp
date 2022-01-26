@@ -42,7 +42,7 @@
 				
 	                <p class="tandan-p-module-news-second">
 	                    <a
-	                        href='${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}' style="background:url('<%=request.getContextPath()%>/images/portal/_themes/ThanhHoa_orange/img/hv-more-news.jpg') no-repeat top left; background-position-y: 5px;">${blog.titleBlogsEntry}</a><span
+	                        href='${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}' style="background:url('<%=request.getContextPath()%>/images/portal/_themes/ThanhHoa_orange/img/hv-module-tvt.PNG') no-repeat top left; background-position-y: 5px;">${blog.titleBlogsEntry}</a><span
 	                        class="ngay">
 	                        (<fmt:formatDate
 								value="${blog.modifiedDate}" pattern="dd/MM/yyyy" />)</span>

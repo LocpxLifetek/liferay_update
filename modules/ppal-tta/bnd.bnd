@@ -1,4 +1,0 @@
-Bundle-Name: ppal-tta
-Bundle-SymbolicName: ppal.tta
-Bundle-Version: 1.0.0
-Export-Package: ppal.tta.constants
