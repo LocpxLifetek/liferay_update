@@ -18,7 +18,7 @@ import goverment.dto.DlFileEntryDto;
 
 
 public class PhotoSql {
-	public CpattachmentfileentryDto findCpattachByCategory(Integer categoryid) {
+	public CpattachmentfileentryDto findCpattachByCategory(Integer categoryid, Long group) {
 		PreparedStatement  statement = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -33,10 +33,12 @@ public class PhotoSql {
 					"    Inner join DlFileEntry dl on cp.fileentryid=dl.fileentryid\r\n" + 
 					"WHERE\r\n" + 
 					"    ac.categoryid = ?\r\n" + 
+					"    AND ac.groupId = ?\r\n" + 
 					"ORDER BY\r\n" + 
 					"    cp.modifieddate DESC\r\n" + 
 					"OFFSET 0 ROWS FETCH NEXT 1 ROWS ONLY");
 			statement.setInt(1, categoryid);
+			statement.setLong(2, group);
 			rs= statement.executeQuery();
 			while (rs.next()) {
 				String uuid=rs.getString("uuid");

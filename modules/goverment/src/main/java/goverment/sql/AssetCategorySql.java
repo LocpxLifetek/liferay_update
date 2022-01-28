@@ -59,7 +59,7 @@ public class AssetCategorySql {
 
 	}
 	
-	public CategoryDto findCategoryByUuid(String uuid) {
+	public CategoryDto findCategoryByUuid(String uuid, Long groupId) {
 		PreparedStatement statement = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -67,8 +67,9 @@ public class AssetCategorySql {
 			CategoryDto CategoryDto = new CategoryDto();
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
-					"SELECT ac.name AS name, ac.groupid AS groupid, ac.categoryid AS id,ac.uuid_ as uuidCa, ac.parentcategoryid as parentId FROM assetcategory ac WHERE ac.uuid_=?");
+					"SELECT ac.name AS name, ac.groupid AS groupid, ac.categoryid AS id,ac.uuid_ as uuidCa, ac.parentcategoryid as parentId FROM assetcategory ac WHERE ac.uuid_=? and ac.groupId= ?");
 			statement.setString(1, uuid);
+			statement.setLong(2, groupId);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				String name = rs.getString("name");

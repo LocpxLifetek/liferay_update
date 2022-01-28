@@ -4,28 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
-	.menu_1{
-    width: 97%;
-}
-.listDirectOperationRight {
-    display: grid;
-}
 
-.ldo a{
-    color: black !important;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: justify;
-    display: block;
-}
-.listDirectOperationGrid{
-    border-bottom: 1px dotted #ccc;
-    padding: 15px 0px;
-}
-.ldo a:hover{
-    color:red !important;
-}
 p{
     text-align: justify;
     display: block;
@@ -110,10 +89,11 @@ p{
 
 						<div class="listDirectOperationGrid">
 							<div class="ldo">
+							<a href="${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}">
 								<img src="${blog.src}" class="soup-image"
-									style="width: 30% !important"> <a
-									href="${url}/detail?id=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
-								<span style="color: #d71920; font-size: 12px;">(<fmt:formatDate
+									style="width: 30% !important"> </a>
+									<a href="${url}/chitiettintuc?uuid=${blog.uuidBlogsEntry}">${blog.titleBlogsEntry}</a>
+								<span style="color: black; font-size: 12px;">(<fmt:formatDate
 										value="${blog.modifiedDate}" pattern="MM/dd/yyyy" />)
 								</span> <br>
 								<p>${blog.description}</p>

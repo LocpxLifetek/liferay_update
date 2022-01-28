@@ -50,12 +50,12 @@ public class Photo extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
 					themDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-			CategoryDto category= new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780");
+			CategoryDto category= new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780",themDisplay.getScopeGroupId());
 			List<CategoryDto> listCategoryDtos=new AssetCategorySql().findCategoryByParentCategory(category.getId());
 			List<CpattachmentfileentryDto> listCpa= new ArrayList<>();
 			List<DlFileEntryDto> listDlefile= new ArrayList<>();
 			for (CategoryDto categoryDto : listCategoryDtos) {
-				CpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId());
+				CpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId(), themDisplay.getScopeGroupId());
 				listCpa.add(cpaAttach);
 			}	
 			

@@ -50,7 +50,7 @@ public class Table_category_photo extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-			CategoryDto categoryName=new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780");
+			CategoryDto categoryName=new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780", themeDisplay.getScopeGroupId());
 			List<CategoryDto> listCategory=new AssetCategorySql().findCategoryByParentCategory(categoryName.getId());
 			renderRequest.setAttribute("categoryName", categoryName);
 			renderRequest.setAttribute("listCategory", listCategory);

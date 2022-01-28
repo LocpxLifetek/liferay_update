@@ -6,16 +6,6 @@
   <head>
     <meta charset="UTF-8" />
     <style>
-      .block.border {
-        border: 1px solid #9abbe2;
-        border-radius: 3px 3px 0 0;
-        padding-bottom: 0px;
-      }
-      .block {
-        padding: 1px;
-        margin-bottom: 5px;
-        height: auto;
-      }
       .block > .title {
         background: #316db5;
         border-radius: 3px 3px 0 0;
@@ -28,75 +18,10 @@
         line-height: 19px;
         padding: 5px;
       }
-      .block > .title.flat {
-        background: none;
-        color: #333;
-        line-height: 20px;
-      }
-      .block .title a,
-      .block .tandan-div-article-other p.tandan-p-article-other {
-        text-decoration: none;
-        color: #fff;
-        text-transform: uppercase;
-      }
-      .td-slide-rotate {
-        width: 100%;
-        height: 146px;
-      }
-      .block > .title,
-      .block .tandan-div-article-other p.tandan-p-article-other {
-        font-size: 13px;
-        text-align: left;
-        font-weight: bold;
-      }
-      .TD-ul-module-menu-left {
-        line-height: 18px;
-        overflow: hidden;
-        overflow-y: auto;
-      }
-      ul {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-      }
-      .TD-ul-module-menu-left li {
-        border-bottom: 1px solid #e0e0e0;
-        padding: 5px 0;
-        padding-left: 5px;
-      }
-
-      .dropup,
-      .dropdown {
-        position: relative;
-      }
-      li {
-        margin: 0;
-        list-style: none;
-      }
-      dt {
-        font-weight: bold;
-      }
-
-      dt,
-      dd {
-        line-height: 1.42857143;
-      }
       .TD-ul-module-menu-left a {
         background: url("<%= request.getContextPath()%>/images/portal/_themes/ThanhHoa_orange/img/hv-module-tvt.PNG") center left no-repeat;
         color: #222;
       }
-
-      .TD-ul-module-menu-left a {
-        font-size: 13px;
-        padding-left: 15px;
-        text-decoration: none;
-        font-family: Roboto;
-        font-weight: 500;
-      }
-      .TD-ul-module-menu-left a:hover {
-	    color: #c10600;
-	    background: url("<%= request.getContextPath()%>/images/portal/_themes/ThanhHoa_orange/img/hv-module-tvt-hv.PNG") center left no-repeat;
-}
     </style>
   </head>
   <body>

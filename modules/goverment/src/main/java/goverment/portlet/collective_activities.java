@@ -44,7 +44,7 @@ public class collective_activities extends MVCPortlet {
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-			CategoryDto categoryDto= new AssetCategorySql().findCategoryByUuid("985f798e-d6f4-da94-5863-1f378459838d");
+			CategoryDto categoryDto= new AssetCategorySql().findCategoryByUuid("985f798e-d6f4-da94-5863-1f378459838d",themeDisplay.getScopeGroupId());
 			List<CategoryDto> listCategoryDtos= new AssetCategorySql().findCategoryByParentCategory(categoryDto.getId());
 			renderRequest.setAttribute("categoryDto", categoryDto);
 			renderRequest.setAttribute("listCategoryDtos", listCategoryDtos);

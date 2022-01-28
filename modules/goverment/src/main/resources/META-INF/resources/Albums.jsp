@@ -20,7 +20,7 @@
                 
                 <ul>
                     
-                    <c:forEach items="${listCpattachmentfileentryDtos}" var="listCpa">
+                    <c:forEach items="${listDlfileNoImage}" var="listCpa">
                         <li><a class="album_bottom" href="${url}/album_anh?uuid=${listCpa.uuidCategory}">${listCpa.title}</a></li>
                     </c:forEach>
                 
