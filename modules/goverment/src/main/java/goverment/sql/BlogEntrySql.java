@@ -116,14 +116,11 @@ public class BlogEntrySql {
 					"    INNER JOIN blogsentry                  be ON ae.classpk = be.entryid\r\n" + 
 					"WHERE\r\n" + 
 					"        ac.uuid_ = ?\r\n" + 
-					"    AND be.status = '0'\r\n" + 
-					"  \r\n" + 
-					"    AND be.status = '0' and be.groupId=?\r\n" + 
+					"    AND be.status = '0' and ac.groupId=?\r\n" + 
 					"ORDER BY\r\n" + 
 					"    be.modifieddate DESC\r\n" + 
 					"OFFSET 0 ROWS FETCH NEXT ? ROWS ONLY");
 			statement.setString(1, uuid);
-			statement.setInt(2, number);
 			statement.setLong(2, groupId);
 			statement.setInt(3, number);
 

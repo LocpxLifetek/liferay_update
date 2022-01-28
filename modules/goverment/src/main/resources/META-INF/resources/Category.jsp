@@ -127,6 +127,13 @@
         max-width: 100%;
         vertical-align: middle;
       }
+      .post-title > a:hover{
+      	color: #038bd4;
+      }
+      .post-title > a{
+      	text-decoration: none;
+      	color: black;
+      }
     </style>
   </head>
   <body>

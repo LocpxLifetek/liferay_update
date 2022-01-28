@@ -1,6 +1,9 @@
 .countViewBlogs a {
   color: black !important;
 }
+a {
+  text-decoration: none !important;
+}
 .countViewBlogs a:hover {
   color: #0a4298 !important;
   text-decoration: none;
@@ -275,8 +278,8 @@ a,
 }
 
 .box-top3 ul li {
-  width: 30%;
-  margin-right: 2.8%;
+  width: 28%;
+  margin-right: 3.8%;
   float: left;
   position: relative;
 }
@@ -378,10 +381,6 @@ a,
   border-bottom: 1px dotted #ccc;
   padding: 10px 0 10px 20px;
   text-align: justify;
-}
-.i-ngang {
-  background: url(http://bocongan.gov.vn/Publishing_Resources/web/media/images/i-ngang.png)
-    no-repeat 7px 13px !important;
 }
 ul {
   list-style: none;
@@ -605,146 +604,6 @@ ul {
     display: none;
   }
 }
-// //Hot event
-// #featured {
-//   position: relative;
-//   min-height: 515px;
-//   overflow: hidden;
-//   background: #fff;
-// }
-// #featured ul.ui-tabs-nav {
-//   position: absolute;
-//   top: 0;
-//   left: 63.04131054131054%;
-//   list-style: none;
-//   padding: 0;
-//   margin: 0;
-//   width: 36.75213675213675%;
-//   overflow: auto;
-//   overflow-x: auto;
-//   overflow-x: hidden;
-// }
-// #featured ul.ui-tabs-nav li {
-//   color: #666;
-//   float: right;
-//   margin-bottom: 7px;
-//   padding-bottom: 7px;
-//   width: 100%;
-// }
-// #featured ul.ui-tabs-nav li img {
-//   float: left;
-//   padding-right: 10px;
-//   width: 100px;
-// }
-// #featured ul.ui-tabs-nav li span {
-//   font: normal 13px/18px "Roboto", Arial, Verdana;
-//   display: block;
-// }
-// #featured li.ui-tabs-nav-item a p {
-//   font-size: 15px;
-//   color: #1b75bb;
-// }
-// #featured li.ui-tabs-nav-item a {
-//   font-family: Roboto, Arial, Tahoma;
-//   text-align: justify;
-//   display: block;
-//   height: auto;
-//   text-decoration: none;
-//   color: #58585b;
-//   background: #fff;
-//   outline: none;
-//   font-size: 14px;
-// }
-// #featured li.ui-tabs-nav-item a:hover {
-//   background: #fff;
-//   font-weight: bold;
-//   color: #038bd4;
-// }
-// #featured li.ui-tabs-nav-item:last-child a {
-//   border-bottom: none;
-// }
-// #featured li.ui-tabs-selected span,
-// #featured li.ui-tabs-active span {
-//   font: 700 13px Roboto, Arial, Tahoma !important;
-// }
-// #featured ul.ui-tabs-nav li.ui-tabs-selected a,
-// #featured ul.ui-tabs-nav li.ui-tabs-active a {
-//   background: #fff;
-//   font-weight: bold;
-// }
-// #featured .ui-tabs-panel {
-//   width: 60.54131054131054%;
-//   position: relative;
-//   text-align: justify;
-// }
-// #featured .ui-tabs-panel img {
-//   width: 100%;
-//   height: 100%;
-//   margin: 0 auto;
-//   margin-bottom: 5px;
-// }
-// #featured .ui-tabs-panel .info {
-//   bottom: 0;
-//   left: 0;
-//   height: 70px; /*background: url('images/transparent-bg.png');*/
-// }
-// #featured .ui-tabs-panel .info a.hideshow {
-//   position: absolute;
-//   font-size: 15px;
-//   font-family: "Roboto", Arial, Verdana;
-//   color: #f0f0f0;
-//   right: 10px;
-//   top: -20px;
-//   line-height: 20px;
-//   margin: 0;
-//   outline: none;
-// }
-// #featured .info h2 {
-//   font: 700 18px/24px "Roboto", Arial, Verdana;
-//   padding: 5px 0;
-//   margin: 0;
-//   font-weight: normal;
-//   overflow: hidden;
-// }
-// #featured .info p {
-//   font-family: "Roboto", Arial, Verdana;
-//   font-size: 13px;
-//   line-height: 18px;
-//   color: #58585b;
-//   text-align: justify;
-// }
-// #featured .info a {
-//   text-decoration: none;
-//   color: #404041;
-//   font-weight: bold;
-//   text-decoration: none;
-// }
-// #featured .info a:hover {
-//   text-decoration: none;
-// }
-// #featured .ui-tabs-hide {
-//   display: none;
-// }
-// #featured ul.ui-tabs-nav li:last-child {
-//   margin: 0;
-//   padding: 0;
-//   border-bottom: none;
-// }
-// .fix-slider {
-//   text-align: center;
-// }
-
-// .box-img .tit a {
-//   font: 700 18px/24px "Roboto", Arial, Verdana;
-//   color: #404041;
-//   text-decoration: none;
-// }
-// .des .ct {
-//   text-align: justify;
-//   font: 400 13px/18px Roboto, Arial, Tahoma;
-//   margin-top: 10px;
-// }
-//search
 .menu_1 {
   width: 97%;
 }
@@ -765,9 +624,8 @@ ul {
   padding: 15px 0px;
 }
 .ldo a:hover {
-  color: red !important;
+  color: #038bd4 !important;
 }
-
 .soup-image {
   float: left;
   margin-right: 2%;
@@ -1635,6 +1493,15 @@ a.top-t-2:visited {
   line-height: 20px;
   float: left;
 }
+.Td-footer h2 {
+  color: #fd9b08 !important;
+}
+@media (min-width: 992px) {
+  .col-lg-2 {
+    flex: 0 0 16.66667%;
+    max-width: 8%;
+  }
+}
 // video
 .head-cm .xemthem {
   float: right;
@@ -1642,4 +1509,77 @@ a.top-t-2:visited {
   color: #0a4298;
   display: block;
   padding-top: 12px;
+}
+//Category right
+.block.border {
+  border: 1px solid #9abbe2;
+  border-radius: 3px 3px 0 0;
+  padding-bottom: 0px;
+}
+.block {
+  padding: 1px;
+  margin-bottom: 5px;
+  height: auto;
+}
+.block > .title.flat {
+  background: none;
+  color: #333;
+  line-height: 20px;
+}
+.block .title a,
+.block .tandan-div-article-other p.tandan-p-article-other {
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+}
+.td-slide-rotate {
+  width: 100%;
+  height: 146px;
+}
+.block > .title,
+.block .tandan-div-article-other p.tandan-p-article-other {
+  font-size: 13px;
+  text-align: left;
+  font-weight: bold;
+}
+.TD-ul-module-menu-left {
+  line-height: 18px;
+  overflow: hidden;
+  overflow-y: auto;
+}
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.TD-ul-module-menu-left li {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 5px 0;
+  padding-left: 5px;
+}
+
+.dropup,
+.dropdown {
+  position: relative;
+}
+li {
+  margin: 0;
+  list-style: none;
+}
+dt {
+  font-weight: bold;
+}
+
+dt,
+dd {
+  line-height: 1.42857143;
+}
+.TD-ul-module-menu-left a {
+  font-size: 14px;
+  padding-left: 15px;
+  text-decoration: none;
+  font-family: Roboto, Arial, Tahoma;
+}
+.TD-ul-module-menu-left a:hover {
+  color: #038bd4;
 }

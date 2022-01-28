@@ -47,7 +47,7 @@ public class Album_new extends MVCPortlet {
 
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid);
+			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid,themeDisplay.getScopeGroupId());
 			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(category.getId());
 			
 			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(categoryDto.getUuid());

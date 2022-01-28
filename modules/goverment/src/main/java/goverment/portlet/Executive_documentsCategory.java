@@ -6,6 +6,7 @@ import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.Portlet;
@@ -16,8 +17,11 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
+import goverment.dto.BlogsEntryDto;
 import goverment.dto.CategoryDto;
 import goverment.sql.AssetCategorySql;
+import goverment.sql.BlogEntrySql;
+import goverment.sql.FeatureNewsSql;
 import goverment.url.UrlCurrentPorlet;
 
 @Component(
@@ -42,12 +46,13 @@ public class Executive_documentsCategory extends MVCPortlet{
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
+		
 			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-			CategoryDto categoryDto= new AssetCategorySql().findCategoryByUuid("1c8ec7af-63b9-7e70-6e7a-f6eb5699f5ce");
-			List<CategoryDto> listCategoryDtos= new AssetCategorySql().findCategoryByParentCategory(categoryDto.getId());
-			renderRequest.setAttribute("categoryDto", categoryDto);
-			renderRequest.setAttribute("listCategoryDtos", listCategoryDtos);
+			CategoryDto category= new AssetCategorySql().findCategoryByUuid("1c8ec7af-63b9-7e70-6e7a-f6eb5699f5ce",themeDisplay.getScopeGroupId());
+			renderRequest.setAttribute("category", category);
+			List<BlogsEntryDto> listBlogsEntryDtos = new FeatureNewsSql().findAllBlogsByIdCategory(themeDisplay.getScopeGroupId(),category.getUuid());
+			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

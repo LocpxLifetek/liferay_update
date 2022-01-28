@@ -52,7 +52,7 @@ public class Category extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
-			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid);
+			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
 			CategoryDto categoryDto= new AssetCategorySql().findCategoryById(category.getParentCategoryId());
 			renderRequest.setAttribute("categoryDto", categoryDto);
 //			CategoryDto category2= new AssetCategorySql().findCategoryByUuid(categoryDto.getUuid());
