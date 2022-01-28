@@ -473,7 +473,7 @@ button, input {
 										đàn</span>
 							</a></li>
 						</div>
-<<<<<<< HEAD
+
 						<li class="active header-menu-item">
 								<c:choose>
 									<c:when test="${not empty login}"><a href="${login}" style="text-decoration: none;" class="title-menu"><span>Đăng nhập</span></a></c:when>
@@ -482,11 +482,8 @@ button, input {
 									</c:otherwise>
 								</c:choose>
 						</li>
-=======
-						<li class="active header-menu-item"><a class="title-menu" href="/web/h05/sign-in">
-								<span>Đăng nhập</span>
-						</a></li>
->>>>>>> 08334802ee0cf5eb17346b1cd50203486b758a6f
+
+
 					</ul>
 				</div>
 				<div class="header-bottom" style="z-index: 100">
