@@ -1,4 +1,0 @@
-Bundle-Name: stateBudegetData
-Bundle-SymbolicName: stateBudegetData
-Bundle-Version: 1.0.0
-Export-Package: stateBudegetData.constants

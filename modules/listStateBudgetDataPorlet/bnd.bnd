@@ -1,4 +1,0 @@
-Bundle-Name: listStateBudgetDataPorlet
-Bundle-SymbolicName: listStateBudgetDataPorlet
-Bundle-Version: 1.0.0
-Export-Package: listStateBudgetDataPorlet.constants

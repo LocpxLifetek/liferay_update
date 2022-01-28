@@ -36,22 +36,22 @@
 <div class="box-left-home">
         <div class="head-cm" style="margin-bottom:20px;">
             <ul>
-                <li><a href="/media/thu-vien-video.html">Video</a></li>
+                <li><a href="${url}/thu-vien-video">Video</a></li>
             </ul>
-            <a href="/media/thu-vien-video.html" class="xemthem">Xem thêm</a>
+            <a href="${url}/thu-vien-video" class="xemthem">Xem thêm</a>
         </div>
         <div class="box-top3">
             <ul>
 				<c:forEach items="${listDlFileVideoDtos}" var="dlfile">
                 <li>
                     <div style="position: relative">
-                        <a href="#">
+                        <a href="${url}/video?uuid=${dlfile.uuid}">
                             <img src="${dlfile.src}">
                         </a>
-                        <a href="#"
+                        <a href="${url}/video?uuid=${dlfile.uuid}"
                             class="iconplay"></a>
                     </div>
-                    <h3><a href="#">${dlfile.title}</a></h3>
+                    <h3><a href="${url}/video?uuid=${dlfile.uuid}">${dlfile.title}</a></h3>
 
                 </li> 
 				</c:forEach>

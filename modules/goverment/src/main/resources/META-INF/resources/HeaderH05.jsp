@@ -441,32 +441,10 @@ button, input {
 			<portlet:resourceURL var="getBlogs">
 				<portlet:param name="<%=Constants.CMD%>" value="get_blogs" />
 			</portlet:resourceURL>
-
-			<div class="block border has-icon">
-				<table class="s4-wpTopTable" cellpadding="0" cellspacing="0"
-					width="100%">
-					<tr>
-						<td valign="top">
-							<div WebPartID="00000000-0000-0000-0000-000000000000"
-								HasPers="true" id="WebPartWPQ1" width="100%" class="noindex"
-								OnlyForMePart="true" allowDelete="false" style="">
-								<div>
-
-									<div class="tandan-div-search">
-										<div class="div-input">
-											<aui:input id="myInputNode" name="myInputNode" label=""
-												helpMessage="Type blogs in Input Box"
-												placeholder="Từ khóa tìm kiếm" />
-										</div>
-
-									</div>
-
-
-								</div>
-							</div>
-						</td>
-					</tr>
-				</table>
+			<div class="div-input" style="position: absolute;top: 0;left: 75%; transform: translateX(5%);z-index: 99;">
+				<aui:input id="myInputNode" name="myInputNode" label=""
+					helpMessage="Type blogs in Input Box"
+					placeholder="Từ khóa tìm kiếm" />
 			</div>
 			<!-- Menu -->
 			<div class="header-menu-wrapper hidden-xs"
@@ -493,9 +471,14 @@ button, input {
 										đàn</span>
 							</a></li>
 						</div>
-						<li class="active header-menu-item"><a class="title-menu">
-								<span>Đăng nhập</span>
-						</a></li>
+						<li class="active header-menu-item">
+								<c:choose>
+									<c:when test="${not empty login}"><a href="${login}" style="text-decoration: none;" class="title-menu"><span>Đăng nhập</span></a></c:when>
+									<c:otherwise>
+										<a href="${logout}" style="text-decoration: none;" class="title-menu"><span>Đăng xuất</span></a>
+									</c:otherwise>
+								</c:choose>
+						</li>
 					</ul>
 				</div>
 				<div class="header-bottom" style="z-index: 100">

@@ -54,13 +54,13 @@
 
 						<li>
 							<div style="position: relative">
-								<a href="${url}/chi-tiet-video?uuid=${dlFileEntry.uuid}"> <img
+								<a href="${url}/video?uuid=${dlFileEntry.uuid}"> <img
 									src="${dlFileEntry.src}">
-								</a> <a href="${url}/chi-tiet-video?uuid=${dlFileEntry.uuid}"
+								</a> <a href="${url}/video?uuid=${dlFileEntry.uuid}"
 									class="iconplay"></a>
 							</div>
 							<h3>
-								<a href="${url}/chi-tiet-video?uuid=${dlFileEntry.uuid}">${dlFileEntry.title}</a>
+								<a href="${url}/video?uuid=${dlFileEntry.uuid}">${dlFileEntry.title}</a>
 							</h3>
 						</li>
 

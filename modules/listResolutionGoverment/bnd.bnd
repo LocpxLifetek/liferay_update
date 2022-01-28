@@ -1,4 +1,0 @@
-Bundle-Name: listResolutionGoverment
-Bundle-SymbolicName: listResolutionGoverment
-Bundle-Version: 1.0.0
-Export-Package: listResolutionGoverment.constants

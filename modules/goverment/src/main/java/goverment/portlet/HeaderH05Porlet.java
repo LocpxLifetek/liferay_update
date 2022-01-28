@@ -89,6 +89,13 @@ public class HeaderH05Porlet extends MVCPortlet {
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
+			String siginIn=themeDisplay.getURLSignIn()+"&"+"redirect="+themeDisplay.getURLCurrent();
+			String siginOut=themeDisplay.getURLSignOut()+"?"+"referer="+themeDisplay.getURLCurrent();
+			if(themeDisplay.getRealUserId() == themeDisplay.getDefaultUserId()) {
+				renderRequest.setAttribute("login", siginIn);
+			}else {
+				renderRequest.setAttribute("logout", siginOut);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
