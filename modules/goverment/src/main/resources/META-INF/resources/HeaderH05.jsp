@@ -469,7 +469,7 @@ button, input {
 							<li class="header-menu-item"><a class="title-menu"> <span>Điều
 										hành tác nghiệp</span>
 							</a></li>
-							<li class="header-menu-item"><a class="title-menu"> <span>Diễn
+							<li class="header-menu-item"><a href="/web/h05/diễn-Đàn" class="title-menu"> <span>Diễn
 										đàn</span>
 							</a></li>
 						</div>

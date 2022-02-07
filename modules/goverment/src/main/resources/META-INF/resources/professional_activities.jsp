@@ -27,7 +27,7 @@
   <body>
     <div class="block border has-icon" cellpadding="0" cellspacing="0">
       <div class="title">
-        <a href="#">${categoryDto.name}</a>
+        <a href="${url }/categorydetail?uuid=${categoryDto.uuid}">${categoryDto.name}</a>
       </div>
 
       <div class="body">

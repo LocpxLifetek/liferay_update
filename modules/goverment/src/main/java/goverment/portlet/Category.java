@@ -54,9 +54,7 @@ public class Category extends MVCPortlet {
 			renderRequest.setAttribute("url", url);
 			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
 			CategoryDto categoryDto= new AssetCategorySql().findCategoryById(category.getParentCategoryId());
-			renderRequest.setAttribute("categoryDto", categoryDto);
-//			CategoryDto category2= new AssetCategorySql().findCategoryByUuid(categoryDto.getUuid());
-			List<BlogsEntryDto> listBlog= new BlogEntrySql().findAllBlogsByCategory(categoryDto.getUuid(), 5, categoryDto.getGroupId());
+			List<BlogsEntryDto> listBlog= new BlogEntrySql().findAllBlogsByIdCategory(categoryDto.getUuid(), 5, categoryDto.getGroupId());
 			List<BlogsEntryDto> listBlogEntryDto= new ArrayList<>();
 			int i = 0;
 			for (BlogsEntryDto blogsEntryDto : listBlog) {
@@ -64,10 +62,11 @@ public class Category extends MVCPortlet {
 				if (i == 1) {
 					renderRequest.setAttribute("blogsEntryDto", blogsEntryDto);
 				}
-				if (i >= 1) {
+				if (i > 1) {
 					listBlogEntryDto.add(blogsEntryDto);
 				}
 			}
+			renderRequest.setAttribute("categoryDto", categoryDto);
 			renderRequest.setAttribute("listBlogEntryDto", listBlogEntryDto);
 		} catch (Exception e) {
 			// TODO: handle exception

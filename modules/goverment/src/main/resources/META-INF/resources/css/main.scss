@@ -22,7 +22,7 @@ a {
   border-bottom: 4px solid #0a4298;
   background: rgba(226, 229, 245, 0.4);
 }
-a{
+a {
   text-decoration: none;
 }
 .currentDate {
@@ -177,7 +177,6 @@ a {
 }
 
 .lts-cmanh ul li a:hover {
-  
   color: #038bd4;
 }
 
@@ -222,7 +221,6 @@ a {
 }
 
 .lts-cmanh ul li a.active {
- 
   color: #038bd4;
 }
 a,
@@ -523,7 +521,6 @@ ul {
   text-align: center;
 }
 
-
 .box-img .tit a {
   font: 700 18px/24px "Roboto", Arial, Verdana;
   color: #404041;
@@ -800,7 +797,6 @@ div.contentBlogs {
   width: 60% !important;
 }
 
-
 // đếm bài viết video mới nhất
 .head-chidaodieuhanh {
   font: 700 18px/35px Roboto, Arial, Tahoma;
@@ -816,8 +812,8 @@ div.contentBlogs {
   padding: 15px;
   border-bottom: 4px solid #004175;
 }
-.top1 img{
-  width:100%;
+.top1 img {
+  width: 100%;
 }
 
 .lts-chidaodieuhanh ul li a {
@@ -887,14 +883,11 @@ div.contentBlogs {
   color: #004175;
 
   float: left;
-
 }
 
 .lts-cmanh ul li a:hover {
   color: #004175;
 }
-
-
 //H05
 .head-news-cover-wrapper h2 {
   font-size: 10pt;
@@ -1536,16 +1529,16 @@ a.top-t-2:visited {
   list-style: none;
   overflow: hidden;
   line-height: 20px;
-  float: left; }
+  float: left;
+}
 // video
 .head-cm .xemthem {
   float: right;
-  font: 400 13px Roboto,Arial,Tahoma;
+  font: 400 13px Roboto, Arial, Tahoma;
   color: #0a4298;
   display: block;
   padding-top: 12px;
 }
-
 
 .Td-footer h2 {
   color: #fd9b08 !important;
@@ -1637,4 +1630,3 @@ dd {
 .TD-ul-module-menu-left a:hover {
   color: #038bd4;
 }
-
