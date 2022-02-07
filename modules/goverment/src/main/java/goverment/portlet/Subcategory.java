@@ -1,7 +1,9 @@
 package goverment.portlet;
 
+import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetTag;
+import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
 import com.liferay.blogs.model.BlogsEntry;
@@ -28,6 +30,7 @@ import goverment.dto.BlogsEntryDto;
 import goverment.dto.CategoryDto;
 import goverment.sql.AssetCategorySql;
 import goverment.sql.BlogEntrySql;
+import goverment.sql.TagsBlogSql;
 import goverment.url.UrlCurrentPorlet;
 
 @Component(
@@ -54,14 +57,22 @@ public class Subcategory extends MVCPortlet {
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
+			String pageDetail = PortalUtil.getOriginalServletRequest(request).getParameter("page");
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
 			CategoryDto parentCategory= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
-			List<BlogsEntryDto> listBlogs= new BlogEntrySql().findAllBlogsByCategory(uuid, 10, parentCategory.getGroupId());
-			CategoryDto categoryDto= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
+			Integer resultDlFile=new BlogEntrySql().countViewBlogsByCategory(uuid, themeDisplay.getScopeGroupId());
+			Integer page=Integer.parseInt(pageDetail == null ? "1" : pageDetail);
+			Integer size=8;
+			int result = (int) Math.ceil((float) resultDlFile/ size);
+			List<BlogsEntryDto> listBlogs= new BlogEntrySql().findAllBlogsByIdCategory(uuid,parentCategory.getGroupId(),page,size);
+			AssetCategory categoryDto=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("listBlogs", listBlogs);
 			renderRequest.setAttribute("categoryDto", categoryDto);
+			renderRequest.setAttribute("currentPage", page);
+			renderRequest.setAttribute("totalPage", result);
+			renderRequest.setAttribute("uuid", uuid);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

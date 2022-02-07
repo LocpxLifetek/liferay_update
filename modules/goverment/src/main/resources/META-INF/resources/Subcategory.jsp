@@ -5,42 +5,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 
-p{
-    text-align: justify;
-    display: block;
-}
-.head-cm {
-        width: 100%;
-        border-bottom: 1px solid #0a4298;
-        margin-bottom: 20px;
-      }
-      .head-cm ul {
-        display: inline-flex;
-        list-style: none;
-      }
       .head-cm ul li:first-child {
         background: url('<%= request.getContextPath()%>/images/portal/images/bg-chuyenmuc.png')
           no-repeat right top;
       }
-      .head-cm ul li:first-child a {
-        color: #fff;
-        font: 700 16px/35px Roboto, Arial, Tahoma;
-        text-transform: uppercase;
-        border-right: none;
-        padding: 0 30px 0 20px;
-      }
-      .head-cm ul li a {
-        color: #404041;
-        font: 400 13px/35px Roboto, Arial, Tahoma;
-        padding: 0 10px;
-        border-right: 1px solid #ddd;
-        text-decoration: none;
-      }
-.soup-image {
-	float:left;
-	margin-right:2%;
-	border: 4px double rgb(212, 211, 211);
-}
 
 </style>
 <div class="menu_1">
@@ -69,6 +37,40 @@ p{
 					</c:forEach>
 		</div>
 	</div>
+</div>
+<div id="wrapper">
+	<ul id="pagination">
+		<c:if test="${currentPage != 1}">
+			<li><a
+				href="${url}/detail?uuid=${uuid}&page=${currentPage - 1}">«</a></li>
+		</c:if>
+		<c:if test="${currentPage gt 3}">
+			<li><span>...</span></li>
+		</c:if>
+		<c:forEach begin="1" end="${totalPage}" var="i">
+			<c:choose>
+				<c:when test="${currentPage eq i}">
+					<li><a href="#">${i}</a>
+					<li>
+				</c:when>
+				<c:otherwise>
+					<c:if test="${(currentPage-3) lt i and i lt (currentPage + 3)}">
+						<li><a href="${url}/detail?uuid=${uuid}&page=${i}">${i}</a>
+						</li>
+					</c:if>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${currentPage lt (totalPage-3)}">
+			<li><span>...</span></li>
+		</c:if>
+		<c:if test="${currentPage lt totalPage}">
+			<li><a
+				href="${url}/detail?uuid=${uuid}&page=${currentPage + 1}">»</a>
+			</li>
+		</c:if>
+
+	</ul>
 </div>
 
 

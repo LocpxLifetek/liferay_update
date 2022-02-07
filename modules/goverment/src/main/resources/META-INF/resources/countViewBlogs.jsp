@@ -15,7 +15,7 @@
 	margin-bottom: 15px;
 }
 
-.lts-cmanh ul li {
+.lts-cmanh ul li{
 	background:
 		url(<%=request.getContextPath()%>/images/portal/_themes/ThanhHoa_orange/img/hv-module-tvt.PNG)
 		no-repeat left center;

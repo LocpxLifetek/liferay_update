@@ -59,7 +59,7 @@ public class EventNewsInformationPorlet extends MVCPortlet{
 				List<AssetCategory> listCategoryDto = new ArrayList<>();
 				listCategoryDto.add(assetCategory);
 				String uuid=assetCategory.getUuid();
-				List<BlogsEntryDto> listBlogsEntryDto=new BlogEntrySql().findAllBlogsByIdCategory(uuid, 4,themeDisplay.getScopeGroupId());
+				List<BlogsEntryDto> listBlogsEntryDto=new BlogEntrySql().findAllBlogsByIdCategory(uuid,themeDisplay.getScopeGroupId(),1,4);
 
 				maps.put(listCategoryDto, listBlogsEntryDto);
 			}

@@ -49,12 +49,14 @@ public class Category extends MVCPortlet {
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
+			String pageDetail = PortalUtil.getOriginalServletRequest(request).getParameter("page");
+			Integer page=Integer.parseInt(pageDetail == null ? "1" : pageDetail);
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
 			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
 			CategoryDto categoryDto= new AssetCategorySql().findCategoryById(category.getParentCategoryId());
-			List<BlogsEntryDto> listBlog= new BlogEntrySql().findAllBlogsByIdCategory(categoryDto.getUuid(), 5, categoryDto.getGroupId());
+			List<BlogsEntryDto> listBlog= new BlogEntrySql().findAllBlogsByIdCategory(categoryDto.getUuid(), categoryDto.getGroupId(),1,5);
 			List<BlogsEntryDto> listBlogEntryDto= new ArrayList<>();
 			int i = 0;
 			for (BlogsEntryDto blogsEntryDto : listBlog) {

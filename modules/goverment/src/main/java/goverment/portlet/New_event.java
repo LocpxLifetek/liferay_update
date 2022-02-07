@@ -51,7 +51,7 @@ public class New_event extends MVCPortlet {
 			List<BlogsEntryDto> listBlogs2=new ArrayList<>();
 			List<BlogsEntryDto> listBlogs6=new ArrayList<>();
 
-			List<BlogsEntryDto> listBlogsEntryDtos= new BlogEntrySql().findAllBlogsByIdCategory("4fb47075-a67c-9f2d-f175-d41304e90ad3",8,themeDisplay.getScopeGroupId());
+			List<BlogsEntryDto> listBlogsEntryDtos= new BlogEntrySql().findAllBlogsByIdCategory("4fb47075-a67c-9f2d-f175-d41304e90ad3",themeDisplay.getScopeGroupId(),1,8);
 			int i=0;
 			for (BlogsEntryDto blogsEntryDto : listBlogsEntryDtos) {
 				i++;

@@ -1,4 +1,0 @@
-Bundle-Name: callAjaxPorlet_thutuong_right
-Bundle-SymbolicName: callAjaxPorlet_thutuong_right
-Bundle-Version: 1.0.0
-Export-Package: callAjaxPorlet_thutuong_right.constants
