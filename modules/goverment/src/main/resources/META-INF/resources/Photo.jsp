@@ -5,7 +5,7 @@
       <ul style="margin: 0; padding: 0">
         <li><a href="${url}/thuvienanh?uuid=${category.uuid}">${category.name}</a></li>
       </ul>
-      <a href="/media/thu-vien-anh.html" class="xemthem">Xem thêm</a>
+      <a href="${url}/thuvienanh?uuid=${category.uuid}" class="xemthem">Xem thêm</a>
     </div>
 <div class="box-top3">
       <ul>

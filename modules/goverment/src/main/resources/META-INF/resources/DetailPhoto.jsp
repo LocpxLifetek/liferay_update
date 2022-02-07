@@ -43,7 +43,6 @@
       loop: false,
       protect: true,
     });
-
     </script>
   </head>
   <body>
