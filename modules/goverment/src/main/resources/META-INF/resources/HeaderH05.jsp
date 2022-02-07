@@ -456,7 +456,7 @@ button, input {
 					<ul class="header-menu"
 						style="justify-content: space-between; display: flex">
 						<div>
-							<li class="active header-menu-item"><a class="title-menu">
+							<li class="active header-menu-item"><a class="title-menu" href="${url}">
 									<span>Giới thiệu</span>
 							</a></li>
 

@@ -11,7 +11,8 @@
 <style>
 .head-cm ul li:first-child {
 	background:
-		url("<%=request.getContextPath()%>/images/portal/_res/img/bg-chuyenmuc.png") no-repeat right top;
+		url("<%=request.getContextPath()%>/images/portal/_res/img/bg-chuyenmuc.png")
+		no-repeat right top;
 }
 </style>
 <div class="detailBlogs">
@@ -51,7 +52,7 @@
 
 		</div>
 	</div>
-	<div class="head-cm" style="margin-top:10px">
+	<div class="head-cm" style="margin-top: 10px">
 		<c:choose>
 			<c:when test="${not empty assetCategory2}">
 				<ul>
@@ -83,18 +84,16 @@
 </div>
 
 <c:if test="${not empty listAssetTag}">
+	<div class="tags" style="display: inline-block;
+    padding: 10px 0 0;
+    background: url('<%=request.getContextPath()%>/images/portal/_res/img/tags.png') no-repeat left 4px;
+    padding-left: 30px;">
+		<c:forEach items="${listAssetTag}" var="assetTag">
+			<ul style="display:flex">
 
-	<div class="tags-text">
+				<li><a href="${url}/tag?uuid=${assetTag.uuid}"> ${assetTag.name},</a></li>
 
-		<p class="keywords">
-			<span class="name">Từ khóa: </span>
-			<c:forEach items="${listAssetTag}" var="assetTag">
-
-				<span class="word"> <a href="/tags?uuid=${assetTag.uuid}">
-						${assetTag.name}</a>
-				</span>
-			,
-			</c:forEach>
-		</p>
+			</ul>
+		</c:forEach>
 	</div>
 </c:if>
