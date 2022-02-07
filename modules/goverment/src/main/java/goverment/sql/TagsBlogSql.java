@@ -21,7 +21,7 @@ public class TagsBlogSql {
 		try {
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
-					"select be.uuid_  AS uuidblogsentry,be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,dl.fileentryid AS fileentryid,dl.groupid  AS groupid,dl.folderid AS folderid, dl.filename AS filename, dl.uuid_ AS uuiddlfileentry,be.modifiedDate as modifieddate from assetentries_assettags aeat inner join assetEntry ae on aeat.entryid=ae.entryid inner join blogsentry be on be.entryid=ae.classpk inner join dlfileentry dl on be.smallimagefileentryid=dl.fileentryid where aeat.tagid=? and be.groupId=? order by be.modifieddate desc OFFSET (?-1)*? ROWS FETCH NEXT ?  ROWS ONLY ");
+					"select be.uuid_  AS uuidblogsentry,be.entryid  AS entryid,be.title AS titleblogsentry, be.description AS descriptiondlfileentry,dl.fileentryid AS fileentryid,dl.groupid  AS groupid,dl.folderid AS folderid, dl.filename AS filename, dl.uuid_ AS uuiddlfileentry,be.modifiedDate as modifieddate from assetentries_assettags aeat inner join assetEntry ae on aeat.entryid=ae.entryid inner join blogsentry be on be.entryid=ae.classpk inner join dlfileentry dl on be.smallimagefileentryid=dl.fileentryid where aeat.tagid=? and be.groupId=? and be.status='0' order by be.modifieddate desc OFFSET (?-1)*? ROWS FETCH NEXT ?  ROWS ONLY ");
 			statement.setLong(1, id);
 			statement.setLong(2, groupIdBlog);
 			statement.setInt(3, page);
@@ -87,7 +87,7 @@ public class TagsBlogSql {
 			Integer result=0;
 			con = DataAccess.getConnection();
 			statement = con.prepareStatement(
-					"select count(*) as result from assetentries_assettags aeat inner join assetEntry ae on aeat.entryid=ae.entryid inner join blogsentry be on be.entryid=ae.classpk inner join dlfileentry dl on be.smallimagefileentryid=dl.fileentryid where aeat.tagid=? and be.groupId=?");
+					"select count(*) as result from assetentries_assettags aeat inner join assetEntry ae on aeat.entryid=ae.entryid inner join blogsentry be on be.entryid=ae.classpk inner join dlfileentry dl on be.smallimagefileentryid=dl.fileentryid where aeat.tagid=? and be.groupId=? and be.status='0'");
 			statement.setLong(1, id);
 			statement.setLong(2, groupId);
 			rs = statement.executeQuery();
