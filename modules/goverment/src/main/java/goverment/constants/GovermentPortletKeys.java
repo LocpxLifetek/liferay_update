@@ -56,5 +56,7 @@ public class GovermentPortletKeys {
 	public static final String FOOTERH05="FooterH05_GovermentPorlet";
 	public static final String SEARCHALLBLOGS="SearchAllBlogs_GovermentPorlet";
 	public static final String LINKPAGESSITE="LinkPageSite_GovermentPorlet";
+	public static final String TAGGOVERMENT="Tag_GovermentPorlet";
+	public static final String CATEGORYBLOGS="CategoryBlogs_GovermentPorlet";
 
 }

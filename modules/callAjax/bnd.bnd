@@ -1,4 +1,0 @@
-Bundle-Name: callAjax
-Bundle-SymbolicName: callAjax
-Bundle-Version: 1.0.0
-Export-Package: callAjax.constants

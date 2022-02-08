@@ -649,7 +649,9 @@ ul {
   color: #036;
   text-decoration: underline;
 }
-
+.description {
+  margin-top: 10px;
+}
 //link goverment
 .link-goverment {
   text-transform: uppercase;
@@ -886,10 +888,6 @@ div.contentBlogs {
 .lts-cmanh ul li a:hover {
   color: #004175;
 }
-a {
-  text-decoration: none;
-}
-
 //H05
 .head-news-cover-wrapper h2 {
   font-size: 10pt;
@@ -1078,7 +1076,6 @@ a {
 body {
   margin: 0;
   padding: 0;
-  font-family: Roboto, Arial, Helvetica, sans-serif !important;
   font-size: 14px !important;
   overflow-x: hidden;
 }

@@ -1,8 +1,5 @@
-<%@page import="java.text.SimpleDateFormat"%>
 <%@ include file="/init.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <style>
 
       .head-cm ul li:first-child {
@@ -14,12 +11,12 @@
 <div class="menu_1">
 	<div class="head-cm">
 		<ul>
-			<li><a href="#">${categoryDto.name}</a></li>
+			<li><a href="${url}/tag?uuid=${assetTag.uuid}">${assetTag.name}</a></li>
 		</ul>
 	</div>
 	<div class="listDirectOperation">
 		<div class="listDirectOperationRight">
-					<c:forEach items="${listBlogs}" var="blog">
+					<c:forEach items="${listBlogsEntryDtos}" var="blog">
 
 						<div class="listDirectOperationGrid">
 							<div class="ldo">
@@ -42,7 +39,7 @@
 	<ul id="pagination">
 		<c:if test="${currentPage != 1}">
 			<li><a
-				href="${url}/detail?uuid=${uuid}&page=${currentPage - 1}">«</a></li>
+				href="${url}/tag?uuid=${uuid}&page=${currentPage - 1}">«</a></li>
 		</c:if>
 		<c:if test="${currentPage gt 3}">
 			<li><span>...</span></li>
@@ -55,7 +52,7 @@
 				</c:when>
 				<c:otherwise>
 					<c:if test="${(currentPage-3) lt i and i lt (currentPage + 3)}">
-						<li><a href="${url}/detail?uuid=${uuid}&page=${i}">${i}</a>
+						<li><a href="${url}/tag?uuid=${uuid}&page=${i}">${i}</a>
 						</li>
 					</c:if>
 				</c:otherwise>
@@ -66,14 +63,9 @@
 		</c:if>
 		<c:if test="${currentPage lt totalPage}">
 			<li><a
-				href="${url}/detail?uuid=${uuid}&page=${currentPage + 1}">»</a>
+				href="${url}/tag?uuid=${uuid}&page=${currentPage + 1}">»</a>
 			</li>
 		</c:if>
 
 	</ul>
 </div>
-
-
-
-
-

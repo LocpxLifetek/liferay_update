@@ -1,4 +1,0 @@
-Bundle-Name: ajax-pagable
-Bundle-SymbolicName: ajax.pagable
-Bundle-Version: 1.0.0
-Export-Package: ajax.pagable.constants

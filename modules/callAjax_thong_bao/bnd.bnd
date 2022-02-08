@@ -1,4 +1,0 @@
-Bundle-Name: callAjax_thong_bao
-Bundle-SymbolicName: callAjax_thong_bao
-Bundle-Version: 1.0.0
-Export-Package: callAjax_thong_bao.constants

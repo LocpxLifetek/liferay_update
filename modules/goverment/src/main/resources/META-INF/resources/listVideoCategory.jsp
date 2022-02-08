@@ -66,7 +66,7 @@
 	</div>
 	<div class="head-cm" style="margin-bottom: 20px;margin-top:20px">
 		<ul>
-			<li><a href="${url}/the-loai-video?id=${assetCategory.uuid}">${assetCategory.name}</a></li>
+			<li><a href="${url}/the-loai-video?uuid=${assetCategory.uuid}">${assetCategory.name}</a></li>
 		</ul>
 	</div>
 	<div class="box-top4">

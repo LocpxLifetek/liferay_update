@@ -11,7 +11,8 @@
 <style>
 .head-cm ul li:first-child {
 	background:
-		url("<%=request.getContextPath()%>/images/portal/_res/img/bg-chuyenmuc.png") no-repeat right top;
+		url("<%=request.getContextPath()%>/images/portal/_res/img/bg-chuyenmuc.png")
+		no-repeat right top;
 }
 </style>
 <div class="detailBlogs">
@@ -19,7 +20,7 @@
 
 		<div class="box-dieuhuong">
 			<div class="trangchu">
-				<a href="/"
+				<a href="${url}"
 					style="color: #333;
 						    font-size: 13px;
 						    padding: 0 12px 0 0px;
@@ -29,7 +30,7 @@
 			<c:choose>
 				<c:when test="${not empty assetCategory2}">
 					<div class="trangchu">
-						<a href="${url}/tintucsukien"
+						<a href="${url}/tintuc?uuid=${assetCategory.uuid}"
 							style="color: #333;
 						    font-size: 13px;
 						    padding: 0 12px 0 10px;
@@ -37,13 +38,13 @@
 					</div>
 
 					<div class="trangchu">
-						<a href="${url}/theloaitintucsukien?id=${assetCategory2.uuid}"
+						<a href="${url}/detail?uuid=${assetCategory2.uuid}"
 							style="font-size: 13px; color: #0a4298 !important; padding: 0px 0px 0px 10px;">${assetCategory2.name}</a>
 					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="trangchu">
-						<a href="${url}/tintucsukien"
+						<a href="${url}/tintuc?uuid=${assetCategory.uuid}"
 							style="font-size: 13px; color: #0a4298 !important; padding: 0px 0px 0px 10px;">${assetCategory.name}</a>
 					</div>
 				</c:otherwise>
@@ -51,17 +52,16 @@
 
 		</div>
 	</div>
-	<div class="head-cm" style="margin-top:10px">
+	<div class="head-cm" style="margin-top: 10px">
 		<c:choose>
 			<c:when test="${not empty assetCategory2}">
 				<ul>
-					<li><a href="${url}/tintucsukien?uuid=${assetCategory2.uuid}">${assetCategory2.name}</a></li>
+					<li><a href="${url}/detail?uuid=${assetCategory2.uuid}">${assetCategory2.name}</a></li>
 				</ul>
 			</c:when>
 			<c:otherwise>
 				<ul>
-					<li><a
-						href="${url}/theloaitintucsukien?uuid=${assetCategory.uuid}">${assetCategory.name}</a></li>
+					<li><a href="${url}/tintuc?uuid=${assetCategory.uuid}">${assetCategory.name}</a></li>
 				</ul>
 			</c:otherwise>
 		</c:choose>
@@ -83,18 +83,18 @@
 </div>
 
 <c:if test="${not empty listAssetTag}">
+	<div class="tags"
+		style="display: inline-block;
+    padding: 10px 0 0;
+    background: url('<%=request.getContextPath()%>/images/portal/_res/img/tags.png') no-repeat left 4px;
+    padding-left: 30px;">
+		<c:forEach items="${listAssetTag}" var="assetTag">
+			<ul style="display: flex">
 
-	<div class="tags-text">
+				<li><a href="${url}/tag?uuid=${assetTag.uuid}">
+						${assetTag.name},</a></li>
 
-		<p class="keywords">
-			<span class="name">Từ khóa: </span>
-			<c:forEach items="${listAssetTag}" var="assetTag">
-
-				<span class="word"> <a href="/tags?uuid=${assetTag.uuid}">
-						${assetTag.name}</a>
-				</span>
-			,
-			</c:forEach>
-		</p>
+			</ul>
+		</c:forEach>
 	</div>
 </c:if>

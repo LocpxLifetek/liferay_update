@@ -13,7 +13,7 @@ import java.util.List;
 import goverment.dto.BlogsEntryDto;
 
 public class BlogEntrySql {
-	public List<BlogsEntryDto> findAllBlogsByIdCategory(String uuid,Integer number,long groupIdBlog) throws SQLException {
+	public List<BlogsEntryDto> findAllBlogsByIdCategory(String uuid,long groupIdBlog, Integer page, Integer size) throws SQLException {
 		PreparedStatement statement = null;
 		Connection con = null;
 		ResultSet rs = null;
@@ -48,11 +48,12 @@ public class BlogEntrySql {
 					"    AND be.status = '0' and be.groupId=?\r\n" + 
 					"ORDER BY\r\n" + 
 					"    be.modifieddate DESC\r\n" + 
-					"OFFSET 0 ROWS FETCH NEXT ? ROWS ONLY");
+					"OFFSET (?-1)*? ROWS FETCH NEXT ? ROWS ONLY");
 			statement.setString(1, uuid);
-			statement.setInt(2, number);
 			statement.setLong(2, groupIdBlog);
-			statement.setInt(3, number);
+			statement.setInt(3, page);
+			statement.setInt(4, size);
+			statement.setInt(5, size);
 			rs = statement.executeQuery();
 			while (rs.next()) {
 				BlogsEntryDto blogsEntryDto = new BlogsEntryDto();
@@ -95,66 +96,51 @@ public class BlogEntrySql {
 			}
 		}
 	}
-	public List<BlogsEntryDto> findAllBlogsByCategory(String uuid, Integer number,long groupId) throws SQLException {
-		PreparedStatement statement=null;
-		Connection con=null;
-		ResultSet rs=null;
+	
+	public Integer countViewBlogsByCategory(String uuid,long groupIdBlog) throws SQLException {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
 		try {
-			
-			List<BlogsEntryDto> listBlogsEntryDto = new ArrayList<>();
+			Integer result=0;
 			con = DataAccess.getConnection();
-			statement = con.prepareStatement("SELECT\r\n" + 
-					"    be.uuid_         AS uuid,\r\n" + 
-					"    be.entryid         AS entryid,\r\n" + 
-					"    be.title           AS titleblogsentry,\r\n" + 
-					"    be.description     AS descriptiondlfileentry,\r\n" + 
-					"    be.modifieddate    AS modifieddate\r\n" + 
+			statement = con.prepareStatement(
+					"SELECT\r\n" + 
+					
+					"count(*) as count " + 
 					"FROM\r\n" + 
 					"         assetcategory ac\r\n" + 
 					"    INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid\r\n" + 
 					"    INNER JOIN assetentry                  ae ON aeac.assetentryid = ae.entryid\r\n" + 
 					"    INNER JOIN blogsentry                  be ON ae.classpk = be.entryid\r\n" + 
+					"    INNER JOIN dlfileentry                 dl ON dl.fileentryid = be.smallimagefileentryid\r\n" + 
 					"WHERE\r\n" + 
-					"        ac.uuid_ = ?\r\n" + 
-					"    AND be.status = '0' and ac.groupId=?\r\n" + 
-					"ORDER BY\r\n" + 
-					"    be.modifieddate DESC\r\n" + 
-					"OFFSET 0 ROWS FETCH NEXT ? ROWS ONLY");
+					"    ac.uuid_ =?\r\n" + 
+					"    AND be.status = '0'\r\n" + 
+					"   \r\n" + 
+					"    AND be.status = '0' and be.groupId=?\r\n");
 			statement.setString(1, uuid);
-			statement.setLong(2, groupId);
-			statement.setInt(3, number);
-
-			rs=statement.executeQuery();
-			while(rs.next()) {
-				BlogsEntryDto blogsEntryDto=new BlogsEntryDto();
-				Integer entryId=rs.getInt("entryid");
-				String titleBlogsEntry=rs.getString("titleblogsentry");
-				String description=rs.getString("descriptiondlfileentry");
-				Timestamp modifiedDate=rs.getTimestamp("modifieddate");
-				String uuidDl= rs.getString("uuid");
-				blogsEntryDto.setDescription(description);
-				blogsEntryDto.setEntryId(entryId);
-				blogsEntryDto.setTitleBlogsEntry(titleBlogsEntry);
-				blogsEntryDto.setModifiedDate(modifiedDate);
-				blogsEntryDto.setUuidBlogsEntry(uuidDl);
-				listBlogsEntryDto.add(blogsEntryDto);
+			statement.setLong(2, groupIdBlog);
+			
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				result=rs.getInt("count");
 			}
-			return listBlogsEntryDto;
+			return result;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			return null;
-		}finally {
-			if(statement != null) {
+		} finally {
+			if (statement != null) {
 				statement.close();
 			}
-			if(con != null) {
+			if (con != null) {
 				con.close();
 			}
-			if(rs != null) {
+			if (rs != null) {
 				rs.close();
 			}
 		}
 	}
-
 }

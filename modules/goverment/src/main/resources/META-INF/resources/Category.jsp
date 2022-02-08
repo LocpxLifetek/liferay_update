@@ -38,32 +38,11 @@
       .box-body {
         padding: 12px;
       }
-      .row {
-        margin-right: -5px;
-        margin-left: -5px;
-      }
-      .row {
-        margin-right: -15px;
-        margin-left: -15px;
-        display: flex;
-        flex-wrap: wrap;
-      }
-      .col-lg-12 {
-        width: 100%;
-        position: relative;
-      }
       .post {
         text-align: justify;
         overflow: hidden;
         position: relative;
       }
-      .mb-2 {
-        margin-bottom: 0.5rem !important;
-      }
-      article {
-        display: block;
-      }
-
       .post-title.h3 {
         font-size: 19px;
       }
@@ -74,20 +53,6 @@
         font-size: 16px;
         font-weight: bold;
         margin-bottom: 0px;
-      }
-      .col-6 {
-        padding-right: 5px;
-        padding-left: 5px;
-      }
-      .col-6 {
-        flex: 0 0 50%;
-        max-width: 50%;
-      }
-      .col-6 {
-        width: 100%;
-        padding-right: 15px;
-        padding-left: 15px;
-        position: relative;
       }
       .article-sub-news {
         margin-bottom: 14px;
@@ -139,7 +104,7 @@
   <body>
  	<div class="head-cm">
 		<ul>
-			<li><a href="#">${categoryDto.name}</a></li>
+			<li><a href="${url}/tintuc?uuid=${uuid}">${categoryDto.name}</a></li>
 		</ul>
 	</div>
     <div class="box-body">
