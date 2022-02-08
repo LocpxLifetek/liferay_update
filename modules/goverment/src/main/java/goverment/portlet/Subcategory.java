@@ -58,7 +58,7 @@ public class Subcategory extends MVCPortlet {
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
 			CategoryDto parentCategory= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
-			List<BlogsEntryDto> listBlogs= new BlogEntrySql().findAllBlogsByCategory(uuid, 10, parentCategory.getGroupId());
+			List<BlogsEntryDto> listBlogs= new BlogEntrySql().findAllBlogsByIdCategory(uuid, 10, parentCategory.getGroupId());
 			CategoryDto categoryDto= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("listBlogs", listBlogs);
 			renderRequest.setAttribute("categoryDto", categoryDto);
