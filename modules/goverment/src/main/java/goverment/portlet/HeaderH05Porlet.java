@@ -59,7 +59,7 @@ public class HeaderH05Porlet extends MVCPortlet {
 			JSONArray usersJSONArray = JSONFactoryUtil.createJSONArray();
 			ThemeDisplay themeDisplay = (ThemeDisplay) resourceRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			String titleBlogs = ParamUtil.getString(resourceRequest, "titleBlogs");
-			
+
 			JSONObject blogJSON = null;
 			List<SearchBlogsDto> listSearchBlogsDto = new SearchBlogsSql().searchBlogsSql(titleBlogs,
 					themeDisplay.getScopeGroupId(),1,1);
