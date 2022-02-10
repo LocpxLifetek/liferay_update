@@ -196,4 +196,71 @@ public class CommonSqlBlogEntry {
 		}
 
 	}
+	public List<BlogsEntryDto> findBlogsCountViewByUuidCategory(String uuid_,long groupIdCategory) {
+
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
+		try {
+			List<BlogsEntryDto> listBlogsEntryDtos = new ArrayList<>();
+			con = DataAccess.getConnection();
+			statement = con.prepareStatement("SELECT be.title          AS title,\r\n" + 
+					"					be.description    AS description, be.uuid_ AS uuid,\r\n" + 
+					"					de.groupid        AS groupid,   de.folderid       AS folderid,\r\n" + 
+					"					de.filename          AS filename,   de.uuid_          AS uuiddlfile\r\n" + 
+					"					FROM  assetcategory ac\r\n" + 
+					"					INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid\r\n" + 
+					"                    inner join assetentry  ae  ON aeac.assetentryid = ae.entryid\r\n" + 
+					"					INNER JOIN blogsentry     be ON ae.classpk =be.entryid\r\n" + 
+					"					INNER JOIN viewcountentry  vc ON vc.classpk = ae.entryid\r\n" + 
+					"					INNER JOIN dlfileentry                 de ON de.fileentryid = be.smallimagefileentryid\r\n" + 
+					"					WHERE ac.groupid = ?\r\n" + 
+					"                    and ac.uuid_=?\r\n" + 
+					"					AND be.status = 0 ORDER BY\r\n" + 
+					"					vc.viewcount DESC OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY");
+			statement.setLong(1, groupIdCategory);
+			statement.setString(2, uuid_);
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				BlogsEntryDto blogsEntryDto = new BlogsEntryDto();
+				String title = rs.getString("title");
+				String description = rs.getString("description");
+				String uuid = rs.getString("uuid");
+				Integer groupId = rs.getInt("groupId");
+				Integer folderId = rs.getInt("folderId");
+				String filename = rs.getString("filename");
+				String uuidDlfile = rs.getString("uuiddlfile");
+				blogsEntryDto.setUuidBlogsEntry(uuid);
+				blogsEntryDto.setDescription(description);
+				blogsEntryDto.setTitleBlogsEntry(title);
+				String src = "/documents" + "/" + groupId + "/" + folderId + "/" + filename + "/" + uuidDlfile;
+				blogsEntryDto.setSrc(src);
+				listBlogsEntryDtos.add(blogsEntryDto);
+			}
+			return listBlogsEntryDtos;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+			if (con != null) {
+				try {
+					con.close();
+				} catch (SQLException e) {
+					/* Ignored */}
+			}
+		}
+	}
 }

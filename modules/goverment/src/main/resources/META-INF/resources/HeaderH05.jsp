@@ -452,7 +452,7 @@ button, input {
 			<div class="header-menu-wrapper hidden-xs"
 				style="background: linear-gradient(#2464b0, #185090, #204f86); box-shadow: inset 0px 1px 0px rgb(255 255 255/ 35%); border-top: 1px solid #204f86;">
 				<div
-					style="height: 47.219px; z-index: 1; margin: auto; width: 1200px">
+					style="height: 47.219px; z-index: 1; margin: auto; width: 1250px">
 					<ul class="header-menu"
 						style="justify-content: space-between; display: flex">
 						<div>

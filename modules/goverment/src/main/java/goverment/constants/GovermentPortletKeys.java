@@ -51,6 +51,9 @@ public class GovermentPortletKeys {
 	public static final String SOFTWARELIBRARY="software_libraryPortlet";
 	public static final String NEWPHOTO="New_photoPorlet";
 	public static final String MIRROR_HCM="mirror_HCMPorlet";
+	public static final String EBOOKS="EbooksPorlet";
+	public static final String COUNTVIEWBLOGBYCATEGORY="CountViewBlogByCategoryPorlet";
+	public static final String DOCUMENT="DocumentPorlet";
 
 	//H05
 	public static final String HEADERGOVERMENT="Headers_GovermentPorlet";
