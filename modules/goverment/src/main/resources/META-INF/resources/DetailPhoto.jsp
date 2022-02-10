@@ -1,32 +1,4 @@
-Skip to content
-Search or jump to…
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@LocpxLifetek 
-LocpxLifetek
-/
-liferay_update
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-liferay_update/modules/goverment/src/main/resources/META-INF/resources/DetailPhoto.jsp
-@truonggiang-java
-truonggiang-java ff
-Latest commit 9984fe5 16 hours ago
- History
- 1 contributor
-110 lines (103 sloc)  2.34 KB
-   
+
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
