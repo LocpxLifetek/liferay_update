@@ -879,15 +879,6 @@ div.contentBlogs {
   font: 400 15px/18px Roboto, Arial, Tahoma;
 }
 
-.lts-cmanh ul li a.active {
-  color: #004175;
-
-  float: left;
-}
-
-.lts-cmanh ul li a:hover {
-  color: #004175;
-}
 //H05
 .head-news-cover-wrapper h2 {
   font-size: 10pt;
@@ -1267,7 +1258,6 @@ p {
   background: #316db5;
   border-radius: 3px 3px 0 0;
   min-height: 33px;
-
   background-position: center right;
   background-size: auto 31px;
   background-repeat: no-repeat;
@@ -1389,7 +1379,7 @@ p {
 }
 
 .tandan-p-module-news-title a:hover {
-  color: #c10600;
+  color: #038bd4;
   cursor: pointer;
   text-decoration: none;
 }
@@ -1426,7 +1416,7 @@ p {
 }
 
 .tandan-p-module-news-second a:hover {
-  color: #d65a01 !important;
+  color: #038bd4 !important;
 }
 
 .TD-box-news-title {
@@ -1622,11 +1612,15 @@ dd {
   line-height: 1.42857143;
 }
 .TD-ul-module-menu-left a {
-  font-size: 14px;
+  font-size: 12px;
   padding-left: 15px;
   text-decoration: none;
   font-family: Roboto, Arial, Tahoma;
 }
 .TD-ul-module-menu-left a:hover {
   color: #038bd4;
+}
+.promotional_photo {
+  width: 100%;
+  height: 100%;
 }

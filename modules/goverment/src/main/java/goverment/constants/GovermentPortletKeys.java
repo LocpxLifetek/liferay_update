@@ -47,6 +47,10 @@ public class GovermentPortletKeys {
 	public static final String COLLECTION_ACTIVITIES="collective_activitiesPortlet";
 	public static final String LISTEXECUTIVE_DOCUMENT_CATEGORY="Executive_documentsCategoryPortlet";
 	public static final String DIENDAN="Dien_danPortlet";
+	public static final String REDIRECTION="RedirectionPortlet";
+	public static final String SOFTWARELIBRARY="software_libraryPortlet";
+	public static final String NEWPHOTO="New_photoPorlet";
+	public static final String MIRROR_HCM="mirror_HCMPorlet";
 
 	//H05
 	public static final String HEADERGOVERMENT="Headers_GovermentPorlet";

@@ -1,7 +1,5 @@
 package goverment.portlet;
 
-import com.liferay.asset.kernel.model.AssetCategory;
-import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.PortalUtil;
@@ -50,13 +48,13 @@ public class Album_new extends MVCPortlet {
 			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid,themeDisplay.getScopeGroupId());
 			CategoryDto categoryDto= new PhotoSql().findCategoryByParentId(category.getId());
 			
-			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(categoryDto.getUuid());
+			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(categoryDto.getUuid(), 1, 10);
 
 			renderRequest.setAttribute("categoryDto", categoryDto);
 			renderRequest.setAttribute("dLfileEntryDtos", dLfileEntryDtos);
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			
 		}
 		super.doView(renderRequest, renderResponse);
 	}

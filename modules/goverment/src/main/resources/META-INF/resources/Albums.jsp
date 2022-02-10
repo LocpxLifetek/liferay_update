@@ -6,7 +6,7 @@
 <body>
 <div class="albums_anh">
             <div class="head-albums_anh">
-                <a style="color: #404041;" href="${url}/media">Chuyên mục ảnh</a>
+                <a style="color: #404041;" href="${url}/media?uuid=${categoryName.uuid}">${categoryName.name}</a>
                 <div class="linered"></div>
             </div>
             <div class="lts-cmanh">

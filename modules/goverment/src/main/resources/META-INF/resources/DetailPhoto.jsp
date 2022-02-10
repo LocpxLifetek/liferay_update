@@ -36,14 +36,7 @@
       }
     </style>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery.fancybox.min.css">
-    <script>
- // Fancybox Config
-    $('[data-fancybox="gallery"]').fancybox({
-      buttons: ["slideShow", "thumbs", "zoom", "fullScreen", "share", "close"],
-      loop: false,
-      protect: true,
-    });
-    </script>
+    
   </head>
   <body>
   <div class="head-cm">
@@ -55,8 +48,8 @@
       <h1>${dlfileEntry.title}</h1>
     </div>
     <div class="box-top3 fix3n">
-    <c:forEach items="${listDlfile}" var="listDlfile">
       <ul>
+      <c:forEach items="${listDlfile}" var="listDlfile">
         <li>
           <a
             data-fancybox="gallery"
@@ -73,8 +66,59 @@
             >
           </h3>
         </li>
+        </c:forEach>
       </ul>
-      </c:forEach>
     </div>
+    <div id="wrapper">
+	<ul id="pagination">
+		<c:if test="${currentPage != 1}">
+			<li><a
+				href="${url}/album_anh?uuid=${uuid}&page=${currentPage - 1}">«</a></li>
+		</c:if>
+		<c:if test="${currentPage gt 3}">
+			<li><span>...</span></li>
+		</c:if>
+		<c:forEach begin="1" end="${totalPage}" var="i">
+			<c:choose>
+				<c:when test="${currentPage eq i}">
+					<li><a href="#">${i}</a>
+					<li>
+				</c:when>
+				<c:otherwise>
+					<c:if test="${(currentPage-3) lt i and i lt (currentPage + 3)}">
+						<li><a href="${url}/album_anh?uuid=${uuid}&page=${i}">${i}</a>
+						</li>
+					</c:if>
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+		<c:if test="${currentPage lt (totalPage-3)}">
+			<li><span>...</span></li>
+		</c:if>
+		<c:if test="${currentPage lt totalPage}">
+			<li><a
+				href="${url}/album_anh?uuid=${uuid}&page=${currentPage + 1}">»</a>
+			</li>
+		</c:if>
+
+	</ul>
+</div>
+    
+    <script>
+ // Fancybox Config
+    $('[data-fancybox="gallery"]').fancybox({
+  buttons: [
+    "slideShow",
+    "thumbs",
+    "zoom",
+    "fullScreen",
+    "share",
+    "close"
+  ],
+  loop: false,
+  protect: true
+});
+    </script>
+    <script src="<%=request.getContextPath()%>/js/jquery.fancybox.min.js"></script>
   </body>
 </html>

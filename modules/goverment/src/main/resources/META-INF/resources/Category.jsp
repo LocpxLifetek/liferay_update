@@ -104,7 +104,7 @@
   <body>
  	<div class="head-cm">
 		<ul>
-			<li><a href="${url}/tintuc?uuid=${uuid}">${categoryDto.name}</a></li>
+			<li><a href="${url}/tintuc?uuid=${categoryDto.uuid}">${categoryDto.name}</a></li>
 		</ul>
 	</div>
     <div class="box-body">

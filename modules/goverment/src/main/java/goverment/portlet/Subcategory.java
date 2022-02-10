@@ -1,13 +1,7 @@
 package goverment.portlet;
 
 import com.liferay.asset.kernel.model.AssetCategory;
-import com.liferay.asset.kernel.model.AssetEntry;
-import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
-import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
-import com.liferay.asset.kernel.service.AssetTagLocalServiceUtil;
-import com.liferay.blogs.model.BlogsEntry;
-import com.liferay.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -30,7 +24,6 @@ import goverment.dto.BlogsEntryDto;
 import goverment.dto.CategoryDto;
 import goverment.sql.AssetCategorySql;
 import goverment.sql.BlogEntrySql;
-import goverment.sql.TagsBlogSql;
 import goverment.url.UrlCurrentPorlet;
 
 @Component(
@@ -62,6 +55,7 @@ public class Subcategory extends MVCPortlet {
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
 			CategoryDto parentCategory= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
+			renderRequest.setAttribute("parentCategory", parentCategory);
 			Integer resultDlFile=new BlogEntrySql().countViewBlogsByCategory(uuid, themeDisplay.getScopeGroupId());
 			Integer page=Integer.parseInt(pageDetail == null ? "1" : pageDetail);
 			Integer size=8;
@@ -73,9 +67,9 @@ public class Subcategory extends MVCPortlet {
 			renderRequest.setAttribute("currentPage", page);
 			renderRequest.setAttribute("totalPage", result);
 			renderRequest.setAttribute("uuid", uuid);
+			renderRequest.setAttribute("url", url);
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
 		}
 		super.doView(renderRequest, renderResponse);
 	}

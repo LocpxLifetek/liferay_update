@@ -50,7 +50,7 @@ public class professional_activities extends MVCPortlet {
 			renderRequest.setAttribute("listCategoryDtos", listCategoryDtos);
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			
 		}
 		super.doView(renderRequest, renderResponse);
 	}

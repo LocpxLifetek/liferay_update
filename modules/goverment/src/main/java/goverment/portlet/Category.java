@@ -72,7 +72,6 @@ public class Category extends MVCPortlet {
 			renderRequest.setAttribute("listBlogEntryDto", listBlogEntryDto);
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
 		}
 		super.doView(renderRequest, renderResponse);
 	}

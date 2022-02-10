@@ -23,6 +23,7 @@ import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
 import goverment.dto.DlFileEntryDto;
+import goverment.sql.BlogEntrySql;
 import goverment.sql.PhotoSql;
 import goverment.url.UrlCurrentPorlet;
 
@@ -53,10 +54,15 @@ public class Deatil_Photo_Categories extends MVCPortlet {
 					themDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
+			String pageDetail = PortalUtil.getOriginalServletRequest(request).getParameter("page");
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
 			DlFileEntryDto dlfileEntry= new PhotoSql().dlfile(uuid);
 			renderRequest.setAttribute("dlfileEntry", dlfileEntry);
-			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid);
+			Integer resultDlFile=new PhotoSql().countDlfileByCategory(uuid, themDisplay.getScopeGroupId());
+			Integer page=Integer.parseInt(pageDetail == null ? "1" : pageDetail);
+			Integer size=9;
+			int result = (int) Math.ceil((float) resultDlFile/ size);
+			List<DlFileEntryDto> dLfileEntryDtos=new PhotoSql().findAllDLfileEntryDtos(uuid, page, size);
 			List<DlFileEntryDto> listDlfile= new ArrayList<>();
 			AssetEntry assetEntry=AssetEntryLocalServiceUtil.getEntry("com.liferay.document.library.kernel.model.DLFileEntry", dlfileEntry.getId());
 			AssetRenderer<?> assetRender=assetEntry.getAssetRenderer();
@@ -66,9 +72,12 @@ public class Deatil_Photo_Categories extends MVCPortlet {
 				listDlfile.add(listDlf);
 			}
 			renderRequest.setAttribute("listDlfile", listDlfile);
+			renderRequest.setAttribute("currentPage", page);
+			renderRequest.setAttribute("totalPage", result);
+			renderRequest.setAttribute("uuid", uuid);
+			renderRequest.setAttribute("url", url);
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
 		}
 		super.doView(renderRequest, renderResponse);
 	}

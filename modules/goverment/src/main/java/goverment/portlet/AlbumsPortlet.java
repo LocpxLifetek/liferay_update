@@ -1,7 +1,5 @@
 package goverment.portlet;
 
-import com.liferay.asset.kernel.model.AssetCategory;
-import com.liferay.asset.kernel.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
@@ -54,6 +52,7 @@ public class AlbumsPortlet extends MVCPortlet {
 			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
 			CategoryDto categoryName= new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780", themeDisplay.getScopeGroupId());
+			renderRequest.setAttribute("categoryName", categoryName);
 			List<CategoryDto> listCategory= new AssetCategorySql().findCategoryByParentCategory(categoryName.getId());
 			List<CpattachmentfileentryDto> listCpa= new ArrayList<>();
 			List<DlFileEntryDto> listDlfileNoImage= new ArrayList<>();
@@ -82,7 +81,7 @@ public class AlbumsPortlet extends MVCPortlet {
 			renderRequest.setAttribute("listDlfileNoImage", listDlfileNoImage);
 		} catch (Exception e) {
 			// TODO: handle exception
-			e.printStackTrace();
+			
 		}
 		super.doView(renderRequest, renderResponse);
 	}

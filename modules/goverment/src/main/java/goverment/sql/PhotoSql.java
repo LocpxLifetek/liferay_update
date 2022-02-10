@@ -195,7 +195,7 @@ public class PhotoSql {
 			}
 		}
 	}
-	public List<DlFileEntryDto> findAllDLfileEntryDtos(String uuid) throws SQLException {
+	public List<DlFileEntryDto> findAllDLfileEntryDtos(String uuid,Integer page, Integer size) throws SQLException {
 		PreparedStatement statement=null;
 		Connection con=null;
 		ResultSet rs=null;
@@ -220,8 +220,11 @@ public class PhotoSql {
 					"    ac.uuid_ = ?\r\n" + 
 					"ORDER BY\r\n" + 
 					"    dl.modifieddate DESC\r\n" + 
-					"OFFSET 0 ROWS FETCH NEXT 9 ROWS ONLY");
+					"OFFSET (?-1)*? ROWS FETCH NEXT ? ROWS ONLY");
 			statement.setString(1, uuid);
+			statement.setInt(2, page);
+			statement.setInt(3, size);
+			statement.setInt(4, size);
 			rs=statement.executeQuery();
 			
 			while(rs.next()) {
@@ -310,6 +313,41 @@ public class PhotoSql {
 			}
 		}
 		
+	}
+	public Integer countDlfileByCategory(String uuid,long groupIdBlog) throws SQLException {
+		PreparedStatement statement = null;
+		Connection con = null;
+		ResultSet rs = null;
+		try {
+			Integer result=0;
+			con = DataAccess.getConnection();
+			statement = con.prepareStatement(
+					"SELECT count(*) as count FROM assetcategory ac INNER JOIN assetentryassetcategoryrel  aeac ON ac.categoryid = aeac.assetcategoryid INNER JOIN assetentry ae ON aeac.assetentryid = ae.entryid INNER JOIN dlfileentry dl ON dl.fileentryid = ae.classpk WHERE\r\n" + 
+					"					    ac.uuid_ =?\r\n" + 
+					"					    and ac.groupId=?");
+			statement.setString(1, uuid);
+			statement.setLong(2, groupIdBlog);
+			
+			rs = statement.executeQuery();
+			while (rs.next()) {
+				result=rs.getInt("count");
+			}
+			return result;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		} finally {
+			if (statement != null) {
+				statement.close();
+			}
+			if (con != null) {
+				con.close();
+			}
+			if (rs != null) {
+				rs.close();
+			}
+		}
 	}
 
 }
