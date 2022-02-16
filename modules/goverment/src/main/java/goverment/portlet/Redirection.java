@@ -49,8 +49,7 @@ public class Redirection extends MVCPortlet {
 			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
 			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
-			CategoryDto parentCategory= new AssetCategorySql().findCategoryById(category.getParentCategoryId());
-			renderRequest.setAttribute("parentCategory", parentCategory);
+			renderRequest.setAttribute("category", category);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

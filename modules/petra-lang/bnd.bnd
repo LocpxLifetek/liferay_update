@@ -1,4 +1,0 @@
-Bundle-Name: petra-lang
-Bundle-SymbolicName: petra.lang
-Bundle-Version: 1.0.0
-Export-Package: petra.lang.constants
