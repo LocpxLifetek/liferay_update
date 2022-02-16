@@ -54,19 +54,6 @@ public class LinkPageSitePorlet extends MVCPortlet{
 				listGroupSiteDtos.add(groupSiteDto);
 			}
 			renderRequest.setAttribute("listGroupSiteDtos", listGroupSiteDtos);
-			System.out.println(listGroupSiteDtos.toString());
-			System.out.println("userId: "+themeDisplay.getUser());
-			System.out.println("user: "+themeDisplay.getRealUserId());
-			System.out.println("userId: "+themeDisplay.getDefaultUserId());
-			System.out.println("abc: "+themeDisplay.getURLCurrent());
-			System.out.println("abcd: "+themeDisplay.getCDNBaseURL());
-			System.out.println("abce: "+themeDisplay.getPathFriendlyURLPublic());
-			System.out.println("abcf: "+themeDisplay.getPathFriendlyURLPrivateGroup());
-			System.out.println("abcg: "+themeDisplay.getPortalURL());
-			System.out.println("abch: "+themeDisplay.getURLHome());
-			System.out.println("abci: "+themeDisplay.getURLPortal());
-			System.out.println("abci: "+themeDisplay.getURLSignIn());
-			System.out.println("abci: "+themeDisplay.getURLSignOut());
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
