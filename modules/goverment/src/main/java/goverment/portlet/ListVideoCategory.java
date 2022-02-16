@@ -43,12 +43,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
+import goverment.dto.AssetEntryAssetCategoryRelDto;
 import goverment.dto.DlFileEntryVideoDto;
 import goverment.dto.DlFileVideoDto;
 import goverment.dto.FieldValuesInDdmContentDto;
 import goverment.dto.FileEntryDlFileDto;
 import goverment.dto.ValueDlFileDto;
 import goverment.dto.VideoDto;
+import goverment.sql.AssetEntryAssetCategoryRelSql;
 import goverment.sql.DlFileEntrySql;
 import goverment.url.UrlCurrentPorlet;
 
@@ -77,10 +79,11 @@ public class ListVideoCategory extends MVCPortlet {
 			int result = (int) Math.ceil((float) resultDlFile/ size);
 			DDMStructure ddmStructure= DDMStructureLocalServiceUtil.getDDMStructureByUuidAndGroupId("4098419d-5793-b989-21c2-c267a13ea5e4", themeDisplay.getScopeGroupId());
 			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
-			List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRels=AssetEntryAssetCategoryRelLocalServiceUtil.getAssetEntryAssetCategoryRelsByAssetCategoryId(assetCategory.getCategoryId(), (page-1)*size, size);
+
+			List<AssetEntryAssetCategoryRelDto> listAssetEntryAssetCategoryRels=new AssetEntryAssetCategoryRelSql().listAssetEntryAssetCategoryRelDtos(assetCategory.getCategoryId(), page, size);
 			List<DlFileVideoDto> listDlFileVideoDtos = new ArrayList<>();
 			
-			for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRels) {
+			for (AssetEntryAssetCategoryRelDto assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRels) {
 				AssetEntry assetEntry=AssetEntryLocalServiceUtil.getAssetEntry(assetEntryAssetCategoryRel.getAssetEntryId());
 				FileEntryDlFileDto fileEntryDlFileDtos=new DlFileEntrySql().findDlFileByGroupIdAndExtension(themeDisplay.getScopeGroupId(),assetEntry.getClassPK());
 				DLFileVersion dlFileVersion=DLFileVersionLocalServiceUtil.getLatestFileVersion(fileEntryDlFileDtos.getUserId(), fileEntryDlFileDtos.getFileEntryId());

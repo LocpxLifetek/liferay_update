@@ -39,11 +39,13 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
+import goverment.dto.AssetEntryAssetCategoryRelDto;
 import goverment.dto.DlFileEntryVideoDto;
 import goverment.dto.DlFileVideoDto;
 import goverment.dto.FieldValuesInDdmContentDto;
 import goverment.dto.FileEntryDlFileDto;
 import goverment.dto.ValueDlFileDto;
+import goverment.sql.AssetEntryAssetCategoryRelSql;
 import goverment.sql.DlFileEntrySql;
 import goverment.url.UrlCurrentPorlet;
 
@@ -69,8 +71,8 @@ public class VideoMediaPorlet extends MVCPortlet {
 			List<AssetCategory> parentAssetCategory=AssetCategoryLocalServiceUtil.getChildCategories(assetCategory.getCategoryId());
 			for (AssetCategory assetCategory2 : parentAssetCategory) {
 				List<DlFileVideoDto> listDlFileVideoDtos=new ArrayList<>();
-				List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRels=AssetEntryAssetCategoryRelLocalServiceUtil.getAssetEntryAssetCategoryRelsByAssetCategoryId(assetCategory2.getCategoryId(), 0, 3);
-				for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRels : listAssetEntryAssetCategoryRels) {
+				List<AssetEntryAssetCategoryRelDto> listAssetEntryAssetCategoryRels=new AssetEntryAssetCategoryRelSql().listAssetEntryAssetCategoryRelDtos(assetCategory2.getCategoryId(), 0, 3);
+				for (AssetEntryAssetCategoryRelDto assetEntryAssetCategoryRels : listAssetEntryAssetCategoryRels) {
 					AssetEntry assetEntry=AssetEntryLocalServiceUtil.getAssetEntry(assetEntryAssetCategoryRels.getAssetEntryId());
 					FileEntryDlFileDto fileEntryDlFileDtos=new DlFileEntrySql().findDlFileByGroupIdAndExtension(themeDisplay.getScopeGroupId(),assetEntry.getClassPK());
 					DLFileVersion dlFileVersion=DLFileVersionLocalServiceUtil.getLatestFileVersion(fileEntryDlFileDtos.getUserId(), fileEntryDlFileDtos.getFileEntryId());

@@ -38,12 +38,14 @@ import javax.portlet.RenderResponse;
 import org.osgi.service.component.annotations.Component;
 
 import goverment.constants.GovermentPortletKeys;
+import goverment.dto.AssetEntryAssetCategoryRelDto;
 import goverment.dto.DlFileEntryMetaDataDto;
 import goverment.dto.DlFileEntryVideoDto;
 import goverment.dto.DlFileVideoDto;
 import goverment.dto.FieldValuesInDdmContentDto;
 import goverment.dto.FileEntryDlFileDto;
 import goverment.dto.ValueDlFileDto;
+import goverment.sql.AssetEntryAssetCategoryRelSql;
 import goverment.sql.DlFileEntrySql;
 import goverment.url.UrlCurrentPorlet;
 
@@ -64,10 +66,10 @@ public class ListVideoMediaPorlet extends MVCPortlet {
 					themeDisplay.getLayoutFriendlyURL(layout));
 			renderRequest.setAttribute("url", url);
 			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId("18c83fb3-4c8d-9aeb-6553-e0a51edd3e0f", themeDisplay.getScopeGroupId());
-			List<AssetEntryAssetCategoryRel> listAssetEntryAssetCategoryRels=AssetEntryAssetCategoryRelLocalServiceUtil.getAssetEntryAssetCategoryRelsByAssetCategoryId(assetCategory.getCategoryId(), 0, 3);
+			List<AssetEntryAssetCategoryRelDto> listAssetEntryAssetCategoryRels=new AssetEntryAssetCategoryRelSql().listAssetEntryAssetCategoryRelDtos(assetCategory.getCategoryId(), 0, 3);
 			List<DlFileVideoDto> listDlFileVideoDtos=new ArrayList<>();
 			DDMStructure ddmStructure= DDMStructureLocalServiceUtil.getDDMStructureByUuidAndGroupId("4098419d-5793-b989-21c2-c267a13ea5e4", themeDisplay.getScopeGroupId());
-			for (AssetEntryAssetCategoryRel assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRels) {
+			for (AssetEntryAssetCategoryRelDto assetEntryAssetCategoryRel : listAssetEntryAssetCategoryRels) {
 				AssetEntry assetEntry=AssetEntryLocalServiceUtil.getAssetEntry(assetEntryAssetCategoryRel.getAssetEntryId());
 				FileEntryDlFileDto fileEntryDlFileDtos=new DlFileEntrySql().findDlFileByGroupIdAndExtension(themeDisplay.getScopeGroupId(),assetEntry.getClassPK());
 				DLFileVersion dlFileVersion=DLFileVersionLocalServiceUtil.getLatestFileVersion(fileEntryDlFileDtos.getUserId(), fileEntryDlFileDtos.getFileEntryId());
