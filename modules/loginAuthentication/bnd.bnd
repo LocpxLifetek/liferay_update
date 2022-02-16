@@ -1,0 +1,4 @@
+Bundle-Name: loginAuthentication
+Bundle-SymbolicName: loginAuthentication
+Bundle-Version: 1.0.0
+Export-Package: loginAuthentication.constants
