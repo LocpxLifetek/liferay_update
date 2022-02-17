@@ -13,6 +13,10 @@ public class UrlCurrentPorlet {
 				urlSite=string;
 			}
 		}
-		return urlSite;
+		String urlCurrrents=urlSite;
+		if(urlSite.contains("group") ==true) {
+			urlCurrrents=urlSite.replace("group", "web");
+		}
+		return urlCurrrents;
 	}
 }

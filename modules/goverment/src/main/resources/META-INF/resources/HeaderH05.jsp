@@ -460,7 +460,7 @@ button, input {
 									<span>Giới thiệu</span>
 							</a></li>
 
-							<li class="header-menu-item"><a href="/group/h05/bo-công-an" class="title-menu"> <span>Lịch
+							<li class="header-menu-item"><a href="${urlPrivate}/lich-cong-tac" class="title-menu"> <span>Lịch
 										công tác</span>
 							</a></li>
 							<li class="header-menu-item"><a class="title-menu"> <span>Thư

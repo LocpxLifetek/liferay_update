@@ -29,7 +29,7 @@ import goverment.url.UrlCurrentPorlet;
 			"com.liferay.portlet.display-category=category.sample",
 			"com.liferay.portlet.header-portlet-css=/css/main.css",
 			"com.liferay.portlet.instanceable=true",
-			"javax.portlet.display-name=FeatureNews",
+			"javax.portlet.display-name=TinTucSuKien",
 			"javax.portlet.init-param.template-path=/",
 			"javax.portlet.init-param.view-template=/featureNews.jsp",
 			"javax.portlet.name=" + GovermentPortletKeys.FEATURENEWS,
