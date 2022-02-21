@@ -1,7 +1,7 @@
 package goverment.url;
 
 public class UrlCurrentPorlet {
-	public String urlCurrentPorlet(String urlCurrent,String layout) {
+	public String urlCurrentPorlet(String urlCurrent,String layout,String baseUrl) {
 //		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 //		Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 		String[] url=urlCurrent.split(layout);
@@ -13,7 +13,7 @@ public class UrlCurrentPorlet {
 				urlSite=string;
 			}
 		}
-		String urlCurrrents=urlSite;
+		String urlCurrrents=baseUrl+urlSite;
 		if(urlSite.contains("group") ==true) {
 			urlCurrrents=urlSite.replace("group", "web");
 		}

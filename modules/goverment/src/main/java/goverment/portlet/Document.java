@@ -46,7 +46,7 @@ public class Document extends MVCPortlet {
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
-					themDisplay.getLayoutFriendlyURL(layout));
+					themDisplay.getLayoutFriendlyURL(layout),themDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			CategoryDto category= new AssetCategorySql().findCategoryByUuid("a9aec0c3-59fd-0eff-bf32-bd2cb61fa2ad",themDisplay.getScopeGroupId());
 			CpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(category.getId(), themDisplay.getScopeGroupId());

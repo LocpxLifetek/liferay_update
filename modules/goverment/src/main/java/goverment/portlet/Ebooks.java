@@ -46,7 +46,7 @@ public class Ebooks extends MVCPortlet {
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
-					themDisplay.getLayoutFriendlyURL(layout));
+					themDisplay.getLayoutFriendlyURL(layout),themDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			CategoryDto category= new AssetCategorySql().findCategoryByUuid("82ab5b25-1666-55fc-b960-a3c5c544608b",themDisplay.getScopeGroupId());
 			CpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(category.getId(), themDisplay.getScopeGroupId());

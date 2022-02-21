@@ -52,7 +52,7 @@ public class Category extends MVCPortlet {
 			String pageDetail = PortalUtil.getOriginalServletRequest(request).getParameter("page");
 			Integer page=Integer.parseInt(pageDetail == null ? "1" : pageDetail);
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
-					themeDisplay.getLayoutFriendlyURL(layout));
+					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
 			CategoryDto categoryDto= new AssetCategorySql().findCategoryById(category.getParentCategoryId());

@@ -585,7 +585,14 @@ a,
   height: 100%;
   text-decoration: none;
 }
-
+#description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
 //detail bo cong an
 .detailBlogs {
   color: black !important;

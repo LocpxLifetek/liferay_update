@@ -48,17 +48,17 @@ public class Photo extends MVCPortlet {
 			throws IOException, PortletException {
 		try {
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
-			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
-					themDisplay.getLayoutFriendlyURL(layout));
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
+					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
-			CategoryDto category= new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780",themDisplay.getScopeGroupId());
+			CategoryDto category= new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780",themeDisplay.getScopeGroupId());
 			List<CategoryDto> listCategoryDtos=new AssetCategorySql().findCategoryByParentCategory(category.getId());
 			List<CpattachmentfileentryDto> listCpa= new ArrayList<>();
 			List<DlFileEntryDto> listDlefile= new ArrayList<>();
 			for (CategoryDto categoryDto : listCategoryDtos) {
-				CpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId(), themDisplay.getScopeGroupId());
+				CpattachmentfileentryDto cpaAttach= new PhotoSql().findCpattachByCategory(categoryDto.getId(),themeDisplay.getScopeGroupId());
 				listCpa.add(cpaAttach);
 			}	
 			

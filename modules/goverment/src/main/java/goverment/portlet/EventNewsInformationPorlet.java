@@ -50,7 +50,7 @@ public class EventNewsInformationPorlet extends MVCPortlet{
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
-					themeDisplay.getLayoutFriendlyURL(layout));
+					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			CategoryDto categoryDto=new AssetCategorySql().findCategoryByVocabulartDto(themeDisplay.getScopeGroupId());
 			List<AssetCategory> listAssetCategory=AssetCategoryLocalServiceUtil.getChildCategories(categoryDto.getId());

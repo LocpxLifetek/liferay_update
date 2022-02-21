@@ -63,7 +63,7 @@ public class VideoMediaPorlet extends MVCPortlet {
 			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
-					themeDisplay.getLayoutFriendlyURL(layout));
+					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			AssetCategory assetCategory=AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId("18c83fb3-4c8d-9aeb-6553-e0a51edd3e0f", themeDisplay.getScopeGroupId());
 			DDMStructure ddmStructure= DDMStructureLocalServiceUtil.getDDMStructureByUuidAndGroupId("4098419d-5793-b989-21c2-c267a13ea5e4", themeDisplay.getScopeGroupId());

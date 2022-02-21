@@ -46,7 +46,7 @@ public class New_event extends MVCPortlet {
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
 
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
-					themeDisplay.getLayoutFriendlyURL(layout));
+					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			List<BlogsEntryDto> listBlogs2=new ArrayList<>();
 			List<BlogsEntryDto> listBlogs6=new ArrayList<>();

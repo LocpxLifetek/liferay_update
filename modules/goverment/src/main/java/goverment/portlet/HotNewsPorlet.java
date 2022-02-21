@@ -48,7 +48,7 @@ public class HotNewsPorlet extends MVCPortlet {
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 			String key = GovermentPortletKeys.HOTNEWS + "," + String.valueOf(themeDisplay.getScopeGroupId());
 			List<BlogsEntryDto> listBlogsEntryDtos = (List<BlogsEntryDto>) WebCachePoolUtil.get(key, wci);
-			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout));
+			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);
 		} catch (Exception e) {

@@ -88,10 +88,15 @@ public class HeaderH05Porlet extends MVCPortlet {
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 			
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
-					themeDisplay.getLayoutFriendlyURL(layout));
+					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
-			
-			String urlPrivate=url.replace("web", "group");
+			String urlPrivate="";
+			if(url.contains("web")) {
+				
+				urlPrivate=url.replace("web", "group");
+			}else {
+				urlPrivate=themeDisplay.getCDNBaseURL()+"group";
+			}
 			renderRequest.setAttribute("urlPrivate", urlPrivate);
 			String siginIn=themeDisplay.getURLSignIn()+"&"+"redirect="+themeDisplay.getURLCurrent();
 			String siginOut=themeDisplay.getURLSignOut()+"?"+"referer="+themeDisplay.getURLCurrent();

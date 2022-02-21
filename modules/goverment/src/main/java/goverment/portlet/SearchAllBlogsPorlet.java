@@ -53,7 +53,7 @@ public class SearchAllBlogsPorlet extends MVCPortlet{
 			int result = (int) Math.ceil((float) count / size);
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
-					themeDisplay.getLayoutFriendlyURL(layout));
+					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			List<SearchBlogsDto> listSearchBlogsDto=new SearchBlogsSql().searchBlogsSql(keyword, themeDisplay.getScopeGroupId(), page, size);
 			if(listSearchBlogsDto.isEmpty() || keyword == null) {

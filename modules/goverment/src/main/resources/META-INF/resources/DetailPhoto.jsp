@@ -1,4 +1,3 @@
-
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page contentType="text/html; charset=UTF-8"%>
@@ -54,6 +53,10 @@ color: #333;
 	height: 80%;
 	object-fit: cover;
 }
+.thumb {
+    width: 215px;
+    height: 125px;
+}
 @media only screen and (max-width: 600px) {
 	.main .container {
 		display: grid;
@@ -79,11 +82,12 @@ color: #333;
 		<c:forEach items="${listDlfile}" var="listDlfile">
 			<div class="card">
 				<div class="card-image">
-					<a href="${listDlfile.src}" data-fancybox="gallery"
-						data-caption="${listDlfile.title}"> <img
-						src="${listDlfile.src}" alt="${listDlfile.title}">${listDlfile.title}
+					<a data-fancybox="gallery"
+						data-caption="${listDlfile.title}"> <img class="thumb"
+						src="${listDlfile.src}" alt="${listDlfile.title}">
 					</a>
 				</div>
+				<h4>${listDlfile.title}</h4>
 			</div>
 		</c:forEach>
 	</div>

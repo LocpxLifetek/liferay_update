@@ -51,7 +51,7 @@ public class CountViewBlogByCategory extends MVCPortlet {
 			List<BlogsEntryDto> manyBlog = new ArrayList<>();
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
 			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
-					themeDisplay.getLayoutFriendlyURL(layout));
+					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			for (BlogsEntryDto blogs : listBlogsEntryDtos) {
 				i++;
