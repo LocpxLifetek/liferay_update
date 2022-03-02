@@ -3,6 +3,7 @@ package goverment.portlet;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -42,7 +43,7 @@ public class professional_activities extends MVCPortlet {
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),
 					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			CategoryDto categoryDto= new AssetCategorySql().findCategoryByUuid("521e8b35-2c5a-db70-f646-81c0c3912ee5",themeDisplay.getScopeGroupId());

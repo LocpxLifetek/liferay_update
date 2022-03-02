@@ -54,6 +54,8 @@ public class GovermentPortletKeys {
 	public static final String EBOOKS="EbooksPorlet";
 	public static final String COUNTVIEWBLOGBYCATEGORY="CountViewBlogByCategoryPorlet";
 	public static final String DOCUMENT="DocumentPorlet";
+	public static final String LEGALDOCUMENT="LegalDocumentPorlet";
+	public static final String DETAILLEGALDOCUMENT="DetailLegalDocumentPorlet";
 
 	//H05
 	public static final String HEADERGOVERMENT="Headers_GovermentPorlet";

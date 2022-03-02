@@ -3,6 +3,7 @@ package goverment.portlet;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class AlbumsPortlet extends MVCPortlet {
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 		
-			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
+			String url=new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			CategoryDto categoryName= new AssetCategorySql().findCategoryByUuid("5bfa37e4-1270-ba14-d6b5-f9c7a8a6b780", themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("categoryName", categoryName);

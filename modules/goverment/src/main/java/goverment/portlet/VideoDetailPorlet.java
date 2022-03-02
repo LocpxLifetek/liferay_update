@@ -71,7 +71,7 @@ public class VideoDetailPorlet extends MVCPortlet {
 		try {
 			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),
 					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);

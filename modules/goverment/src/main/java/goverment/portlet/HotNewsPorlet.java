@@ -3,6 +3,7 @@ package goverment.portlet;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
@@ -48,7 +49,7 @@ public class HotNewsPorlet extends MVCPortlet {
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 			String key = GovermentPortletKeys.HOTNEWS + "," + String.valueOf(themeDisplay.getScopeGroupId());
 			List<BlogsEntryDto> listBlogsEntryDtos = (List<BlogsEntryDto>) WebCachePoolUtil.get(key, wci);
-			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
+			String url=new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			renderRequest.setAttribute("listBlogsEntryDtos", listBlogsEntryDtos);
 		} catch (Exception e) {

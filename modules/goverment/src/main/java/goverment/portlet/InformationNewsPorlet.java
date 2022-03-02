@@ -55,7 +55,7 @@ public class InformationNewsPorlet extends MVCPortlet {
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),
 					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			BlogsEntry blogsEntry=BlogsEntryLocalServiceUtil.getBlogsEntryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());

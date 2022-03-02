@@ -3,6 +3,7 @@ package goverment.portlet;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -47,7 +48,7 @@ public class Executive_documentsCategory extends MVCPortlet{
 			ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 		
-			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
+			String url=new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			CategoryDto category= new AssetCategorySql().findCategoryByUuid("1c8ec7af-63b9-7e70-6e7a-f6eb5699f5ce",themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("category", category);

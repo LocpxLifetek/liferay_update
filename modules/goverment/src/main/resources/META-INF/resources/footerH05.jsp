@@ -11,10 +11,10 @@
                 <div class="col-xs-12 col-sm-6 col-md-7 col-lg-7">
                     <!-- Footer text -->
                     <div class="Td-footer-text">
-                        <h2 style="font-size: 24;">BỘ CÔNG AN - CỤC CÔNG NGHỆ THÔNG TIN</h2>
-                        <p>Chịu trách nhiệm xuất bản: Cục Công nghệ thông tin</p>
+                        <h2 style="font-size: 24;">TRUNG TÂM NGHIÊN CỨU PHÁT TRIỂN ỨNG DỤNG CÔNG NGHỆ THÔNG TIN</h2>
                         <p>Địa chỉ: 80 Trần Quốc Hoàn - Quận Cầu Giấy - Hà Nội</p>
                         <p>Điện thoại: 069-47811 - Fax : 069-46980</p>
+                        <p>Mail: Mps@itekmps.vn</p>
                     </div>
                 </div>
             </div>

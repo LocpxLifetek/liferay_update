@@ -3,6 +3,7 @@ package goverment.portlet;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class CountViewBlogsPortlet extends MVCPortlet {
 					.findBlogsCountView(themeDisplay.getScopeGroupId());
 			List<BlogsEntryDto> manyBlog = new ArrayList<>();
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),
 					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			for (BlogsEntryDto blogs : listBlogsEntryDtos) {

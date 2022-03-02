@@ -427,8 +427,8 @@ button, input {
 					src="<%=request.getContextPath()%>/images/portal/_res/img/quochuy.png" />
 				<div class="brand-text">
 					<h1>BỘ CÔNG AN</h1>
-					<h2>CỤC CÔNG NGHỆ THÔNG TIN</h2>
-					<h3>DEPARTMENT OF INFORMATION TECHNOLOGY</h3>
+					<h2>CÔNG AN THÀNH PHỐ HÀ NỘI</h2>
+					
 				</div>
 			</div>
 			<div class="banner-carousel">
@@ -466,10 +466,10 @@ button, input {
 							<li class="header-menu-item"><a class="title-menu"> <span>Thư
 										điện tử</span>
 							</a></li>
-							<li class="header-menu-item"><a class="title-menu"> <span>Điều
+							<li class="header-menu-item"><a class="title-menu" href="http://10.10.59.162/"> <span>Điều
 										hành tác nghiệp</span>
 							</a></li>
-							<li class="header-menu-item"><a href="/group/h05/forums" class="title-menu"> <span>Diễn
+							<li class="header-menu-item"><a href="${urlPrivate}/forums" class="title-menu"> <span>Diễn
 										đàn</span>
 							</a></li>
 						</div>

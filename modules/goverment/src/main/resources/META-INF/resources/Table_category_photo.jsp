@@ -100,7 +100,7 @@
 				      <c:forEach items="${listCategory}" var="listCategory">
 						<li class="i-ngang" style="background: url('<%= request.getContextPath()%>/images/portal/_themes/ThanhHoa_orange/img/hv-module-tvt.PNG') no-repeat 7px 13px !important;
 ">
-                        	<a href="${url}/album_anh?uuid=${listCategory.uuid}"
+                        	<a href="${url}/album-anh?uuid=${listCategory.uuid}"
 						       title="${listCategory.name}"
 						       class="">${listCategory.name}</a>
                     	</li>

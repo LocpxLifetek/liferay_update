@@ -46,7 +46,7 @@ public class Redirection extends MVCPortlet {
 			Layout layout = (Layout) renderRequest.getAttribute(WebKeys.LAYOUT);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
-			String url=new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
+			String url=new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			CategoryDto category= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());
 			renderRequest.setAttribute("category", category);

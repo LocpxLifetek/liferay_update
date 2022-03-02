@@ -50,7 +50,7 @@ public class Deatil_Photo_Categories extends MVCPortlet {
 		try {
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 			ThemeDisplay themDisplay=(ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themDisplay.getURLCurrent(),
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themDisplay),
 					themDisplay.getLayoutFriendlyURL(layout),themDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);

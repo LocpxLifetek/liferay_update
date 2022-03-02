@@ -12,16 +12,16 @@
             <div class="lts-cmanh">
                 
                 <div class="top1">
-                    <a href="${url}/album_anh?uuid=${list.uuidCategory}">
+                    <a href="${url}/album-anh?uuid=${list.uuidCategory}">
                         <img style="max-width:100%; min-width:20%;" src="${list.src}">
                     </a>
-                    <div><a href="${url}/album_anh?uuid=${list.uuidCategory}">${list.title}</a></div>
+                    <div><a href="${url}/album-anh?uuid=${list.uuidCategory}">${list.title}</a></div>
                 </div>
                 
                 <ul>
                     
                     <c:forEach items="${listDlfileNoImage}" var="listCpa">
-                        <li><a class="album_bottom" href="${url}/album_anh?uuid=${listCpa.uuidCategory}">${listCpa.title}</a></li>
+                        <li><a class="album_bottom" href="${url}/album-anh?uuid=${listCpa.uuidCategory}">${listCpa.title}</a></li>
                     </c:forEach>
                 
                 </ul>   

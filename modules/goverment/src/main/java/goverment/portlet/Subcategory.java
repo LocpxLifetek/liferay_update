@@ -51,7 +51,7 @@ public class Subcategory extends MVCPortlet {
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			String uuid =  PortalUtil.getOriginalServletRequest(request).getParameter("uuid");
 			String pageDetail = PortalUtil.getOriginalServletRequest(request).getParameter("page");
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),
 					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			CategoryDto parentCategory= new AssetCategorySql().findCategoryByUuid(uuid, themeDisplay.getScopeGroupId());

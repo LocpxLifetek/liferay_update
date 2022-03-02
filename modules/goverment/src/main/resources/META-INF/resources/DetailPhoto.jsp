@@ -81,14 +81,13 @@ color: #333;
 	<div class="container">
 		<c:forEach items="${listDlfile}" var="listDlfile">
 			<div class="card">
-				<div class="card-image">
-					<a data-fancybox="gallery"
-						data-caption="${listDlfile.title}"> <img class="thumb"
-						src="${listDlfile.src}" alt="${listDlfile.title}">
-					</a>
-				</div>
-				<h4>${listDlfile.title}</h4>
-			</div>
+        <div class="card-image">
+          <a href="${listDlfile.src}" data-fancybox="gallery" data-caption="${listDlfile.title}">
+            <img src="${listDlfile.src}" alt="Image Gallery">
+          </a>
+          <a>${listDlfile.title}</a>
+        </div>
+      </div>
 		</c:forEach>
 	</div>
 	</main>

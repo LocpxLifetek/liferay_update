@@ -68,7 +68,7 @@ public class ListVideoCategory extends MVCPortlet {
 			ThemeDisplay themeDisplay = (ThemeDisplay) renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),
 					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			String uuid = PortalUtil.getOriginalServletRequest(request).getParameter("uuid");

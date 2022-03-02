@@ -14,7 +14,7 @@ import java.util.List;
 import goverment.model.NodeModel;
 
 public class ConvertXmlToJson {
-	private static NodeModel convertToNodeMap(Node node, String langId) {
+	public static NodeModel convertToNodeMap(Node node, String langId) {
 		Node nodeValue = node.selectSingleNode("dynamic-content[@language-id='" + langId + "']");
 		String nodeKey = nodeValue.getParent().attribute("name").getStringValue();
 		NodeModel nodeModel = new NodeModel();
@@ -23,7 +23,7 @@ public class ConvertXmlToJson {
 		return nodeModel;
 	}
 
-	private static JSONArray fetchChildNodeArray(List<Node> childNodeList, String langId) {
+	public static JSONArray fetchChildNodeArray(List<Node> childNodeList, String langId) {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		for (Node childNode : childNodeList) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -36,7 +36,7 @@ public class ConvertXmlToJson {
 		return jsonArray;
 	}
 
-	private static JSONObject fetchChildNodeObject(List<Node> childNodeList, String langId) {
+	public static JSONObject fetchChildNodeObject(List<Node> childNodeList, String langId) {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 		for (Node childNode : childNodeList) {
 			NodeModel childNodeModel = convertToNodeMap(childNode, langId);
@@ -47,7 +47,7 @@ public class ConvertXmlToJson {
 		return jsonObject;
 	}
 
-	private static void fetchNode(JSONObject jsonObject, Node prentNode, String langId) {
+	public static void fetchNode(JSONObject jsonObject, Node prentNode, String langId) {
 		List<Node> nodes = prentNode.selectNodes("dynamic-element");
 		List<String> nodeList = new ArrayList<>();
 		for (Node node : nodes) {

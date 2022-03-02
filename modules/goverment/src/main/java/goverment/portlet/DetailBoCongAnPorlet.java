@@ -52,7 +52,7 @@ public class DetailBoCongAnPorlet extends MVCPortlet {
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(renderRequest);
 			Layout layout = (Layout)renderRequest.getAttribute(WebKeys.LAYOUT);
 			String uuid = PortalUtil.getOriginalServletRequest(request).getParameter("id");
-			String url = new UrlCurrentPorlet().urlCurrentPorlet(themeDisplay.getURLCurrent(),
+			String url = new UrlCurrentPorlet().urlCurrentPorlet(PortalUtil.getLayoutFriendlyURL(layout, themeDisplay),
 					themeDisplay.getLayoutFriendlyURL(layout),themeDisplay.getCDNBaseURL());
 			renderRequest.setAttribute("url", url);
 			BlogsEntry blogsEntry=BlogsEntryLocalServiceUtil.getBlogsEntryByUuidAndGroupId(uuid, themeDisplay.getScopeGroupId());
